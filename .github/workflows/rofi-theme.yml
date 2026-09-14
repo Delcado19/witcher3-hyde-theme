@@ -29,7 +29,7 @@ jobs:
           set -Eeuo pipefail
 
           source_theme="Configs/.config/hyde/themes/Witcher3/rofi.theme"
-          target_line='\$HOME/.config/rofi/theme.rasi'
+          target_line='$HOME/.config/rofi/theme.rasi'
           fragment="$RUNNER_TEMP/Witcher3-rofi.rasi"
 
           test "$(head -n 1 "$source_theme")" = "$target_line"
