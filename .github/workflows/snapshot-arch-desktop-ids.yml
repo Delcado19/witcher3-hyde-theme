@@ -1,0 +1,146 @@
+name: Snapshot Arch Desktop IDs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/snapshot-arch-desktop-ids.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    name: Snapshot official Arch desktop IDs
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Download official Arch file databases
+        run: |
+          set -Eeuo pipefail
+
+          base="https://geo.mirror.pkgbuild.com"
+          for repo in core extra multilib; do
+            curl --fail --location --retry 3 --silent --show-error \
+              "$base/$repo/os/x86_64/$repo.files" \
+              --output "$RUNNER_TEMP/$repo.files"
+            test -s "$RUNNER_TEMP/$repo.files"
+          done
+
+      - name: Build desktop ID snapshot
+        run: |
+          set -Eeuo pipefail
+
+          python3 - <<'PY'
+          import csv
+          import os
+          import tarfile
+          from collections import defaultdict
+          from pathlib import Path
+
+          runner_temp = Path(os.environ["RUNNER_TEMP"])
+          output = Path("design/icons/standards/arch-desktop-ids-2026-09-14.csv")
+          output.parent.mkdir(parents=True, exist_ok=True)
+
+          memberships: dict[str, set[str]] = defaultdict(set)
+          repos = ("core", "extra", "multilib")
+
+          for repo in repos:
+              archive = runner_temp / f"{repo}.files"
+              with tarfile.open(archive, mode="r:*") as tar:
+                  for member in tar:
+                      if not member.isfile() or not member.name.endswith("/files"):
+                          continue
+                      extracted = tar.extractfile(member)
+                      if extracted is None:
+                          continue
+                      text = extracted.read().decode("utf-8", errors="strict")
+                      in_files = False
+                      for raw_line in text.splitlines():
+                          line = raw_line.strip()
+                          if line == "%FILES%":
+                              in_files = True
+                              continue
+                          if not in_files or not line:
+                              continue
+                          prefix = "usr/share/applications/"
+                          if not line.startswith(prefix) or not line.endswith(".desktop"):
+                              continue
+                          remainder = line[len(prefix):]
+                          if "/" in remainder:
+                              continue
+                          desktop_id = remainder.removesuffix(".desktop")
+                          if desktop_id:
+                              memberships[desktop_id].add(repo)
+
+          if len(memberships) < 500:
+              raise SystemExit(
+                  f"Refusing suspiciously small Arch desktop-ID snapshot: "
+                  f"{len(memberships)} IDs"
+              )
+
+          with output.open("w", encoding="utf-8", newline="") as handle:
+              writer = csv.writer(handle, lineterminator="\n")
+              writer.writerow(["desktop_id", "repos"])
+              for desktop_id in sorted(memberships):
+                  writer.writerow([desktop_id, ";".join(sorted(memberships[desktop_id]))])
+
+          print(f"Captured {len(memberships)} unique official Arch desktop IDs.")
+          for repo in repos:
+              count = sum(repo in values for values in memberships.values())
+              print(f"  {repo}: {count} desktop-ID memberships")
+          PY
+
+      - name: Validate snapshot
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path("design/icons/standards/arch-desktop-ids-2026-09-14.csv")
+          with path.open("r", encoding="utf-8", newline="") as handle:
+              rows = list(csv.DictReader(handle))
+
+          if not rows or list(rows[0].keys()) != ["desktop_id", "repos"]:
+              raise SystemExit("Unexpected Arch desktop-ID snapshot columns")
+
+          ids = [row["desktop_id"].strip() for row in rows]
+          if ids != sorted(set(ids)):
+              raise SystemExit("Arch desktop IDs are not sorted and unique")
+
+          allowed_repos = {"core", "extra", "multilib"}
+          for row in rows:
+              repos = {item for item in row["repos"].split(";") if item}
+              if not repos or not repos <= allowed_repos:
+                  raise SystemExit(f"Invalid repository membership: {row!r}")
+              desktop_id = row["desktop_id"].strip()
+              if not desktop_id or "/" in desktop_id or desktop_id.endswith(".desktop"):
+                  raise SystemExit(f"Malformed desktop ID: {desktop_id!r}")
+
+          print(f"Validated {len(ids)} sorted unique Arch desktop IDs.")
+          PY
+
+      - name: Verify change scope
+        run: |
+          set -Eeuo pipefail
+          git status --short
+          paths="$(git status --porcelain | sed 's/^...//' | LC_ALL=C sort -u)"
+          expected="design/icons/standards/arch-desktop-ids-2026-09-14.csv"
+          if [[ "$paths" != "$expected" ]]; then
+            echo "Unexpected files changed by Arch snapshot workflow:" >&2
+            printf '%s\n' "$paths" >&2
+            exit 1
+          fi
+
+      - name: Commit Arch snapshot
+        run: |
+          set -Eeuo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add design/icons/standards/arch-desktop-ids-2026-09-14.csv
+          git commit -m "Snapshot Arch desktop IDs"
+          git push origin HEAD:main
