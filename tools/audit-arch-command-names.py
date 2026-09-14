@@ -8,8 +8,8 @@ real /usr/bin command shipped by the official Arch core, extra, or multilib
 repositories.
 
 This is appropriate for CLI/session/system components such as tmux, Waybar, or
-Hyprland-related tools that may have no Desktop Entry at all. This first pass is
-observational; measured coverage is pinned only after a successful CI run.
+Hyprland-related tools that may have no Desktop Entry at all. The validated
+2026-09-14 coverage is pinned below to prevent silent regressions.
 """
 
 from __future__ import annotations
@@ -30,6 +30,28 @@ EXPECTED_ARCH_DESKTOP_IDS = 2436
 EXPECTED_ARCH_COMMANDS = 22691
 EXPECTED_STAGE_E_UNRESOLVED = 46
 EXPECTED_COMMAND_REPO_MEMBERSHIPS = {"core": 1567, "extra": 20802, "multilib": 331}
+EXPECTED_CANONICAL_COMMAND_ROWS = 15
+EXPECTED_ALIAS_COMMAND_ROWS = 1
+EXPECTED_RESOLVED_ROWS = 15
+EXPECTED_UNRESOLVED_ROWS = 31
+EXPECTED_COMBINED_ROWS = 189
+EXPECTED_RESOLVED_IDS = {
+    "W3-035",
+    "W3-036",
+    "W3-050",
+    "W3-090",
+    "W3-108",
+    "W3-112",
+    "W3-186",
+    "W3-202",
+    "W3-203",
+    "W3-205",
+    "W3-206",
+    "W3-207",
+    "W3-208",
+    "W3-209",
+    "W3-219",
+}
 ALLOWED_ARCH_REPOS = {"core", "extra", "multilib"}
 
 
@@ -165,6 +187,31 @@ def main() -> int:
             )
             print(f"- {command}: {rendered}")
         return 1
+
+    resolved_ids = {row_id for row_id, _, _ in resolved_rows}
+    measured = {
+        "canonical_command_rows": len(canonical_matches),
+        "alias_command_rows": len(alias_matches),
+        "resolved_rows": len(resolved_rows),
+        "unresolved_rows": len(unresolved_rows),
+        "combined_rows": EXPECTED_APPLICATION_ROWS - len(unresolved_rows),
+    }
+    expected = {
+        "canonical_command_rows": EXPECTED_CANONICAL_COMMAND_ROWS,
+        "alias_command_rows": EXPECTED_ALIAS_COMMAND_ROWS,
+        "resolved_rows": EXPECTED_RESOLVED_ROWS,
+        "unresolved_rows": EXPECTED_UNRESOLVED_ROWS,
+        "combined_rows": EXPECTED_COMBINED_ROWS,
+    }
+    if measured != expected:
+        raise SystemExit(
+            f"Unexpected Stage F coverage: {measured!r}; expected {expected!r}"
+        )
+    if resolved_ids != EXPECTED_RESOLVED_IDS:
+        raise SystemExit(
+            f"Unexpected Stage F resolved IDs: {sorted(resolved_ids)!r}; "
+            f"expected {sorted(EXPECTED_RESOLVED_IDS)!r}"
+        )
 
     print(f"Arch command snapshot: {len(arch_commands)} command names.")
     for repo in ("core", "extra", "multilib"):
