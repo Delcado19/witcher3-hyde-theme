@@ -1,0 +1,75 @@
+$HOME/.config/kitty/theme.conf|killall -SIGUSR1 kitty
+
+# Witcher 3 HyDE Theme
+# Dark iron, weathered steel and restrained Witcher-red accents.
+
+# Basic colors
+foreground              #DEE6F0
+background              #0A151E
+selection_foreground    #DEE6F0
+selection_background    #B72A18
+
+# Cursor colors
+cursor                  #DEE6F0
+cursor_text_color       #0A151E
+
+# URL underline color
+url_color               #3188A6
+
+# Kitty window border colors
+active_border_color     #B72A18
+inactive_border_color   #3D3A39
+bell_border_color       #D58E4D
+
+# OS window titlebar colors
+wayland_titlebar_color  system
+macos_titlebar_color    system
+
+# Tab bar colors
+active_tab_foreground   #DEE6F0
+active_tab_background   #B72A18
+inactive_tab_foreground #B0B6C2
+inactive_tab_background #171A1C
+tab_bar_background      #0A151E
+
+# Marks
+mark1_foreground        #0A151E
+mark1_background        #3188A6
+mark2_foreground        #0A151E
+mark2_background        #3DB479
+mark3_foreground        #0A151E
+mark3_background        #D58E4D
+
+# ANSI colors
+
+# black / bright black
+color0                  #171A1C
+color8                  #8E8B8D
+
+# red / bright red
+color1                  #621B0E
+color9                  #B72A18
+
+# green / bright green
+color2                  #505A26
+color10                 #3DB479
+
+# yellow / bright yellow
+color3                  #7D572C
+color11                 #D58E4D
+
+# blue / bright blue
+color4                  #3188A6
+color12                 #3188A6
+
+# magenta / bright magenta
+color5                  #743874
+color13                 #743874
+
+# cyan / bright cyan
+color6                  #3188A6
+color14                 #B0B6C2
+
+# white / bright white
+color7                  #B0B6C2
+color15                 #DEE6F0
