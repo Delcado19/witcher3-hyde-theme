@@ -10,12 +10,14 @@ on:
       - "design/icons/standards/freedesktop-context-exceptions.csv"
       - "design/icons/standards/flathub-app-ids-2026-09-14.csv"
       - "design/icons/standards/arch-desktop-ids-2026-09-14.csv"
+      - "design/icons/standards/arch-command-names-2026-09-14.csv"
       - "tools/validate-icon-matrix.py"
       - "tools/normalize-icon-matrix.py"
       - "tools/audit-freedesktop-icon-names.py"
       - "tools/audit-breeze-icon-names.py"
       - "tools/audit-flathub-app-ids.py"
       - "tools/audit-arch-desktop-ids.py"
+      - "tools/audit-arch-command-names.py"
       - ".github/workflows/icon-matrix.yml"
 
 permissions:
@@ -83,3 +85,8 @@ jobs:
         run: |
           set -Eeuo pipefail
           python3 tools/audit-arch-desktop-ids.py
+
+      - name: Audit official Arch command names
+        run: |
+          set -Eeuo pipefail
+          python3 tools/audit-arch-command-names.py
