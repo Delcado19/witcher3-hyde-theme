@@ -10,7 +10,7 @@ The presence of an item in this file does not replace its original license. The 
 
 | Asset / Package | Author / Project | Source | License | Repository Path | Modifications / Notes |
 |---|---|---|---|---|---|
-| _None recorded yet_ |  |  |  |  |  |
+| The Witcher 3: Wild Hunt — Kaer Morhen in-game screenshot wallpaper | CD PROJEKT RED; screenshot captured and supplied by the project maintainer | https://www.cdprojektred.com/en/fan-content | CD PROJEKT RED Fan Content Guidelines; not an open-source asset license | `Configs/.config/hyde/themes/Witcher3/wallpapers/witcher3_kaer_morhen.png` | 2560×1440, 16-bit RGB PNG. SHA-256: `0732e839be0166f807381d6fcde291edb1bc398516d7bb6fe85a7ea4660188fb`. Bundled as a non-commercial, clearly unofficial fan-content wallpaper. CD PROJEKT RED's Fan Content Guidelines explicitly list taking screenshots of its games, sharing them online, and turning them into wallpaper as permitted examples when the guidelines are followed. Game imagery remains property of its respective rights holders and is not relicensed under this repository's software or original-artwork license. The applicable game EULA and CD PROJEKT RED User Agreement remain authoritative. |
 
 ## Referenced but Not Yet Redistributed
 
@@ -20,11 +20,8 @@ Use this section for third-party material that is referenced, selected as an imp
 |---|---|---|---|---|
 | HyDE | HyDE Project | https://github.com/HyDE-Project/HyDE | GPL-3.0 | Target desktop environment and technical source of truth for theme integration |
 | Colloid GTK Theme | Vince / `vinceliuice` | https://github.com/vinceliuice/Colloid-gtk-theme | GPL-3.0 | Selected structural base for the future `Witcher3` GTK derivative; pinned upstream commit `fe11342f37f124f1b29d44cf33e9a06053f4bba2` from 2026-08-22. No Colloid source or generated GTK package is redistributed by the repository at this stage. See `docs/GTK_BASELINE.md` and `design/gtk/upstream/COLLOID_SOURCE.md`. |
-| The Witcher 3: Wild Hunt in-game screenshot wallpaper set | CD PROJEKT RED; screenshots supplied by the project maintainer | https://www.cdprojektred.com/en/fan-content | CD PROJEKT RED Fan Content Guidelines; not an open-source asset license | Candidate 2560×1440 in-game screenshots for `Configs/.config/hyde/themes/Witcher3/wallpapers/`. CD PROJEKT RED's Fan Content Guidelines explicitly list taking screenshots of its games, sharing them online, and turning them into wallpaper as permitted examples when the guidelines are followed. Intended use here is non-commercial and clearly unofficial. Game imagery remains property of its respective rights holders and is not relicensed under this repository's software/artwork license. The applicable game EULA and CD PROJEKT RED User Agreement remain authoritative. |
 
 When the Witcher3 GTK derivative or its corresponding source is added to the repository, move or duplicate the Colloid entry into **Bundled Assets** with the exact repository paths and modification details used by the release.
-
-When a Witcher 3 screenshot is actually committed under `Configs/.config/hyde/themes/Witcher3/wallpapers/`, move the corresponding screenshot entry into **Bundled Assets** and record the exact filename(s). Do not imply that the screenshot itself is licensed under the repository's source-code or original-artwork license.
 
 ## Witcher Intellectual Property
 
