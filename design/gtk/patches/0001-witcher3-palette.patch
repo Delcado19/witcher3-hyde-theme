@@ -1,0 +1,193 @@
+From: Witcher 3 HyDE Theme
+Subject: [PATCH] Apply Witcher3 palette to Colloid dark build
+Upstream: vinceliuice/Colloid-gtk-theme
+Upstream-commit: fe11342f37f124f1b29d44cf33e9a06053f4bba2
+License: GPL-3.0 (same as upstream covered work)
+
+This patch is intentionally limited to Colloid's central default palette,
+GTK2 generated colors, and generated GTK SVG asset colors. The first
+Witcher3 build uses the upstream default accent slot with an explicit dark
+build, so no additional Colloid color-variant identity is introduced.
+
+---
+diff --git a/src/sass/_color-palette-default.scss b/src/sass/_color-palette-default.scss
+--- a/src/sass/_color-palette-default.scss
++++ b/src/sass/_color-palette-default.scss
+@@ -1,69 +1,69 @@
+ // Default Theme Color Palette
+ 
+ // Red
+-$red-light: #F44336;
+-$red-dark: #E53935;
++$red-light: #C94736;
++$red-dark: #B72A18;
+ 
+ // Pink
+-$pink-light: #F06292;
+-$pink-dark: #EC407A;
++$pink-light: #A84A58;
++$pink-dark: #843642;
+ 
+ // Purple
+-$purple-light: #BA68C8;
+-$purple-dark: #AB47BC;
++$purple-light: #8A4A8A;
++$purple-dark: #743874;
+ 
+ // Blue
+-$blue-light: #5b9bf8;
+-$blue-dark: #3c84f7;
++$blue-light: #3188A6;
++$blue-dark: #1C496B;
+ 
+ // Teal
+-$teal-light: #4DB6AC;
+-$teal-dark: #009688;
++$teal-light: #3B9B9A;
++$teal-dark: #1D5D6A;
+ 
+ // Green
+-$green-light: #66BB6A;
+-$green-dark: #4CAF50;
++$green-light: #3DB479;
++$green-dark: #106B3C;
+ 
+ // Yellow
+-$yellow-light: #FFD600;
+-$yellow-dark: #FBC02D;
++$yellow-light: #D58E4D;
++$yellow-dark: #A06A32;
+ 
+ // Orange
+-$orange-light: #FF8A65;
+-$orange-dark: #FF7043;
++$orange-light: #BB5B1D;
++$orange-dark: #865625;
+ 
+ // Grey
+-$grey-050: #FAFAFA;
+-$grey-100: #F2F2F2;
+-$grey-150: #EEEEEE;
+-$grey-200: #DDDDDD;
+-$grey-250: #CCCCCC;
+-$grey-300: #BFBFBF;
+-$grey-350: #A0A0A0;
+-$grey-400: #9E9E9E;
+-$grey-450: #868686;
+-$grey-500: #727272;
+-$grey-550: #555555;
+-$grey-600: #464646;
+-$grey-650: #3C3C3C;
+-$grey-700: #2C2C2C;
+-$grey-750: #242424;
+-$grey-800: #212121;
+-$grey-850: #121212;
+-$grey-900: #0F0F0F;
+-$grey-950: #030303;
++$grey-050: #F0F4F8;
++$grey-100: #DEE6F0;
++$grey-150: #C9D0D9;
++$grey-200: #B0B6C2;
++$grey-250: #A1A5AD;
++$grey-300: #8E8B8D;
++$grey-350: #7A797B;
++$grey-400: #676768;
++$grey-450: #55575A;
++$grey-500: #494B4E;
++$grey-550: #3D3A39;
++$grey-600: #262729;
++$grey-650: #171A1C;
++$grey-700: #0A151E;
++$grey-750: #1C1813;
++$grey-800: #070E14;
++$grey-850: #060B10;
++$grey-900: #04080C;
++$grey-950: #020405;
+ 
+ // White
+-$white: #FFFFFF;
++$white: #DEE6F0;
+ 
+ // Black
+-$black: #000000;
++$black: #05090D;
+ 
+ // Button
+-$button-close: #fd5f51;
+-$button-max: #38c76a;
+-$button-min: #fdbe04;
++$button-close: #B72A18;
++$button-max: #3DB479;
++$button-min: #D58E4D;
+ 
+ // Link
+-$links: #5bd3f8;
++$links: #3188A6;
+ 
+ // Theme
+-$default-light: $blue-light;
+-$default-dark: $blue-dark;
++$default-light: #B72A18;
++$default-dark: #B72A18;
+diff --git a/gtkrc.sh b/gtkrc.sh
+--- a/gtkrc.sh
++++ b/gtkrc.sh
+@@ -15,8 +15,8 @@ make_gtkrc() {
+ 
+   case "$theme" in
+     '')
+-      theme_color_dark='#3c84f7'
+-      theme_color_light='#5b9bf8'
++      theme_color_dark='#B72A18'
++      theme_color_light='#B72A18'
+       ;;
+     -Purple)
+       theme_color_dark='#AB47BC'
+@@ -308,11 +308,11 @@ make_gtkrc() {
+   else
+     case "$scheme" in
+       '')
+         background_light='#FFFFFF'
+-        background_dark='#2C2C2C'
+-        background_darker='#3C3C3C'
+-        background_alt='#464646'
++        background_dark='#0A151E'
++        background_darker='#171A1C'
++        background_alt='#262729'
+         titlebar_light='#F2F2F2'
+-        titlebar_dark='#242424'
++        titlebar_dark='#1C1813'
+         ;;
+       -Nord)
+         background_light='#f8fafc'
+diff --git a/assets.sh b/assets.sh
+--- a/assets.sh
++++ b/assets.sh
+@@ -15,8 +15,8 @@ make_assets() {
+ 
+   case "$theme" in
+     '')
+-      theme_color_dark='#3c84f7'
+-      theme_color_light='#5b9bf8'
++      theme_color_dark='#B72A18'
++      theme_color_light='#B72A18'
+       ;;
+     -Purple)
+       theme_color_dark='#AB47BC'
+@@ -294,10 +294,10 @@ make_assets() {
+   else
+     case "$scheme" in
+       '')
+         background_light='#ffffff'
+-        background_dark='#2c2c2c'
+-        background_dark_alt='#3c3c3c'
++        background_dark='#0A151E'
++        background_dark_alt='#171A1C'
+         titlebar_light='#f2f2f2'
+-        titlebar_dark='#242424'
++        titlebar_dark='#1C1813'
+         ;;
+       -Nord)
+         background_light='#f8fafc'
+-- 
+Witcher 3 HyDE Theme
