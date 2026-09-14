@@ -1,4 +1,6 @@
 id,canonical_name,matrix_group,freedesktop_context,rationale
+W3-279,media-playlist-repeat,Actions/UI,Status,Design-bucket exception: repeat is used as an application media control; Breeze exposes the same canonical name in both Actions and Status while Freedesktop standardizes it as Status.
+W3-280,media-playlist-shuffle,Actions/UI,Status,Design-bucket exception: shuffle is used as an application media control; Breeze exposes the same canonical name in both Actions and Status while Freedesktop standardizes it as Status.
 W3-289,camera-photo,Actions/UI,Devices,Design-bucket exception: used as a capture control in application UI; install/export under the Freedesktop Devices context.
 W3-290,camera-video,Actions/UI,Devices,Design-bucket exception: used as a video-capture control in application UI; install/export under the Freedesktop Devices context.
 W3-300,folder-open,Actions/UI,Status,Design-bucket exception: used as an open-folder UI control; Breeze also exposes folder-open in Places and Status while Freedesktop standardizes the name as Status.
