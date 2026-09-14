@@ -1,0 +1,140 @@
+name: Snapshot Arch Command Names
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/snapshot-arch-command-names.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    name: Snapshot official Arch command names
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Download official Arch file databases
+        run: |
+          set -Eeuo pipefail
+          base="https://geo.mirror.pkgbuild.com"
+          for repo in core extra multilib; do
+            curl --fail --location --retry 3 --silent --show-error \
+              "$base/$repo/os/x86_64/$repo.files" \
+              --output "$RUNNER_TEMP/$repo.files"
+            test -s "$RUNNER_TEMP/$repo.files"
+          done
+
+      - name: Build command-name snapshot
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import csv
+          import os
+          import tarfile
+          from collections import defaultdict
+          from pathlib import Path
+
+          runner_temp = Path(os.environ["RUNNER_TEMP"])
+          output = Path("design/icons/standards/arch-command-names-2026-09-14.csv")
+          output.parent.mkdir(parents=True, exist_ok=True)
+
+          memberships: dict[str, set[str]] = defaultdict(set)
+          repos = ("core", "extra", "multilib")
+          prefix = "usr/bin/"
+
+          for repo in repos:
+              archive = runner_temp / f"{repo}.files"
+              with tarfile.open(archive, mode="r:*") as tar:
+                  for member in tar:
+                      if not member.isfile() or not member.name.endswith("/files"):
+                          continue
+                      extracted = tar.extractfile(member)
+                      if extracted is None:
+                          continue
+                      text = extracted.read().decode("utf-8", errors="strict")
+                      in_files = False
+                      for raw_line in text.splitlines():
+                          line = raw_line.strip()
+                          if line == "%FILES%":
+                              in_files = True
+                              continue
+                          if not in_files or not line.startswith(prefix):
+                              continue
+                          command = line[len(prefix):]
+                          if not command or "/" in command or command.endswith("/"):
+                              continue
+                          memberships[command].add(repo)
+
+          if len(memberships) < 3000:
+              raise SystemExit(
+                  f"Refusing suspiciously small Arch command snapshot: "
+                  f"{len(memberships)} commands"
+              )
+
+          with output.open("w", encoding="utf-8", newline="") as handle:
+              writer = csv.writer(handle, lineterminator="\n")
+              writer.writerow(["command", "repos"])
+              for command in sorted(memberships):
+                  writer.writerow([command, ";".join(sorted(memberships[command]))])
+
+          print(f"Captured {len(memberships)} unique official Arch command names.")
+          for repo in repos:
+              count = sum(repo in values for values in memberships.values())
+              print(f"  {repo}: {count} command memberships")
+          PY
+
+      - name: Validate snapshot
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path("design/icons/standards/arch-command-names-2026-09-14.csv")
+          with path.open("r", encoding="utf-8", newline="") as handle:
+              rows = list(csv.DictReader(handle))
+
+          if not rows or list(rows[0].keys()) != ["command", "repos"]:
+              raise SystemExit("Unexpected Arch command snapshot columns")
+
+          commands = [row["command"].strip() for row in rows]
+          if commands != sorted(set(commands)):
+              raise SystemExit("Arch commands are not sorted and unique")
+
+          allowed_repos = {"core", "extra", "multilib"}
+          for row in rows:
+              command = row["command"].strip()
+              repos = {item for item in row["repos"].split(";") if item}
+              if not command or "/" in command:
+                  raise SystemExit(f"Malformed Arch command: {command!r}")
+              if not repos or not repos <= allowed_repos:
+                  raise SystemExit(f"Invalid repository membership: {row!r}")
+
+          print(f"Validated {len(commands)} sorted unique Arch command names.")
+          PY
+
+      - name: Verify change scope
+        run: |
+          set -Eeuo pipefail
+          git status --short
+          paths="$(git status --porcelain | sed 's/^...//' | LC_ALL=C sort -u)"
+          expected="design/icons/standards/arch-command-names-2026-09-14.csv"
+          if [[ "$paths" != "$expected" ]]; then
+            echo "Unexpected files changed by Arch command snapshot workflow:" >&2
+            printf '%s\n' "$paths" >&2
+            exit 1
+          fi
+
+      - name: Commit Arch command snapshot
+        run: |
+          set -Eeuo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add design/icons/standards/arch-command-names-2026-09-14.csv
+          git commit -m "Snapshot Arch command names"
+          git push origin HEAD:main
