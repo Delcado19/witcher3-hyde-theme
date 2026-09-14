@@ -245,7 +245,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-207 | Applications | hyprpaper | Layered wallpaper scrolls with a cyan Hypr rune | Hero | P0 |  |  |
 | W3-208 | Applications | hyprlock | Obsidian lock shield with a cyan Hypr fracture | Hero | P0 |  |  |
 | W3-209 | Applications | hypridle | Hourglass inside a cyan Hypr window frame | Hero | P1 |  |  |
-| W3-210 | Applications | swww | Triple wallpaper scrolls rotating in a smooth magic loop | Hero | P1 |  |  |
+| W3-210 | Applications | awww | Triple wallpaper scrolls rotating in a smooth magic loop | Hero | P1 | swww |  |
 | W3-211 | Applications | waypaper | Wallpaper parchment pinned to a Wayland steel board | Hero | P1 |  |  |
 | W3-212 | Applications | nwg-look | Mirror panel with GTK runes and a small styling brush | Hero | P2 |  |  |
 | W3-213 | Applications | qt5ct | Qt rune with a five-point configuration cog | Hero | P2 |  |  |

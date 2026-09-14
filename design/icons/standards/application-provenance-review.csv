@@ -26,5 +26,4 @@ W3-178,tavern,unknown,needs-source,,No uniquely matching Linux music application
 W3-179,clementine,aur-package,validated-current,AUR:clementine,Current AUR package is maintained and points to Clementine upstream.
 W3-180,deadbeef,aur-package,validated-current,AUR:deadbeef,Current AUR package is maintained for the DeaDBeeF Linux audio player.
 W3-204,walker,aur-package,validated-current,AUR:walker-bin,Current Wayland application runner is distributed through AUR.
-W3-210,swww,renamed-successor,needs-canonical-review,Arch extra:awww,Project was renamed to awww; Arch extra now ships awww and marks it as replacing/providing swww.
 W3-211,waypaper,aur-package,validated-current,AUR:waypaper,Current Wayland/Xorg wallpaper GUI package exists in AUR and supports awww/hyprpaper backends.
