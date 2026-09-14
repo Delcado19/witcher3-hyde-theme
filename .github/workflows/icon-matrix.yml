@@ -5,6 +5,9 @@ on:
   push:
     paths:
       - "design/icons/matrix/witcher-icon-matrix-v1.csv"
+      - "design/icons/matrix/witcher-icon-matrix-v1.md"
+      - "tools/validate-icon-matrix.py"
+      - "tools/normalize-icon-matrix.py"
       - ".github/workflows/icon-matrix.yml"
 
 permissions:
@@ -22,148 +25,9 @@ jobs:
       - name: Validate matrix structure and namespaces
         run: |
           set -Eeuo pipefail
+          python3 tools/validate-icon-matrix.py
 
-          MATRIX_PATH="design/icons/matrix/witcher-icon-matrix-v1.csv" python3 <<'PY'
-          import csv
-          import os
-          import re
-          from collections import Counter, defaultdict
-          from pathlib import Path
-
-          path = Path(os.environ["MATRIX_PATH"])
-          expected_columns = [
-              "id",
-              "group",
-              "canonical_name",
-              "witcher_concept",
-              "style_class",
-              "priority",
-              "aliases",
-              "notes",
-          ]
-          expected_groups = {
-              "Applications": 220,
-              "Actions/UI": 100,
-              "Places/Folders": 65,
-              "Status/Panel/Waybar": 95,
-              "Devices": 45,
-              "MIME/Filetypes": 85,
-              "Categories/Misc": 35,
-          }
-          expected_styles = {"Hero", "Glyph", "Emblem"}
-          expected_priorities = {"P0", "P1", "P2", "P3"}
-          name_re = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+@:-]*$")
-
-          with path.open("r", encoding="utf-8-sig", newline="") as handle:
-              reader = csv.DictReader(handle)
-              if reader.fieldnames != expected_columns:
-                  raise SystemExit(
-                      f"Unexpected columns: {reader.fieldnames!r}; expected {expected_columns!r}"
-                  )
-              rows = list(reader)
-
-          if len(rows) != 645:
-              raise SystemExit(f"Expected 645 matrix rows, found {len(rows)}")
-
-          ids = [row["id"].strip() for row in rows]
-          expected_ids = [f"W3-{index:03d}" for index in range(1, 646)]
-          if ids != expected_ids:
-              mismatches = [
-                  f"row {index + 1}: {actual!r} != {expected!r}"
-                  for index, (actual, expected) in enumerate(zip(ids, expected_ids))
-                  if actual != expected
-              ]
-              raise SystemExit("Non-sequential IDs:\n" + "\n".join(mismatches[:20]))
-
-          group_counts = Counter(row["group"].strip() for row in rows)
-          if dict(group_counts) != expected_groups:
-              raise SystemExit(
-                  f"Unexpected group counts: {dict(group_counts)!r}; expected {expected_groups!r}"
-              )
-
-          canonical_to_id = {}
-          alias_to_ids = defaultdict(list)
-          errors = []
-
-          for row in rows:
-              row_id = row["id"].strip()
-              group = row["group"].strip()
-              canonical = row["canonical_name"].strip()
-              concept = row["witcher_concept"].strip()
-              style = row["style_class"].strip()
-              priority = row["priority"].strip()
-              aliases = [
-                  item.strip()
-                  for item in row["aliases"].split(";")
-                  if item.strip()
-              ]
-
-              if not canonical:
-                  errors.append(f"{row_id}: missing canonical_name")
-              elif not name_re.fullmatch(canonical):
-                  errors.append(f"{row_id}: invalid canonical_name {canonical!r}")
-
-              if not concept:
-                  errors.append(f"{row_id}: missing witcher_concept")
-              if style not in expected_styles:
-                  errors.append(f"{row_id}: invalid style_class {style!r}")
-              if priority not in expected_priorities:
-                  errors.append(f"{row_id}: invalid priority {priority!r}")
-
-              if canonical in canonical_to_id:
-                  errors.append(
-                      f"{row_id}: canonical_name {canonical!r} already used by "
-                      f"{canonical_to_id[canonical]}"
-                  )
-              else:
-                  canonical_to_id[canonical] = row_id
-
-              if len(aliases) != len(set(aliases)):
-                  duplicates = sorted(
-                      name for name, count in Counter(aliases).items() if count > 1
-                  )
-                  errors.append(
-                      f"{row_id}: duplicate aliases within row: {', '.join(duplicates)}"
-                  )
-
-              for alias in aliases:
-                  if alias == canonical:
-                      errors.append(f"{row_id}: alias duplicates canonical_name {alias!r}")
-                  if not name_re.fullmatch(alias):
-                      errors.append(f"{row_id}: invalid alias {alias!r}")
-                  alias_to_ids[alias].append(row_id)
-
-          for alias, owner_ids in sorted(alias_to_ids.items()):
-              unique_owners = sorted(set(owner_ids))
-              if len(unique_owners) > 1:
-                  errors.append(
-                      f"Alias {alias!r} is shared by multiple designs: "
-                      + ", ".join(unique_owners)
-                  )
-
-              canonical_owner = canonical_to_id.get(alias)
-              if canonical_owner and canonical_owner not in unique_owners:
-                  errors.append(
-                      f"Alias {alias!r} collides with canonical_name of {canonical_owner}; "
-                      f"alias owner(s): {', '.join(unique_owners)}"
-                  )
-
-          if errors:
-              print(f"Found {len(errors)} icon-matrix error(s):")
-              for error in errors:
-                  print(f"- {error}")
-              raise SystemExit(1)
-
-          alias_count = sum(
-              1
-              for row in rows
-              for item in row["aliases"].split(";")
-              if item.strip()
-          )
-          print(f"Validated {len(rows)} unique designs.")
-          print(f"Validated {len(canonical_to_id)} canonical names.")
-          print(f"Validated {alias_count} alias entries without namespace collisions.")
-          print("Group counts:")
-          for group, expected in expected_groups.items():
-              print(f"  {group}: {group_counts[group]} / {expected}")
-          PY
+      - name: Verify normalized CSV and Markdown mirror
+        run: |
+          set -Eeuo pipefail
+          python3 tools/normalize-icon-matrix.py
