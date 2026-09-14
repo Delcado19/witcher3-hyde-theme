@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "tools/build-gtk.sh"
+      - "tools/prepare-hyde-live-smoke.sh"
       - "design/gtk/**"
       - "design/palette/**"
       - ".github/workflows/gtk-build.yml"
@@ -56,6 +57,23 @@ jobs:
           cmp --silent "$first" "$archive"
 
           echo "GTK archive is byte-reproducible."
+
+      - name: Prepare development HyDE smoke tree
+        run: |
+          set -Eeuo pipefail
+          ./tools/prepare-hyde-live-smoke.sh --use-existing-gtk --output "$RUNNER_TEMP/hyde-live-smoke"
+
+          staged="$RUNNER_TEMP/hyde-live-smoke"
+          repo_theme="Configs/.config/hyde/themes/Witcher3/hypr.theme"
+          staged_theme="$staged/Configs/.config/hyde/themes/Witcher3/hypr.theme"
+
+          test -f "$staged/Source/arcs/Gtk_Witcher3.tar.xz"
+          test -f "$staged/DEV_SMOKE_TEST.txt"
+          grep -Fq '$ICON_THEME = Witcher3-HyDE' "$repo_theme"
+          ! grep -Eq '^[[:space:]]*\$ICON_THEME[[:space:]]*=' "$staged_theme"
+          grep -Eq '^[[:space:]]*\$GTK_THEME[[:space:]]*=[[:space:]]*Witcher3[[:space:]]*$' "$staged_theme"
+          ! find "$staged" -type f -name 'Icon_*.tar.*' -print -quit | grep -q .
+          ! find "$staged" -type f -name 'Cursor_*.tar.*' -print -quit | grep -q .
 
       - name: Inspect generated archive
         run: |
