@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "Configs/.config/hyde/themes/Witcher3/hypr.theme"
+      - "Source/**/Cursor_*.tar.*"
       - ".github/workflows/hypr-theme.yml"
 
 permissions:
@@ -73,6 +74,24 @@ jobs:
             "https://raw.githubusercontent.com/HyDE-Project/HyDE/$HYDE_COMMIT/Configs/.local/share/hypr/schema/hyprland-lua.json" \
             --output "$RUNNER_TEMP/hyprland-lua.json"
           test -s "$RUNNER_TEMP/hyprland-lua.json"
+
+      - name: Validate v1 cursor inheritance policy
+        run: |
+          set -Eeuo pipefail
+          theme="Configs/.config/hyde/themes/Witcher3/hypr.theme"
+
+          if grep -Eq '^[[:space:]]*\$CURSOR_(THEME|SIZE)[[:space:]]*=' "$theme"; then
+            echo "Witcher3 v1 must inherit the HyDE/user cursor; remove CURSOR_THEME/CURSOR_SIZE from hypr.theme." >&2
+            exit 1
+          fi
+
+          if [ -d Source ] && find Source -type f -name 'Cursor_*.tar.*' -print -quit | grep -q .; then
+            echo "Witcher3 v1 must not ship a Cursor_*.tar.* package." >&2
+            find Source -type f -name 'Cursor_*.tar.*' -print >&2
+            exit 1
+          fi
+
+          echo "Witcher3 v1 cursor inheritance policy is intact."
 
       - name: Validate Witcher3 hypr.theme
         run: |
