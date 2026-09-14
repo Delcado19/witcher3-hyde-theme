@@ -66,6 +66,7 @@ witcher3-hyde-theme/
 │       ├── kvantum-theme.yml
 │       ├── rofi-theme.yml
 │       ├── theme-dcol.yml
+│       ├── wallpaper-theme.yml
 │       └── waybar-theme.yml
 │
 ├── README.md
@@ -84,7 +85,7 @@ witcher3-hyde-theme/
 │                   ├── kvantum/
 │                   │   └── kvconfig.theme
 │                   └── wallpapers/
-│                       └── ...
+│                       └── witcher3_kaer_morhen.png
 │
 ├── Source/
 │   └── arcs/
@@ -130,11 +131,13 @@ witcher3-hyde-theme/
 └── tools/
     ├── build-gtk.sh
     ├── build-icons.py
+    ├── import-witcher-wallpaper.py
     ├── validate-icon-matrix.py
-    └── validate-icon-sources.py
+    ├── validate-icon-sources.py
+    └── validate-wallpaper-theme.py
 ```
 
-The wallpaper files, actual icon artwork, screenshots, and optional cursor resources are target-state entries and may not exist yet during development. `wall.set` is runtime state created by current HyDE and is intentionally not stored in the repository. Icon build and validation tooling already exists and is CI-tested independently of the unfinished artwork set.
+The Kaer Morhen default wallpaper is bundled as a validated 2560×1440 16-bit RGB PNG. With exactly one bundled wallpaper, current HyDE's fallback selection is deterministic and creates `wall.set` as runtime state when the theme is first applied; `wall.set` is intentionally not stored in the repository. Actual icon artwork, screenshots, and optional cursor resources remain development targets. Icon and wallpaper build/validation tooling is CI-tested independently of unfinished visual assets.
 
 ### Kvantum integration
 
@@ -395,6 +398,7 @@ Current CI coverage includes:
 | Kitty | Official pinned Kitty binary and Kitty's internal config parser |
 | `theme.dcol` | Shell syntax, complete variable matrix, Hex/RGBA consistency |
 | Kvantum | Rendered Kvconfig, pinned HyDE SVG, XML validity, color roles, selection contrast |
+| Wallpaper | Strict 2560×1440 16-bit RGB PNG structure/data validation, exact approved filename, single-wallpaper baseline, and repository-level `wall.set` rejection |
 | Icon matrix | 645-design structure, canonical/alias namespace, Freedesktop/Breeze naming and application identity provenance |
 | Icon builder | Incremental source validation plus synthetic 645-SVG staging, symlink, archive, and reproducibility tests |
 
@@ -413,7 +417,7 @@ For the HyDE runtime theme:
 3. Implement and statically validate Hyprland, Waybar, Rofi, and Kitty integrations.
 4. Define `theme.dcol` as the fixed Wallbash palette.
 5. Add the minimal Kvantum override while reusing current HyDE's maintained Wallbash SVG template.
-6. Add at least one project-owned or redistributable wallpaper. Current HyDE creates `wall.set` as runtime state when the theme is applied.
+6. Bundle and validate at least one permitted redistributable wallpaper. **Done.** Current HyDE creates `wall.set` as runtime state when the theme is applied.
 7. Produce and package the dedicated icon artwork through the validated builder.
 8. Decide whether a custom cursor package is justified.
 9. Test the complete theme on a clean/current HyDE installation before release.
@@ -446,7 +450,7 @@ Until the first stable release exists, this repository should be treated as a de
 
 ## Status
 
-**Current phase:** core runtime styling and icon infrastructure are statically validated; original visual assets and live integration are next.
+**Current phase:** core runtime styling, the Kaer Morhen wallpaper baseline, and icon infrastructure are statically validated; original icon artwork and live integration are next.
 
 - [x] Define the project as a full HyDE theme
 - [x] Establish a current-HyDE-compatible repository baseline
@@ -468,7 +472,7 @@ Until the first stable release exists, this repository should be treated as a de
 - [x] Implement and CI-validate the strict icon builder
 - [x] Add incremental SVG artwork validation
 - [x] Define icon art direction and the 14-icon pilot batch
-- [ ] Add the first project-owned or redistributable wallpaper
+- [x] Add and CI-validate the Kaer Morhen default wallpaper
 - [x] Document `wall.set` as HyDE-managed runtime state rather than a repository asset
 - [ ] Produce and review the 14-icon Witcher artwork pilot
 - [ ] Expand original icon artwork to 645/645 canonicals
