@@ -10,6 +10,10 @@ on:
 permissions:
   contents: read
 
+env:
+  KITTY_VERSION: "0.48.2"
+  KITTY_LINUX_X86_64_SHA256: "967a1958e7fc67b495d279c0963bcd1a0482097151817ce6506fabc822689af7"
+
 jobs:
   validate-kitty-theme:
     name: Parse Witcher3 Kitty theme
@@ -19,19 +23,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Install Kitty and virtual display
+      - name: Install pinned Kitty binary bundle
         run: |
-          sudo apt-get update
-          sudo apt-get install --yes kitty xvfb
+          set -Eeuo pipefail
 
-      - name: Validate HyDE theme fragment with Kitty
+          archive="$RUNNER_TEMP/kitty.txz"
+          install_dir="$RUNNER_TEMP/kitty-app"
+          url="https://github.com/kovidgoyal/kitty/releases/download/v${KITTY_VERSION}/kitty-${KITTY_VERSION}-x86_64.txz"
+
+          curl --fail --location --silent --show-error \
+            "$url" \
+            --output "$archive"
+
+          printf '%s  %s\n' "$KITTY_LINUX_X86_64_SHA256" "$archive" | sha256sum --check --status
+
+          mkdir -p "$install_dir"
+          tar -xJf "$archive" -C "$install_dir"
+
+          kitty_bin="$install_dir/bin/kitty"
+          test -x "$kitty_bin"
+          "$kitty_bin" --version | grep -F "kitty ${KITTY_VERSION}"
+
+      - name: Validate HyDE theme fragment with Kitty parser
         run: |
           set -Eeuo pipefail
 
           source_theme="Configs/.config/hyde/themes/Witcher3/kitty.theme"
           target_line='$HOME/.config/kitty/theme.conf|killall -SIGUSR1 kitty'
           fragment="$RUNNER_TEMP/Witcher3-kitty.conf"
-          debug_output="$RUNNER_TEMP/Witcher3-kitty-debug.txt"
+          kitty_bin="$RUNNER_TEMP/kitty-app/bin/kitty"
 
           test "$(head -n 1 "$source_theme")" = "$target_line"
           tail -n +2 "$source_theme" > "$fragment"
@@ -44,30 +64,47 @@ jobs:
             selection_background \
             cursor \
             cursor_text_color \
+            url_color \
             active_border_color \
             inactive_border_color \
+            bell_border_color \
             active_tab_foreground \
             active_tab_background \
-            color0 \
-            color15; do
+            inactive_tab_foreground \
+            inactive_tab_background \
+            tab_bar_background \
+            mark1_foreground \
+            mark1_background \
+            mark2_foreground \
+            mark2_background \
+            mark3_foreground \
+            mark3_background; do
             grep -Eq "^[[:space:]]*${key}[[:space:]]+" "$fragment"
           done
 
-          set +e
-          xvfb-run -a kitty --config "$fragment" --debug-config > "$debug_output" 2>&1
-          kitty_status=$?
-          set -e
+          for index in $(seq 0 15); do
+            grep -Eq "^[[:space:]]*color${index}[[:space:]]+" "$fragment"
+          done
 
-          cat "$debug_output"
+          grep -Eq '^[[:space:]]*foreground[[:space:]]+#DEE6F0[[:space:]]*$' "$fragment"
+          grep -Eq '^[[:space:]]*background[[:space:]]+#0A151E[[:space:]]*$' "$fragment"
+          grep -Eq '^[[:space:]]*active_border_color[[:space:]]+#B72A18[[:space:]]*$' "$fragment"
 
-          if ((kitty_status != 0)); then
-            echo "Kitty config parse/debug command failed with exit code $kitty_status." >&2
-            exit "$kitty_status"
-          fi
+          KITTY_THEME_FRAGMENT="$fragment" "$kitty_bin" +runpy '
+          import os
+          import sys
+          from kitty.config import load_config
 
-          test -s "$debug_output"
-          grep -qi '#0a151e' "$debug_output"
-          grep -qi '#dee6f0' "$debug_output"
-          grep -qi '#b72a18' "$debug_output"
+          bad_lines = []
+          load_config(os.environ["KITTY_THEME_FRAGMENT"], accumulate_bad_lines=bad_lines)
 
-          echo "Witcher3 Kitty theme parsed successfully."
+          if bad_lines:
+              print("Kitty rejected configuration lines:", file=sys.stderr)
+              for item in bad_lines:
+                  print(item, file=sys.stderr)
+              raise SystemExit(1)
+
+          print("Kitty parser accepted Witcher3 theme fragment.")
+          '
+
+          echo "Witcher3 Kitty theme validation passed with Kitty ${KITTY_VERSION}."
