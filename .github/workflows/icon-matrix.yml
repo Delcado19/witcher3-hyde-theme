@@ -11,10 +11,14 @@ on:
       - "tools/validate-icon-matrix.py"
       - "tools/normalize-icon-matrix.py"
       - "tools/audit-freedesktop-icon-names.py"
+      - "tools/audit-breeze-icon-names.py"
       - ".github/workflows/icon-matrix.yml"
 
 permissions:
   contents: read
+
+env:
+  BREEZE_COMMIT: 235730e69d90949621e4fee77fcc459772b7a8f0
 
 jobs:
   validate-icon-matrix:
@@ -39,3 +43,29 @@ jobs:
         run: |
           set -Eeuo pipefail
           python3 tools/audit-freedesktop-icon-names.py
+
+      - name: Fetch pinned KDE Breeze icon tree
+        run: |
+          set -Eeuo pipefail
+
+          breeze_repo="$RUNNER_TEMP/breeze-icons"
+          breeze_tree="$RUNNER_TEMP/breeze-tree.txt"
+
+          git init --quiet "$breeze_repo"
+          git -C "$breeze_repo" remote add origin https://github.com/KDE/breeze-icons.git
+          git -C "$breeze_repo" fetch --quiet --depth=1 origin "$BREEZE_COMMIT"
+
+          actual_commit="$(git -C "$breeze_repo" rev-parse FETCH_HEAD)"
+          if [[ "$actual_commit" != "$BREEZE_COMMIT" ]]; then
+            echo "Expected Breeze $BREEZE_COMMIT, fetched $actual_commit" >&2
+            exit 1
+          fi
+
+          git -C "$breeze_repo" ls-tree -r --name-only FETCH_HEAD > "$breeze_tree"
+          test -s "$breeze_tree"
+
+      - name: Audit KDE Breeze icon names
+        run: |
+          set -Eeuo pipefail
+          python3 tools/audit-breeze-icon-names.py \
+            --tree-list "$RUNNER_TEMP/breeze-tree.txt"
