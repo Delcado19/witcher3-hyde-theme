@@ -12,13 +12,16 @@ The presence of an item in this file does not replace its original license. The 
 |---|---|---|---|---|---|
 | _None recorded yet_ |  |  |  |  |  |
 
-## Referenced but Not Redistributed
+## Referenced but Not Yet Redistributed
 
-Use this section for material that influenced the project or is linked by documentation but is not packaged in the repository.
+Use this section for third-party material that is referenced, selected as an implementation base, or used for development but is not currently packaged in this repository.
 
-| Resource | Author / Project | Source | Purpose |
-|---|---|---|---|
-| HyDE | HyDE Project | https://github.com/HyDE-Project/HyDE | Target desktop environment and theme format |
+| Resource | Author / Project | Source | License | Purpose / Notes |
+|---|---|---|---|---|
+| HyDE | HyDE Project | https://github.com/HyDE-Project/HyDE | GPL-3.0 | Target desktop environment and technical source of truth for theme integration |
+| Colloid GTK Theme | Vince / `vinceliuice` | https://github.com/vinceliuice/Colloid-gtk-theme | GPL-3.0 | Selected structural base for the future `Witcher3` GTK derivative; pinned upstream commit `fe11342f37f124f1b29d44cf33e9a06053f4bba2` from 2026-08-22. No Colloid source or generated GTK package is redistributed by the repository at this stage. See `docs/GTK_BASELINE.md` and `design/gtk/upstream/COLLOID_SOURCE.md`. |
+
+When the Witcher3 GTK derivative or its corresponding source is added to the repository, move or duplicate the Colloid entry into **Bundled Assets** with the exact repository paths and modification details used by the release.
 
 ## Witcher Intellectual Property
 
