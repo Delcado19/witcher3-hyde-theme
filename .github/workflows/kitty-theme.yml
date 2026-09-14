@@ -1,0 +1,63 @@
+name: Kitty Theme Validation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "Configs/.config/hyde/themes/Witcher3/kitty.theme"
+      - ".github/workflows/kitty-theme.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-kitty-theme:
+    name: Parse Witcher3 Kitty theme
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install Kitty and virtual display
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes kitty xvfb
+
+      - name: Validate HyDE theme fragment with Kitty
+        run: |
+          set -Eeuo pipefail
+
+          source_theme="Configs/.config/hyde/themes/Witcher3/kitty.theme"
+          target_line='$HOME/.config/kitty/theme.conf|killall -SIGUSR1 kitty'
+          fragment="$RUNNER_TEMP/Witcher3-kitty.conf"
+          debug_output="$RUNNER_TEMP/Witcher3-kitty-debug.txt"
+
+          test "$(head -n 1 "$source_theme")" = "$target_line"
+          tail -n +2 "$source_theme" > "$fragment"
+          test -s "$fragment"
+
+          for key in \
+            foreground \
+            background \
+            selection_foreground \
+            selection_background \
+            cursor \
+            cursor_text_color \
+            active_border_color \
+            inactive_border_color \
+            active_tab_foreground \
+            active_tab_background \
+            color0 \
+            color15; do
+            grep -Eq "^[[:space:]]*${key}[[:space:]]+" "$fragment"
+          done
+
+          xvfb-run -a kitty --config "$fragment" --debug-config > "$debug_output" 2>&1
+          test -s "$debug_output"
+
+          grep -qi '#0a151e' "$debug_output"
+          grep -qi '#dee6f0' "$debug_output"
+          grep -qi '#b72a18' "$debug_output"
+
+          echo "Witcher3 Kitty theme parsed successfully."
