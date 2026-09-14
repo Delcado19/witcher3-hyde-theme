@@ -81,7 +81,6 @@ witcher3-hyde-theme/
 │                   ├── rofi.theme
 │                   ├── waybar.theme
 │                   ├── theme.dcol
-│                   ├── wall.set
 │                   ├── kvantum/
 │                   │   └── kvconfig.theme
 │                   └── wallpapers/
@@ -135,7 +134,7 @@ witcher3-hyde-theme/
     └── validate-icon-sources.py
 ```
 
-`wall.set`, the wallpaper files, actual icon artwork, screenshots, and optional cursor resources are target-state entries and may not exist yet during development. Icon build and validation tooling already exists and is CI-tested independently of the unfinished artwork set.
+The wallpaper files, actual icon artwork, screenshots, and optional cursor resources are target-state entries and may not exist yet during development. `wall.set` is runtime state created by current HyDE and is intentionally not stored in the repository. Icon build and validation tooling already exists and is CI-tested independently of the unfinished artwork set.
 
 ### Kvantum integration
 
@@ -414,11 +413,10 @@ For the HyDE runtime theme:
 3. Implement and statically validate Hyprland, Waybar, Rofi, and Kitty integrations.
 4. Define `theme.dcol` as the fixed Wallbash palette.
 5. Add the minimal Kvantum override while reusing current HyDE's maintained Wallbash SVG template.
-6. Add at least one project-owned or redistributable wallpaper.
-7. Set the deterministic default `wall.set`.
-8. Produce and package the dedicated icon artwork through the validated builder.
-9. Decide whether a custom cursor package is justified.
-10. Test the complete theme on a clean/current HyDE installation before release.
+6. Add at least one project-owned or redistributable wallpaper. Current HyDE creates `wall.set` as runtime state when the theme is applied.
+7. Produce and package the dedicated icon artwork through the validated builder.
+8. Decide whether a custom cursor package is justified.
+9. Test the complete theme on a clean/current HyDE installation before release.
 
 For the icon theme:
 
@@ -471,7 +469,7 @@ Until the first stable release exists, this repository should be treated as a de
 - [x] Add incremental SVG artwork validation
 - [x] Define icon art direction and the 14-icon pilot batch
 - [ ] Add the first project-owned or redistributable wallpaper
-- [ ] Select the default wallpaper and add `wall.set`
+- [x] Document `wall.set` as HyDE-managed runtime state rather than a repository asset
 - [ ] Produce and review the 14-icon Witcher artwork pilot
 - [ ] Expand original icon artwork to 645/645 canonicals
 - [ ] Build the real `Icon_Witcher3-HyDE.tar.xz` from accepted artwork
