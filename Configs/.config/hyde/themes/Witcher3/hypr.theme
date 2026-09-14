@@ -1,0 +1,56 @@
+$HOME/.config/hypr/themes/theme.conf|> $HOME/.config/hypr/themes/colors.conf
+
+# Witcher 3 HyDE Theme
+# HyDE applies GTK, icon and color-scheme variables during theme switching.
+# Do not add legacy theme-local gsettings exec commands here.
+
+$GTK_THEME = Witcher3
+$ICON_THEME = Witcher3-HyDE
+$COLOR_SCHEME = prefer-dark
+
+general {
+    gaps_in = 5
+    gaps_out = 10
+    border_size = 2
+
+    # Witcher red fading into weathered steel for the focused window.
+    col.active_border = rgba(B72A18ff) rgba(8E8B8Dff) 45deg
+
+    # Charcoal and blackened iron for unfocused windows.
+    col.inactive_border = rgba(3D3A39cc) rgba(171A1Ccc) 45deg
+
+    layout = dwindle
+    resize_on_border = true
+}
+
+group {
+    col.border_active = rgba(B72A18ff) rgba(8E8B8Dff) 45deg
+    col.border_inactive = rgba(3D3A39cc) rgba(171A1Ccc) 45deg
+    col.border_locked_active = rgba(B72A18ff) rgba(8E8B8Dff) 45deg
+    col.border_locked_inactive = rgba(3D3A39cc) rgba(171A1Ccc) 45deg
+}
+
+decoration {
+    # Slightly softened metal rather than a rounded/mobile UI look.
+    rounding = 4
+
+    shadow {
+        enabled = true
+        offset = 0 3
+        range = 12
+        render_power = 3
+        color = rgba(0A151E99)
+    }
+
+    blur {
+        enabled = true
+        size = 5
+        passes = 2
+        new_optimizations = true
+        ignore_opacity = true
+        xray = false
+    }
+}
+
+# The Witcher3 Waybar is intentionally opaque and should remain crisp.
+layerrule = unset,waybar
