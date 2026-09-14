@@ -26,17 +26,50 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes sassc xz-utils
 
-      - name: Build and validate GTK package
+      - name: Build and validate first GTK package
         run: ./tools/build-gtk.sh --package
+
+      - name: Preserve first archive
+        run: |
+          set -Eeuo pipefail
+          archive="Source/arcs/Gtk_Witcher3.tar.xz"
+          test -f "$archive"
+          cp "$archive" "$RUNNER_TEMP/Gtk_Witcher3.first.tar.xz"
+          sha256sum "$archive" | tee "$RUNNER_TEMP/Gtk_Witcher3.first.sha256"
+
+      - name: Build and validate second GTK package
+        run: ./tools/build-gtk.sh --package
+
+      - name: Verify byte-reproducible GTK archive
+        run: |
+          set -Eeuo pipefail
+          archive="Source/arcs/Gtk_Witcher3.tar.xz"
+          first="$RUNNER_TEMP/Gtk_Witcher3.first.tar.xz"
+
+          first_sha="$(sha256sum "$first" | awk '{print $1}')"
+          second_sha="$(sha256sum "$archive" | awk '{print $1}')"
+
+          printf 'first SHA-256:  %s\n' "$first_sha"
+          printf 'second SHA-256: %s\n' "$second_sha"
+
+          test "$first_sha" = "$second_sha"
+          cmp --silent "$first" "$archive"
+
+          echo "GTK archive is byte-reproducible."
 
       - name: Inspect generated archive
         run: |
-          test -f Source/arcs/Gtk_Witcher3.tar.xz
+          set -Eeuo pipefail
+          archive="Source/arcs/Gtk_Witcher3.tar.xz"
+          test -f "$archive"
           echo "Archive size:"
-          du -h Source/arcs/Gtk_Witcher3.tar.xz
+          du -h "$archive"
+          echo
+          echo "SHA-256:"
+          sha256sum "$archive"
           echo
           echo "Top-level archive entries:"
-          tar -tJf Source/arcs/Gtk_Witcher3.tar.xz \
+          tar -tJf "$archive" \
             | sed 's#^\./##' \
             | cut -d/ -f1 \
             | sort -u
