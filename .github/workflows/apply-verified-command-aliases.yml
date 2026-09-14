@@ -1,0 +1,182 @@
+name: Apply Verified Command Aliases
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/apply-verified-command-aliases.yml"
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  migrate:
+    name: Apply 7zip and SANE command aliases
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Add verified command aliases
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path("design/icons/matrix/witcher-icon-matrix-v1.csv")
+          with path.open("r", encoding="utf-8-sig", newline="") as handle:
+              reader = csv.DictReader(handle)
+              fieldnames = reader.fieldnames
+              rows = [dict(row) for row in reader]
+
+          expected = {
+              "W3-081": ["7z", "7za", "7zr"],
+              "W3-198": ["scanimage"],
+          }
+          seen = set()
+          for row in rows:
+              row_id = row["id"].strip()
+              additions = expected.get(row_id)
+              if additions is None:
+                  continue
+              seen.add(row_id)
+              aliases = [item.strip() for item in row["aliases"].split(";") if item.strip()]
+              for alias in additions:
+                  if alias not in aliases:
+                      aliases.append(alias)
+              row["aliases"] = "; ".join(aliases)
+
+          if seen != set(expected):
+              raise SystemExit(f"Missing expected matrix rows: {sorted(set(expected) - seen)}")
+
+          with path.open("w", encoding="utf-8", newline="") as handle:
+              handle.write("\ufeff")
+              writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+              writer.writeheader()
+              writer.writerows(rows)
+          PY
+
+          python3 tools/normalize-icon-matrix.py --write
+
+      - name: Remove resolved provenance rows
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path("design/icons/standards/application-provenance-review.csv")
+          remove_ids = {"W3-081", "W3-198"}
+
+          with path.open("r", encoding="utf-8", newline="") as handle:
+              reader = csv.DictReader(handle)
+              fieldnames = reader.fieldnames
+              rows = [dict(row) for row in reader]
+
+          removed = {row["id"].strip() for row in rows if row["id"].strip() in remove_ids}
+          if removed != remove_ids:
+              raise SystemExit(f"Expected provenance rows not found: {sorted(remove_ids - removed)}")
+
+          rows = [row for row in rows if row["id"].strip() not in remove_ids]
+          with path.open("w", encoding="utf-8", newline="") as handle:
+              writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+              writer.writeheader()
+              writer.writerows(rows)
+          PY
+
+      - name: Update pinned Stage F and G coverage
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path: Path, old: str, new: str) -> None:
+              text = path.read_text(encoding="utf-8")
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(
+                      f"Expected exactly one occurrence in {path}: {old!r}; found {count}"
+                  )
+              path.write_text(text.replace(old, new), encoding="utf-8", newline="")
+
+          stage_f = Path("tools/audit-arch-command-names.py")
+          replace_once(stage_f, "EXPECTED_ALIAS_COMMAND_ROWS = 1", "EXPECTED_ALIAS_COMMAND_ROWS = 3")
+          replace_once(stage_f, "EXPECTED_RESOLVED_ROWS = 15", "EXPECTED_RESOLVED_ROWS = 17")
+          replace_once(stage_f, "EXPECTED_UNRESOLVED_ROWS = 31", "EXPECTED_UNRESOLVED_ROWS = 29")
+          replace_once(stage_f, "EXPECTED_COMBINED_ROWS = 189", "EXPECTED_COMBINED_ROWS = 191")
+          replace_once(
+              stage_f,
+              '    "W3-050",\n    "W3-090",',
+              '    "W3-050",\n    "W3-081",\n    "W3-090",',
+          )
+          replace_once(
+              stage_f,
+              '    "W3-186",\n    "W3-202",',
+              '    "W3-186",\n    "W3-198",\n    "W3-202",',
+          )
+
+          stage_g = Path("tools/audit-application-provenance.py")
+          replace_once(
+              stage_g,
+              "EXPECTED_PROVENANCE_ROWS = 31",
+              "EXPECTED_PROVENANCE_ROWS = 29",
+          )
+          PY
+
+      - name: Validate migration before commit
+        run: |
+          set -Eeuo pipefail
+          python3 tools/normalize-icon-matrix.py
+          python3 tools/validate-icon-matrix.py
+          python3 tools/audit-flathub-app-ids.py
+          python3 tools/audit-arch-desktop-ids.py
+          python3 tools/audit-arch-command-names.py
+          python3 tools/audit-application-provenance.py
+
+      - name: Verify change scope
+        run: |
+          set -Eeuo pipefail
+          git status --short
+          paths="$(git status --porcelain | sed 's/^...//' | LC_ALL=C sort -u)"
+          expected="$(printf '%s\n' \
+            design/icons/matrix/witcher-icon-matrix-v1.csv \
+            design/icons/matrix/witcher-icon-matrix-v1.md \
+            design/icons/standards/application-provenance-review.csv \
+            tools/audit-application-provenance.py \
+            tools/audit-arch-command-names.py \
+            | LC_ALL=C sort -u)"
+          if [[ "$paths" != "$expected" ]]; then
+            echo "Unexpected migration scope:" >&2
+            printf '%s\n' "$paths" >&2
+            exit 1
+          fi
+
+      - name: Commit verified alias fixes
+        run: |
+          set -Eeuo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            design/icons/matrix/witcher-icon-matrix-v1.csv \
+            design/icons/matrix/witcher-icon-matrix-v1.md \
+            design/icons/standards/application-provenance-review.csv \
+            tools/audit-application-provenance.py \
+            tools/audit-arch-command-names.py
+          git commit -m "Add verified 7zip and SANE command aliases"
+          git push origin HEAD:main
+
+      - name: Dispatch full icon validation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -Eeuo pipefail
+          curl --fail-with-body --silent --show-error --location \
+            --request POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/icon-matrix.yml/dispatches" \
+            --data '{"ref":"main"}'
