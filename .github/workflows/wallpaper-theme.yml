@@ -1,0 +1,61 @@
+name: Wallpaper Theme Validation
+
+on:
+  push:
+    paths:
+      - 'Configs/.config/hyde/themes/Witcher3/wallpapers/**'
+      - 'Configs/.config/hyde/themes/Witcher3/wall.set'
+      - 'THIRD_PARTY_NOTICES.md'
+      - 'tools/import-witcher-wallpaper.py'
+      - 'tools/validate-wallpaper-theme.py'
+      - 'tests/test_import_witcher_wallpaper.py'
+      - '.github/workflows/wallpaper-theme.yml'
+  pull_request:
+    paths:
+      - 'Configs/.config/hyde/themes/Witcher3/wallpapers/**'
+      - 'Configs/.config/hyde/themes/Witcher3/wall.set'
+      - 'THIRD_PARTY_NOTICES.md'
+      - 'tools/import-witcher-wallpaper.py'
+      - 'tools/validate-wallpaper-theme.py'
+      - 'tests/test_import_witcher_wallpaper.py'
+      - '.github/workflows/wallpaper-theme.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Witcher3 wallpaper pipeline
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Show Python version
+        run: python3 --version
+
+      - name: Compile wallpaper tools and tests
+        run: |
+          set -Eeuo pipefail
+          python3 -m py_compile \
+            tools/import-witcher-wallpaper.py \
+            tools/validate-wallpaper-theme.py \
+            tests/test_import_witcher_wallpaper.py
+
+      - name: Validate repository wallpaper state
+        run: |
+          set -Eeuo pipefail
+          python3 tools/validate-wallpaper-theme.py
+
+      - name: Run wallpaper importer fixture tests
+        run: |
+          set -Eeuo pipefail
+          python3 -m unittest -v tests/test_import_witcher_wallpaper.py
+
+      - name: Verify tests did not modify repository state
+        run: |
+          set -Eeuo pipefail
+          git status --short
+          test -z "$(git status --porcelain --untracked-files=no)"
