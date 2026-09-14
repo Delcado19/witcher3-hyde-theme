@@ -1,0 +1,85 @@
+name: Finalize wallpaper baseline documentation
+
+on:
+  push:
+    paths:
+      - '.github/workflows/finalize-wallpaper-docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Verify bundled wallpaper baseline
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 tools/validate-wallpaper-theme.py
+          test -f Configs/.config/hyde/themes/Witcher3/wallpapers/witcher3_kaer_morhen.png
+          test ! -e Configs/.config/hyde/themes/Witcher3/wall.set
+          test ! -L Configs/.config/hyde/themes/Witcher3/wall.set
+
+      - name: Patch README for completed wallpaper milestone
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('README.md')
+          s = p.read_text(encoding='utf-8')
+
+          replacements = {
+              "│       ├── rofi-theme.yml\n│       ├── theme-dcol.yml\n│       └── waybar-theme.yml":
+                  "│       ├── rofi-theme.yml\n│       ├── theme-dcol.yml\n│       ├── wallpaper-theme.yml\n│       └── waybar-theme.yml",
+              "│                   └── wallpapers/\n│                       └── ...":
+                  "│                   └── wallpapers/\n│                       └── witcher3_kaer_morhen.png",
+              "└── tools/\n    ├── build-gtk.sh\n    ├── build-icons.py\n    ├── validate-icon-matrix.py\n    └── validate-icon-sources.py":
+                  "└── tools/\n    ├── build-gtk.sh\n    ├── build-icons.py\n    ├── import-witcher-wallpaper.py\n    ├── validate-icon-matrix.py\n    ├── validate-icon-sources.py\n    └── validate-wallpaper-theme.py",
+              "The wallpaper files, actual icon artwork, screenshots, and optional cursor resources are target-state entries and may not exist yet during development. `wall.set` is runtime state created by current HyDE and is intentionally not stored in the repository. Icon build and validation tooling already exists and is CI-tested independently of the unfinished artwork set.":
+                  "The Kaer Morhen default wallpaper is bundled as a validated 2560×1440 16-bit RGB PNG. With exactly one bundled wallpaper, current HyDE's fallback selection is deterministic and creates `wall.set` as runtime state when the theme is first applied; `wall.set` is intentionally not stored in the repository. Actual icon artwork, screenshots, and optional cursor resources remain development targets. Icon and wallpaper build/validation tooling is CI-tested independently of unfinished visual assets.",
+              "| Kvantum | Rendered Kvconfig, pinned HyDE SVG, XML validity, color roles, selection contrast |\n| Icon matrix |":
+                  "| Kvantum | Rendered Kvconfig, pinned HyDE SVG, XML validity, color roles, selection contrast |\n| Wallpaper | Strict 2560×1440 16-bit RGB PNG structure/data validation, exact approved filename, single-wallpaper baseline, and repository-level `wall.set` rejection |\n| Icon matrix |",
+              "6. Add at least one project-owned or redistributable wallpaper. Current HyDE creates `wall.set` as runtime state when the theme is applied.":
+                  "6. Bundle and validate at least one permitted redistributable wallpaper. **Done.** Current HyDE creates `wall.set` as runtime state when the theme is applied.",
+              "**Current phase:** core runtime styling and icon infrastructure are statically validated; original visual assets and live integration are next.":
+                  "**Current phase:** core runtime styling, the Kaer Morhen wallpaper baseline, and icon infrastructure are statically validated; original icon artwork and live integration are next.",
+              "- [ ] Add the first project-owned or redistributable wallpaper":
+                  "- [x] Add and CI-validate the Kaer Morhen default wallpaper",
+          }
+
+          for old, new in replacements.items():
+              count = s.count(old)
+              if count != 1:
+                  raise SystemExit(f'Expected exactly one match for {old!r}, found {count}')
+              s = s.replace(old, new)
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+          grep -Fq 'witcher3_kaer_morhen.png' README.md
+          grep -Fq '| Wallpaper | Strict 2560×1440 16-bit RGB PNG' README.md
+          grep -Fq -- '- [x] Add and CI-validate the Kaer Morhen default wallpaper' README.md
+          grep -Fq 'the Kaer Morhen wallpaper baseline' README.md
+          ! grep -Fq -- '- [ ] Add the first project-owned or redistributable wallpaper' README.md
+          ! grep -Fq '├── wall.set' README.md
+
+      - name: Remove one-shot workflow and commit
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          rm .github/workflows/finalize-wallpaper-docs.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md .github/workflows/finalize-wallpaper-docs.yml
+          git diff --cached --check
+          git commit -m 'Finalize wallpaper baseline documentation'
+          git push origin HEAD:main
