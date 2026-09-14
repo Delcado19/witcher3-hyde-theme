@@ -1,0 +1,90 @@
+# Witcher 3 HyDE Theme
+# Keep installable HyDE resources and artwork tracked.
+# In particular, DO NOT ignore Source/arcs/*.tar.* or image assets globally.
+
+# ---------------------------------------------------------------------------
+# Operating system
+# ---------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+ehthumbs.db
+
+# ---------------------------------------------------------------------------
+# Editors / IDEs
+# ---------------------------------------------------------------------------
+.idea/
+.vscode/
+*.code-workspace
+*.swp
+*.swo
+*~
+*.bak
+*.orig
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.venv/
+venv/
+env/
+
+# ---------------------------------------------------------------------------
+# Local tooling / caches
+# ---------------------------------------------------------------------------
+.cache/
+.cache-*/
+tmp/
+temp/
+*.tmp
+*.log
+
+# ---------------------------------------------------------------------------
+# Build output
+# ---------------------------------------------------------------------------
+build/
+dist/
+out/
+artifacts/
+
+# Generated icon-theme staging area.
+# Final source artwork in design/icons/sources/ stays tracked.
+design/icons/generated/
+design/icons/staging/
+design/icons/previews/generated/
+
+# Generated validation reports.
+reports/
+validation-reports/
+
+# ---------------------------------------------------------------------------
+# Local secrets / machine-specific configuration
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.local
+local/
+secrets/
+
+# ---------------------------------------------------------------------------
+# Archive scratch files
+# ---------------------------------------------------------------------------
+*.part
+*.download
+
+# IMPORTANT:
+# Do not add generic rules such as *.png, *.jpg, *.svg, *.tar.gz or *.tar.xz.
+# Those file types are legitimate project assets and HyDE resource packages.

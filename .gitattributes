@@ -1,0 +1,55 @@
+# Normalize text files across Linux and Windows development environments.
+* text=auto eol=lf
+
+# Shell / scripting
+*.sh        text eol=lf
+*.bash      text eol=lf
+*.zsh       text eol=lf
+*.py        text eol=lf
+*.ps1       text eol=crlf
+
+# HyDE and configuration files
+*.theme     text eol=lf
+*.dcol      text eol=lf
+*.conf      text eol=lf
+*.rasi      text eol=lf
+*.css       text eol=lf
+*.ini       text eol=lf
+*.toml      text eol=lf
+*.yaml      text eol=lf
+*.yml       text eol=lf
+*.json      text eol=lf
+
+# Documentation / data
+*.md        text eol=lf
+*.txt       text eol=lf
+*.csv       text eol=lf
+LICENSE     text eol=lf
+
+# Images are binary.
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.webp      binary
+*.avif      binary
+*.ico       binary
+
+# Vector artwork is text internally, but treating it as binary avoids noisy
+# line-based diffs for generated or editor-authored SVG assets.
+*.svg       binary
+
+# Theme packages / archives are binary and intentionally versioned.
+*.tar       binary
+*.tar.gz    binary
+*.tgz       binary
+*.tar.xz    binary
+*.txz       binary
+*.zip       binary
+*.7z        binary
+
+# Fonts
+*.ttf       binary
+*.otf       binary
+*.woff      binary
+*.woff2     binary
