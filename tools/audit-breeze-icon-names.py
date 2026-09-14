@@ -26,6 +26,7 @@ FREEDESKTOP_PATH = (
 )
 
 ICON_SUFFIXES = {".svg", ".png", ".xpm"}
+EXPECTED_FREEDESKTOP_MATCHES = 135
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -134,9 +135,11 @@ def main() -> int:
                     f"alias {alias!r} in {', '.join(sorted(alias_contexts))}"
                 )
 
-    if fdo_matches != 132:
+    if fdo_matches != EXPECTED_FREEDESKTOP_MATCHES:
         raise SystemExit(
-            f"Expected 132 Freedesktop-resolved matrix names, found {fdo_matches}"
+            "Expected "
+            f"{EXPECTED_FREEDESKTOP_MATCHES} Freedesktop-resolved matrix names, "
+            f"found {fdo_matches}"
         )
 
     if fdo_matches + len(breeze_matches) + len(unresolved) != len(matrix_rows):
