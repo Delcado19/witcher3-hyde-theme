@@ -1,0 +1,93 @@
+name: Hypr Theme Validation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "Configs/.config/hyde/themes/Witcher3/hypr.theme"
+      - ".github/workflows/hypr-theme.yml"
+
+permissions:
+  contents: read
+
+env:
+  HYDE_COMMIT: 51b6cbf55b0bf982b2ea88af00a0cdbae0c787c7
+  HYPRQUERY_COMMIT: 002af783eeb8c487a4bf90d75e5a804340557967
+  HYPRUTILS_TAG: v0.7.1
+
+jobs:
+  validate-hypr-theme:
+    name: Dump hypr.theme through HyDE parser path
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            build-essential \
+            cmake \
+            curl \
+            libpixman-1-dev \
+            libxkbcommon-dev \
+            pkg-config
+
+      - name: Build pinned hyprutils
+        run: |
+          set -Eeuo pipefail
+          prefix="$RUNNER_TEMP/hypr-prefix"
+          git clone --quiet --depth 1 --branch "$HYPRUTILS_TAG" \
+            https://github.com/hyprwm/hyprutils.git "$RUNNER_TEMP/hyprutils"
+          cmake -S "$RUNNER_TEMP/hyprutils" -B "$RUNNER_TEMP/hyprutils/build" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX="$prefix"
+          cmake --build "$RUNNER_TEMP/hyprutils/build" --parallel
+          cmake --install "$RUNNER_TEMP/hyprutils/build"
+
+      - name: Build pinned HyDE hyprquery
+        run: |
+          set -Eeuo pipefail
+          prefix="$RUNNER_TEMP/hypr-prefix"
+          git clone --quiet https://github.com/HyDE-Project/hyprquery.git "$RUNNER_TEMP/hyprquery"
+          git -C "$RUNNER_TEMP/hyprquery" checkout --quiet --detach "$HYPRQUERY_COMMIT"
+
+          export PKG_CONFIG_PATH="$prefix/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+          export CMAKE_PREFIX_PATH="$prefix${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}"
+          export LD_LIBRARY_PATH="$prefix/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
+          cmake -S "$RUNNER_TEMP/hyprquery" -B "$RUNNER_TEMP/hyprquery/build" \
+            -DCMAKE_BUILD_TYPE=Release
+          cmake --build "$RUNNER_TEMP/hyprquery/build" --parallel
+
+      - name: Fetch pinned HyDE Lua schema
+        run: |
+          set -Eeuo pipefail
+          curl --fail --silent --show-error --location \
+            "https://raw.githubusercontent.com/HyDE-Project/HyDE/$HYDE_COMMIT/Configs/.local/share/hypr/schema/hyprland-lua.json" \
+            --output "$RUNNER_TEMP/hyprland-lua.json"
+          test -s "$RUNNER_TEMP/hyprland-lua.json"
+
+      - name: Validate Witcher3 hypr.theme
+        run: |
+          set -Eeuo pipefail
+          prefix="$RUNNER_TEMP/hypr-prefix"
+          export LD_LIBRARY_PATH="$prefix/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
+          theme="Configs/.config/hyde/themes/Witcher3/hypr.theme"
+          hyq="$RUNNER_TEMP/hyprquery/build/bin/hyq"
+          schema="$RUNNER_TEMP/hyprland-lua.json"
+          output="$RUNNER_TEMP/hypr_theme.lua"
+
+          "$hyq" --dump "$theme" --schema "$schema" --export lua > "$output"
+          test -s "$output"
+
+          grep -q 'general = {' "$output"
+          grep -q 'decoration = {' "$output"
+          grep -q 'colors = {' "$output"
+
+          echo "HyDE-compatible Lua dump generated successfully."
+          echo
+          cat "$output"
