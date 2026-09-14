@@ -1,0 +1,52 @@
+name: Rofi Theme Validation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "Configs/.config/hyde/themes/Witcher3/rofi.theme"
+      - ".github/workflows/rofi-theme.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-rofi-theme:
+    name: Validate Witcher3 Rofi palette
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install Rofi
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes rofi
+
+      - name: Validate HyDE theme fragment
+        run: |
+          set -Eeuo pipefail
+
+          source_theme="Configs/.config/hyde/themes/Witcher3/rofi.theme"
+          target_line='\$HOME/.config/rofi/theme.rasi'
+          fragment="$RUNNER_TEMP/Witcher3-rofi.rasi"
+
+          test "$(head -n 1 "$source_theme")" = "$target_line"
+          tail -n +2 "$source_theme" > "$fragment"
+          test -s "$fragment"
+
+          for role in \
+            main-bg \
+            main-fg \
+            main-br \
+            main-ex \
+            select-bg \
+            select-fg \
+            separatorcolor \
+            border-color; do
+            grep -Eq "^[[:space:]]*${role}:[[:space:]]*" "$fragment"
+          done
+
+          rofi -rasi-validate "$fragment"
+          echo "Witcher3 Rofi theme fragment is valid Rasi."
