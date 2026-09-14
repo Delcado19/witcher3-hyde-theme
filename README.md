@@ -23,7 +23,7 @@ The current scope includes:
 - Kvantum / Qt styling
 - GTK theme integration
 - Witcher-themed wallpapers
-- Witcher-themed cursor package
+- Witcher-themed cursor package, if a custom cursor is justified
 - A dedicated Witcher icon theme
 - Theme validation and build tooling
 
@@ -38,8 +38,11 @@ The current HyDE implementation is the technical source of truth for this projec
 Project references:
 
 - [`docs/HYDE_REFERENCE_MATRIX.md`](docs/HYDE_REFERENCE_MATRIX.md) — current HyDE theme structure, archive conventions, and implementation decisions
+- [`docs/GTK_BASELINE.md`](docs/GTK_BASELINE.md) — selected GTK base, runtime contract, source pin, and validation requirements
 - [`design/palette/witcher3-color-system.md`](design/palette/witcher3-color-system.md) — measured and normalized Witcher3 UI palette
 - [`design/icons/matrix/witcher-icon-matrix-v1.md`](design/icons/matrix/witcher-icon-matrix-v1.md) — 645-design icon specification
+
+Current integration is tested against pinned upstream states where practical instead of silently following moving targets.
 
 ---
 
@@ -49,6 +52,16 @@ The first complete HyDE target is:
 
 ```text
 witcher3-hyde-theme/
+│
+├── .github/
+│   └── workflows/
+│       ├── gtk-build.yml
+│       ├── hypr-theme.yml
+│       ├── kitty-theme.yml
+│       ├── kvantum-theme.yml
+│       ├── rofi-theme.yml
+│       ├── theme-dcol.yml
+│       └── waybar-theme.yml
 │
 ├── README.md
 ├── LICENSE
@@ -65,14 +78,13 @@ witcher3-hyde-theme/
 │                   ├── theme.dcol
 │                   ├── wall.set
 │                   ├── kvantum/
-│                   │   ├── kvantum.theme
 │                   │   └── kvconfig.theme
 │                   └── wallpapers/
 │                       └── ...
 │
 ├── Source/
 │   └── arcs/
-│       ├── Gtk_<final-name>.tar.*
+│       ├── Gtk_Witcher3.tar.xz
 │       ├── Icon_Witcher3-HyDE.tar.*
 │       └── Cursor_<optional-name>.tar.*
 │
@@ -83,6 +95,9 @@ witcher3-hyde-theme/
 │   └── dolphin.jpg
 │
 ├── design/
+│   ├── gtk/
+│   │   ├── patches/
+│   │   └── upstream/
 │   ├── palette/
 │   │   └── witcher3-color-system.md
 │   └── icons/
@@ -97,18 +112,29 @@ witcher3-hyde-theme/
 │
 ├── docs/
 │   ├── ASSET_POLICY.md
+│   ├── GTK_BASELINE.md
 │   └── HYDE_REFERENCE_MATRIX.md
 │
 └── tools/
-    ├── build-icons.py
-    ├── validate-icons.py
-    ├── build-theme.sh
-    └── validate-theme.sh
+    └── build-gtk.sh
 ```
 
-`wall.set` is shown because the finished theme should have a deterministic default wallpaper, but current HyDE can create it automatically when a valid wallpaper exists.
+`wall.set`, the wallpaper files, icon build tools, icon source trees, screenshots, and optional cursor resources are target-state entries and may not exist yet during development.
 
-Optional components are intentionally absent from this baseline until their integration has been validated against current HyDE.
+### Kvantum integration
+
+Witcher3 intentionally does **not** vendor a theme-local `kvantum.theme` SVG at this stage.
+
+Current HyDE already ships and renders its maintained Wallbash Kvantum SVG template. Witcher3 provides:
+
+```text
+Configs/.config/hyde/themes/Witcher3/theme.dcol
+Configs/.config/hyde/themes/Witcher3/kvantum/kvconfig.theme
+```
+
+`theme.dcol` supplies the fixed Witcher palette. `kvconfig.theme` contains only the Witcher-specific Kvantum color and text-state overrides required for the red selection scheme. Missing Kvantum settings continue to inherit from Kvantum defaults, while HyDE supplies the current SVG structure.
+
+This avoids carrying a large copied SVG that would otherwise need to be kept in sync with HyDE.
 
 ### Runtime vs. development files
 
@@ -126,6 +152,7 @@ These directories follow the structure expected by HyDE theme repositories.
 **Development content**
 
 ```text
+.github/
 design/
 docs/
 tools/
@@ -172,7 +199,54 @@ Primary production tokens include:
 
 Red is deliberately used as a controlled interaction color rather than as a large-area background. Silver and dark steel carry most normal interface hierarchy.
 
+The fixed HyDE / Wallbash mapping is stored in:
+
+```text
+Configs/.config/hyde/themes/Witcher3/theme.dcol
+```
+
+Its primary roles are:
+
+```text
+pry1 = #0A151E  canvas / background
+pry2 = #171A1C  surface
+pry3 = #262729  elevated surface
+pry4 = #B72A18  Witcher red selection / accent
+```
+
 See [`design/palette/witcher3-color-system.md`](design/palette/witcher3-color-system.md) for the complete measured palette, contrast checks, and component mapping.
+
+---
+
+## GTK Theme
+
+The GTK runtime identity is:
+
+```text
+$GTK_THEME = Witcher3
+```
+
+The selected structural base is the GPL-3.0 licensed **Colloid GTK Theme**, pinned to an explicit upstream commit and modified through a small project-owned palette patch rather than a copied source tree.
+
+The reproducible builder is:
+
+```text
+tools/build-gtk.sh
+```
+
+The intended package is:
+
+```text
+Source/arcs/Gtk_Witcher3.tar.xz
+```
+
+with exactly one archive top-level directory:
+
+```text
+Witcher3/
+```
+
+The CI build currently validates the GTK2, GTK3, and GTK4 staging tree and the packaged archive. Live visual validation on the target HyDE desktop is still required before release.
 
 ---
 
@@ -235,12 +309,12 @@ Source/arcs/
 Planned packages:
 
 ```text
-Gtk_<final-name>.tar.*
+Gtk_Witcher3.tar.xz
 Icon_Witcher3-HyDE.tar.*
 Cursor_<optional-name>.tar.*
 ```
 
-The GTK archive is required for a complete HyDE theme import. The final `$GTK_THEME` value in `hypr.theme` must match the top-level theme directory contained in that archive.
+The GTK archive is required for a complete HyDE theme import. The `$GTK_THEME` value in `hypr.theme` must match the top-level `Witcher3/` directory contained in that archive.
 
 The icon archive is a core project deliverable even though HyDE itself can operate without one. Its top-level directory must match:
 
@@ -271,6 +345,26 @@ The cursor package remains optional until a Witcher-specific cursor design is ju
 
 ---
 
+## Validation
+
+Runtime components are validated independently so one broken integration does not hide behind a broad theme-level test.
+
+Current CI coverage includes:
+
+| Component | Validation |
+| --- | --- |
+| GTK | Reproducible pinned-source build, staging checks, archive layout |
+| Hyprland | Current HyDE `hyq` parser path and Lua export |
+| Waybar | HyDE target line, required color roles, expected Witcher values |
+| Rofi | HyDE target line, required roles, Rasi syntax validation |
+| Kitty | Official pinned Kitty binary and Kitty's internal config parser |
+| `theme.dcol` | Shell syntax, complete variable matrix, Hex/RGBA consistency |
+| Kvantum | Rendered Kvconfig, pinned HyDE SVG, XML validity, color roles, selection contrast |
+
+Static CI validation does **not** replace final visual testing on a real HyDE installation.
+
+---
+
 ## Development Workflow
 
 The project follows a specification-first, test-before-next-change workflow.
@@ -278,14 +372,15 @@ The project follows a specification-first, test-before-next-change workflow.
 For the HyDE runtime theme:
 
 1. Keep the Witcher3 color system stable and documented.
-2. Select or build a redistributable GTK base and determine the exact `$GTK_THEME` name.
-3. Add at least one project-owned or redistributable wallpaper.
-4. Implement and test a modern `hypr.theme` without legacy theme-local `exec` side effects.
-5. Implement and test Waybar, Rofi, and Kitty theme files.
-6. Generate or derive the Kvantum files from a known-good HyDE installation.
-7. Add `theme.dcol` to keep the deliberate Witcher3 palette stable across wallpapers.
-8. Set the deterministic default `wall.set` once the default wallpaper is selected.
-9. Add validation/build tooling and test clean installation.
+2. Build the redistributable GTK package and keep the exact `$GTK_THEME` contract stable.
+3. Implement and statically validate Hyprland, Waybar, Rofi, and Kitty integrations.
+4. Define `theme.dcol` as the fixed Wallbash palette.
+5. Add the minimal Kvantum override while reusing current HyDE's maintained Wallbash SVG template.
+6. Add at least one project-owned or redistributable wallpaper.
+7. Set the deterministic default `wall.set`.
+8. Build and package the dedicated icon theme.
+9. Decide whether a custom cursor package is justified.
+10. Test the complete theme on a clean/current HyDE installation before release.
 
 For the icon theme:
 
@@ -314,30 +409,32 @@ Until the first stable release exists, this repository should be treated as a de
 
 ## Status
 
-**Current phase:** palette baseline and first HyDE runtime integration.
+**Current phase:** core runtime styling is statically validated; visual assets and live integration are next.
 
 - [x] Define the project as a full HyDE theme
 - [x] Establish a current-HyDE-compatible repository baseline
 - [x] Document the current HyDE reference/theme matrix
 - [x] Define the initial 645-design icon budget
-- [x] Define the initial Witcher3 production color system
-- [x] Create and refine the initial Waybar theme
-- [ ] Validate canonical icon names
-- [ ] Expand alias coverage
-- [ ] Select/build the GTK resource package and final `$GTK_THEME`
-- [ ] Add the first redistributable wallpaper
-- [ ] Create and test Hyprland theme
-- [ ] Create and test Rofi theme
-- [ ] Create and test Kitty theme
-- [ ] Create and test Kvantum theme
-- [ ] Create and validate `theme.dcol`
+- [x] Define the Witcher3 production color system
+- [x] Select and pin the Colloid GTK structural base
+- [x] Build and CI-validate the initial `Gtk_Witcher3.tar.xz` package
+- [x] Create and validate the Hyprland theme
+- [x] Create and validate the Waybar theme
+- [x] Create and validate the Rofi theme
+- [x] Create and validate the Kitty theme
+- [x] Create and validate the fixed `theme.dcol` palette
+- [x] Create and validate the Kvantum / Qt color integration
+- [x] Add component-level validation workflows
+- [ ] Add the first project-owned or redistributable wallpaper
 - [ ] Select the default wallpaper and add `wall.set`
-- [ ] Decide whether a custom cursor package is justified
+- [ ] Validate canonical icon names
+- [ ] Expand icon alias coverage
 - [ ] Produce Witcher icon artwork
 - [ ] Build `Icon_Witcher3-HyDE.tar.*`
+- [ ] Decide whether a custom cursor package is justified
 - [ ] Add screenshots
-- [ ] Add validation tooling
-- [ ] Test clean installation
+- [ ] Perform live visual validation of GTK3 / GTK4 / Qt / Rofi / Waybar / Kitty
+- [ ] Test clean HyDE theme import and switching
 - [ ] Create first release
 
 Hyprlock theming, animation overrides, and other optional components remain deferred until current HyDE behavior or a concrete design requirement justifies them.
