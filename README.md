@@ -39,8 +39,11 @@ Project references:
 
 - [`docs/HYDE_REFERENCE_MATRIX.md`](docs/HYDE_REFERENCE_MATRIX.md) — current HyDE theme structure, archive conventions, and implementation decisions
 - [`docs/GTK_BASELINE.md`](docs/GTK_BASELINE.md) — selected GTK base, runtime contract, source pin, and validation requirements
+- [`docs/ICON_BUILD.md`](docs/ICON_BUILD.md) — standalone icon-theme build, staging, alias, and archive contract
 - [`design/palette/witcher3-color-system.md`](design/palette/witcher3-color-system.md) — measured and normalized Witcher3 UI palette
 - [`design/icons/matrix/witcher-icon-matrix-v1.md`](design/icons/matrix/witcher-icon-matrix-v1.md) — 645-design icon specification
+- [`design/icons/ART_DIRECTION.md`](design/icons/ART_DIRECTION.md) — Hero/Glyph/Emblem visual system and acceptance rules
+- [`design/icons/PILOT_BATCH.md`](design/icons/PILOT_BATCH.md) — first 14-icon artwork validation batch
 
 Current integration is tested against pinned upstream states where practical instead of silently following moving targets.
 
@@ -57,6 +60,8 @@ witcher3-hyde-theme/
 │   └── workflows/
 │       ├── gtk-build.yml
 │       ├── hypr-theme.yml
+│       ├── icon-build.yml
+│       ├── icon-matrix.yml
 │       ├── kitty-theme.yml
 │       ├── kvantum-theme.yml
 │       ├── rofi-theme.yml
@@ -85,7 +90,7 @@ witcher3-hyde-theme/
 ├── Source/
 │   └── arcs/
 │       ├── Gtk_Witcher3.tar.xz
-│       ├── Icon_Witcher3-HyDE.tar.*
+│       ├── Icon_Witcher3-HyDE.tar.xz
 │       └── Cursor_<optional-name>.tar.*
 │
 ├── screenshots/
@@ -101,25 +106,36 @@ witcher3-hyde-theme/
 │   ├── palette/
 │   │   └── witcher3-color-system.md
 │   └── icons/
+│       ├── ART_DIRECTION.md
+│       ├── PILOT_BATCH.md
 │       ├── matrix/
 │       │   ├── witcher-icon-matrix-v1.md
 │       │   └── witcher-icon-matrix-v1.csv
-│       ├── sources/
-│       │   ├── hero/
-│       │   ├── glyph/
-│       │   └── emblem/
-│       └── aliases/
+│       ├── standards/
+│       │   └── ...
+│       └── src/
+│           ├── apps/
+│           ├── actions/
+│           ├── places/
+│           ├── status/
+│           ├── devices/
+│           ├── mimetypes/
+│           └── categories/
 │
 ├── docs/
 │   ├── ASSET_POLICY.md
 │   ├── GTK_BASELINE.md
-│   └── HYDE_REFERENCE_MATRIX.md
+│   ├── HYDE_REFERENCE_MATRIX.md
+│   └── ICON_BUILD.md
 │
 └── tools/
-    └── build-gtk.sh
+    ├── build-gtk.sh
+    ├── build-icons.py
+    ├── validate-icon-matrix.py
+    └── validate-icon-sources.py
 ```
 
-`wall.set`, the wallpaper files, icon build tools, icon source trees, screenshots, and optional cursor resources are target-state entries and may not exist yet during development.
+`wall.set`, the wallpaper files, actual icon artwork, screenshots, and optional cursor resources are target-state entries and may not exist yet during development. Icon build and validation tooling already exists and is CI-tested independently of the unfinished artwork set.
 
 ### Kvantum integration
 
@@ -155,6 +171,7 @@ These directories follow the structure expected by HyDE theme repositories.
 .github/
 design/
 docs/
+tests/
 tools/
 screenshots/
 ```
@@ -271,20 +288,11 @@ The Witcher icon system is therefore being designed as a real standalone icon th
 
 Aliases do **not** count as unique designs.
 
-Multiple icon names may point to the same canonical artwork where they represent the same application or semantic action.
+The current matrix contains 645 unique canonical names and 206 validated aliases without namespace collisions. Application identity is checked against pinned Flathub, official Arch Desktop Entry, and official Arch command snapshots; remaining vendor/AUR/historical cases are recorded explicitly in the provenance review data rather than treated as guessed names.
 
-Example:
+For the 220 application designs, 193 are machine-resolved by the pinned identity snapshots and the remaining 27 have explicit validated current or historical provenance. There are currently no actionable `needs-*` application identity rows.
 
-```text
-firefox
-firefox-bin
-firefox-esr
-org.mozilla.firefox
-```
-
-These may resolve to one canonical Firefox design.
-
-Different applications such as Firefox, Chromium, Brave, Thunderbird, Discord, and Steam are expected to use genuinely different artwork.
+Different applications such as Firefox, Chromium, Brave, Thunderbird, Discord, and Steam are expected to use genuinely different artwork. Multiple runtime names may resolve to one canonical design through generated relative symlinks.
 
 ### Visual classes
 
@@ -294,7 +302,35 @@ The icon system is divided into three visual families:
 - **Glyph** — reduced UI, status, action, and Waybar icons
 - **Emblem** — folders, devices, MIME types, and category icons
 
-The master artwork is created at high resolution, while very small sizes may receive simplified variants instead of being reduced mechanically.
+The release format uses project-owned scalable SVGs. Glyph artwork is specifically designed to remain legible at small UI sizes instead of relying on mechanical downscaling of highly detailed Hero artwork.
+
+The visual rules are defined in [`design/icons/ART_DIRECTION.md`](design/icons/ART_DIRECTION.md). The first cross-context review set is defined in [`design/icons/PILOT_BATCH.md`](design/icons/PILOT_BATCH.md).
+
+### Build contract
+
+The standalone icon builder is:
+
+```text
+python3 tools/build-icons.py
+```
+
+Normal invocation validates and stages only. Release packaging is explicit:
+
+```text
+python3 tools/build-icons.py --package
+```
+
+The default release path is fail-closed: all 645 canonical source SVGs must exist and pass validation before the real archive can be produced.
+
+Artwork may still be added incrementally. Existing source SVGs are checked with:
+
+```text
+python3 tools/validate-icon-sources.py
+```
+
+The incremental validator accepts an incomplete artwork set during development but applies the final SVG/path rules to every file that already exists. At 645/645 it automatically exercises the strict staging path.
+
+The builder itself is already CI-tested using a synthetic 645-SVG fixture, including alias-symlink validation and byte-reproducible archive generation. No synthetic fixture artwork is committed to the project or shipped as release content.
 
 ---
 
@@ -310,7 +346,7 @@ Planned packages:
 
 ```text
 Gtk_Witcher3.tar.xz
-Icon_Witcher3-HyDE.tar.*
+Icon_Witcher3-HyDE.tar.xz
 Cursor_<optional-name>.tar.*
 ```
 
@@ -322,24 +358,24 @@ The icon archive is a core project deliverable even though HyDE itself can opera
 $ICON_THEME = Witcher3-HyDE
 ```
 
-The final icon archive should therefore contain a complete icon-theme directory similar to:
+The icon archive contract is:
 
 ```text
 Witcher3-HyDE/
 ├── index.theme
-├── scalable/
-├── 16x16/
-├── 22x22/
-├── 24x24/
-├── 32x32/
-├── 48x48/
-├── 64x64/
-├── 128x128/
-├── 256x256/
-└── ...
+└── scalable/
+    ├── apps/
+    ├── actions/
+    ├── places/
+    ├── status/
+    ├── devices/
+    ├── mimetypes/
+    └── categories/
 ```
 
-The exact size layout may change during implementation and validation.
+`index.theme` inherits only `hicolor`; the package does not silently require Tela, Breeze, Papirus, or another optional third-party theme. Aliases are generated as relative SVG symlinks and are not duplicate artwork.
+
+See [`docs/ICON_BUILD.md`](docs/ICON_BUILD.md) for the complete archive and validation contract.
 
 The cursor package remains optional until a Witcher-specific cursor design is judged to improve the complete desktop experience enough to justify overriding the user's normal cursor theme.
 
@@ -360,6 +396,8 @@ Current CI coverage includes:
 | Kitty | Official pinned Kitty binary and Kitty's internal config parser |
 | `theme.dcol` | Shell syntax, complete variable matrix, Hex/RGBA consistency |
 | Kvantum | Rendered Kvconfig, pinned HyDE SVG, XML validity, color roles, selection contrast |
+| Icon matrix | 645-design structure, canonical/alias namespace, Freedesktop/Breeze naming and application identity provenance |
+| Icon builder | Incremental source validation plus synthetic 645-SVG staging, symlink, archive, and reproducibility tests |
 
 Static CI validation does **not** replace final visual testing on a real HyDE installation.
 
@@ -378,20 +416,21 @@ For the HyDE runtime theme:
 5. Add the minimal Kvantum override while reusing current HyDE's maintained Wallbash SVG template.
 6. Add at least one project-owned or redistributable wallpaper.
 7. Set the deterministic default `wall.set`.
-8. Build and package the dedicated icon theme.
+8. Produce and package the dedicated icon artwork through the validated builder.
 9. Decide whether a custom cursor package is justified.
 10. Test the complete theme on a clean/current HyDE installation before release.
 
 For the icon theme:
 
-1. Define the complete icon matrix.
-2. Validate canonical Linux / Freedesktop / KDE / HyDE icon names.
-3. Define aliases separately from unique artwork.
-4. Create and review the visual assets.
-5. Test small-size readability.
-6. Build the icon-theme directory.
-7. Validate theme structure and aliases.
-8. Package the installable archive.
+1. Define and structurally validate the complete 645-design matrix. **Done.**
+2. Validate canonical Linux / Freedesktop / KDE names and application identities. **Done.**
+3. Validate aliases separately from unique artwork. **Done for the current matrix baseline.**
+4. Freeze the build contract and scalable package layout. **Done.**
+5. Define Hero/Glyph/Emblem art direction and the first cross-context pilot. **Done.**
+6. Produce and review the 14-icon pilot artwork. **Pending.**
+7. Expand accepted artwork family-by-family while incremental CI validates each batch. **Pending.**
+8. Reach 645/645 canonical SVGs and run the strict full staging path. **Pending artwork; builder already validated.**
+9. Package `Source/arcs/Icon_Witcher3-HyDE.tar.xz`. **Pending complete artwork.**
 
 Release archives should only be created after the corresponding validation steps pass.
 
@@ -409,12 +448,12 @@ Until the first stable release exists, this repository should be treated as a de
 
 ## Status
 
-**Current phase:** core runtime styling is statically validated; visual assets and live integration are next.
+**Current phase:** core runtime styling and icon infrastructure are statically validated; original visual assets and live integration are next.
 
 - [x] Define the project as a full HyDE theme
 - [x] Establish a current-HyDE-compatible repository baseline
 - [x] Document the current HyDE reference/theme matrix
-- [x] Define the initial 645-design icon budget
+- [x] Define the 645-design icon budget and matrix
 - [x] Define the Witcher3 production color system
 - [x] Select and pin the Colloid GTK structural base
 - [x] Build and CI-validate the initial `Gtk_Witcher3.tar.xz` package
@@ -425,12 +464,17 @@ Until the first stable release exists, this repository should be treated as a de
 - [x] Create and validate the fixed `theme.dcol` palette
 - [x] Create and validate the Kvantum / Qt color integration
 - [x] Add component-level validation workflows
+- [x] Validate icon canonical names and application identities
+- [x] Establish and validate the current icon alias namespace
+- [x] Define the standalone icon build/archive contract
+- [x] Implement and CI-validate the strict icon builder
+- [x] Add incremental SVG artwork validation
+- [x] Define icon art direction and the 14-icon pilot batch
 - [ ] Add the first project-owned or redistributable wallpaper
 - [ ] Select the default wallpaper and add `wall.set`
-- [ ] Validate canonical icon names
-- [ ] Expand icon alias coverage
-- [ ] Produce Witcher icon artwork
-- [ ] Build `Icon_Witcher3-HyDE.tar.*`
+- [ ] Produce and review the 14-icon Witcher artwork pilot
+- [ ] Expand original icon artwork to 645/645 canonicals
+- [ ] Build the real `Icon_Witcher3-HyDE.tar.xz` from accepted artwork
 - [ ] Decide whether a custom cursor package is justified
 - [ ] Add screenshots
 - [ ] Perform live visual validation of GTK3 / GTK4 / Qt / Rofi / Waybar / Kitty
@@ -447,7 +491,7 @@ The project is currently being developed as a controlled design system.
 
 Before adding new icon artwork, first check whether the required concept already exists in the icon matrix or should be represented as an alias.
 
-New artwork should preserve the established Witcher visual language and must remain readable at its intended desktop size.
+New artwork should preserve [`design/icons/ART_DIRECTION.md`](design/icons/ART_DIRECTION.md), remain readable at its intended desktop size, and pass the incremental icon source validator before the next artwork batch begins.
 
 Avoid:
 
