@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - "tools/normalize-icon-matrix.py"
       - ".github/workflows/icon-matrix-normalize.yml"
 
 permissions:
