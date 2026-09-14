@@ -4,7 +4,6 @@ W3-026,whatsapp,unofficial-wrapper,validated-current,GitHub:mimbrero/whatsapp-de
 W3-041,duckstation,upstream-appimage,validated-current,GitHub:stenzek/duckstation,Current Linux distribution is upstream AppImage; retain historical org.duckstation.DuckStation compatibility alias.
 W3-042,ryujinx,archived-project,validated-historical,Flathub:org.ryujinx.Ryujinx,Historical Linux application identity retained for icon compatibility; project/distribution is no longer current.
 W3-063,wps-office,aur-package,validated-current,AUR:wps-office,Current Linux package exists outside the official Arch repositories.
-W3-081,7zip,official-arch-package,needs-alias-fix,Arch extra:7zip,Official Arch package is current but ships commands 7z 7za and 7zr rather than a 7zip command/Desktop Entry.
 W3-088,tilix,upstream-desktop,validated-current,GitHub:gnunn1/tilix,Upstream generates com.gexperts.Tilix.desktop; retain com.gexperts.Tilix compatibility identity.
 W3-094,cursor,vendor-linux,validated-current,Vendor:cursor.com/downloads,Vendor currently distributes Linux AppImages.
 W3-099,sublime-text,vendor-linux,validated-current,Vendor:sublimetext.com/docs/linux_repositories.html,Vendor provides a dedicated pacman repository for Arch Linux.
@@ -26,7 +25,6 @@ W3-149,picocrypt,archived-project,validated-historical,GitHub:HACKERALERT/Picocr
 W3-178,tavern,unknown,needs-source,,No uniquely matching Linux music application has been identified for this matrix entry yet.
 W3-179,clementine,aur-package,validated-current,AUR:clementine,Current AUR package is maintained and points to Clementine upstream.
 W3-180,deadbeef,aur-package,validated-current,AUR:deadbeef,Current AUR package is maintained for the DeaDBeeF Linux audio player.
-W3-198,sane,framework-command,needs-alias-fix,Arch extra:sane,SANE is a scanner framework/package; the real user-facing CLI is scanimage and should be added as an alias.
 W3-204,walker,aur-package,validated-current,AUR:walker-bin,Current Wayland application runner is distributed through AUR.
 W3-210,swww,renamed-successor,needs-canonical-review,Arch extra:awww,Project was renamed to awww; Arch extra now ships awww and marks it as replacing/providing swww.
 W3-211,waypaper,aur-package,validated-current,AUR:waypaper,Current Wayland/Xorg wallpaper GUI package exists in AUR and supports awww/hyprpaper backends.
