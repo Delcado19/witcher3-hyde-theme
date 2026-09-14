@@ -27,11 +27,17 @@ FIELDNAMES = [
     "notes",
 ]
 
-# The Freedesktop Icon Naming Specification defines audio-volume-* as Status
-# icons, not Actions. Keep W3-409..W3-412 as the canonical status designs and
-# use these four previously duplicated Action slots for missing standard Action
-# icons instead.
+# Deterministic canonical corrections backed by the Freedesktop Icon Naming
+# Specification. W3-281..W3-284 replace duplicated audio-volume Status names
+# that had incorrectly occupied Action slots. W3-279, W3-280 and W3-294 align
+# older generic names with the exact standardized repeat/shuffle/reply names.
 ACTION_REPLACEMENTS = {
+    "W3-279": {
+        "canonical_name": "media-playlist-repeat",
+    },
+    "W3-280": {
+        "canonical_name": "media-playlist-shuffle",
+    },
     "W3-281": {
         "canonical_name": "address-book-new",
         "witcher_concept": "Fresh contact ledger with a silver clasp and small plus rune",
@@ -47,6 +53,9 @@ ACTION_REPLACEMENTS = {
     "W3-284": {
         "canonical_name": "call-stop",
         "witcher_concept": "Lowered communication horn cut by a Witcher-red stop slash",
+    },
+    "W3-294": {
+        "canonical_name": "mail-reply-sender",
     },
 }
 
