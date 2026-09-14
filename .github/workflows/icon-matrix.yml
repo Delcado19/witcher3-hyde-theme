@@ -6,8 +6,10 @@ on:
     paths:
       - "design/icons/matrix/witcher-icon-matrix-v1.csv"
       - "design/icons/matrix/witcher-icon-matrix-v1.md"
+      - "design/icons/standards/freedesktop-icon-naming-latest-2026-09-14.csv"
       - "tools/validate-icon-matrix.py"
       - "tools/normalize-icon-matrix.py"
+      - "tools/audit-freedesktop-icon-names.py"
       - ".github/workflows/icon-matrix.yml"
 
 permissions:
@@ -31,3 +33,8 @@ jobs:
         run: |
           set -Eeuo pipefail
           python3 tools/normalize-icon-matrix.py
+
+      - name: Audit Freedesktop standard names and contexts
+        run: |
+          set -Eeuo pipefail
+          python3 tools/audit-freedesktop-icon-names.py
