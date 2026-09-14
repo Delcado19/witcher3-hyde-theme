@@ -11,6 +11,7 @@ on:
       - "design/icons/standards/flathub-app-ids-2026-09-14.csv"
       - "design/icons/standards/arch-desktop-ids-2026-09-14.csv"
       - "design/icons/standards/arch-command-names-2026-09-14.csv"
+      - "design/icons/standards/application-provenance-review.csv"
       - "tools/validate-icon-matrix.py"
       - "tools/normalize-icon-matrix.py"
       - "tools/audit-freedesktop-icon-names.py"
@@ -18,6 +19,7 @@ on:
       - "tools/audit-flathub-app-ids.py"
       - "tools/audit-arch-desktop-ids.py"
       - "tools/audit-arch-command-names.py"
+      - "tools/audit-application-provenance.py"
       - ".github/workflows/icon-matrix.yml"
 
 permissions:
@@ -90,3 +92,8 @@ jobs:
         run: |
           set -Eeuo pipefail
           python3 tools/audit-arch-command-names.py
+
+      - name: Audit Stage-G application provenance
+        run: |
+          set -Eeuo pipefail
+          python3 tools/audit-application-provenance.py
