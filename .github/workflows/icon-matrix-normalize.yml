@@ -1,0 +1,88 @@
+name: Icon Matrix Normalization
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/icon-matrix-normalize.yml"
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  normalize-icon-matrix:
+    name: Normalize and commit icon matrix
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Normalize CSV and regenerate Markdown mirror
+        run: |
+          set -Eeuo pipefail
+          python3 tools/normalize-icon-matrix.py --write
+
+      - name: Validate normalized matrix
+        run: |
+          set -Eeuo pipefail
+          python3 tools/validate-icon-matrix.py
+          python3 tools/normalize-icon-matrix.py
+
+      - name: Verify change scope
+        run: |
+          set -Eeuo pipefail
+
+          mapfile -t changed < <(git diff --name-only)
+          printf 'Changed files:\n'
+          printf '  %s\n' "${changed[@]}"
+
+          expected=(
+            "design/icons/matrix/witcher-icon-matrix-v1.csv"
+            "design/icons/matrix/witcher-icon-matrix-v1.md"
+          )
+
+          if (( ${#changed[@]} != ${#expected[@]} )); then
+            echo "Unexpected number of changed files." >&2
+            exit 1
+          fi
+
+          for index in "${!expected[@]}"; do
+            if [[ "${changed[index]}" != "${expected[index]}" ]]; then
+              echo "Unexpected changed file: ${changed[index]}" >&2
+              exit 1
+            fi
+          done
+
+          git diff --check
+
+      - name: Commit normalized matrix
+        id: commit
+        run: |
+          set -Eeuo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            design/icons/matrix/witcher-icon-matrix-v1.csv \
+            design/icons/matrix/witcher-icon-matrix-v1.md
+
+          git diff --cached --check
+          git commit -m "Normalize icon matrix namespaces"
+          git push origin HEAD:main
+
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Dispatch validation on normalized main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -Eeuo pipefail
+          gh workflow run icon-matrix.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref main
+          echo "Dispatched Icon Matrix Validation for ${{ steps.commit.outputs.sha }}"
