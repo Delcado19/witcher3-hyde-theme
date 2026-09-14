@@ -193,10 +193,18 @@ printf '==> GTK staging validation passed\n'
 printf 'stage: %s\n' "$THEME_DIR"
 
 if ((PACKAGE)); then
-  printf '==> Packaging HyDE GTK archive\n'
+  printf '==> Packaging reproducible HyDE GTK archive\n'
   mkdir -p "$ARCHIVE_DIR"
   rm -f "$ARCHIVE_PATH"
-  tar -C "$STAGE_ROOT" -cJf "$ARCHIVE_PATH" Witcher3
+  tar \
+    --sort=name \
+    --mtime='@0' \
+    --owner=0 \
+    --group=0 \
+    --numeric-owner \
+    -C "$STAGE_ROOT" \
+    -cJf "$ARCHIVE_PATH" \
+    Witcher3
 
   top_entries="$(tar -tJf "$ARCHIVE_PATH" | sed 's#^\./##' | cut -d/ -f1 | sort -u)"
   if [[ "$top_entries" != 'Witcher3' ]]; then
