@@ -7,6 +7,7 @@ on:
       - "design/icons/matrix/witcher-icon-matrix-v1.csv"
       - "design/icons/matrix/witcher-icon-matrix-v1.md"
       - "design/icons/standards/freedesktop-icon-naming-latest-2026-09-14.csv"
+      - "design/icons/standards/freedesktop-context-exceptions.csv"
       - "tools/validate-icon-matrix.py"
       - "tools/normalize-icon-matrix.py"
       - "tools/audit-freedesktop-icon-names.py"
