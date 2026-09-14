@@ -27,6 +27,18 @@ FREEDESKTOP_PATH = (
 
 ICON_SUFFIXES = {".svg", ".png", ".xpm"}
 EXPECTED_FREEDESKTOP_MATCHES = 135
+EXPECTED_BREEZE_UNIQUE_NAMES = 4382
+EXPECTED_BREEZE_MATCHES = 102
+EXPECTED_UNRESOLVED = 408
+EXPECTED_GROUP_COVERAGE = {
+    "Applications": (19, 201),
+    "Actions/UI": (18, 2),
+    "Places/Folders": (19, 36),
+    "Status/Panel/Waybar": (13, 61),
+    "Devices": (10, 29),
+    "MIME/Filetypes": (21, 63),
+    "Categories/Misc": (2, 16),
+}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -85,6 +97,11 @@ def main() -> int:
     breeze_names = parse_breeze_tree(args.tree_list)
     if not breeze_names:
         raise SystemExit("No Breeze icon names were parsed from the supplied tree")
+    if len(breeze_names) != EXPECTED_BREEZE_UNIQUE_NAMES:
+        raise SystemExit(
+            f"Expected {EXPECTED_BREEZE_UNIQUE_NAMES} unique Breeze names, "
+            f"found {len(breeze_names)}"
+        )
 
     breeze_context_counts = Counter(
         context
@@ -142,6 +159,28 @@ def main() -> int:
             f"found {fdo_matches}"
         )
 
+    if len(breeze_matches) != EXPECTED_BREEZE_MATCHES:
+        raise SystemExit(
+            f"Expected {EXPECTED_BREEZE_MATCHES} additional Breeze matches, "
+            f"found {len(breeze_matches)}"
+        )
+
+    if len(unresolved) != EXPECTED_UNRESOLVED:
+        raise SystemExit(
+            f"Expected {EXPECTED_UNRESOLVED} unresolved matrix names after Breeze, "
+            f"found {len(unresolved)}"
+        )
+
+    actual_group_coverage = {
+        group: (matched_by_group[group], unresolved_by_group[group])
+        for group in EXPECTED_GROUP_COVERAGE
+    }
+    if actual_group_coverage != EXPECTED_GROUP_COVERAGE:
+        raise SystemExit(
+            "Unexpected Stage C group coverage: "
+            f"{actual_group_coverage!r}; expected {EXPECTED_GROUP_COVERAGE!r}"
+        )
+
     if fdo_matches + len(breeze_matches) + len(unresolved) != len(matrix_rows):
         raise SystemExit("Internal coverage accounting error")
 
@@ -160,16 +199,7 @@ def main() -> int:
 
     print()
     print("Stage C coverage by Witcher3 group:")
-    group_order = [
-        "Applications",
-        "Actions/UI",
-        "Places/Folders",
-        "Status/Panel/Waybar",
-        "Devices",
-        "MIME/Filetypes",
-        "Categories/Misc",
-    ]
-    for group in group_order:
+    for group in EXPECTED_GROUP_COVERAGE:
         print(
             f"  {group}: {matched_by_group[group]} Breeze / "
             f"{unresolved_by_group[group]} still unresolved"
