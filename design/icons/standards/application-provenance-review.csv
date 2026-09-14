@@ -1,0 +1,32 @@
+id,canonical_name,provenance_class,status,evidence,notes
+W3-025,skype,retired-product,validated-historical,Microsoft Support: Skype retired 2025-05-05,Keep only as historical icon compatibility; Skype itself is retired.
+W3-026,whatsapp,unofficial-wrapper,validated-current,GitHub:mimbrero/whatsapp-desktop-linux,Current Linux wrapper is explicitly unofficial; existing reverse-DNS alias belongs to the wrapper rather than WhatsApp upstream.
+W3-041,duckstation,upstream-appimage,validated-current,GitHub:stenzek/duckstation,Current Linux distribution is upstream AppImage; retain historical org.duckstation.DuckStation compatibility alias.
+W3-042,ryujinx,archived-project,validated-historical,Flathub:org.ryujinx.Ryujinx,Historical Linux application identity retained for icon compatibility; project/distribution is no longer current.
+W3-063,wps-office,aur-package,validated-current,AUR:wps-office,Current Linux package exists outside the official Arch repositories.
+W3-081,7zip,official-arch-package,needs-alias-fix,Arch extra:7zip,Official Arch package is current but ships commands 7z 7za and 7zr rather than a 7zip command/Desktop Entry.
+W3-088,tilix,upstream-desktop,validated-current,GitHub:gnunn1/tilix,Upstream generates com.gexperts.Tilix.desktop; retain com.gexperts.Tilix compatibility identity.
+W3-094,cursor,vendor-linux,validated-current,Vendor:cursor.com/downloads,Vendor currently distributes Linux AppImages.
+W3-099,sublime-text,vendor-linux,validated-current,Vendor:sublimetext.com/docs/linux_repositories.html,Vendor provides a dedicated pacman repository for Arch Linux.
+W3-100,jetbrains-toolbox,aur-package,validated-current,AUR:jetbrains-toolbox,Current AUR package uses the official JetBrains Toolbox Linux tarball and installs a desktop entry.
+W3-103,clion,vendor-linux,validated-current,Vendor:JetBrains CLion Linux,Current JetBrains Linux application; commonly managed through Toolbox.
+W3-104,webstorm,vendor-linux,validated-current,Vendor:JetBrains WebStorm Linux,Current JetBrains Linux application; commonly managed through Toolbox.
+W3-105,goland,vendor-linux,validated-current,Vendor:JetBrains GoLand Linux,Current JetBrains Linux application; commonly managed through Toolbox.
+W3-106,rustrover,vendor-linux,validated-current,Vendor:JetBrains RustRover Linux,Current JetBrains Linux application; commonly managed through Toolbox.
+W3-107,android-studio,vendor-linux,validated-current,Vendor:developer.android.com/studio,Google currently distributes Android Studio for Linux.
+W3-110,gitkraken,aur-package,validated-current,AUR:gitkraken,Current proprietary GitKraken Linux package exists in AUR.
+W3-118,redisinsight,aur-package,validated-current,AUR:redisinsight-bin,Current RedisInsight binary package exists in AUR.
+W3-119,docker-desktop,vendor-linux,validated-current,Vendor:docs.docker.com/desktop/setup/install/linux,Current Docker Desktop Linux distribution is vendor-provided.
+W3-139,dropbox,aur-package,validated-current,AUR:dropbox,Current Dropbox Linux desktop package exists in AUR; vendor Linux support is also current.
+W3-140,megasync,aur-package,validated-current,AUR:megasync,Current MEGA desktop application package exists in AUR.
+W3-141,onedrive,aur-package,validated-current,AUR:onedrive-abraunegg,Upstream recommends the AUR package for Arch/Manjaro.
+W3-142,rclone-browser,aur-package,validated-current,AUR:rclone-browser,Current AUR package remains available for the kapitainsky RcloneBrowser GUI.
+W3-145,1password,aur-package,validated-current,AUR:1password,1Password officially documents AUR installation for Arch Linux.
+W3-149,picocrypt,archived-project,validated-historical,GitHub:HACKERALERT/Picocrypt,Repository was permanently archived in 2025; keep only historical compatibility identity.
+W3-178,tavern,unknown,needs-source,,No uniquely matching Linux music application has been identified for this matrix entry yet.
+W3-179,clementine,aur-package,validated-current,AUR:clementine,Current AUR package is maintained and points to Clementine upstream.
+W3-180,deadbeef,aur-package,validated-current,AUR:deadbeef,Current AUR package is maintained for the DeaDBeeF Linux audio player.
+W3-198,sane,framework-command,needs-alias-fix,Arch extra:sane,SANE is a scanner framework/package; the real user-facing CLI is scanimage and should be added as an alias.
+W3-204,walker,aur-package,validated-current,AUR:walker-bin,Current Wayland application runner is distributed through AUR.
+W3-210,swww,renamed-successor,needs-canonical-review,Arch extra:awww,Project was renamed to awww; Arch extra now ships awww and marks it as replacing/providing swww.
+W3-211,waypaper,aur-package,validated-current,AUR:waypaper,Current Wayland/Xorg wallpaper GUI package exists in AUR and supports awww/hyprpaper backends.
