@@ -213,7 +213,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-175 | Applications | elisa | Blue music crystal framed by a KDE ring | Hero | P1 | org.kde.elisa |  |
 | W3-176 | Applications | amberol | Amber music disc glowing in a blackened bronze bezel | Hero | P2 | io.bassi.Amberol |  |
 | W3-177 | Applications | spotify | Three green sound-wave runes on a black roundel | Hero | P0 | com.spotify.Client |  |
-| W3-178 | Applications | tavern | Tavern signboard with lute strings and a small ale crest | Hero | P3 |  |  |
+| W3-178 | Applications | tauonmb | Black alchemical record disc with opposing amber-red and cyan-violet quarter sigils | Hero | P3 | com.github.taiko2k.tauonmb |  |
 | W3-179 | Applications | clementine | Orange fruit half carved with a musical spiral | Hero | P2 |  |  |
 | W3-180 | Applications | deadbeef | Horned red skull wearing tiny music-wave engravings | Hero | P2 |  |  |
 | W3-181 | Applications | easy-effects | Three alchemy sliders above an audio waveform | Hero | P1 | com.github.wwmm.easyeffects |  |

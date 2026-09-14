@@ -22,7 +22,6 @@ W3-141,onedrive,aur-package,validated-current,AUR:onedrive-abraunegg,Upstream re
 W3-142,rclone-browser,aur-package,validated-current,AUR:rclone-browser,Current AUR package remains available for the kapitainsky RcloneBrowser GUI.
 W3-145,1password,aur-package,validated-current,AUR:1password,1Password officially documents AUR installation for Arch Linux.
 W3-149,picocrypt,archived-project,validated-historical,GitHub:HACKERALERT/Picocrypt,Repository was permanently archived in 2025; keep only historical compatibility identity.
-W3-178,tavern,unknown,needs-source,,No uniquely matching Linux music application has been identified for this matrix entry yet.
 W3-179,clementine,aur-package,validated-current,AUR:clementine,Current AUR package is maintained and points to Clementine upstream.
 W3-180,deadbeef,aur-package,validated-current,AUR:deadbeef,Current AUR package is maintained for the DeaDBeeF Linux audio player.
 W3-204,walker,aur-package,validated-current,AUR:walker-bin,Current Wayland application runner is distributed through AUR.
