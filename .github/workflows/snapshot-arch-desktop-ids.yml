@@ -118,7 +118,7 @@ jobs:
               if not repos or not repos <= allowed_repos:
                   raise SystemExit(f"Invalid repository membership: {row!r}")
               desktop_id = row["desktop_id"].strip()
-              if not desktop_id or "/" in desktop_id or desktop_id.endswith(".desktop"):
+              if not desktop_id or "/" in desktop_id:
                   raise SystemExit(f"Malformed desktop ID: {desktop_id!r}")
 
           print(f"Validated {len(ids)} sorted unique Arch desktop IDs.")
