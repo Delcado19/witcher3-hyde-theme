@@ -1,0 +1,83 @@
+name: Waybar Theme Validation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "Configs/.config/hyde/themes/Witcher3/waybar.theme"
+      - ".github/workflows/waybar-theme.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-waybar-theme:
+    name: Validate Witcher3 Waybar palette
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Validate HyDE theme fragment
+        run: |
+          set -Eeuo pipefail
+
+          theme="Configs/.config/hyde/themes/Witcher3/waybar.theme"
+          target_line='$HOME/.config/waybar/theme.css|${scrDir}/wbarconfgen.sh'
+
+          test "$(head -n 1 "$theme")" = "$target_line"
+
+          THEME_PATH="$theme" python3 <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          path = Path(os.environ["THEME_PATH"])
+          lines = path.read_text(encoding="utf-8").splitlines()[1:]
+          text = "\n".join(lines)
+
+          definition_re = re.compile(
+              r"^[ \t]*@define-color[ \t]+([A-Za-z0-9_-]+)[ \t]+(#[0-9A-Fa-f]{6})[ \t]*;[ \t]*$",
+              re.MULTILINE,
+          )
+          definitions = dict(definition_re.findall(text))
+
+          expected_roles = {
+              "bar-bg",
+              "main-bg",
+              "main-fg",
+              "wb-act-bg",
+              "wb-act-fg",
+              "wb-hvr-bg",
+              "wb-hvr-fg",
+          }
+
+          missing = sorted(expected_roles - definitions.keys())
+          if missing:
+              raise SystemExit("Missing Waybar color roles: " + ", ".join(missing))
+
+          extras = sorted(definitions.keys() - expected_roles)
+          if extras:
+              raise SystemExit("Unexpected Waybar color roles: " + ", ".join(extras))
+
+          expected_values = {
+              "main-fg": "#DEE6F0",
+              "wb-act-bg": "#B72A18",
+              "wb-act-fg": "#DEE6F0",
+              "wb-hvr-bg": "#7D572C",
+              "wb-hvr-fg": "#DEE6F0",
+          }
+          for role, expected in expected_values.items():
+              actual = definitions[role].upper()
+              if actual != expected:
+                  raise SystemExit(f"{role}: expected {expected}, got {actual}")
+
+          remaining = re.sub(definition_re, "", text)
+          remaining = re.sub(r"/\*.*?\*/", "", remaining, flags=re.DOTALL)
+          remaining = re.sub(r"^[ \t]*#[^\n]*$", "", remaining, flags=re.MULTILINE)
+          if remaining.strip():
+              raise SystemExit("Unexpected content in Waybar theme fragment")
+
+          print("Witcher3 Waybar theme fragment is structurally valid.")
+          PY
