@@ -23,7 +23,7 @@ The current scope includes:
 - Kvantum / Qt styling
 - GTK theme integration
 - Witcher-themed wallpapers
-- Witcher-themed cursor package, if a custom cursor is justified
+- HyDE/user cursor inheritance for v1; a complete original Witcher cursor family may be considered later
 - A dedicated Witcher icon theme
 - Theme validation and build tooling
 
@@ -38,6 +38,7 @@ The current HyDE implementation is the technical source of truth for this projec
 Project references:
 
 - [`docs/HYDE_REFERENCE_MATRIX.md`](docs/HYDE_REFERENCE_MATRIX.md) — current HyDE theme structure, archive conventions, and implementation decisions
+- [`docs/CURSOR_DECISION.md`](docs/CURSOR_DECISION.md) — v1 cursor inheritance decision and post-v1 revisit criteria
 - [`docs/GTK_BASELINE.md`](docs/GTK_BASELINE.md) — selected GTK base, runtime contract, source pin, and validation requirements
 - [`docs/ICON_BUILD.md`](docs/ICON_BUILD.md) — standalone icon-theme build, staging, alias, and archive contract
 - [`design/palette/witcher3-color-system.md`](design/palette/witcher3-color-system.md) — measured and normalized Witcher3 UI palette
@@ -90,8 +91,7 @@ witcher3-hyde-theme/
 ├── Source/
 │   └── arcs/
 │       ├── Gtk_Witcher3.tar.xz
-│       ├── Icon_Witcher3-HyDE.tar.xz
-│       └── Cursor_<optional-name>.tar.*
+│       └── Icon_Witcher3-HyDE.tar.xz
 │
 ├── screenshots/
 │   ├── overview.jpg
@@ -124,6 +124,7 @@ witcher3-hyde-theme/
 │
 ├── docs/
 │   ├── ASSET_POLICY.md
+│   ├── CURSOR_DECISION.md
 │   ├── GTK_BASELINE.md
 │   ├── HYDE_REFERENCE_MATRIX.md
 │   └── ICON_BUILD.md
@@ -137,7 +138,7 @@ witcher3-hyde-theme/
     └── validate-wallpaper-theme.py
 ```
 
-The Kaer Morhen default wallpaper is bundled as a validated 2560×1440 16-bit RGB PNG. With exactly one bundled wallpaper, current HyDE's fallback selection is deterministic and creates `wall.set` as runtime state when the theme is first applied; `wall.set` is intentionally not stored in the repository. Actual icon artwork, screenshots, and optional cursor resources remain development targets. Icon and wallpaper build/validation tooling is CI-tested independently of unfinished visual assets.
+The Kaer Morhen default wallpaper is bundled as a validated 2560×1440 16-bit RGB PNG. With exactly one bundled wallpaper, current HyDE's fallback selection is deterministic and creates `wall.set` as runtime state when the theme is first applied; `wall.set` is intentionally not stored in the repository. Actual icon artwork and screenshots remain development targets. Witcher3 v1 intentionally does not ship or force a cursor package and inherits the normal HyDE/user cursor configuration instead. Icon and wallpaper build/validation tooling is CI-tested independently of unfinished visual assets.
 
 ### Kvantum integration
 
@@ -344,12 +345,11 @@ HyDE theme resources are stored under:
 Source/arcs/
 ```
 
-Planned packages:
+Planned v1 packages:
 
 ```text
 Gtk_Witcher3.tar.xz
 Icon_Witcher3-HyDE.tar.xz
-Cursor_<optional-name>.tar.*
 ```
 
 The GTK archive is required for a complete HyDE theme import. The `$GTK_THEME` value in `hypr.theme` must match the top-level `Witcher3/` directory contained in that archive.
@@ -379,7 +379,7 @@ Witcher3-HyDE/
 
 See [`docs/ICON_BUILD.md`](docs/ICON_BUILD.md) for the complete archive and validation contract.
 
-The cursor package remains optional until a Witcher-specific cursor design is judged to improve the complete desktop experience enough to justify overriding the user's normal cursor theme.
+Witcher3 v1 intentionally ships no cursor package and does not declare `$CURSOR_THEME` or `$CURSOR_SIZE`. Cursor selection remains owned by the user's HyDE configuration. A complete original Witcher cursor family may be reconsidered after v1; see [`docs/CURSOR_DECISION.md`](docs/CURSOR_DECISION.md).
 
 ---
 
@@ -419,7 +419,7 @@ For the HyDE runtime theme:
 5. Add the minimal Kvantum override while reusing current HyDE's maintained Wallbash SVG template.
 6. Bundle and validate at least one permitted redistributable wallpaper. **Done.** Current HyDE creates `wall.set` as runtime state when the theme is applied.
 7. Produce and package the dedicated icon artwork through the validated builder.
-8. Decide whether a custom cursor package is justified.
+8. Keep cursor ownership with HyDE/user configuration for v1. **Done.** Revisit only for a complete original Witcher cursor family.
 9. Test the complete theme on a clean/current HyDE installation before release.
 
 For the icon theme:
@@ -450,7 +450,7 @@ Until the first stable release exists, this repository should be treated as a de
 
 ## Status
 
-**Current phase:** core runtime styling, the Kaer Morhen wallpaper baseline, and icon infrastructure are statically validated; original icon artwork and live integration are next.
+**Current phase:** core runtime styling, the Kaer Morhen wallpaper baseline, the v1 cursor policy, and icon infrastructure are statically validated; original icon artwork and live integration are next.
 
 - [x] Define the project as a full HyDE theme
 - [x] Establish a current-HyDE-compatible repository baseline
@@ -474,16 +474,16 @@ Until the first stable release exists, this repository should be treated as a de
 - [x] Define icon art direction and the 14-icon pilot batch
 - [x] Add and CI-validate the Kaer Morhen default wallpaper
 - [x] Document `wall.set` as HyDE-managed runtime state rather than a repository asset
+- [x] Decide v1 cursor policy: inherit HyDE/user cursor; no cursor package
 - [ ] Produce and review the 14-icon Witcher artwork pilot
 - [ ] Expand original icon artwork to 645/645 canonicals
 - [ ] Build the real `Icon_Witcher3-HyDE.tar.xz` from accepted artwork
-- [ ] Decide whether a custom cursor package is justified
 - [ ] Add screenshots
 - [ ] Perform live visual validation of GTK3 / GTK4 / Qt / Rofi / Waybar / Kitty
 - [ ] Test clean HyDE theme import and switching
 - [ ] Create first release
 
-Hyprlock theming, animation overrides, and other optional components remain deferred until current HyDE behavior or a concrete design requirement justifies them.
+Hyprlock theming, animation overrides, a custom Witcher cursor family, and other optional components remain deferred until current HyDE behavior or a concrete design requirement justifies them.
 
 ---
 
