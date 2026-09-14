@@ -8,10 +8,12 @@ on:
       - "design/icons/matrix/witcher-icon-matrix-v1.md"
       - "design/icons/standards/freedesktop-icon-naming-latest-2026-09-14.csv"
       - "design/icons/standards/freedesktop-context-exceptions.csv"
+      - "design/icons/standards/flathub-app-ids-2026-09-14.csv"
       - "tools/validate-icon-matrix.py"
       - "tools/normalize-icon-matrix.py"
       - "tools/audit-freedesktop-icon-names.py"
       - "tools/audit-breeze-icon-names.py"
+      - "tools/audit-flathub-app-ids.py"
       - ".github/workflows/icon-matrix.yml"
 
 permissions:
@@ -69,3 +71,8 @@ jobs:
           set -Eeuo pipefail
           python3 tools/audit-breeze-icon-names.py \
             --tree-list "$RUNNER_TEMP/breeze-tree.txt"
+
+      - name: Audit Flathub application IDs
+        run: |
+          set -Eeuo pipefail
+          python3 tools/audit-flathub-app-ids.py
