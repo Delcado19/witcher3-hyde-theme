@@ -41,10 +41,10 @@ Primary references:
 | `kvantum/kvconfig.theme` | Yes | Yes | Yes | Yes | Yes | **Include** |
 | `theme.dcol` | Yes | Yes | No | Yes | No | **Recommended** |
 | `wallpapers/` | Yes | Yes | Yes | Yes | Yes | **Required** |
-| `wall.set` committed | No | No | No | No | No | **Recommended after default wallpaper exists** |
+| `wall.set` committed | No | No | No | No | No | **Do not commit; HyDE runtime state** |
 | GTK archive | Yes | Yes | Yes | Yes | Yes | **Required by HyDE patcher** |
 | Icon archive | Yes | Yes | Yes | Yes | Yes | **Required by this project** |
-| Cursor archive | Yes | Yes | Yes | Yes | Yes | Optional |
+| Cursor archive | Yes | Yes | Yes | Yes | Yes | **No for v1; optional post-v1** |
 | Font archive | No | No | No | No | Yes | Optional |
 | `cava.theme` | Yes | No | No | No | No | Optional; not baseline |
 | Active legacy `exec = gsettings ...` | Yes | Yes | Yes | Yes | No; commented | **Do not copy** |
@@ -81,9 +81,9 @@ Do not add a placeholder copied from another theme merely to satisfy the patcher
 
 ### `wall.set`
 
-`wall.set` is not required to be committed. Current HyDE checks it during theme switching. If it is missing or invalid, HyDE chooses the first available file in `wallpapers/` and creates the symlink automatically.
+`wall.set` is HyDE-managed runtime state and is intentionally not committed by Witcher3. Current HyDE checks it during theme switching. If it is missing or invalid, HyDE chooses the first available file in `wallpapers/` and creates the symlink automatically.
 
-For Witcher3, commit `wall.set` only after the intended default wallpaper is known. This keeps the default deterministic instead of depending on filesystem ordering.
+The v1 baseline bundles exactly one validated wallpaper, `witcher3_kaer_morhen.png`, so this fallback is deterministic without storing an install-local `wall.set` symlink in the repository.
 
 ### GTK package
 
@@ -128,6 +128,12 @@ Source/arcs/
 
 Both `.tar.gz` and `.tar.xz` occur in maintained themes. The important contract is the archive prefix, the declared variable, and the top-level directory inside the archive — not one specific compression format.
 
+### Cursor archive status
+
+`Cursor_*.tar.*` is recognized by current HyDE but is optional. The current HyDE default environment uses `Bibata-Modern-Ice` at size `24`, and `theme.switch.sh` falls back to the loaded HyDE/user cursor settings when a theme does not declare `$CURSOR_THEME` or `$CURSOR_SIZE`.
+
+Witcher3 v1 intentionally does not declare either variable and ships no cursor archive. See [`CURSOR_DECISION.md`](CURSOR_DECISION.md) for the complete decision and revisit criteria.
+
 ## `hypr.theme` rules for Witcher3
 
 All five audited themes use the HyDE destination header:
@@ -148,15 +154,15 @@ Do **not** copy that pattern into Witcher3 by default.
 
 Current HyDE parses theme variables from `hypr.theme` and applies icon, GTK, cursor, Qt and font settings during `theme.switch.sh`. The modern Witcher3 file should therefore primarily declare variables and Hyprland visual settings rather than re-applying desktop settings through theme-local `exec` commands.
 
-Initial variable set to evaluate:
+The v1 theme-owned variable set is:
 
 ```text
-$GTK_THEME = <final GTK theme name>
+$GTK_THEME = Witcher3
 $ICON_THEME = Witcher3-HyDE
 $COLOR_SCHEME = prefer-dark
-$CURSOR_THEME = <optional cursor theme>
-$CURSOR_SIZE = <size>
 ```
+
+`$CURSOR_THEME` and `$CURSOR_SIZE` are intentionally absent in v1 so the existing HyDE/user cursor remains authoritative.
 
 Fonts should only be declared if the theme intentionally owns the font choice. Do not hard-code a font into Rofi or Kitty merely because a reference theme does so.
 
@@ -272,9 +278,8 @@ They may be added later if there is a demonstrated HyDE integration or a deliber
 7. Implement and test `kitty.theme`.
 8. Generate/derive Kvantum files from the working HyDE setup.
 9. Generate and review `theme.dcol` so Wallbash keeps the intended Witcher palette.
-10. Set `wall.set` once the default wallpaper is selected.
-11. Develop `Witcher3-HyDE` as an independent icon subproject and package it as `Icon_Witcher3-HyDE.tar.*`.
-12. Add optional cursor/font packages only when they improve the theme without unnecessarily overriding user preferences.
+10. Develop `Witcher3-HyDE` as an independent icon subproject and package it as `Icon_Witcher3-HyDE.tar.*`.
+11. Keep cursor ownership with HyDE/user configuration for v1; revisit only for a complete original Witcher cursor family.
 
 ## Reference-specific lessons
 
@@ -315,17 +320,15 @@ Configs/
                 │   └── kvconfig.theme
                 ├── rofi.theme
                 ├── theme.dcol
-                ├── wall.set
                 ├── wallpapers/
                 └── waybar.theme
 
 Source/
 └── arcs/
     ├── Gtk_<final-name>.tar.*
-    ├── Icon_Witcher3-HyDE.tar.*
-    └── Cursor_<optional-name>.tar.*
+    └── Icon_Witcher3-HyDE.tar.*
 ```
 
-`wall.set` and `Cursor_*` remain optional from HyDE's point of view; they are shown in the target layout because a deterministic default wallpaper and a coherent cursor may be desirable for the finished release.
+`wall.set` is HyDE-managed runtime state and is not part of the repository target. A `Cursor_*.tar.*` package is also intentionally outside the v1 target; current HyDE supports themes without one, and Witcher3 inherits the user's existing HyDE cursor configuration.
 
 No `hyprlock.theme` or `animations.theme` should be created until current HyDE behavior or a concrete design requirement justifies them.
