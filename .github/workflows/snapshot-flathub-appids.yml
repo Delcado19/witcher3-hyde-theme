@@ -1,0 +1,93 @@
+name: Snapshot Flathub App IDs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/snapshot-flathub-appids.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    name: Snapshot Flathub application IDs
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install Flatpak
+        run: |
+          set -Eeuo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends flatpak
+
+      - name: Query Flathub application IDs
+        run: |
+          set -Eeuo pipefail
+
+          snapshot="design/icons/standards/flathub-app-ids-2026-09-14.csv"
+          mkdir -p "$(dirname "$snapshot")"
+
+          flatpak remote-add --user --if-not-exists \
+            flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+          {
+            printf 'app_id\n'
+            flatpak remote-ls --user --app --columns=application flathub \
+              | sed '/^[[:space:]]*$/d' \
+              | LC_ALL=C sort -u
+          } > "$snapshot"
+
+          app_count="$(($(wc -l < "$snapshot") - 1))"
+          echo "Captured $app_count Flathub application IDs."
+
+          if (( app_count < 2000 )); then
+            echo "Refusing suspiciously small Flathub snapshot: $app_count IDs" >&2
+            exit 1
+          fi
+
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path("design/icons/standards/flathub-app-ids-2026-09-14.csv")
+          with path.open("r", encoding="utf-8", newline="") as handle:
+              rows = list(csv.DictReader(handle))
+
+          ids = [row["app_id"].strip() for row in rows]
+          if any(not app_id for app_id in ids):
+              raise SystemExit("Snapshot contains an empty app ID")
+          if ids != sorted(set(ids)):
+              raise SystemExit("Snapshot IDs are not sorted and unique")
+          if any(" " in app_id or "/" in app_id for app_id in ids):
+              raise SystemExit("Snapshot contains malformed app IDs")
+
+          print(f"Validated {len(ids)} sorted unique Flathub application IDs.")
+          PY
+
+      - name: Verify change scope
+        run: |
+          set -Eeuo pipefail
+          changed="$(git status --short)"
+          printf '%s\n' "$changed"
+
+          paths="$(git status --porcelain | sed 's/^...//' | LC_ALL=C sort -u)"
+          expected="design/icons/standards/flathub-app-ids-2026-09-14.csv"
+
+          if [[ "$paths" != "$expected" ]]; then
+            echo "Unexpected files changed by Flathub snapshot workflow:" >&2
+            printf '%s\n' "$paths" >&2
+            exit 1
+          fi
+
+      - name: Commit Flathub snapshot
+        run: |
+          set -Eeuo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add design/icons/standards/flathub-app-ids-2026-09-14.csv
+          git commit -m "Snapshot Flathub application IDs"
+          git push origin HEAD:main
