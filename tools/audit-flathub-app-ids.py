@@ -6,17 +6,16 @@ The artwork canonical may remain a conventional desktop icon name such as
 `firefox`; exact Flathub application IDs are expected to live in `aliases` and
 will later become compatibility symlinks in the generated icon theme.
 
-This first Stage-D pass is observational. Missing Flathub coverage does not make
-an application invalid because many applications are distributed outside
-Flathub. Hard failures are reserved for malformed snapshots or one Flathub ID
-being assigned to more than one Witcher3 design.
+Missing Flathub coverage does not make an application invalid because many
+applications are distributed outside Flathub. The pinned counts below make the
+validated 2026-09-14 coverage reproducible and prevent silent regressions.
 """
 
 from __future__ import annotations
 
 import csv
 import re
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +24,11 @@ FLATHUB_PATH = ROOT / "design/icons/standards/flathub-app-ids-2026-09-14.csv"
 
 EXPECTED_APPLICATION_ROWS = 220
 EXPECTED_FLATHUB_IDS = 3352
+EXPECTED_ROWS_WITH_FLATHUB_ALIAS = 126
+EXPECTED_EXACT_FLATHUB_ALIASES = 126
+EXPECTED_CANONICAL_FLATHUB_IDS = 0
+EXPECTED_ROWS_WITHOUT_FLATHUB = 94
+EXPECTED_SHAPED_NON_FLATHUB_ALIASES = 21
 
 # Flatpak application IDs are reverse-DNS-like. Requiring at least three
 # components intentionally avoids classifying desktop filenames such as
@@ -109,6 +113,25 @@ def main() -> int:
             rendered = ", ".join(f"{row_id} ({canonical})" for row_id, canonical in owners)
             print(f"- {app_id}: {rendered}")
         return 1
+
+    measured = {
+        "rows_with_alias": len(rows_with_flathub_alias),
+        "exact_aliases": exact_alias_count,
+        "canonical_ids": len(canonical_matches),
+        "rows_without": len(rows_without_flathub),
+        "shaped_non_flathub": len(shaped_non_flathub_aliases),
+    }
+    expected = {
+        "rows_with_alias": EXPECTED_ROWS_WITH_FLATHUB_ALIAS,
+        "exact_aliases": EXPECTED_EXACT_FLATHUB_ALIASES,
+        "canonical_ids": EXPECTED_CANONICAL_FLATHUB_IDS,
+        "rows_without": EXPECTED_ROWS_WITHOUT_FLATHUB,
+        "shaped_non_flathub": EXPECTED_SHAPED_NON_FLATHUB_ALIASES,
+    }
+    if measured != expected:
+        raise SystemExit(
+            f"Unexpected Stage D coverage: {measured!r}; expected {expected!r}"
+        )
 
     print(f"Flathub snapshot: {len(flathub_set)} application IDs.")
     print(f"Witcher3 application designs: {len(application_rows)}.")
