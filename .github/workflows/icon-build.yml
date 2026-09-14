@@ -1,0 +1,50 @@
+name: Icon Build Validation
+
+on:
+  push:
+    paths:
+      - 'design/icons/matrix/**'
+      - 'docs/ICON_BUILD.md'
+      - 'tools/build-icons.py'
+      - 'tests/test_build_icons.py'
+      - '.github/workflows/icon-build.yml'
+  pull_request:
+    paths:
+      - 'design/icons/matrix/**'
+      - 'docs/ICON_BUILD.md'
+      - 'tools/build-icons.py'
+      - 'tests/test_build_icons.py'
+      - '.github/workflows/icon-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate strict icon builder
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Show Python version
+        run: python3 --version
+
+      - name: Compile builder and tests
+        run: |
+          set -Eeuo pipefail
+          python3 -m py_compile tools/build-icons.py tests/test_build_icons.py
+
+      - name: Run 645-icon fixture suite
+        run: |
+          set -Eeuo pipefail
+          python3 -m unittest -v tests/test_build_icons.py
+
+      - name: Verify tests left no release artifact
+        run: |
+          set -Eeuo pipefail
+          test ! -e Source/arcs/Icon_Witcher3-HyDE.tar.xz
+          git status --short
+          test -z "$(git status --porcelain --untracked-files=no)"
