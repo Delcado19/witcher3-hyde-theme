@@ -14,6 +14,8 @@ env:
   HYDE_COMMIT: 51b6cbf55b0bf982b2ea88af00a0cdbae0c787c7
   HYPRQUERY_COMMIT: 002af783eeb8c487a4bf90d75e5a804340557967
   HYPRUTILS_TAG: v0.7.1
+  CC: gcc-14
+  CXX: g++-14
 
 jobs:
   validate-hypr-theme:
@@ -31,6 +33,8 @@ jobs:
             build-essential \
             cmake \
             curl \
+            gcc-14 \
+            g++-14 \
             libpixman-1-dev \
             libxkbcommon-dev \
             pkg-config
