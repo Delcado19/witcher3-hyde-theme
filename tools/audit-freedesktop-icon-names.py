@@ -5,12 +5,17 @@ This is Stage B of the icon naming validation pipeline. A name that is absent
 from the Freedesktop list is not considered invalid here; it must be validated
 later against Breeze, application metadata, HyDE, or documented as a project
 extension.
+
+Matrix groups are design/coverage buckets, not runtime icon-theme directories.
+Exact Freedesktop names that intentionally live in a different design bucket
+must be listed in the context-exception table. The exception still records the
+Freedesktop runtime context that the future builder must use.
 """
 
 from __future__ import annotations
 
 import csv
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,6 +23,9 @@ MATRIX_PATH = ROOT / "design/icons/matrix/witcher-icon-matrix-v1.csv"
 STANDARD_PATH = (
     ROOT
     / "design/icons/standards/freedesktop-icon-naming-latest-2026-09-14.csv"
+)
+EXCEPTIONS_PATH = (
+    ROOT / "design/icons/standards/freedesktop-context-exceptions.csv"
 )
 
 EXPECTED_STANDARD_COUNTS = {
@@ -34,10 +42,9 @@ EXPECTED_STANDARD_COUNTS = {
     "Status": 59,
 }
 
-# The matrix groups are design/coverage families, but an exact Freedesktop
-# standard name should normally live in the corresponding semantic family.
-# Categories/Misc intentionally owns the standard contexts for which the
-# Witcher3 design budget has no dedicated top-level group.
+# The matrix groups are design/coverage families. These mappings describe the
+# normal relationship only; documented exceptions are allowed when a design is
+# intentionally grouped by desktop use rather than Freedesktop runtime context.
 ALLOWED_CONTEXTS = {
     "Applications": {"Applications"},
     "Actions/UI": {"Actions"},
@@ -54,6 +61,14 @@ ALLOWED_CONTEXTS = {
     },
 }
 
+EXPECTED_EXCEPTION_COLUMNS = [
+    "id",
+    "canonical_name",
+    "matrix_group",
+    "freedesktop_context",
+    "rationale",
+]
+
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
@@ -62,7 +77,7 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 def main() -> int:
     standard_rows = read_csv(STANDARD_PATH)
-    if list(standard_rows[0].keys()) != ["context", "name"]:
+    if not standard_rows or list(standard_rows[0].keys()) != ["context", "name"]:
         raise SystemExit("Unexpected Freedesktop snapshot columns")
 
     standard_counts = Counter(row["context"].strip() for row in standard_rows)
@@ -87,9 +102,42 @@ def main() -> int:
             f"Expected 288 unique Freedesktop names, found {len(standard_by_name)}"
         )
 
+    exception_rows = read_csv(EXCEPTIONS_PATH)
+    if not exception_rows or list(exception_rows[0].keys()) != EXPECTED_EXCEPTION_COLUMNS:
+        raise SystemExit("Unexpected Freedesktop context-exception columns")
+
+    exceptions_by_id: dict[str, tuple[str, str, str, str]] = {}
+    for row in exception_rows:
+        row_id = row["id"].strip()
+        canonical = row["canonical_name"].strip()
+        matrix_group = row["matrix_group"].strip()
+        freedesktop_context = row["freedesktop_context"].strip()
+        rationale = row["rationale"].strip()
+
+        if not all((row_id, canonical, matrix_group, freedesktop_context, rationale)):
+            raise SystemExit(f"Incomplete Freedesktop context exception for {row_id!r}")
+        if row_id in exceptions_by_id:
+            raise SystemExit(f"Duplicate Freedesktop context exception for {row_id}")
+
+        actual_standard_context = standard_by_name.get(canonical)
+        if actual_standard_context != freedesktop_context:
+            raise SystemExit(
+                f"Exception {row_id}: {canonical!r} claims Freedesktop "
+                f"{freedesktop_context}, snapshot says {actual_standard_context!r}"
+            )
+
+        exceptions_by_id[row_id] = (
+            canonical,
+            matrix_group,
+            freedesktop_context,
+            rationale,
+        )
+
     matrix_rows = read_csv(MATRIX_PATH)
     exact_matches: list[tuple[str, str, str, str]] = []
     context_mismatches: list[str] = []
+    documented_exceptions: list[str] = []
+    consumed_exception_ids: set[str] = set()
     matrix_match_counts: Counter[str] = Counter()
     matched_by_group: Counter[str] = Counter()
     unmatched_by_group: Counter[str] = Counter()
@@ -110,10 +158,24 @@ def main() -> int:
 
             allowed = ALLOWED_CONTEXTS.get(group, set())
             if context not in allowed:
-                context_mismatches.append(
-                    f"{row_id}: {canonical!r} is Freedesktop {context}, "
-                    f"but matrix group is {group!r}"
-                )
+                exception = exceptions_by_id.get(row_id)
+                expected_exception = None
+                if exception is not None:
+                    expected_exception = exception[:3]
+
+                actual_tuple = (canonical, group, context)
+                if expected_exception == actual_tuple:
+                    consumed_exception_ids.add(row_id)
+                    documented_exceptions.append(
+                        f"{row_id}: {canonical!r} ({group} design bucket -> "
+                        f"Freedesktop {context})"
+                    )
+                else:
+                    context_mismatches.append(
+                        f"{row_id}: {canonical!r} is Freedesktop {context}, "
+                        f"but matrix group is {group!r} and no exact documented "
+                        "exception matches"
+                    )
 
         aliases = [
             item.strip()
@@ -129,6 +191,8 @@ def main() -> int:
                     f"{row_id}: non-standard canonical {canonical!r} has "
                     f"Freedesktop alias {alias!r} ({standard_by_name[alias]})"
                 )
+
+    stale_exception_ids = sorted(set(exceptions_by_id) - consumed_exception_ids)
 
     print(f"Freedesktop snapshot: {len(standard_by_name)} standard names.")
     print(
@@ -150,6 +214,15 @@ def main() -> int:
         unmatched = unmatched_by_group[group]
         print(f"  {group}: {matched} Freedesktop / {unmatched} unresolved")
 
+    if documented_exceptions:
+        print()
+        print(
+            f"Validated {len(documented_exceptions)} documented design-bucket / "
+            "Freedesktop-context exception(s):"
+        )
+        for item in documented_exceptions:
+            print(f"- {item}")
+
     if standard_aliases_to_nonstandard_canonical:
         print()
         print(
@@ -159,15 +232,32 @@ def main() -> int:
         for item in standard_aliases_to_nonstandard_canonical:
             print(f"- {item}")
 
+    errors: list[str] = []
     if context_mismatches:
+        errors.append(
+            f"Found {len(context_mismatches)} undocumented Freedesktop "
+            "context mismatch(es):"
+        )
+        errors.extend(f"- {item}" for item in context_mismatches)
+
+    if stale_exception_ids:
+        errors.append(
+            f"Found {len(stale_exception_ids)} stale Freedesktop context "
+            "exception(s):"
+        )
+        errors.extend(f"- {row_id}" for row_id in stale_exception_ids)
+
+    if errors:
         print()
-        print(f"Found {len(context_mismatches)} Freedesktop context mismatch(es):")
-        for mismatch in context_mismatches:
-            print(f"- {mismatch}")
+        for item in errors:
+            print(item)
         return 1
 
     print()
-    print("All exact Freedesktop canonical matches use compatible matrix groups.")
+    print(
+        "All exact Freedesktop canonical matches use compatible matrix groups "
+        "or exact documented exceptions."
+    )
     return 0
 
 
