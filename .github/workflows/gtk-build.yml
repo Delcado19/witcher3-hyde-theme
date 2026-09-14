@@ -1,0 +1,50 @@
+name: GTK Build Validation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/build-gtk.sh"
+      - "design/gtk/**"
+      - "design/palette/**"
+      - ".github/workflows/gtk-build.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-gtk:
+    name: Build Witcher3 GTK package
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes sassc xz-utils
+
+      - name: Build and validate GTK package
+        run: ./tools/build-gtk.sh --package
+
+      - name: Inspect generated archive
+        run: |
+          test -f Source/arcs/Gtk_Witcher3.tar.xz
+          echo "Archive size:"
+          du -h Source/arcs/Gtk_Witcher3.tar.xz
+          echo
+          echo "Top-level archive entries:"
+          tar -tJf Source/arcs/Gtk_Witcher3.tar.xz \
+            | sed 's#^\./##' \
+            | cut -d/ -f1 \
+            | sort -u
+
+      - name: Upload validated GTK package
+        uses: actions/upload-artifact@v7
+        with:
+          name: Gtk_Witcher3
+          path: Source/arcs/Gtk_Witcher3.tar.xz
+          if-no-files-found: error
+          retention-days: 7
