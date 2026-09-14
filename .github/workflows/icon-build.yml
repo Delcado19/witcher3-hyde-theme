@@ -4,15 +4,19 @@ on:
   push:
     paths:
       - 'design/icons/matrix/**'
+      - 'design/icons/src/**'
       - 'docs/ICON_BUILD.md'
       - 'tools/build-icons.py'
+      - 'tools/validate-icon-sources.py'
       - 'tests/test_build_icons.py'
       - '.github/workflows/icon-build.yml'
   pull_request:
     paths:
       - 'design/icons/matrix/**'
+      - 'design/icons/src/**'
       - 'docs/ICON_BUILD.md'
       - 'tools/build-icons.py'
+      - 'tools/validate-icon-sources.py'
       - 'tests/test_build_icons.py'
       - '.github/workflows/icon-build.yml'
   workflow_dispatch:
@@ -32,10 +36,18 @@ jobs:
       - name: Show Python version
         run: python3 --version
 
-      - name: Compile builder and tests
+      - name: Compile builder, source validator, and tests
         run: |
           set -Eeuo pipefail
-          python3 -m py_compile tools/build-icons.py tests/test_build_icons.py
+          python3 -m py_compile \
+            tools/build-icons.py \
+            tools/validate-icon-sources.py \
+            tests/test_build_icons.py
+
+      - name: Validate repository artwork incrementally
+        run: |
+          set -Eeuo pipefail
+          python3 tools/validate-icon-sources.py
 
       - name: Run 645-icon fixture suite
         run: |
