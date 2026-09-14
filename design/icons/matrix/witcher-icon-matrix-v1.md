@@ -85,18 +85,18 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-047 | Applications | obsidian | Deep violet obsidian shard with Witcher glyph fractures | Hero | P0 | md.obsidian.Obsidian |  |
 | W3-048 | Applications | joplin | Black notebook with a silver J quill and red bookmark | Hero | P2 | net.cozic.joplin_desktop |  |
 | W3-049 | Applications | logseq | Three linked parchment nodes connected by silver thread | Hero | P2 | com.logseq.Logseq |  |
-| W3-050 | Applications | notion | Ivory N rune printed on a weathered contract page | Hero | P2 | notion-app-enhanced; notion |  |
+| W3-050 | Applications | notion | Ivory N rune printed on a weathered contract page | Hero | P2 | notion-app-enhanced |  |
 | W3-051 | Applications | standard-notes | White sealed journal with a simple steel lock rune | Hero | P3 | org.standardnotes.standardnotes |  |
 | W3-052 | Applications | zettlr | Scholar's manuscript with an emerald Z initial | Hero | P3 | com.zettlr.Zettlr |  |
 | W3-053 | Applications | typora | Minimal manuscript page with a dark T quill stroke | Hero | P2 | io.typora.Typora |  |
 | W3-054 | Applications | marktext | Red M wax seal on a Markdown parchment | Hero | P2 | com.github.marktext.marktext |  |
 | W3-055 | Applications | ghostwriter | Spectral blue quill writing on a black parchment sheet | Hero | P2 | org.kde.ghostwriter |  |
 | W3-056 | Applications | libreoffice-startcenter | Open folio bound by a bronze office-clasp medallion | Hero | P0 | libreoffice; org.libreoffice.LibreOffice |  |
-| W3-057 | Applications | libreoffice-writer | Blue manuscript folio with a silver quill blade | Hero | P0 | libreoffice-writer |  |
-| W3-058 | Applications | libreoffice-calc | Green alchemist ledger with etched grid lines | Hero | P0 | libreoffice-calc |  |
-| W3-059 | Applications | libreoffice-impress | Orange herald's presentation board with sunburst rune | Hero | P1 | libreoffice-impress |  |
-| W3-060 | Applications | libreoffice-draw | Yellow drafting compass crossing a silver stylus | Hero | P2 | libreoffice-draw |  |
-| W3-061 | Applications | libreoffice-base | Burgundy archive cylinder with stacked database rings | Hero | P2 | libreoffice-base |  |
+| W3-057 | Applications | libreoffice-writer | Blue manuscript folio with a silver quill blade | Hero | P0 |  |  |
+| W3-058 | Applications | libreoffice-calc | Green alchemist ledger with etched grid lines | Hero | P0 |  |  |
+| W3-059 | Applications | libreoffice-impress | Orange herald's presentation board with sunburst rune | Hero | P1 |  |  |
+| W3-060 | Applications | libreoffice-draw | Yellow drafting compass crossing a silver stylus | Hero | P2 |  |  |
+| W3-061 | Applications | libreoffice-base | Burgundy archive cylinder with stacked database rings | Hero | P2 |  |  |
 | W3-062 | Applications | onlyoffice | Red interleaved manuscript sheets with brass corners | Hero | P2 | org.onlyoffice.desktopeditors |  |
 | W3-063 | Applications | wps-office | Crimson folded ribbon rune over a dark document plaque | Hero | P3 | wps-office-prometheus |  |
 | W3-064 | Applications | okular | Red eye-lens reading a parchment page | Hero | P0 | org.kde.okular |  |
@@ -109,58 +109,58 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-071 | Applications | nautilus | Nautilus shell as an Oxenfurt archive seal | Hero | P2 | org.gnome.Nautilus |  |
 | W3-072 | Applications | nemo | Green compass-shell on a leather explorer map | Hero | P2 | nemo.desktop |  |
 | W3-073 | Applications | thunar | Grey mouse familiar carrying a tiny folder satchel | Hero | P1 | Thunar; org.xfce.Thunar |  |
-| W3-074 | Applications | pcmanfm | Blue filing drawer with an elven P rune | Hero | P3 | pcmanfm-qt; pcmanfm |  |
+| W3-074 | Applications | pcmanfm | Blue filing drawer with an elven P rune | Hero | P3 | pcmanfm-qt |  |
 | W3-075 | Applications | krusader | Twin sabres crossing over a two-panel file chest | Hero | P1 | org.kde.krusader |  |
-| W3-076 | Applications | yazi | Minimal black terminal chest with a yellow rune-tab | Hero | P1 | yazi |  |
-| W3-077 | Applications | ranger | Forest ranger quiver shaped into a terminal file tree | Hero | P2 | ranger |  |
+| W3-076 | Applications | yazi | Minimal black terminal chest with a yellow rune-tab | Hero | P1 |  |  |
+| W3-077 | Applications | ranger | Forest ranger quiver shaped into a terminal file tree | Hero | P2 |  |  |
 | W3-078 | Applications | ark | Iron archive chest with a brass compression clasp | Hero | P0 | org.kde.ark |  |
 | W3-079 | Applications | file-roller | Rolled parchment bundle tied with an archive cord | Hero | P2 | org.gnome.FileRoller |  |
-| W3-080 | Applications | peazip | Green pea-shaped alchemical capsule in a steel archive ring | Hero | P2 | peazip |  |
-| W3-081 | Applications | 7zip | Seven steel archive plates locked by one heavy clasp | Hero | P2 | 7zFM; 7zip |  |
+| W3-080 | Applications | peazip | Green pea-shaped alchemical capsule in a steel archive ring | Hero | P2 |  |  |
+| W3-081 | Applications | 7zip | Seven steel archive plates locked by one heavy clasp | Hero | P2 | 7zFM |  |
 | W3-082 | Applications | konsole | Black rune-terminal slab with a luminous command chevron | Hero | P0 | org.kde.konsole |  |
-| W3-083 | Applications | kitty | Cat-school medallion with a terminal prompt etched below | Hero | P0 | kitty |  |
+| W3-083 | Applications | kitty | Cat-school medallion with a terminal prompt etched below | Hero | P0 |  |  |
 | W3-084 | Applications | alacritty | Flaming red A rune on a blackened steel terminal plate | Hero | P1 | Alacritty; org.alacritty.Alacritty |  |
 | W3-085 | Applications | wezterm | Lightning W rune over a dark terminal crystal | Hero | P1 | org.wezfurlong.wezterm |  |
 | W3-086 | Applications | foot | Bootprint rune stamped onto a minimalist terminal plate | Hero | P2 | footclient |  |
 | W3-087 | Applications | gnome-terminal | Dark stone terminal slab with green alchemical prompt | Hero | P2 | org.gnome.Terminal |  |
 | W3-088 | Applications | tilix | Split terminal panes held in a bronze tiled frame | Hero | P2 | com.gexperts.Tilix |  |
-| W3-089 | Applications | cool-retro-term | Amber cathode glow inside a brass retro scrying box | Hero | P3 | cool-retro-term |  |
-| W3-090 | Applications | tmux | Three stacked terminal panes bound by a green T rune | Hero | P2 | tmux |  |
-| W3-091 | Applications | zellij | Mosaic terminal panes in a Z-shaped Nilfgaardian frame | Hero | P2 | zellij |  |
+| W3-089 | Applications | cool-retro-term | Amber cathode glow inside a brass retro scrying box | Hero | P3 |  |  |
+| W3-090 | Applications | tmux | Three stacked terminal panes bound by a green T rune | Hero | P2 |  |  |
+| W3-091 | Applications | zellij | Mosaic terminal panes in a Z-shaped Nilfgaardian frame | Hero | P2 |  |  |
 | W3-092 | Applications | code | Blue ribbon chevrons forged as crossed editor blades | Hero | P0 | visual-studio-code; com.visualstudio.code |  |
 | W3-093 | Applications | vscodium | Blue-green codium crystal framed by editor chevrons | Hero | P1 | codium; com.vscodium.codium |  |
 | W3-094 | Applications | cursor | Black magical cursor arrow over a white arcane circle | Hero | P1 | cursor-editor; Cursor |  |
 | W3-095 | Applications | zed | Red Z rune cut through a black steel editor badge | Hero | P2 | dev.zed.Zed |  |
 | W3-096 | Applications | kate | Blue quill over a folded KDE manuscript | Hero | P0 | org.kde.kate |  |
 | W3-097 | Applications | kwrite | Simple blue quill on a compact parchment page | Hero | P2 | org.kde.kwrite |  |
-| W3-098 | Applications | geany | Blue genie lamp reimagined as a code alchemy vessel | Hero | P2 | geany |  |
+| W3-098 | Applications | geany | Blue genie lamp reimagined as a code alchemy vessel | Hero | P2 |  |  |
 | W3-099 | Applications | sublime-text | Orange S rune carved into an obsidian editor tile | Hero | P2 | sublime_text; com.sublimetext.three |  |
-| W3-100 | Applications | jetbrains-toolbox | Black arcane toolbox with four neon rune corners | Hero | P1 | jetbrains-toolbox |  |
+| W3-100 | Applications | jetbrains-toolbox | Black arcane toolbox with four neon rune corners | Hero | P1 |  |  |
 | W3-101 | Applications | idea | Black IDE crystal with magenta-blue arcane border | Hero | P1 | idea-ultimate; idea-community |  |
-| W3-102 | Applications | pycharm | Black python-serpent grimoire with green rune border | Hero | P1 | pycharm; pycharm-professional; pycharm-community |  |
-| W3-103 | Applications | clion | Black C rune on a red-blue engineering sigil | Hero | P2 | clion |  |
-| W3-104 | Applications | webstorm | Black web rune on blue-green storm crystal | Hero | P2 | webstorm |  |
-| W3-105 | Applications | goland | Black Go rune on a cyan hunter's badge | Hero | P3 | goland |  |
-| W3-106 | Applications | rustrover | Black rusted R rune on an orange iron plate | Hero | P3 | rustrover |  |
-| W3-107 | Applications | android-studio | Green droid familiar under a steel drafting compass | Hero | P2 | android-studio |  |
-| W3-108 | Applications | qtcreator | Green Q rune mounted in a technical drafting frame | Hero | P2 | qtcreator |  |
+| W3-102 | Applications | pycharm | Black python-serpent grimoire with green rune border | Hero | P1 | pycharm-professional; pycharm-community |  |
+| W3-103 | Applications | clion | Black C rune on a red-blue engineering sigil | Hero | P2 |  |  |
+| W3-104 | Applications | webstorm | Black web rune on blue-green storm crystal | Hero | P2 |  |  |
+| W3-105 | Applications | goland | Black Go rune on a cyan hunter's badge | Hero | P3 |  |  |
+| W3-106 | Applications | rustrover | Black rusted R rune on an orange iron plate | Hero | P3 |  |  |
+| W3-107 | Applications | android-studio | Green droid familiar under a steel drafting compass | Hero | P2 |  |  |
+| W3-108 | Applications | qtcreator | Green Q rune mounted in a technical drafting frame | Hero | P2 |  |  |
 | W3-109 | Applications | meld | Three parchment code strips merging into one red center strip | Hero | P1 | org.gnome.meld |  |
-| W3-110 | Applications | gitkraken | Sea-monster kraken curling around a Git fork rune | Hero | P1 | gitkraken |  |
+| W3-110 | Applications | gitkraken | Sea-monster kraken curling around a Git fork rune | Hero | P1 |  |  |
 | W3-111 | Applications | github-desktop | Octocat familiar engraved on a black contract seal | Hero | P2 | io.github.shiftey.Desktop |  |
-| W3-112 | Applications | lazygit | Lazy cat-school medallion lounging over a Git branch rune | Hero | P2 | lazygit |  |
+| W3-112 | Applications | lazygit | Lazy cat-school medallion lounging over a Git branch rune | Hero | P2 |  |  |
 | W3-113 | Applications | postman | Orange courier rider carrying an API scroll tube | Hero | P1 | com.getpostman.Postman |  |
 | W3-114 | Applications | insomnia | Moonlit API eye under a sleepless violet crescent | Hero | P2 | rest.insomnia.Insomnia |  |
 | W3-115 | Applications | dbeaver | Beaver artificer holding a database gear wheel | Hero | P1 | io.dbeaver.DBeaverCommunity |  |
 | W3-116 | Applications | beekeeper-studio | Golden bee over a honeycomb database sigil | Hero | P2 | io.beekeeperstudio.Studio |  |
-| W3-117 | Applications | sqlitebrowser | Stacked stone tablets with a magnifying rune | Hero | P2 | sqlitebrowser; org.sqlitebrowser.sqlitebrowser |  |
-| W3-118 | Applications | redisinsight | Red crystal stack inside an alchemist data vial | Hero | P3 | redisinsight |  |
-| W3-119 | Applications | docker-desktop | Cargo barge carrying stacked container chests | Hero | P1 | docker-desktop |  |
+| W3-117 | Applications | sqlitebrowser | Stacked stone tablets with a magnifying rune | Hero | P2 | org.sqlitebrowser.sqlitebrowser |  |
+| W3-118 | Applications | redisinsight | Red crystal stack inside an alchemist data vial | Hero | P3 |  |  |
+| W3-119 | Applications | docker-desktop | Cargo barge carrying stacked container chests | Hero | P1 |  |  |
 | W3-120 | Applications | podman-desktop | Red seal-pup familiar beside stacked container crates | Hero | P2 | io.podman_desktop.PodmanDesktop |  |
-| W3-121 | Applications | virt-manager | Two nested scrying mirrors symbolizing virtual machines | Hero | P1 | virt-manager |  |
-| W3-122 | Applications | virtualbox | Blue rune cube with six engraved virtual faces | Hero | P2 | virtualbox |  |
-| W3-123 | Applications | qemu | Copper machine core surrounded by four emulation runes | Hero | P2 | qemu |  |
+| W3-121 | Applications | virt-manager | Two nested scrying mirrors symbolizing virtual machines | Hero | P1 |  |  |
+| W3-122 | Applications | virtualbox | Blue rune cube with six engraved virtual faces | Hero | P2 |  |  |
+| W3-123 | Applications | qemu | Copper machine core surrounded by four emulation runes | Hero | P2 |  |  |
 | W3-124 | Applications | wireshark | Blue shark fin slicing through luminous packet waves | Hero | P1 | org.wireshark.Wireshark |  |
-| W3-125 | Applications | nmap | Compass rose scanning a network map parchment | Hero | P2 | zenmap; nmap |  |
+| W3-125 | Applications | nmap | Compass rose scanning a network map parchment | Hero | P2 | zenmap |  |
 | W3-126 | Applications | remmina | Two remote viewing mirrors connected by a silver tether | Hero | P1 | org.remmina.Remmina |  |
 | W3-127 | Applications | rustdesk | Rust-red remote desk sigil with linked screen plates | Hero | P2 | com.rustdesk.RustDesk |  |
 | W3-128 | Applications | anydesk | Twin red diamond portals facing each other | Hero | P2 | com.anydesk.Anydesk |  |
@@ -174,20 +174,20 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-136 | Applications | kdeconnect | Phone and desktop plaques linked by a blue magical thread | Hero | P0 | org.kde.kdeconnect.app |  |
 | W3-137 | Applications | warpinator | Green teleport ring moving a file scroll between portals | Hero | P2 | org.x.Warpinator |  |
 | W3-138 | Applications | nextcloud | Three cloud runes encircling a central silver node | Hero | P1 | com.nextcloud.desktopclient.nextcloud |  |
-| W3-139 | Applications | dropbox | Four blue rune tiles folding into a storage box | Hero | P2 | dropbox |  |
-| W3-140 | Applications | megasync | Red M seal on a heavy encrypted storage chest | Hero | P2 | megasync |  |
-| W3-141 | Applications | onedrive | Blue cloud crest above a steel storage vault | Hero | P3 | onedrive |  |
-| W3-142 | Applications | rclone-browser | Remote cloud scrolls orbiting an R rune | Hero | P3 | rclone-browser |  |
+| W3-139 | Applications | dropbox | Four blue rune tiles folding into a storage box | Hero | P2 |  |  |
+| W3-140 | Applications | megasync | Red M seal on a heavy encrypted storage chest | Hero | P2 |  |  |
+| W3-141 | Applications | onedrive | Blue cloud crest above a steel storage vault | Hero | P3 |  |  |
+| W3-142 | Applications | rclone-browser | Remote cloud scrolls orbiting an R rune | Hero | P3 |  |  |
 | W3-143 | Applications | keepassxc | Blue key crossing a black database shield | Hero | P0 | org.keepassxc.KeePassXC |  |
 | W3-144 | Applications | bitwarden | Blue castle-shield lock with a narrow gate slit | Hero | P0 | com.bitwarden.desktop |  |
 | W3-145 | Applications | 1password | Blue keyhole inside a polished circular vault plate | Hero | P2 | com.1password.1password |  |
 | W3-146 | Applications | seahorse | Small seahorse familiar guarding a ring of cryptographic keys | Hero | P2 | org.gnome.seahorse.Application |  |
 | W3-147 | Applications | kleopatra | Golden royal profile holding a cryptographic key | Hero | P2 | org.kde.kleopatra |  |
-| W3-148 | Applications | veracrypt | Red V rune embedded in a heavy iron vault door | Hero | P1 | veracrypt |  |
-| W3-149 | Applications | picocrypt | Tiny obsidian lock crystal with a minimalist P rune | Hero | P3 | picocrypt |  |
+| W3-148 | Applications | veracrypt | Red V rune embedded in a heavy iron vault door | Hero | P1 |  |  |
+| W3-149 | Applications | picocrypt | Tiny obsidian lock crystal with a minimalist P rune | Hero | P3 |  |  |
 | W3-150 | Applications | gwenview | Silver eye viewing a mountain landscape through a round lens | Hero | P0 | org.kde.gwenview |  |
 | W3-151 | Applications | eog | GNOME eye reimagined as a cat-school viewing medallion | Hero | P2 | org.gnome.eog |  |
-| W3-152 | Applications | feh | Minimal framed raven-feather photograph plaque | Hero | P2 | feh |  |
+| W3-152 | Applications | feh | Minimal framed raven-feather photograph plaque | Hero | P2 |  |  |
 | W3-153 | Applications | nomacs | Red-black image frame crossed by a silver viewing slash | Hero | P2 | org.nomacs.ImageLounge |  |
 | W3-154 | Applications | digikam | Camera aperture built from six Witcher school blades | Hero | P1 | org.kde.digikam |  |
 | W3-155 | Applications | darktable | Darkroom table with a luminous photo plate | Hero | P1 | org.darktable.Darktable |  |
@@ -208,54 +208,54 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-170 | Applications | haruna | Blue play rune inside a KDE crescent frame | Hero | P1 | org.kde.haruna |  |
 | W3-171 | Applications | smplayer | Blue play crystal over a film slate shield | Hero | P2 | org.smplayer.SMPlayer |  |
 | W3-172 | Applications | celluloid | Celluloid film loop around a minimalist play rune | Hero | P2 | io.github.celluloid_player.Celluloid |  |
-| W3-173 | Applications | audacious | Purple sound gem with a silver waveform cut | Hero | P2 | audacious |  |
+| W3-173 | Applications | audacious | Purple sound gem with a silver waveform cut | Hero | P2 |  |  |
 | W3-174 | Applications | strawberry | Red strawberry alchemy fruit with a silver music note stem | Hero | P1 | org.strawberrymusicplayer.strawberry |  |
 | W3-175 | Applications | elisa | Blue music crystal framed by a KDE ring | Hero | P1 | org.kde.elisa |  |
 | W3-176 | Applications | amberol | Amber music disc glowing in a blackened bronze bezel | Hero | P2 | io.bassi.Amberol |  |
 | W3-177 | Applications | spotify | Three green sound-wave runes on a black roundel | Hero | P0 | com.spotify.Client |  |
-| W3-178 | Applications | tavern | Tavern signboard with lute strings and a small ale crest | Hero | P3 | tavern |  |
-| W3-179 | Applications | clementine | Orange fruit half carved with a musical spiral | Hero | P2 | clementine |  |
-| W3-180 | Applications | deadbeef | Horned red skull wearing tiny music-wave engravings | Hero | P2 | deadbeef |  |
+| W3-178 | Applications | tavern | Tavern signboard with lute strings and a small ale crest | Hero | P3 |  |  |
+| W3-179 | Applications | clementine | Orange fruit half carved with a musical spiral | Hero | P2 |  |  |
+| W3-180 | Applications | deadbeef | Horned red skull wearing tiny music-wave engravings | Hero | P2 |  |  |
 | W3-181 | Applications | easy-effects | Three alchemy sliders above an audio waveform | Hero | P1 | com.github.wwmm.easyeffects |  |
 | W3-182 | Applications | pavucontrol | Copper audio valve manifold with three volume gauges | Hero | P1 | org.pulseaudio.pavucontrol |  |
 | W3-183 | Applications | helvum | Patchbay rune network connecting four audio sockets | Hero | P2 | org.pipewire.Helvum |  |
 | W3-184 | Applications | ardour | Red audio wave engraved into a black mixing console plate | Hero | P2 | org.ardour.Ardour |  |
 | W3-185 | Applications | lmms | Green-black music forge with beat gears | Hero | P2 | io.lmms.LMMS |  |
-| W3-186 | Applications | reaper | White reaper scythe over a black-red audio crest | Hero | P2 | reaper |  |
+| W3-186 | Applications | reaper | White reaper scythe over a black-red audio crest | Hero | P2 |  |  |
 | W3-187 | Applications | audacity | Blue-red headphones around a golden waveform crystal | Hero | P1 | org.audacityteam.Audacity |  |
 | W3-188 | Applications | tenacity | Blue waveform held by a stronger steel headphone frame | Hero | P2 | org.tenacityaudio.Tenacity |  |
 | W3-189 | Applications | kcalc | Runic calculator tablet with brass number studs | Hero | P0 | org.kde.kcalc |  |
 | W3-190 | Applications | qalculate | Green alchemical abacus with a Q rune | Hero | P2 | qalculate-gtk; io.github.Qalculate |  |
-| W3-191 | Applications | speedcrunch | Red lightning abacus mounted on a steel number plate | Hero | P3 | speedcrunch |  |
+| W3-191 | Applications | speedcrunch | Red lightning abacus mounted on a steel number plate | Hero | P3 |  |  |
 | W3-192 | Applications | spectacle | Framed eye-lens with a capture sparkle rune | Hero | P0 | org.kde.spectacle |  |
 | W3-193 | Applications | flameshot | Purple flame striking a screenshot parchment | Hero | P1 | org.flameshot.Flameshot |  |
 | W3-194 | Applications | ksnip | Silver shears cutting a rectangular screenshot parchment | Hero | P2 | org.ksnip.ksnip |  |
-| W3-195 | Applications | swappy | Blue swap arrows around a captured parchment rectangle | Hero | P2 | swappy |  |
+| W3-195 | Applications | swappy | Blue swap arrows around a captured parchment rectangle | Hero | P2 |  |  |
 | W3-196 | Applications | kolourpaint | Painter's palette shield with five alchemical pigment gems | Hero | P2 | org.kde.kolourpaint |  |
 | W3-197 | Applications | simple-scan | White manuscript passing beneath a blue scanning beam | Hero | P2 | org.gnome.SimpleScan |  |
 | W3-198 | Applications | sane | Scanner plate with a green verification rune | Hero | P3 | xsane |  |
 | W3-199 | Applications | systemsettings | Steel gear ring enclosing a blue witcher adjustment rune | Hero | P0 | org.kde.systemsettings |  |
 | W3-200 | Applications | plasma-discover | Blue shopping satchel with a star-shaped software rune | Hero | P0 | org.kde.discover |  |
-| W3-201 | Applications | rofi | Compact black launcher plaque with a silver search sigil | Hero | P0 | rofi |  |
-| W3-202 | Applications | wofi | Minimal Wayland launcher rune on a dark steel plate | Hero | P1 | wofi |  |
-| W3-203 | Applications | fuzzel | Fuzzy search rune surrounded by tiny glowing sparks | Hero | P1 | fuzzel |  |
-| W3-204 | Applications | walker | Traveler bootprint crossing a launcher search scroll | Hero | P1 | walker |  |
-| W3-205 | Applications | waybar | Long steel status bar with miniature Witcher sign glyphs | Hero | P0 | waybar |  |
+| W3-201 | Applications | rofi | Compact black launcher plaque with a silver search sigil | Hero | P0 |  |  |
+| W3-202 | Applications | wofi | Minimal Wayland launcher rune on a dark steel plate | Hero | P1 |  |  |
+| W3-203 | Applications | fuzzel | Fuzzy search rune surrounded by tiny glowing sparks | Hero | P1 |  |  |
+| W3-204 | Applications | walker | Traveler bootprint crossing a launcher search scroll | Hero | P1 |  |  |
+| W3-205 | Applications | waybar | Long steel status bar with miniature Witcher sign glyphs | Hero | P0 |  |  |
 | W3-206 | Applications | hyprland | Cyan-purple fractured H rune like a magical window rift | Hero | P0 | Hyprland |  |
-| W3-207 | Applications | hyprpaper | Layered wallpaper scrolls with a cyan Hypr rune | Hero | P0 | hyprpaper |  |
-| W3-208 | Applications | hyprlock | Obsidian lock shield with a cyan Hypr fracture | Hero | P0 | hyprlock |  |
-| W3-209 | Applications | hypridle | Hourglass inside a cyan Hypr window frame | Hero | P1 | hypridle |  |
-| W3-210 | Applications | swww | Triple wallpaper scrolls rotating in a smooth magic loop | Hero | P1 | swww |  |
-| W3-211 | Applications | waypaper | Wallpaper parchment pinned to a Wayland steel board | Hero | P1 | waypaper |  |
-| W3-212 | Applications | nwg-look | Mirror panel with GTK runes and a small styling brush | Hero | P2 | nwg-look |  |
-| W3-213 | Applications | qt5ct | Qt rune with a five-point configuration cog | Hero | P2 | qt5ct |  |
-| W3-214 | Applications | qt6ct | Qt rune with a six-point configuration cog | Hero | P2 | qt6ct |  |
+| W3-207 | Applications | hyprpaper | Layered wallpaper scrolls with a cyan Hypr rune | Hero | P0 |  |  |
+| W3-208 | Applications | hyprlock | Obsidian lock shield with a cyan Hypr fracture | Hero | P0 |  |  |
+| W3-209 | Applications | hypridle | Hourglass inside a cyan Hypr window frame | Hero | P1 |  |  |
+| W3-210 | Applications | swww | Triple wallpaper scrolls rotating in a smooth magic loop | Hero | P1 |  |  |
+| W3-211 | Applications | waypaper | Wallpaper parchment pinned to a Wayland steel board | Hero | P1 |  |  |
+| W3-212 | Applications | nwg-look | Mirror panel with GTK runes and a small styling brush | Hero | P2 |  |  |
+| W3-213 | Applications | qt5ct | Qt rune with a five-point configuration cog | Hero | P2 |  |  |
+| W3-214 | Applications | qt6ct | Qt rune with a six-point configuration cog | Hero | P2 |  |  |
 | W3-215 | Applications | kvantum | Glass-like K crystal with theme facets and metallic edges | Hero | P1 | kvantummanager |  |
-| W3-216 | Applications | lxappearance | Paintbrush over a lightweight theme parchment | Hero | P2 | lxappearance |  |
-| W3-217 | Applications | azote | Wallpaper board with a bright A-shaped pin | Hero | P3 | azote |  |
-| W3-218 | Applications | nwg-displays | Two monitor shields arranged by a blue layout rune | Hero | P1 | nwg-displays |  |
-| W3-219 | Applications | wdisplays | Wayland monitor pair with directional arrangement arrows | Hero | P1 | wdisplays |  |
-| W3-220 | Applications | nwg-shell-config | Wayland shell crest with a configuration hammer | Hero | P2 | nwg-shell-config |  |
+| W3-216 | Applications | lxappearance | Paintbrush over a lightweight theme parchment | Hero | P2 |  |  |
+| W3-217 | Applications | azote | Wallpaper board with a bright A-shaped pin | Hero | P3 |  |  |
+| W3-218 | Applications | nwg-displays | Two monitor shields arranged by a blue layout rune | Hero | P1 |  |  |
+| W3-219 | Applications | wdisplays | Wayland monitor pair with directional arrangement arrows | Hero | P1 |  |  |
+| W3-220 | Applications | nwg-shell-config | Wayland shell crest with a configuration hammer | Hero | P2 |  |  |
 | W3-221 | Actions/UI | document-new | Blank parchment with a glowing plus rune | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-222 | Actions/UI | document-open | Open leather folio with outward arrow | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-223 | Actions/UI | document-save | Archive chest with downward seal | Glyph | P0 |  | Optimise separately for 16/22/24 px |
@@ -316,10 +316,10 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-278 | Actions/UI | media-eject | Eject wedge over base line | Glyph | P1 |  | Optimise separately for 16/22/24 px |
 | W3-279 | Actions/UI | media-repeat | Twin chasing swallow arrows | Glyph | P1 |  | Optimise separately for 16/22/24 px |
 | W3-280 | Actions/UI | media-shuffle | Crossing path arrows like trail signs | Glyph | P1 |  | Optimise separately for 16/22/24 px |
-| W3-281 | Actions/UI | audio-volume-high | Horn emitting three sound waves | Glyph | P1 |  | Optimise separately for 16/22/24 px |
-| W3-282 | Actions/UI | audio-volume-medium | Horn emitting two sound waves | Glyph | P1 |  | Optimise separately for 16/22/24 px |
-| W3-283 | Actions/UI | audio-volume-low | Horn emitting one sound wave | Glyph | P1 |  | Optimise separately for 16/22/24 px |
-| W3-284 | Actions/UI | audio-volume-muted | Horn blocked by red slash | Glyph | P1 |  | Optimise separately for 16/22/24 px |
+| W3-281 | Actions/UI | address-book-new | Fresh contact ledger with a silver clasp and small plus rune | Glyph | P1 |  | Optimise separately for 16/22/24 px |
+| W3-282 | Actions/UI | appointment-new | New calendar parchment stamped with a red wax date seal | Glyph | P1 |  | Optimise separately for 16/22/24 px |
+| W3-283 | Actions/UI | call-start | Raised communication horn with an alchemy-green start rune | Glyph | P1 |  | Optimise separately for 16/22/24 px |
+| W3-284 | Actions/UI | call-stop | Lowered communication horn cut by a Witcher-red stop slash | Glyph | P1 |  | Optimise separately for 16/22/24 px |
 | W3-285 | Actions/UI | microphone-sensitivity-high | Mic rune with three waves | Glyph | P1 |  | Optimise separately for 16/22/24 px |
 | W3-286 | Actions/UI | microphone-sensitivity-medium | Mic rune with two waves | Glyph | P1 |  | Optimise separately for 16/22/24 px |
 | W3-287 | Actions/UI | microphone-sensitivity-low | Mic rune with one wave | Glyph | P1 |  | Optimise separately for 16/22/24 px |
