@@ -1,0 +1,112 @@
+# Witcher3 fixed HyDE / Wallbash palette
+#
+# Role mapping:
+#   pry1 = canvas/background
+#   pry2 = surface
+#   pry3 = elevated surface
+#   pry4 = Witcher red selection/accent
+#
+# High xa slots also preserve useful semantic accents for HyDE templates:
+#   1xa6 = amber/yellow
+#   1xa7 = cyan/blue
+#   1xa8 = Witcher red
+#   2xa5 = violet
+#   2xa7/2xa8 = alchemy green
+#   3xa6 = muted silver
+#   3xa7 = cyan/blue
+#   3xa8/3xa9 = amber/yellow
+#   4xa1..4xa9 = deep-red to bright-red interaction ramp
+
+dcol_mode="dark"
+
+dcol_pry1="0A151E"
+dcol_pry1_rgba="rgba(10,21,30,\1)"
+dcol_txt1="DEE6F0"
+dcol_txt1_rgba="rgba(222,230,240,\1)"
+dcol_1xa1="101318"
+dcol_1xa1_rgba="rgba(16,19,24,\1)"
+dcol_1xa2="171A1C"
+dcol_1xa2_rgba="rgba(23,26,28,\1)"
+dcol_1xa3="262729"
+dcol_1xa3_rgba="rgba(38,39,41,\1)"
+dcol_1xa4="8E8B8D"
+dcol_1xa4_rgba="rgba(142,139,141,\1)"
+dcol_1xa5="7D572C"
+dcol_1xa5_rgba="rgba(125,87,44,\1)"
+dcol_1xa6="D58E4D"
+dcol_1xa6_rgba="rgba(213,142,77,\1)"
+dcol_1xa7="3188A6"
+dcol_1xa7_rgba="rgba(49,136,166,\1)"
+dcol_1xa8="B72A18"
+dcol_1xa8_rgba="rgba(183,42,24,\1)"
+dcol_1xa9="DEE6F0"
+dcol_1xa9_rgba="rgba(222,230,240,\1)"
+
+dcol_pry2="171A1C"
+dcol_pry2_rgba="rgba(23,26,28,\1)"
+dcol_txt2="B0B6C2"
+dcol_txt2_rgba="rgba(176,182,194,\1)"
+dcol_2xa1="101318"
+dcol_2xa1_rgba="rgba(16,19,24,\1)"
+dcol_2xa2="171A1C"
+dcol_2xa2_rgba="rgba(23,26,28,\1)"
+dcol_2xa3="262729"
+dcol_2xa3_rgba="rgba(38,39,41,\1)"
+dcol_2xa4="3D3A39"
+dcol_2xa4_rgba="rgba(61,58,57,\1)"
+dcol_2xa5="743874"
+dcol_2xa5_rgba="rgba(116,56,116,\1)"
+dcol_2xa6="505A26"
+dcol_2xa6_rgba="rgba(80,90,38,\1)"
+dcol_2xa7="3DB479"
+dcol_2xa7_rgba="rgba(61,180,121,\1)"
+dcol_2xa8="3DB479"
+dcol_2xa8_rgba="rgba(61,180,121,\1)"
+dcol_2xa9="74CE9C"
+dcol_2xa9_rgba="rgba(116,206,156,\1)"
+
+dcol_pry3="262729"
+dcol_pry3_rgba="rgba(38,39,41,\1)"
+dcol_txt3="DEE6F0"
+dcol_txt3_rgba="rgba(222,230,240,\1)"
+dcol_3xa1="0A151E"
+dcol_3xa1_rgba="rgba(10,21,30,\1)"
+dcol_3xa2="171A1C"
+dcol_3xa2_rgba="rgba(23,26,28,\1)"
+dcol_3xa3="262729"
+dcol_3xa3_rgba="rgba(38,39,41,\1)"
+dcol_3xa4="3D3A39"
+dcol_3xa4_rgba="rgba(61,58,57,\1)"
+dcol_3xa5="B0B6C2"
+dcol_3xa5_rgba="rgba(176,182,194,\1)"
+dcol_3xa6="8E8B8D"
+dcol_3xa6_rgba="rgba(142,139,141,\1)"
+dcol_3xa7="3188A6"
+dcol_3xa7_rgba="rgba(49,136,166,\1)"
+dcol_3xa8="D58E4D"
+dcol_3xa8_rgba="rgba(213,142,77,\1)"
+dcol_3xa9="E3AD74"
+dcol_3xa9_rgba="rgba(227,173,116,\1)"
+
+dcol_pry4="B72A18"
+dcol_pry4_rgba="rgba(183,42,24,\1)"
+dcol_txt4="DEE6F0"
+dcol_txt4_rgba="rgba(222,230,240,\1)"
+dcol_4xa1="2B0C08"
+dcol_4xa1_rgba="rgba(43,12,8,\1)"
+dcol_4xa2="40110B"
+dcol_4xa2_rgba="rgba(64,17,11,\1)"
+dcol_4xa3="621B0E"
+dcol_4xa3_rgba="rgba(98,27,14,\1)"
+dcol_4xa4="7D1F10"
+dcol_4xa4_rgba="rgba(125,31,16,\1)"
+dcol_4xa5="8F2213"
+dcol_4xa5_rgba="rgba(143,34,19,\1)"
+dcol_4xa6="A32716"
+dcol_4xa6_rgba="rgba(163,39,22,\1)"
+dcol_4xa7="AD2917"
+dcol_4xa7_rgba="rgba(173,41,23,\1)"
+dcol_4xa8="B72A18"
+dcol_4xa8_rgba="rgba(183,42,24,\1)"
+dcol_4xa9="D14A34"
+dcol_4xa9_rgba="rgba(209,74,52,\1)"
