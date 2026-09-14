@@ -277,8 +277,8 @@ W3-275,Actions/UI,media-seek-forward,Fast triple spearhead right,Glyph,P1,,Optim
 W3-276,Actions/UI,media-seek-backward,Fast triple spearhead left,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-277,Actions/UI,media-record,Blood-red recording gem,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-278,Actions/UI,media-eject,Eject wedge over base line,Glyph,P1,,Optimise separately for 16/22/24 px
-W3-279,Actions/UI,media-repeat,Twin chasing swallow arrows,Glyph,P1,,Optimise separately for 16/22/24 px
-W3-280,Actions/UI,media-shuffle,Crossing path arrows like trail signs,Glyph,P1,,Optimise separately for 16/22/24 px
+W3-279,Actions/UI,media-playlist-repeat,Twin chasing swallow arrows,Glyph,P1,,Optimise separately for 16/22/24 px
+W3-280,Actions/UI,media-playlist-shuffle,Crossing path arrows like trail signs,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-281,Actions/UI,address-book-new,Fresh contact ledger with a silver clasp and small plus rune,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-282,Actions/UI,appointment-new,New calendar parchment stamped with a red wax date seal,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-283,Actions/UI,call-start,Raised communication horn with an alchemy-green start rune,Glyph,P1,,Optimise separately for 16/22/24 px
@@ -292,7 +292,7 @@ W3-290,Actions/UI,camera-video,Scrying camera with film rune,Glyph,P1,,Optimise 
 W3-291,Actions/UI,camera-switch,Twin camera eyes with swap arrows,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-292,Actions/UI,mail-send,Raven releasing a sealed letter,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-293,Actions/UI,mail-receive,Raven catching a sealed letter,Glyph,P1,,Optimise separately for 16/22/24 px
-W3-294,Actions/UI,mail-reply,Letter with backward raven arrow,Glyph,P1,,Optimise separately for 16/22/24 px
+W3-294,Actions/UI,mail-reply-sender,Letter with backward raven arrow,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-295,Actions/UI,mail-reply-all,Letter with twin backward arrows,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-296,Actions/UI,mail-forward,Letter with forward bolt arrow,Glyph,P1,,Optimise separately for 16/22/24 px
 W3-297,Actions/UI,mail-mark-read,Opened letter with eye rune,Glyph,P1,,Optimise separately for 16/22/24 px
