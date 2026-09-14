@@ -17,6 +17,7 @@ import os
 import struct
 import tempfile
 import zipfile
+import zlib
 from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,6 +34,8 @@ EXPECTED_COLOR_TYPE = 2  # Truecolour RGB, no palette/alpha.
 EXPECTED_COMPRESSION = 0
 EXPECTED_FILTER = 0
 EXPECTED_INTERLACE = 0
+EXPECTED_CHANNELS = 3
+EXPECTED_BYTES_PER_SAMPLE = 2
 
 
 class WallpaperError(ValueError):
@@ -40,13 +43,13 @@ class WallpaperError(ValueError):
 
 
 def parse_png(data: bytes) -> dict[str, int]:
-    """Validate basic PNG structure/chunk CRCs and return IHDR fields."""
+    """Validate PNG structure, CRCs, IHDR and the compressed scanline stream."""
     if not data.startswith(PNG_SIGNATURE):
         raise WallpaperError("wallpaper is not a PNG file")
 
     offset = len(PNG_SIGNATURE)
     ihdr: dict[str, int] | None = None
-    seen_idat = False
+    idat_parts: list[bytes] = []
     seen_iend = False
 
     while offset < len(data):
@@ -93,7 +96,9 @@ def parse_png(data: bytes) -> dict[str, int]:
                 "interlace": interlace,
             }
         elif chunk_type == b"IDAT":
-            seen_idat = True
+            if ihdr is None:
+                raise WallpaperError("PNG IDAT encountered before IHDR")
+            idat_parts.append(chunk_data)
         elif chunk_type == b"IEND":
             if length != 0:
                 raise WallpaperError("PNG IEND chunk must be empty")
@@ -105,7 +110,7 @@ def parse_png(data: bytes) -> dict[str, int]:
 
     if ihdr is None:
         raise WallpaperError("PNG has no IHDR chunk")
-    if not seen_idat:
+    if not idat_parts:
         raise WallpaperError("PNG has no IDAT chunk")
     if not seen_iend:
         raise WallpaperError("PNG has no IEND chunk")
@@ -123,6 +128,27 @@ def parse_png(data: bytes) -> dict[str, int]:
     }
     if ihdr != expected:
         raise WallpaperError(f"unexpected PNG IHDR: {ihdr!r}; expected {expected!r}")
+
+    try:
+        scanlines = zlib.decompress(b"".join(idat_parts))
+    except zlib.error as exc:
+        raise WallpaperError("PNG IDAT stream is not valid zlib data") from exc
+
+    row_payload = EXPECTED_WIDTH * EXPECTED_CHANNELS * EXPECTED_BYTES_PER_SAMPLE
+    row_size = 1 + row_payload  # One PNG filter byte precedes each non-interlaced row.
+    expected_size = row_size * EXPECTED_HEIGHT
+    if len(scanlines) != expected_size:
+        raise WallpaperError(
+            f"unexpected decompressed PNG data size: {len(scanlines)}; "
+            f"expected {expected_size}"
+        )
+
+    for row in range(EXPECTED_HEIGHT):
+        filter_type = scanlines[row * row_size]
+        if filter_type > 4:
+            raise WallpaperError(
+                f"invalid PNG filter type {filter_type} on scanline {row}"
+            )
 
     return ihdr
 
@@ -193,10 +219,6 @@ def atomic_write(path: Path, data: bytes, *, force: bool) -> bool:
 
 
 def import_wallpaper(archive: Path, *, force: bool = False) -> tuple[Path, str, bool]:
-    if WALL_SET_PATH.lexists() if hasattr(WALL_SET_PATH, "lexists") else False:
-        # pathlib has no lexists on current supported Python versions; retained
-        # only as a defensive no-op for alternate implementations.
-        raise WallpaperError("wall.set must remain HyDE-managed runtime state")
     if os.path.lexists(WALL_SET_PATH):
         raise WallpaperError(
             f"repository already contains {WALL_SET_PATH}; remove it because current HyDE "
