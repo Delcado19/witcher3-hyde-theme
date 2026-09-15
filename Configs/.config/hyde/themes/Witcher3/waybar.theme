@@ -10,3 +10,32 @@ $HOME/.config/waybar/theme.css|${scrDir}/wbarconfgen.sh
 
 @define-color wb-hvr-bg #7D572C;
 @define-color wb-hvr-fg #DEE6F0;
+
+/* Witcher3 compact top/bottom bar profile. */
+window#waybar.top,
+window#waybar.bottom {
+    min-height: 34px;
+}
+
+window#waybar.top button,
+window#waybar.bottom button,
+#workspaces button {
+    min-height: 0;
+}
+
+#workspaces button {
+    margin-top: 0.12em;
+    margin-bottom: 0.12em;
+}
+
+window#waybar.top button,
+window#waybar.bottom button {
+    margin-top: 0.18em;
+    margin-bottom: 0.18em;
+}
+
+window#waybar.top label.module,
+window#waybar.bottom label.module {
+    padding-top: 0;
+    padding-bottom: 0;
+}
