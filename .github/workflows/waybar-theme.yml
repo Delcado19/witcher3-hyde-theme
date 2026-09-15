@@ -73,10 +73,47 @@ jobs:
               if actual != expected:
                   raise SystemExit(f"{role}: expected {expected}, got {actual}")
 
+          compact_css = r'''
+          window#waybar.top,
+          window#waybar.bottom {
+              min-height: 34px;
+          }
+
+          window#waybar.top button,
+          window#waybar.bottom button,
+          #workspaces button {
+              min-height: 0;
+          }
+
+          #workspaces button {
+              margin-top: 0.12em;
+              margin-bottom: 0.12em;
+          }
+
+          window#waybar.top button,
+          window#waybar.bottom button {
+              margin-top: 0.18em;
+              margin-bottom: 0.18em;
+          }
+
+          window#waybar.top label.module,
+          window#waybar.bottom label.module {
+              padding-top: 0;
+              padding-bottom: 0;
+          }
+          '''.strip()
+
+          def normalize_css(value: str) -> str:
+              return re.sub(r"\s+", " ", value).strip()
+
+          if normalize_css(compact_css) not in normalize_css(text):
+              raise SystemExit("Missing or changed Witcher3 compact Waybar profile")
+
           remaining = re.sub(definition_re, "", text)
           remaining = re.sub(r"/\*.*?\*/", "", remaining, flags=re.DOTALL)
-          remaining = re.sub(r"^[ \t]*#[^\n]*$", "", remaining, flags=re.MULTILINE)
-          if remaining.strip():
+          normalized_remaining = normalize_css(remaining)
+          normalized_compact = normalize_css(compact_css)
+          if normalized_remaining != normalized_compact:
               raise SystemExit("Unexpected content in Waybar theme fragment")
 
           print("Witcher3 Waybar theme fragment is structurally valid.")
