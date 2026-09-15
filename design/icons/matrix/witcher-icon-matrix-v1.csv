@@ -404,7 +404,7 @@ W3-402,Status/Panel/Waybar,network-wireless-disconnected,Tower crossed by slash,
 W3-403,Status/Panel/Waybar,network-wireless-hotspot,Tower inside concentric ward,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-404,Status/Panel/Waybar,network-vpn,Quen shield over network link,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-405,Status/Panel/Waybar,network-error,Network chain with red warning shard,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
-W3-406,Status/Panel/Waybar,bluetooth-active,Blue tooth-rune glowing,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
+W3-406,Status/Panel/Waybar,network-bluetooth-activated,Blue tooth-rune glowing,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-407,Status/Panel/Waybar,bluetooth-disabled,Blue tooth-rune under slash,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-408,Status/Panel/Waybar,bluetooth-paired,Twin tooth-runes linked,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-409,Status/Panel/Waybar,audio-volume-high,Silver horn with three waves,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
