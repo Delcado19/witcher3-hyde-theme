@@ -423,7 +423,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-385 | Places/Folders | vault | Heavy Nilfgaardian vault door | Emblem | P1 |  | Folder family should share silhouette and clasp geometry |
 | W3-386 | Status/Panel/Waybar | battery-full | Charged green mutagen vial battery | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-387 | Status/Panel/Waybar | battery-good | Three-quarter mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-388 | Status/Panel/Waybar | battery-medium | Half-filled mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-388 | Status/Panel/Waybar | battery-050 | Half-filled mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-389 | Status/Panel/Waybar | battery-low | Low amber mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-390 | Status/Panel/Waybar | battery-caution | Red nearly empty mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-391 | Status/Panel/Waybar | battery-empty | Empty cracked mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
