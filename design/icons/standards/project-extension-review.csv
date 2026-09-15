@@ -1,0 +1,2 @@
+id,canonical_name,provenance_class,status,evidence,notes
+W3-291,camera-switch,project-extension,validated,"Freedesktop Stage B and pinned KDE Breeze 235730e69d90949621e4fee77fcc459772b7a8f0 Stage C","Retain a distinct switch-camera action. Breeze provides camera-photo, camera-video and camera-web, but no camera-specific switch action; generic exchange/reverse actions would weaken the intended semantic meaning."
