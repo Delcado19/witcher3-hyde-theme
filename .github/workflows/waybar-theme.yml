@@ -62,6 +62,8 @@ jobs:
               raise SystemExit("Unexpected Waybar color roles: " + ", ".join(extras))
 
           expected_values = {
+              "bar-bg": "#171A1C",
+              "main-bg": "#262729",
               "main-fg": "#DEE6F0",
               "wb-act-bg": "#B72A18",
               "wb-act-fg": "#DEE6F0",
