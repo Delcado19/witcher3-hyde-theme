@@ -285,7 +285,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-247 | Actions/UI | view-fullscreen | Four expanding corner blades | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-248 | Actions/UI | view-restore | Four contracting corner blades | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-249 | Actions/UI | view-grid | Nine engraved stone tiles | Glyph | P0 |  | Optimise separately for 16/22/24 px |
-| W3-250 | Actions/UI | view-list | Three parchment rows | Glyph | P0 |  | Optimise separately for 16/22/24 px |
+| W3-250 | Actions/UI | view-list-text | Three parchment rows | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-251 | Actions/UI | view-sort-ascending | Ascending rune bars | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-252 | Actions/UI | view-sort-descending | Descending rune bars | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-253 | Actions/UI | view-filter | Alchemy funnel | Glyph | P0 |  | Optimise separately for 16/22/24 px |
