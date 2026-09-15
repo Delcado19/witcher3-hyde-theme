@@ -397,7 +397,7 @@ W3-395,Status/Panel/Waybar,ac-adapter,Power rune on a plugged cable talisman,Gly
 W3-396,Status/Panel/Waybar,network-wired,Linked chain nodes with cable,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-397,Status/Panel/Waybar,network-wired-disconnected,Broken chain nodes,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-398,Status/Panel/Waybar,network-wireless-100,Four radio arcs over tower,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
-W3-399,Status/Panel/Waybar,network-wireless-75,Three radio arcs over tower,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
+W3-399,Status/Panel/Waybar,network-wireless-connected-75,Three radio arcs over tower,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-400,Status/Panel/Waybar,network-wireless-50,Two radio arcs over tower,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-401,Status/Panel/Waybar,network-wireless-25,One radio arc over tower,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-402,Status/Panel/Waybar,network-wireless-offline,Tower crossed by slash,Glyph,P0,,Waybar/status family; optimise for monochrome and tiny sizes
