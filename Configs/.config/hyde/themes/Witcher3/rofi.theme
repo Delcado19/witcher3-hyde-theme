@@ -10,3 +10,9 @@ $HOME/.config/rofi/theme.rasi
     separatorcolor:     #3D3A39cc;
     border-color:       #3D3A39ff;
 }
+
+/* Keep HyDE style 3's selected mode dark instead of inverting to main-fg. */
+button selected.normal {
+    background-color:   #262729ff;
+    text-color:         #B72A18ff;
+}
