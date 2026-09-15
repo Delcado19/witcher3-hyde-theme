@@ -427,7 +427,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-389 | Status/Panel/Waybar | battery-low | Low amber mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-390 | Status/Panel/Waybar | battery-caution | Red nearly empty mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-391 | Status/Panel/Waybar | battery-empty | Empty cracked mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-392 | Status/Panel/Waybar | battery-charging | Mutagen vial struck by lightning rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-392 | Status/Panel/Waybar | battery-050-charging | Half-filled mutagen vial with lightning rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-393 | Status/Panel/Waybar | battery-full-charging | Full vial with lightning | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-394 | Status/Panel/Waybar | battery-low-charging | Low vial with lightning | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-395 | Status/Panel/Waybar | ac-adapter | Power rune on a plugged cable talisman | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
