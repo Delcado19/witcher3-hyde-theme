@@ -448,7 +448,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-410 | Status/Panel/Waybar | audio-volume-medium | Silver horn with two waves | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-411 | Status/Panel/Waybar | audio-volume-low | Silver horn with one wave | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-412 | Status/Panel/Waybar | audio-volume-muted | Silver horn crossed out | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-413 | Status/Panel/Waybar | microphone-active | Bright microphone rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-413 | Status/Panel/Waybar | mic-on | Bright microphone rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-414 | Status/Panel/Waybar | microphone-muted | Muted microphone rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-415 | Status/Panel/Waybar | camera-on | Open scrying eye camera | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-416 | Status/Panel/Waybar | camera-off | Closed scrying eye under slash | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
