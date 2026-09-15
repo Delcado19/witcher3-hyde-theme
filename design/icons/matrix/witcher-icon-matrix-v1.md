@@ -437,7 +437,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-399 | Status/Panel/Waybar | network-wireless-connected-75 | Three radio arcs over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-400 | Status/Panel/Waybar | network-wireless-connected-50 | Two radio arcs over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-401 | Status/Panel/Waybar | network-wireless-connected-25 | One radio arc over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-402 | Status/Panel/Waybar | network-wireless-offline | Tower crossed by slash | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-402 | Status/Panel/Waybar | network-wireless-disconnected | Tower crossed by slash | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-403 | Status/Panel/Waybar | network-wireless-hotspot | Tower inside concentric ward | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-404 | Status/Panel/Waybar | network-vpn | Quen shield over network link | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-405 | Status/Panel/Waybar | network-error | Network chain with red warning shard | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
