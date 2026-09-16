@@ -564,7 +564,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-526 | MIME/Filetypes | text-plain | Simple parchment page with text lines | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-527 | MIME/Filetypes | text-markdown | Parchment page with engraved M↓ rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-528 | MIME/Filetypes | text-code | Parchment page with angle-bracket runes | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-529 | MIME/Filetypes | text-shell | Dark parchment terminal page with prompt rune | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-529 | MIME/Filetypes | text-x-shellscript | Dark parchment terminal page with prompt rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-530 | MIME/Filetypes | text-python | Blue-yellow serpent pair on code parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-531 | MIME/Filetypes | text-javascript | Golden JS rune on dark code parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-532 | MIME/Filetypes | text-typescript | Blue TS rune on code parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
