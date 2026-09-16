@@ -468,7 +468,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-430 | Status/Panel/Waybar | weather-fog | Mist bands over swamp reeds | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-431 | Status/Panel/Waybar | weather-windy | Three wind strokes around swallow feather | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-432 | Status/Panel/Waybar | temperature-normal | Thermometer with pale rune | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-433 | Status/Panel/Waybar | temperature-high | Red hot thermometer with Igni spark | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-433 | Status/Panel/Waybar | temperature-warm | Red hot thermometer with Igni spark | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-434 | Status/Panel/Waybar | cpu-usage-low | CPU crystal with one lit quadrant | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-435 | Status/Panel/Waybar | cpu-usage-medium | CPU crystal half lit | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-436 | Status/Panel/Waybar | cpu-usage-high | CPU crystal fully glowing | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
