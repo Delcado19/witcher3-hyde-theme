@@ -499,9 +499,9 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-461 | Status/Panel/Waybar | sync-idle | Twin swallow arrows at rest | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-462 | Status/Panel/Waybar | sync-active | Twin swallow arrows glowing | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-463 | Status/Panel/Waybar | sync-error | Broken sync ring | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-464 | Status/Panel/Waybar | media-playing | Small play spearhead glowing | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-465 | Status/Panel/Waybar | media-paused | Twin pause blades | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-466 | Status/Panel/Waybar | media-stopped | Dark stop stone | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-464 | Status/Panel/Waybar | media-playback-playing | Small play spearhead glowing | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-465 | Status/Panel/Waybar | media-playback-paused | Twin pause blades | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-466 | Status/Panel/Waybar | media-playback-stopped | Dark stop stone | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-467 | Status/Panel/Waybar | caps-lock-on | Upward rune arrow inside keycap | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-468 | Status/Panel/Waybar | num-lock-on | Number rune inside keycap | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-469 | Status/Panel/Waybar | scroll-lock-on | Scroll rune inside keycap | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
