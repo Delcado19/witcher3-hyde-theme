@@ -454,7 +454,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-416 | Status/Panel/Waybar | camera-off | Closed scrying eye under slash | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-417 | Status/Panel/Waybar | brightness-high | Sun-disc with eight rays | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-418 | Status/Panel/Waybar | screen-brightness-medium | Sun-disc with four rays | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-419 | Status/Panel/Waybar | screen-brightness-low | Dim crescent sun-disc | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-419 | Status/Panel/Waybar | brightness-low | Dim crescent sun-disc | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-420 | Status/Panel/Waybar | keyboard-brightness | Keyboard plate with glow runes | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-421 | Status/Panel/Waybar | night-light | Moon over warm ember glow | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-422 | Status/Panel/Waybar | weather-clear | Toussaint sun crest | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
