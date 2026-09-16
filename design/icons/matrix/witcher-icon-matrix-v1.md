@@ -534,7 +534,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-496 | Devices | audio-input-microphone | Studio speaking rune on stand | Emblem | P1 |  |  |
 | W3-497 | Devices | audio-speakers | Twin sound towers with horn runes | Emblem | P1 |  |  |
 | W3-498 | Devices | audio-card | Copper audio circuit plate | Emblem | P1 |  |  |
-| W3-499 | Devices | monitor | Standalone viewing crystal in metal frame | Emblem | P1 |  |  |
+| W3-499 | Devices | video-display | Standalone viewing crystal in metal frame | Emblem | P1 |  |  |
 | W3-500 | Devices | monitor-dual | Twin viewing crystals on one stand | Emblem | P1 |  |  |
 | W3-501 | Devices | tv | Wide scrying panel with heavy frame | Emblem | P1 |  |  |
 | W3-502 | Devices | projector | Light-projecting crystal box | Emblem | P1 |  |  |
