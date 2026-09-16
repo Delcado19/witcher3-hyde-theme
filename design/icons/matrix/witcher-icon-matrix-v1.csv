@@ -542,7 +542,7 @@ W3-540,MIME/Filetypes,text-config,Gear seal on parchment,Emblem,P1,,Keep strong 
 W3-541,MIME/Filetypes,text-diff,Red-green split parchment,Emblem,P1,,Keep strong family resemblance by file class
 W3-542,MIME/Filetypes,text-license,Official wax seal on legal parchment,Emblem,P1,,Keep strong family resemblance by file class
 W3-543,MIME/Filetypes,application-pdf,Red PDF contract seal,Emblem,P1,,Keep strong family resemblance by file class
-W3-544,MIME/Filetypes,application-epub,Green open e-book grimoire,Emblem,P1,,Keep strong family resemblance by file class
+W3-544,MIME/Filetypes,application-epub+zip,Green open e-book grimoire,Emblem,P1,,Keep strong family resemblance by file class
 W3-545,MIME/Filetypes,application-rtf,Blue rich-text parchment,Emblem,P1,,Keep strong family resemblance by file class
 W3-546,MIME/Filetypes,application-msword,Blue W rune on office folio,Emblem,P1,,Keep strong family resemblance by file class
 W3-547,MIME/Filetypes,application-wordprocessing,Blue quill folio,Emblem,P1,,Keep strong family resemblance by file class
