@@ -456,7 +456,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-418 | Status/Panel/Waybar | screen-brightness-medium | Sun-disc with four rays | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-419 | Status/Panel/Waybar | brightness-low | Dim crescent sun-disc | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-420 | Status/Panel/Waybar | input-keyboard-brightness | Keyboard plate with glow runes | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-421 | Status/Panel/Waybar | night-light | Moon over warm ember glow | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-421 | Status/Panel/Waybar | redshift-status-on | Moon over warm ember glow | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-422 | Status/Panel/Waybar | weather-clear | Toussaint sun crest | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-423 | Status/Panel/Waybar | weather-few-clouds | Sun behind small Skellige cloud | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-424 | Status/Panel/Waybar | weather-clouds | Layered storm clouds | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
