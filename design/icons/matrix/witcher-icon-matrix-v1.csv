@@ -444,9 +444,9 @@ W3-442,Status/Panel/Waybar,gpu-usage-high,GPU crystal blazing,Glyph,P1,,Waybar/s
 W3-443,Status/Panel/Waybar,disk-idle,Disk platter at rest,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-444,Status/Panel/Waybar,disk-busy,Spinning disk platter with motion sparks,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-445,Status/Panel/Waybar,disk-warning,Disk platter with amber crack,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
-W3-446,Status/Panel/Waybar,updates-none,Closed package chest with check rune,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
-W3-447,Status/Panel/Waybar,updates-available,Package chest with blue sparkle,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
-W3-448,Status/Panel/Waybar,updates-important,Package chest with red warning seal,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
+W3-446,Status/Panel/Waybar,software-updates-inactive,Closed package chest with check rune,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
+W3-447,Status/Panel/Waybar,software-updates-updates,Package chest with blue sparkle,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
+W3-448,Status/Panel/Waybar,software-updates-important,Package chest with red warning seal,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-449,Status/Panel/Waybar,security-high,Quen shield fully lit,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-450,Status/Panel/Waybar,security-medium,Quen shield half lit,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-451,Status/Panel/Waybar,security-low,Cracked Quen shield,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
