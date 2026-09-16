@@ -450,11 +450,11 @@ W3-448,Status/Panel/Waybar,software-updates-important,Package chest with red war
 W3-449,Status/Panel/Waybar,security-high,Quen shield fully lit,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-450,Status/Panel/Waybar,security-medium,Quen shield half lit,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-451,Status/Panel/Waybar,security-low,Cracked Quen shield,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
-W3-452,Status/Panel/Waybar,security-update,Quen shield with circular arrow,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
-W3-453,Status/Panel/Waybar,notification-none,Silent bell talisman,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
-W3-454,Status/Panel/Waybar,notification-new,Bell talisman with blue spark,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
+W3-452,Status/Panel/Waybar,software-updates-security,Quen shield with circular arrow,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
+W3-453,Status/Panel/Waybar,notification-inactive,Silent bell talisman,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
+W3-454,Status/Panel/Waybar,notification-active,Bell talisman with blue spark,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-455,Status/Panel/Waybar,notification-important,Bell talisman with red gem,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
-W3-456,Status/Panel/Waybar,do-not-disturb,Moon rune over muted bell,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
+W3-456,Status/Panel/Waybar,notification-disabled,Moon rune over muted bell,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-457,Status/Panel/Waybar,mail-unread,Sealed raven letter,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-458,Status/Panel/Waybar,mail-read,Opened raven letter,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
 W3-459,Status/Panel/Waybar,download-active,Arrow falling into crate,Glyph,P1,,Waybar/status family; optimise for monochrome and tiny sizes
