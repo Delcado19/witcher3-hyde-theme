@@ -584,7 +584,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-546 | MIME/Filetypes | application-msword | Blue W rune on office folio | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-547 | MIME/Filetypes | application-vnd.oasis.opendocument.text | Blue quill folio | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-548 | MIME/Filetypes | application-vnd.oasis.opendocument.spreadsheet | Green grid ledger | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-549 | MIME/Filetypes | application-excel | Green X rune on grid ledger | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-549 | MIME/Filetypes | application-vnd.ms-excel | Green X rune on grid ledger | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-550 | MIME/Filetypes | application-presentation | Orange presentation board | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-551 | MIME/Filetypes | application-powerpoint | Orange P rune on presentation board | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-552 | MIME/Filetypes | application-database | Stacked dark data cylinders | Emblem | P1 |  | Keep strong family resemblance by file class |
