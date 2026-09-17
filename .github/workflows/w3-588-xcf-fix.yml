@@ -1,0 +1,66 @@
+name: One-shot W3-588 XCF MIME correction
+
+on:
+  push:
+    branches:
+      - scratch-w3-581-svg
+    paths:
+      - ".github/workflows/w3-588-xcf-fix.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout scratch branch
+        uses: actions/checkout@v7
+
+      - name: Correct W3-588 and regenerate mirror
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("design/icons/matrix/witcher-icon-matrix-v1.csv")
+          text = path.read_text(encoding="utf-8")
+          old = "W3-588,MIME/Filetypes,image-xcf,GIMP brush over layered canvas,Emblem,P2,,Keep strong family resemblance by file class"
+          new = "W3-588,MIME/Filetypes,image-x-xcf,GIMP brush over layered canvas,Emblem,P2,,Keep strong family resemblance by file class"
+          if text.count(old) != 1:
+              raise SystemExit(f"Expected exactly one W3-588 source row, found {text.count(old)}")
+          path.write_text(text.replace(old, new), encoding="utf-8", newline="")
+          PY
+
+          python3 tools/normalize-icon-matrix.py --write
+          python3 tools/validate-icon-matrix.py
+          python3 tools/normalize-icon-matrix.py
+          git diff --check
+
+      - name: Verify candidate resolves through Stage B-MIME
+        run: |
+          set -Eeuo pipefail
+          shared_repo="$RUNNER_TEMP/shared-mime-info"
+          shared_xml="$RUNNER_TEMP/shared-mime-info.xml"
+          git init --quiet "$shared_repo"
+          git -C "$shared_repo" remote add origin https://gitlab.freedesktop.org/xdg/shared-mime-info.git
+          git -C "$shared_repo" fetch --quiet --depth=1 origin refs/tags/2.5.1
+          actual_commit="$(git -C "$shared_repo" rev-parse 'FETCH_HEAD^{commit}')"
+          [[ "$actual_commit" == fd8ab89c20* ]]
+          git -C "$shared_repo" show "FETCH_HEAD:data/freedesktop.org.xml.in" > "$shared_xml"
+          python3 tools/audit-shared-mime-info.py \
+            --source-xml "$shared_xml" \
+            --resolved-output "$RUNNER_TEMP/shared-mime-resolved.txt" \
+            | tee "$RUNNER_TEMP/shared-mime-audit.log"
+          grep -F "W3-588: 'image-x-xcf' -> image/x-xcf (derived)" \
+            "$RUNNER_TEMP/shared-mime-audit.log"
+
+      - name: Commit generated matrix update
+        run: |
+          set -Eeuo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add design/icons/matrix/witcher-icon-matrix-v1.csv design/icons/matrix/witcher-icon-matrix-v1.md
+          git diff --cached --exit-code && { echo "Expected matrix changes were not produced" >&2; exit 1; }
+          git commit -m "Align XCF MIME canonical with shared-mime-info"
+          git push origin HEAD:scratch-w3-581-svg
