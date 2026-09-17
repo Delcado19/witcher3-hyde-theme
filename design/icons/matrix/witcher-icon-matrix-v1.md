@@ -595,7 +595,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-557 | MIME/Filetypes | application-vnd.rar | Three bound archive tomes | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-558 | MIME/Filetypes | application-x-tar | Tar-black archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-559 | MIME/Filetypes | application-gzip | Archive bundle under pressure gauge | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-560 | MIME/Filetypes | application-bzip2 | Blue compressed archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-560 | MIME/Filetypes | application-x-bzip | Blue compressed archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-561 | MIME/Filetypes | application-xz | Silver XZ seal on archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-562 | MIME/Filetypes | application-zstd | Zstd rune on compact archive plate | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-563 | MIME/Filetypes | application-appimage | Portable app crystal with base pedestal | Emblem | P1 |  | Keep strong family resemblance by file class |
