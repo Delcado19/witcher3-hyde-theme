@@ -600,7 +600,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-562 | MIME/Filetypes | application-zstd | Zstd rune on compact archive plate | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-563 | MIME/Filetypes | application-vnd.appimage | Portable app crystal with base pedestal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-564 | MIME/Filetypes | application-flatpak | Stacked package cubes | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-565 | MIME/Filetypes | application-snap | Snapped rune loop package seal | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-565 | MIME/Filetypes | application-vnd.snap | Snapped rune loop package seal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-566 | MIME/Filetypes | application-executable | Steel gear with green play rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-567 | MIME/Filetypes | application-sharedlib | Linked library chain glyph | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-568 | MIME/Filetypes | application-deb | Debian swirl stamped on package chest | Emblem | P1 |  | Keep strong family resemblance by file class |
