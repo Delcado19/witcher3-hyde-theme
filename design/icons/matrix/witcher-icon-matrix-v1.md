@@ -618,7 +618,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-580 | MIME/Filetypes | image-webp | Web-shaped image frame | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-581 | MIME/Filetypes | image-svg+xml | Vector knot on transparent frame | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-582 | MIME/Filetypes | image-gif | Animated double-frame image tile | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-583 | MIME/Filetypes | image-raw | Unpolished photo crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-583 | MIME/Filetypes | image-x-dcraw | Unpolished photo crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-584 | MIME/Filetypes | image-heif | High-efficiency image crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-585 | MIME/Filetypes | image-tiff | Layered archival image parchment | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-586 | MIME/Filetypes | image-psd | Stacked painted layers with PS rune | Emblem | P2 |  | Keep strong family resemblance by file class |
