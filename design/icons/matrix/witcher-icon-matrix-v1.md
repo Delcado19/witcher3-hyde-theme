@@ -603,7 +603,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-565 | MIME/Filetypes | application-vnd.snap | Snapped rune loop package seal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-566 | MIME/Filetypes | application-x-executable | Steel gear with green play rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-567 | MIME/Filetypes | application-x-sharedlib | Linked library chain glyph | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-568 | MIME/Filetypes | application-deb | Debian swirl stamped on package chest | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-568 | MIME/Filetypes | application-x-deb | Debian swirl stamped on package chest | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-569 | MIME/Filetypes | application-rpm | Red package gear seal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-570 | MIME/Filetypes | application-pkg | Generic package crate | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-571 | MIME/Filetypes | application-iso | Optical disc over archive case | Emblem | P1 |  | Keep strong family resemblance by file class |
