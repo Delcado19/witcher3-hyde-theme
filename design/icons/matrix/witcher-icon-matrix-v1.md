@@ -582,7 +582,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-544 | MIME/Filetypes | application-epub+zip | Green open e-book grimoire | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-545 | MIME/Filetypes | application-rtf | Blue rich-text parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-546 | MIME/Filetypes | application-msword | Blue W rune on office folio | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-547 | MIME/Filetypes | application-wordprocessing | Blue quill folio | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-547 | MIME/Filetypes | application-vnd.oasis.opendocument.text | Blue quill folio | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-548 | MIME/Filetypes | application-spreadsheet | Green grid ledger | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-549 | MIME/Filetypes | application-excel | Green X rune on grid ledger | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-550 | MIME/Filetypes | application-presentation | Orange presentation board | Emblem | P1 |  | Keep strong family resemblance by file class |
