@@ -208,6 +208,8 @@ Remaining generic desktop names are checked against the pinned Breeze source tre
 
 The validator should record the exact Breeze path/context in which the name exists.
 
+A basename that exists only as a symlink or compatibility alias is not sufficient by itself to establish a canonical semantic name. Stage C must distinguish primary Breeze artwork names from aliases/links and confirm that the upstream semantics match the Witcher3 concept.
+
 ### Stage D — application identity validation
 
 Branded application entries and their aliases are checked against upstream desktop files, application IDs, executable names, or maintained Linux packaging metadata.
@@ -241,3 +243,37 @@ W3-284  call-stop
 ```
 
 This preserves the 645-design budget while removing the namespace collision and increasing actual standards coverage.
+
+## Review stop — W3-576 encrypted MIME canonical
+
+**Recorded:** 2026-09-17
+
+Work on the MIME canonical cleanup must stop at W3-576 until this entry is re-reviewed.
+
+Current branch state:
+
+```text
+branch: icon-pilot-w3-409
+commit: 7afe23b7ce0bcb190c1e021a383a7147ff9690af
+change: W3-576 application-encrypted -> encrypted
+```
+
+The change was made after the following evidence was observed:
+
+- the pinned Freedesktop naming snapshot does not define `application-encrypted`;
+- the pinned Breeze tree contains an `encrypted.svg` name;
+- the observed Breeze `encrypted.svg` entry resolves to `application-pgp-encrypted.svg`.
+
+That evidence is **not sufficient** to conclude that `encrypted` is the correct generic canonical name for W3-576.
+
+The unresolved problem is semantic and methodological: a Breeze basename can exist as a compatibility link or alias without being the preferred canonical name for the underlying MIME concept. In this case the target is explicitly PGP-specific while the Witcher3 concept is generic encryption (`Locked parchment with Quen shield`). Treating the generic-looking alias basename as canonical may therefore broaden the semantics incorrectly.
+
+Before W3-576 is considered validated, the review must:
+
+1. determine whether `encrypted` is a primary Breeze canonical name or only a compatibility/symlink alias;
+2. verify the intended upstream semantics of that name rather than relying on basename presence alone;
+3. determine whether MIME/filetype validation needs an additional authoritative source such as the upstream shared MIME database before Breeze aliases are promoted to canonicals;
+4. choose the final W3-576 canonical only after that evidence is recorded;
+5. update the matrix and audit expectations again if the current `encrypted` decision is not supported.
+
+Possible outcomes remain deliberately open: retain `encrypted` only with evidence that it is the correct generic canonical; otherwise restore a project extension or select a different upstream-backed generic name. Do not continue the sequential MIME cleanup with W3-577 until this review stop is cleared.
