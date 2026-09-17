@@ -591,7 +591,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-553 | MIME/Filetypes | application-sql | Database cylinders with SQL rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-554 | MIME/Filetypes | application-x-archive | Iron-bound archive chest | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-555 | MIME/Filetypes | application-zip | Compressed chest with zipper-like clasp | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-556 | MIME/Filetypes | application-7zip | Seven-notch compression seal | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-556 | MIME/Filetypes | application-x-7z-compressed | Seven-notch compression seal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-557 | MIME/Filetypes | application-rar | Three bound archive tomes | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-558 | MIME/Filetypes | application-tar | Tar-black archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-559 | MIME/Filetypes | application-gzip | Archive bundle under pressure gauge | Emblem | P1 |  | Keep strong family resemblance by file class |
