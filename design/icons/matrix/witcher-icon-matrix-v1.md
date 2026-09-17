@@ -608,7 +608,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-570 | MIME/Filetypes | package-x-generic | Generic package crate | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-571 | MIME/Filetypes | application-x-cd-image | Optical disc over archive case | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-572 | MIME/Filetypes | application-x-bittorrent | Blue torrent spiral on parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-573 | MIME/Filetypes | application-font | Illuminated A type specimen | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-573 | MIME/Filetypes | font-x-generic | Illuminated A type specimen | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-574 | MIME/Filetypes | application-certificate | Signed certificate scroll with seal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-575 | MIME/Filetypes | application-key | Silver cryptographic key on dark parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-576 | MIME/Filetypes | application-encrypted | Locked parchment with Quen shield | Emblem | P1 |  | Keep strong family resemblance by file class |
