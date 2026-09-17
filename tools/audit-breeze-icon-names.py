@@ -28,15 +28,15 @@ FREEDESKTOP_PATH = (
 ICON_SUFFIXES = {".svg", ".png", ".xpm"}
 EXPECTED_FREEDESKTOP_MATCHES = 147
 EXPECTED_BREEZE_UNIQUE_NAMES = 4382
-EXPECTED_BREEZE_MATCHES = 155
-EXPECTED_UNRESOLVED = 343
+EXPECTED_BREEZE_MATCHES = 156
+EXPECTED_UNRESOLVED = 342
 EXPECTED_GROUP_COVERAGE = {
     "Applications": (19, 201),
     "Actions/UI": (19, 1),
     "Places/Folders": (19, 36),
     "Status/Panel/Waybar": (42, 32),
     "Devices": (12, 17),
-    "MIME/Filetypes": (42, 40),
+    "MIME/Filetypes": (43, 39),
     "Categories/Misc": (2, 16),
 }
 
