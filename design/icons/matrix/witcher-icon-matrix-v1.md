@@ -604,7 +604,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-566 | MIME/Filetypes | application-x-executable | Steel gear with green play rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-567 | MIME/Filetypes | application-x-sharedlib | Linked library chain glyph | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-568 | MIME/Filetypes | application-x-deb | Debian swirl stamped on package chest | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-569 | MIME/Filetypes | application-rpm | Red package gear seal | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-569 | MIME/Filetypes | application-x-rpm | Red package gear seal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-570 | MIME/Filetypes | application-pkg | Generic package crate | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-571 | MIME/Filetypes | application-iso | Optical disc over archive case | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-572 | MIME/Filetypes | application-torrent | Blue torrent spiral on parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
