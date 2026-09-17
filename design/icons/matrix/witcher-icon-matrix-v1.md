@@ -612,7 +612,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-574 | MIME/Filetypes | application-certificate | Signed certificate scroll with seal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-575 | MIME/Filetypes | application-key | Silver cryptographic key on dark parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-576 | MIME/Filetypes | encrypted | Locked parchment with Quen shield | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-577 | MIME/Filetypes | image-generic | Landscape painting in carved frame | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-577 | MIME/Filetypes | image-x-generic | Landscape painting in carved frame | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-578 | MIME/Filetypes | image-jpeg | Landscape frame with JPEG rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-579 | MIME/Filetypes | image-png | Crystal-clear landscape frame with PNG rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-580 | MIME/Filetypes | image-webp | Web-shaped image frame | Emblem | P1 |  | Keep strong family resemblance by file class |
