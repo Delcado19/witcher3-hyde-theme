@@ -621,7 +621,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-583 | MIME/Filetypes | image-x-dcraw | Unpolished photo crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-584 | MIME/Filetypes | image-heif | High-efficiency image crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-585 | MIME/Filetypes | image-tiff | Layered archival image parchment | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-586 | MIME/Filetypes | image-psd | Stacked painted layers with PS rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-586 | MIME/Filetypes | image-vnd.adobe.photoshop | Stacked painted layers with PS rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-587 | MIME/Filetypes | image-kra | Krita feather over layered canvas | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-588 | MIME/Filetypes | image-xcf | GIMP brush over layered canvas | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-589 | MIME/Filetypes | audio-generic | Music note on sound crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
