@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Audit unresolved Witcher3 canonical icon names against a pinned Breeze tree.
+"""Audit remaining Witcher3 canonical names against a pinned Breeze tree.
 
-Stage C intentionally follows the Freedesktop audit. Canonical names already
-covered by the pinned Freedesktop snapshot are excluded here. An unresolved
-name that is also absent from Breeze is not automatically invalid: application
-IDs, desktop IDs, HyDE-specific names, and project extensions are validated in
-later stages.
+Stage C intentionally follows both Freedesktop audits: names covered by the
+Icon Naming Specification (Stage B) or by shared-mime-info specific icon names
+(Stage B-MIME) are excluded here. An unresolved name that is also absent from
+Breeze is not automatically invalid: application IDs, desktop IDs,
+HyDE-specific names, and project extensions are validated in later stages.
 
 The tool consumes a plain `git ls-tree -r --name-only` listing instead of a
 checked-out Breeze repository. This keeps CI fast and makes the exact upstream
@@ -28,22 +28,37 @@ FREEDESKTOP_PATH = (
 ICON_SUFFIXES = {".svg", ".png", ".xpm"}
 EXPECTED_FREEDESKTOP_MATCHES = 149
 EXPECTED_BREEZE_UNIQUE_NAMES = 4382
-EXPECTED_BREEZE_MATCHES = 157
-EXPECTED_UNRESOLVED = 339
-EXPECTED_GROUP_COVERAGE = {
-    "Applications": (19, 201),
-    "Actions/UI": (19, 1),
-    "Places/Folders": (19, 36),
-    "Status/Panel/Waybar": (42, 32),
-    "Devices": (12, 17),
-    "MIME/Filetypes": (44, 36),
-    "Categories/Misc": (2, 16),
-}
+GROUP_ORDER = (
+    "Applications",
+    "Actions/UI",
+    "Places/Folders",
+    "Status/Panel/Waybar",
+    "Devices",
+    "MIME/Filetypes",
+    "Categories/Misc",
+)
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         return [dict(row) for row in csv.DictReader(handle)]
+
+
+def read_resolved_names(path: Path) -> set[str]:
+    if not path.is_file():
+        raise SystemExit(f"Stage-B-MIME resolved-name file not found: {path}")
+
+    names: list[str] = []
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        name = raw_line.strip()
+        if name:
+            names.append(name)
+
+    if len(names) != len(set(names)):
+        raise SystemExit("Duplicate name in Stage-B-MIME resolved-name file")
+    if not names:
+        raise SystemExit("Stage-B-MIME resolved-name file is empty")
+    return set(names)
 
 
 def parse_breeze_tree(path: Path) -> dict[str, set[str]]:
@@ -82,6 +97,12 @@ def main() -> int:
         required=True,
         help="Path to `git ls-tree -r --name-only` output for pinned Breeze",
     )
+    parser.add_argument(
+        "--shared-mime-resolved",
+        type=Path,
+        required=True,
+        help="Stage-B-MIME newline-delimited resolved canonical names",
+    )
     args = parser.parse_args()
 
     if not args.tree_list.is_file():
@@ -93,6 +114,8 @@ def main() -> int:
         raise SystemExit(
             f"Expected 288 Freedesktop names, found {len(freedesktop_names)}"
         )
+
+    shared_mime_names = read_resolved_names(args.shared_mime_resolved)
 
     breeze_names = parse_breeze_tree(args.tree_list)
     if not breeze_names:
@@ -113,9 +136,38 @@ def main() -> int:
     if len(matrix_rows) != 645:
         raise SystemExit(f"Expected 645 matrix rows, found {len(matrix_rows)}")
 
+    matrix_by_canonical = {
+        row["canonical_name"].strip(): row
+        for row in matrix_rows
+    }
+    unknown_shared = sorted(shared_mime_names - set(matrix_by_canonical))
+    if unknown_shared:
+        raise SystemExit(
+            "Stage-B-MIME resolved file contains names absent from matrix: "
+            + ", ".join(unknown_shared)
+        )
+
+    wrong_group = sorted(
+        name
+        for name in shared_mime_names
+        if matrix_by_canonical[name]["group"].strip() != "MIME/Filetypes"
+    )
+    if wrong_group:
+        raise SystemExit(
+            "Stage-B-MIME resolved non-MIME matrix names: " + ", ".join(wrong_group)
+        )
+
+    overlap = sorted(shared_mime_names & freedesktop_names)
+    if overlap:
+        raise SystemExit(
+            "Stage-B-MIME output overlaps Freedesktop Stage B: " + ", ".join(overlap)
+        )
+
     fdo_matches = 0
+    shared_mime_matches = 0
     breeze_matches: list[tuple[str, str, str, tuple[str, ...]]] = []
     unresolved: list[tuple[str, str, str]] = []
+    shared_by_group: Counter[str] = Counter()
     matched_by_group: Counter[str] = Counter()
     unresolved_by_group: Counter[str] = Counter()
     breeze_alias_candidates: list[str] = []
@@ -127,6 +179,11 @@ def main() -> int:
 
         if canonical in freedesktop_names:
             fdo_matches += 1
+            continue
+
+        if canonical in shared_mime_names:
+            shared_mime_matches += 1
+            shared_by_group[group] += 1
             continue
 
         contexts = breeze_names.get(canonical)
@@ -159,30 +216,20 @@ def main() -> int:
             f"found {fdo_matches}"
         )
 
-    if len(breeze_matches) != EXPECTED_BREEZE_MATCHES:
+    if shared_mime_matches != len(shared_mime_names):
         raise SystemExit(
-            f"Expected {EXPECTED_BREEZE_MATCHES} additional Breeze matches, "
-            f"found {len(breeze_matches)}"
+            "Stage-B-MIME handoff accounting error: "
+            f"{shared_mime_matches} consumed / {len(shared_mime_names)} supplied"
         )
 
-    if len(unresolved) != EXPECTED_UNRESOLVED:
-        raise SystemExit(
-            f"Expected {EXPECTED_UNRESOLVED} unresolved matrix names after Breeze, "
-            f"found {len(unresolved)}"
-        )
-
-    actual_group_coverage = {
-        group: (matched_by_group[group], unresolved_by_group[group])
-        for group in EXPECTED_GROUP_COVERAGE
-    }
-    if actual_group_coverage != EXPECTED_GROUP_COVERAGE:
-        raise SystemExit(
-            "Unexpected Stage C group coverage: "
-            f"{actual_group_coverage!r}; expected {EXPECTED_GROUP_COVERAGE!r}"
-        )
-
-    if fdo_matches + len(breeze_matches) + len(unresolved) != len(matrix_rows):
-        raise SystemExit("Internal coverage accounting error")
+    if (
+        fdo_matches
+        + shared_mime_matches
+        + len(breeze_matches)
+        + len(unresolved)
+        != len(matrix_rows)
+    ):
+        raise SystemExit("Internal Stage C coverage accounting error")
 
     print(f"Parsed {len(breeze_names)} unique Breeze icon names.")
     print("Breeze source contexts:")
@@ -191,17 +238,20 @@ def main() -> int:
 
     print()
     print(f"Freedesktop-resolved matrix names: {fdo_matches} / 645")
+    print(f"shared-mime-resolved matrix names: {shared_mime_matches} / 645")
     print(
         "Additional exact Breeze canonical matches: "
-        f"{len(breeze_matches)} / {645 - fdo_matches} unresolved after Stage B"
+        f"{len(breeze_matches)} / {645 - fdo_matches - shared_mime_matches} "
+        "remaining after Stage B + Stage B-MIME"
     )
     print(f"Still unresolved after Breeze: {len(unresolved)} / 645")
 
     print()
     print("Stage C coverage by Witcher3 group:")
-    for group in EXPECTED_GROUP_COVERAGE:
+    for group in GROUP_ORDER:
         print(
-            f"  {group}: {matched_by_group[group]} Breeze / "
+            f"  {group}: {shared_by_group[group]} shared-mime / "
+            f"{matched_by_group[group]} Breeze / "
             f"{unresolved_by_group[group]} still unresolved"
         )
 
@@ -215,7 +265,7 @@ def main() -> int:
             print(f"- {item}")
 
     print()
-    print("Exact Breeze matches among Stage-B-unresolved canonicals:")
+    print("Exact Breeze matches among names unresolved after Stage B-MIME:")
     for row_id, canonical, group, contexts in breeze_matches:
         print(
             f"- {row_id}: {canonical!r} [{group}] -> "
@@ -223,7 +273,7 @@ def main() -> int:
         )
 
     print()
-    print("Names still unresolved after Freedesktop + Breeze:")
+    print("Names still unresolved after Freedesktop + shared-mime-info + Breeze:")
     for row_id, canonical, group in unresolved:
         print(f"- {row_id}: {canonical!r} [{group}]")
 
