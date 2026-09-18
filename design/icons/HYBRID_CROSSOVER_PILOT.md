@@ -457,3 +457,33 @@ Initial engineering/visual observation (not project-owner verdict):
 - no Kitty crossover or PNG-only decision is frozen yet.
 
 Kitty is useful as a second conversion-method check, but because Dolphin and Kitty are both medallion constructions it still does **not** satisfy the requirement for a materially different Hero construction before any class-wide rule is frozen.
+
+
+## Project-owner crossover verdict — medallion candidates
+
+The project owner has now reviewed the corrected seven-size Dolphin and Kitty packages at native size.
+
+Current visual verdict for **both medallion candidates**:
+
+- **32 / 48 / 64 / 96 / 128 px:** SVG looks better;
+- **512 px:** PNG looks better;
+- **256 px:** genuinely borderline / undecided.
+
+This is the first valid size-dependent delivery evidence from production-quality Hero artwork.
+
+Do **not** collapse the result into a class-wide rule yet:
+
+- Dolphin and Kitty are both forged circular medallions;
+- 256 px is still unresolved;
+- at least one materially different non-medallion Hero must be tested before freezing a default Hero delivery policy.
+
+For these two candidates, the working delivery model is therefore:
+
+```text
+<= 128 px : SVG preferred
+256 px    : unresolved / per-canonical review required
+512 px    : PNG preferred
+```
+
+No claim is made yet about intermediate untested sizes.
+
