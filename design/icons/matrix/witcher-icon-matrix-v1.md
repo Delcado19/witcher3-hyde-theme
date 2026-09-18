@@ -624,13 +624,13 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-586 | MIME/Filetypes | image-vnd.adobe.photoshop | Stacked painted layers with PS rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-587 | MIME/Filetypes | application-x-krita | Krita feather over layered canvas | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-588 | MIME/Filetypes | image-x-xcf | GIMP brush over layered canvas | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-589 | MIME/Filetypes | audio-generic | Music note on sound crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-590 | MIME/Filetypes | audio-mp3 | Music note with MP3 rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-589 | MIME/Filetypes | audio-x-generic | Music note on sound crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-590 | MIME/Filetypes | audio-mpeg | Music note with MP3 rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-591 | MIME/Filetypes | audio-flac | Crystal waveform with FLAC rune | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-592 | MIME/Filetypes | audio-wav | Waveform parchment | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-592 | MIME/Filetypes | audio-vnd.wave | Waveform parchment | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-593 | MIME/Filetypes | audio-ogg | Round OGG sound stone | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-594 | MIME/Filetypes | audio-opus | Purple opus waveform gem | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-595 | MIME/Filetypes | audio-m4a | Silver M4A audio tablet | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-594 | MIME/Filetypes | audio-x-opus+ogg | Purple opus waveform gem | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-595 | MIME/Filetypes | audio-mp4 | Silver M4A audio tablet | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-596 | MIME/Filetypes | audio-playlist | List parchment with music runes | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-597 | MIME/Filetypes | video-generic | Film strip with play rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-598 | MIME/Filetypes | video-mp4 | Film strip with MP4 plaque | Emblem | P2 |  | Keep strong family resemblance by file class |
