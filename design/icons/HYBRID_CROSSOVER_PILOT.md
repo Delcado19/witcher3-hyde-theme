@@ -526,3 +526,28 @@ Therefore:
 
 Because the same facet anti-aliasing mechanism exists in Dolphin, Dolphin must also be re-rendered with the underpainting before its earlier size verdict is treated as final. The user's earlier Dolphin preference remains useful prior evidence, but the formal crossover is reopened until corrected light-background sheets are reviewed.
 
+
+
+## Corrected alpha review packages regenerated
+
+Fresh Dolphin and Kitty crossover packages have now been regenerated after the light-background alpha failure was fixed.
+
+Corrections applied:
+
+- Kitty working master alpha was rebuilt from a closed external medallion silhouette, restoring **77,393** interior pixels that the earlier near-black flood removal had accidentally made transparent;
+- both SVGs now use the default source-alpha-derived dark vector underpainting beneath the facet layer;
+- accepted facet geometry, Dolphin `punchy` brilliance, and the 1.25 seam overlap remain otherwise unchanged.
+
+Measured SVG interior alpha after underpainting:
+
+| Candidate | Size | Mean visible alpha | Fully opaque visible pixels |
+| --- | ---: | ---: | ---: |
+| Dolphin | 256 | 252.86 | 97.69% |
+| Dolphin | 512 | 253.99 | 98.92% |
+| Kitty | 256 | 252.94 | 97.68% |
+| Kitty | 512 | 254.00 | 98.91% |
+
+The previous facet-only renders had roughly half or more of their visible SVG pixels partially transparent at these sizes. The corrected values confirm that internal desktop-background leakage is now effectively removed while normal anti-aliasing remains at the exterior silhouette.
+
+Fresh seven-size/five-surface packages exist for both icons. **All prior crossover verdicts remain superseded until the project owner reviews these corrected sheets.**
+
