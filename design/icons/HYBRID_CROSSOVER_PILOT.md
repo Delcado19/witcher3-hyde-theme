@@ -127,3 +127,20 @@ Status:
 - Kitty prototype: generated/reproducible
 - project-owner visual review: pending
 - Hero default crossover: **not yet frozen**
+
+
+## Project-owner review package — generated
+
+A local review package has now been generated from the committed Dolphin and Kitty pilot generators plus the accepted SVG sources.
+
+For each candidate it contains:
+
+- 1024×1024 raster master;
+- exact PNG derivatives at 32, 48, 64, 96, 128, 256, and 512 px;
+- SVG renders at the same seven sizes;
+- a native-size overview;
+- a 4× nearest-neighbour comparison board on the Witcher dark surface and the generic light edge case.
+
+The binary review package is intentionally **not committed**. It is a disposable inspection artifact. The committed generator sources remain the reproducible source of truth.
+
+Project-owner visual verdict is still pending. Do not freeze the Hero crossover before that verdict is recorded.
