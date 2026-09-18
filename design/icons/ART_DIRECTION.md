@@ -136,6 +136,36 @@ These are a vocabulary, **not mandatory containers**.
 
 Do not place every application inside the same circular medallion, rounded-square tile, or shield. Hero icons must retain varied silhouettes so the launcher remains scannable.
 
+## 7. Platform convention and semantic recognition
+
+The theme must preserve established desktop icon conventions wherever a strong cross-platform convention already exists.
+
+**Convention outranks novelty.** Witcher styling should transform the rendering and material language of a familiar symbol, not needlessly replace the symbol itself.
+
+Examples:
+
+- folders should remain immediately recognizable as folders;
+- settings/preferences should normally use a gear, cog, control or equally established settings metaphor;
+- audio should normally use a speaker, headphones/headset, microphone, or another established audio metaphor appropriate to the canonical;
+- trash should remain recognizably a bin/basket;
+- search should normally retain the magnifying-glass metaphor;
+- locks/security should retain an established lock/shield/key metaphor where semantically appropriate;
+- documents should remain recognizable as documents before any type-specific emblem is added;
+- common transport and media controls should retain their established play/pause/stop/skip language.
+
+This rule applies across Hero, Emblem and Glyph classes.
+
+The redesign freedom is primarily in:
+
+- material: blackened iron, weathered silver, leather, parchment, bone, glass, alchemical or magical accents;
+- construction: forged frames, rivets, bevels, straps, seals, engravings and controlled damage;
+- color/value hierarchy and lighting;
+- secondary Witcher-specific ornamentation that does not obscure the semantic base.
+
+A familiar symbol may be replaced only when the replacement is at least as immediately understandable at the intended desktop size and there is a clear semantic reason to do so.
+
+For semantic families, first establish one approved base object or symbol and then derive family variants from it. Example: approve one strong Witcher folder master, then derive Home, Downloads, Documents, Music, Pictures and related folder variants through secondary emblems rather than reinventing the folder silhouette for every canonical.
+
 ## 6. Canvas, master size, and safe area
 
 Vector artwork should use a square coordinate system. The preferred authoring canvas is:
@@ -156,7 +186,7 @@ General safe-area guidance:
 - do not force all silhouettes to fill exactly the same bounding box;
 - optical centering takes precedence over mathematical centering.
 
-## 7. Hybrid delivery principle
+## 8. Hybrid delivery principle
 
 The artwork class does not automatically determine the file format.
 
@@ -185,7 +215,7 @@ Before any raster candidate is allowed to influence crossover policy, review its
 
 The approved target quality is comparable to a forged Witcher-style desktop object: blackened/weathered steel, leather or other secondary material where appropriate, engraved accents, controlled red recess/rim light, and a strong central application motif.
 
-## 8. Hero icons — Applications
+## 9. Hero icons — Applications
 
 **Matrix class:** `Hero`  
 **Count:** 220
@@ -223,7 +253,7 @@ At 16–32 px:
 - micro-texture is irrelevant;
 - internal negative spaces must not collapse.
 
-## 9. Glyph icons — Actions, Status, Panel, Waybar
+## 10. Glyph icons — Actions, Status, Panel, Waybar
 
 **Matrix class:** `Glyph`  
 **Count:** 195
@@ -258,7 +288,7 @@ State families should keep the same outer silhouette and change only the minimum
 
 At typical Waybar sizes, one-glance recognition is mandatory. Decorative material effects should never make a status icon weaker than the equivalent plain symbolic icon.
 
-## 10. Emblem icons — Places, Devices, MIME, Categories
+## 11. Emblem icons — Places, Devices, MIME, Categories
 
 **Matrix class:** `Emblem`  
 **Count:** 230
@@ -281,7 +311,7 @@ Examples:
 - MIME types use consistent document/container geometry and a strong type-specific emblem;
 - preference categories use coherent control/tool metaphors rather than unrelated mini-scenes.
 
-## 11. Family consistency rules
+## 12. Family consistency rules
 
 Icons in a semantic family must share:
 
@@ -296,7 +326,7 @@ They must **not** be simple recolors when the matrix requires genuinely distinct
 
 Aliases reuse one canonical design by symlink and are the only intended cases of identical artwork under multiple names.
 
-## 12. Lighting
+## 13. Lighting
 
 Use one restrained desktop-icon lighting model:
 
@@ -308,7 +338,7 @@ Use one restrained desktop-icon lighting model:
 
 No global lens flare, bloom haze, depth-of-field, or environmental background scene.
 
-## 13. Depth and perspective
+## 14. Depth and perspective
 
 Hero and Emblem icons may use shallow pseudo-3D depth, bevels, overlapping plates, straps, and object thickness.
 
@@ -316,7 +346,7 @@ Avoid extreme perspective. Icons should feel like crafted objects presented for 
 
 Glyphs should remain substantially flatter.
 
-## 14. Edge treatment
+## 15. Edge treatment
 
 The icon theme must remain readable on the project's dark surfaces.
 
