@@ -15,6 +15,7 @@ on:
       - "tools/validate-icon-matrix.py"
       - "tools/normalize-icon-matrix.py"
       - "tools/audit-freedesktop-icon-names.py"
+      - "tools/audit-shared-mime-info.py"
       - "tools/audit-breeze-icon-names.py"
       - "tools/audit-flathub-app-ids.py"
       - "tools/audit-arch-desktop-ids.py"
@@ -27,6 +28,8 @@ permissions:
 
 env:
   BREEZE_COMMIT: 235730e69d90949621e4fee77fcc459772b7a8f0
+  SHARED_MIME_TAG: "2.5.1"
+  SHARED_MIME_COMMIT_PREFIX: fd8ab89c20
 
 jobs:
   validate-icon-matrix:
@@ -52,6 +55,36 @@ jobs:
           set -Eeuo pipefail
           python3 tools/audit-freedesktop-icon-names.py
 
+      - name: Fetch pinned Freedesktop shared-mime-info source
+        run: |
+          set -Eeuo pipefail
+
+          shared_repo="$RUNNER_TEMP/shared-mime-info"
+          shared_xml="$RUNNER_TEMP/shared-mime-info.xml"
+
+          git init --quiet "$shared_repo"
+          git -C "$shared_repo" remote add origin \
+            https://gitlab.freedesktop.org/xdg/shared-mime-info.git
+          git -C "$shared_repo" fetch --quiet --depth=1 origin \
+            "refs/tags/$SHARED_MIME_TAG"
+
+          actual_commit="$(git -C "$shared_repo" rev-parse 'FETCH_HEAD^{commit}')"
+          if [[ "$actual_commit" != "$SHARED_MIME_COMMIT_PREFIX"* ]]; then
+            echo "Expected shared-mime-info $SHARED_MIME_TAG at ${SHARED_MIME_COMMIT_PREFIX}..., fetched $actual_commit" >&2
+            exit 1
+          fi
+
+          git -C "$shared_repo" show \
+            "FETCH_HEAD:data/freedesktop.org.xml.in" > "$shared_xml"
+          test -s "$shared_xml"
+
+      - name: Audit shared-mime-info specific icon names
+        run: |
+          set -Eeuo pipefail
+          python3 tools/audit-shared-mime-info.py \
+            --source-xml "$RUNNER_TEMP/shared-mime-info.xml" \
+            --resolved-output "$RUNNER_TEMP/shared-mime-resolved.txt"
+
       - name: Fetch pinned KDE Breeze icon tree
         run: |
           set -Eeuo pipefail
@@ -76,7 +109,8 @@ jobs:
         run: |
           set -Eeuo pipefail
           python3 tools/audit-breeze-icon-names.py \
-            --tree-list "$RUNNER_TEMP/breeze-tree.txt"
+            --tree-list "$RUNNER_TEMP/breeze-tree.txt" \
+            --shared-mime-resolved "$RUNNER_TEMP/shared-mime-resolved.txt"
 
       - name: Audit Flathub application IDs
         run: |

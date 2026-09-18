@@ -9,3 +9,5 @@ W3-396,network-wired,Status/Panel/Waybar,Devices,Design-bucket exception: used a
 W3-643,system-software-install,Categories/Misc,Applications,Design-bucket exception: generic system/software utility artwork grouped under Misc; install/export under the Freedesktop Applications context.
 W3-644,system-software-update,Categories/Misc,Applications,Design-bucket exception: generic system/software utility artwork grouped under Misc; Breeze also provides a Status variant while Freedesktop standardizes the name as Applications.
 W3-645,system-shutdown,Categories/Misc,Actions,Design-bucket exception: generic system control artwork grouped under Misc; install/export under the Freedesktop Actions context.
+W3-629,preferences-desktop-keyboard,Categories/Misc,Applications,Design-bucket exception: keyboard settings artwork is grouped with other preference categories; install/export under the Freedesktop Applications context.
+W3-638,preferences-desktop-locale,Categories/Misc,Applications,Design-bucket exception: locale settings artwork is grouped with other preference categories; install/export under the Freedesktop Applications context.

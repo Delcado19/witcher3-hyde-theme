@@ -285,7 +285,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-247 | Actions/UI | view-fullscreen | Four expanding corner blades | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-248 | Actions/UI | view-restore | Four contracting corner blades | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-249 | Actions/UI | view-grid | Nine engraved stone tiles | Glyph | P0 |  | Optimise separately for 16/22/24 px |
-| W3-250 | Actions/UI | view-list | Three parchment rows | Glyph | P0 |  | Optimise separately for 16/22/24 px |
+| W3-250 | Actions/UI | view-list-text | Three parchment rows | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-251 | Actions/UI | view-sort-ascending | Ascending rune bars | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-252 | Actions/UI | view-sort-descending | Descending rune bars | Glyph | P0 |  | Optimise separately for 16/22/24 px |
 | W3-253 | Actions/UI | view-filter | Alchemy funnel | Glyph | P0 |  | Optimise separately for 16/22/24 px |
@@ -423,40 +423,40 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-385 | Places/Folders | vault | Heavy Nilfgaardian vault door | Emblem | P1 |  | Folder family should share silhouette and clasp geometry |
 | W3-386 | Status/Panel/Waybar | battery-full | Charged green mutagen vial battery | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-387 | Status/Panel/Waybar | battery-good | Three-quarter mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-388 | Status/Panel/Waybar | battery-medium | Half-filled mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-388 | Status/Panel/Waybar | battery-050 | Half-filled mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-389 | Status/Panel/Waybar | battery-low | Low amber mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-390 | Status/Panel/Waybar | battery-caution | Red nearly empty mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-391 | Status/Panel/Waybar | battery-empty | Empty cracked mutagen vial | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-392 | Status/Panel/Waybar | battery-charging | Mutagen vial struck by lightning rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-392 | Status/Panel/Waybar | battery-050-charging | Half-filled mutagen vial with lightning rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-393 | Status/Panel/Waybar | battery-full-charging | Full vial with lightning | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-394 | Status/Panel/Waybar | battery-low-charging | Low vial with lightning | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-395 | Status/Panel/Waybar | ac-adapter | Power rune on a plugged cable talisman | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-396 | Status/Panel/Waybar | network-wired | Linked chain nodes with cable | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-397 | Status/Panel/Waybar | network-wired-disconnected | Broken chain nodes | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-398 | Status/Panel/Waybar | network-wireless-100 | Four radio arcs over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-399 | Status/Panel/Waybar | network-wireless-75 | Three radio arcs over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-400 | Status/Panel/Waybar | network-wireless-50 | Two radio arcs over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-401 | Status/Panel/Waybar | network-wireless-25 | One radio arc over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-402 | Status/Panel/Waybar | network-wireless-offline | Tower crossed by slash | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-399 | Status/Panel/Waybar | network-wireless-connected-75 | Three radio arcs over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-400 | Status/Panel/Waybar | network-wireless-connected-50 | Two radio arcs over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-401 | Status/Panel/Waybar | network-wireless-connected-25 | One radio arc over tower | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-402 | Status/Panel/Waybar | network-wireless-disconnected | Tower crossed by slash | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-403 | Status/Panel/Waybar | network-wireless-hotspot | Tower inside concentric ward | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-404 | Status/Panel/Waybar | network-vpn | Quen shield over network link | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-405 | Status/Panel/Waybar | network-error | Network chain with red warning shard | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-406 | Status/Panel/Waybar | bluetooth-active | Blue tooth-rune glowing | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-406 | Status/Panel/Waybar | network-bluetooth-activated | Blue tooth-rune glowing | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-407 | Status/Panel/Waybar | bluetooth-disabled | Blue tooth-rune under slash | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-408 | Status/Panel/Waybar | bluetooth-paired | Twin tooth-runes linked | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-409 | Status/Panel/Waybar | audio-volume-high | Silver horn with three waves | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-410 | Status/Panel/Waybar | audio-volume-medium | Silver horn with two waves | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-411 | Status/Panel/Waybar | audio-volume-low | Silver horn with one wave | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-412 | Status/Panel/Waybar | audio-volume-muted | Silver horn crossed out | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-413 | Status/Panel/Waybar | microphone-active | Bright microphone rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-414 | Status/Panel/Waybar | microphone-muted | Muted microphone rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-413 | Status/Panel/Waybar | mic-on | Bright microphone rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-414 | Status/Panel/Waybar | mic-off | Muted microphone rune | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-415 | Status/Panel/Waybar | camera-on | Open scrying eye camera | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-416 | Status/Panel/Waybar | camera-off | Closed scrying eye under slash | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-417 | Status/Panel/Waybar | screen-brightness-high | Sun-disc with eight rays | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-417 | Status/Panel/Waybar | brightness-high | Sun-disc with eight rays | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-418 | Status/Panel/Waybar | screen-brightness-medium | Sun-disc with four rays | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-419 | Status/Panel/Waybar | screen-brightness-low | Dim crescent sun-disc | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-420 | Status/Panel/Waybar | keyboard-brightness | Keyboard plate with glow runes | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-421 | Status/Panel/Waybar | night-light | Moon over warm ember glow | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-419 | Status/Panel/Waybar | brightness-low | Dim crescent sun-disc | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-420 | Status/Panel/Waybar | input-keyboard-brightness | Keyboard plate with glow runes | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-421 | Status/Panel/Waybar | redshift-status-on | Moon over warm ember glow | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-422 | Status/Panel/Waybar | weather-clear | Toussaint sun crest | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-423 | Status/Panel/Waybar | weather-few-clouds | Sun behind small Skellige cloud | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-424 | Status/Panel/Waybar | weather-clouds | Layered storm clouds | Glyph | P0 |  | Waybar/status family; optimise for monochrome and tiny sizes |
@@ -468,7 +468,7 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-430 | Status/Panel/Waybar | weather-fog | Mist bands over swamp reeds | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-431 | Status/Panel/Waybar | weather-windy | Three wind strokes around swallow feather | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-432 | Status/Panel/Waybar | temperature-normal | Thermometer with pale rune | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-433 | Status/Panel/Waybar | temperature-high | Red hot thermometer with Igni spark | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-433 | Status/Panel/Waybar | temperature-warm | Red hot thermometer with Igni spark | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-434 | Status/Panel/Waybar | cpu-usage-low | CPU crystal with one lit quadrant | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-435 | Status/Panel/Waybar | cpu-usage-medium | CPU crystal half lit | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-436 | Status/Panel/Waybar | cpu-usage-high | CPU crystal fully glowing | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
@@ -481,17 +481,17 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-443 | Status/Panel/Waybar | disk-idle | Disk platter at rest | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-444 | Status/Panel/Waybar | disk-busy | Spinning disk platter with motion sparks | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-445 | Status/Panel/Waybar | disk-warning | Disk platter with amber crack | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-446 | Status/Panel/Waybar | updates-none | Closed package chest with check rune | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-447 | Status/Panel/Waybar | updates-available | Package chest with blue sparkle | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-448 | Status/Panel/Waybar | updates-important | Package chest with red warning seal | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-446 | Status/Panel/Waybar | software-updates-inactive | Closed package chest with check rune | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-447 | Status/Panel/Waybar | software-updates-updates | Package chest with blue sparkle | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-448 | Status/Panel/Waybar | software-updates-important | Package chest with red warning seal | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-449 | Status/Panel/Waybar | security-high | Quen shield fully lit | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-450 | Status/Panel/Waybar | security-medium | Quen shield half lit | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-451 | Status/Panel/Waybar | security-low | Cracked Quen shield | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-452 | Status/Panel/Waybar | security-update | Quen shield with circular arrow | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-453 | Status/Panel/Waybar | notification-none | Silent bell talisman | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-454 | Status/Panel/Waybar | notification-new | Bell talisman with blue spark | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-452 | Status/Panel/Waybar | software-updates-security | Quen shield with circular arrow | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-453 | Status/Panel/Waybar | notification-inactive | Silent bell talisman | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-454 | Status/Panel/Waybar | notification-active | Bell talisman with blue spark | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-455 | Status/Panel/Waybar | notification-important | Bell talisman with red gem | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-456 | Status/Panel/Waybar | do-not-disturb | Moon rune over muted bell | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-456 | Status/Panel/Waybar | notification-disabled | Moon rune over muted bell | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-457 | Status/Panel/Waybar | mail-unread | Sealed raven letter | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-458 | Status/Panel/Waybar | mail-read | Opened raven letter | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-459 | Status/Panel/Waybar | download-active | Arrow falling into crate | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
@@ -499,15 +499,15 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-461 | Status/Panel/Waybar | sync-idle | Twin swallow arrows at rest | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-462 | Status/Panel/Waybar | sync-active | Twin swallow arrows glowing | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-463 | Status/Panel/Waybar | sync-error | Broken sync ring | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-464 | Status/Panel/Waybar | media-playing | Small play spearhead glowing | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-465 | Status/Panel/Waybar | media-paused | Twin pause blades | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-466 | Status/Panel/Waybar | media-stopped | Dark stop stone | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-467 | Status/Panel/Waybar | caps-lock-on | Upward rune arrow inside keycap | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-468 | Status/Panel/Waybar | num-lock-on | Number rune inside keycap | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-464 | Status/Panel/Waybar | media-playback-playing | Small play spearhead glowing | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-465 | Status/Panel/Waybar | media-playback-paused | Twin pause blades | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-466 | Status/Panel/Waybar | media-playback-stopped | Dark stop stone | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-467 | Status/Panel/Waybar | input-caps-on | Upward rune arrow inside keycap | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-468 | Status/Panel/Waybar | input-num-on | Number rune inside keycap | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-469 | Status/Panel/Waybar | scroll-lock-on | Scroll rune inside keycap | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-470 | Status/Panel/Waybar | power-profile-performance | Red wolf claw performance crest | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-471 | Status/Panel/Waybar | power-profile-balanced | Balanced scales over battery | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
-| W3-472 | Status/Panel/Waybar | power-profile-power-saver | Green leaf over battery | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-470 | Status/Panel/Waybar | battery-profile-performance | Red wolf claw performance crest | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-471 | Status/Panel/Waybar | battery-profile-balanced | Balanced scales over battery | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
+| W3-472 | Status/Panel/Waybar | battery-profile-powersave | Green leaf over battery | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-473 | Status/Panel/Waybar | workspace-active | Lit runestone workspace | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-474 | Status/Panel/Waybar | workspace-inactive | Dark runestone workspace | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
 | W3-475 | Status/Panel/Waybar | window-urgent | Window rune with red pulse | Glyph | P1 |  | Waybar/status family; optimise for monochrome and tiny sizes |
@@ -522,31 +522,31 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-484 | Devices | phone | Handheld communication rune-slate | Emblem | P1 |  |  |
 | W3-485 | Devices | smartphone | Tall black scrying slate | Emblem | P1 |  |  |
 | W3-486 | Devices | camera | Mechanical scrying camera | Emblem | P1 |  |  |
-| W3-487 | Devices | webcam | Round eye-camera on a small stand | Emblem | P1 |  |  |
+| W3-487 | Devices | camera-web | Round eye-camera on a small stand | Emblem | P1 |  |  |
 | W3-488 | Devices | printer | Dwarven printing press | Emblem | P1 |  |  |
 | W3-489 | Devices | scanner | Flat scanning altar with light beam | Emblem | P1 |  |  |
-| W3-490 | Devices | keyboard | Steel keyboard plate with rune keys | Emblem | P1 |  |  |
-| W3-491 | Devices | mouse | Mouse familiar shaped into input device | Emblem | P1 |  |  |
-| W3-492 | Devices | gamepad | Controller shield with twin sticks | Emblem | P1 |  |  |
+| W3-490 | Devices | input-keyboard | Steel keyboard plate with rune keys | Emblem | P1 |  |  |
+| W3-491 | Devices | input-mouse | Mouse familiar shaped into input device | Emblem | P1 |  |  |
+| W3-492 | Devices | input-gaming | Controller shield with twin sticks | Emblem | P1 |  |  |
 | W3-493 | Devices | joystick | Flight lever on circular iron base | Emblem | P1 |  |  |
-| W3-494 | Devices | headphones | Silver ear-guards around a sound crystal | Emblem | P1 |  |  |
-| W3-495 | Devices | headset | Headphones with microphone boom | Emblem | P1 |  |  |
-| W3-496 | Devices | microphone | Studio speaking rune on stand | Emblem | P1 |  |  |
-| W3-497 | Devices | speakers | Twin sound towers with horn runes | Emblem | P1 |  |  |
+| W3-494 | Devices | audio-headphones | Silver ear-guards around a sound crystal | Emblem | P1 |  |  |
+| W3-495 | Devices | audio-headset | Headphones with microphone boom | Emblem | P1 |  |  |
+| W3-496 | Devices | audio-input-microphone | Studio speaking rune on stand | Emblem | P1 |  |  |
+| W3-497 | Devices | audio-speakers | Twin sound towers with horn runes | Emblem | P1 |  |  |
 | W3-498 | Devices | audio-card | Copper audio circuit plate | Emblem | P1 |  |  |
-| W3-499 | Devices | monitor | Standalone viewing crystal in metal frame | Emblem | P1 |  |  |
+| W3-499 | Devices | video-display | Standalone viewing crystal in metal frame | Emblem | P1 |  |  |
 | W3-500 | Devices | monitor-dual | Twin viewing crystals on one stand | Emblem | P1 |  |  |
 | W3-501 | Devices | tv | Wide scrying panel with heavy frame | Emblem | P1 |  |  |
 | W3-502 | Devices | projector | Light-projecting crystal box | Emblem | P1 |  |  |
-| W3-503 | Devices | harddisk | Black iron disk vault | Emblem | P1 |  |  |
+| W3-503 | Devices | drive-harddisk | Black iron disk vault | Emblem | P1 |  |  |
 | W3-504 | Devices | harddisk-external | Travel disk vault with cable | Emblem | P1 |  |  |
 | W3-505 | Devices | ssd | Slim etched solid-state data tablet | Emblem | P1 |  |  |
 | W3-506 | Devices | nvme | Narrow rune-studded NVMe blade | Emblem | P1 |  |  |
-| W3-507 | Devices | usb-drive | Small silver data talisman with USB prongs | Emblem | P1 |  |  |
-| W3-508 | Devices | memory-card | Tiny memory rune card | Emblem | P1 |  |  |
-| W3-509 | Devices | optical-drive | Disc chamber with silver tray | Emblem | P1 |  |  |
-| W3-510 | Devices | cdrom | Shining alchemical data disc | Emblem | P1 |  |  |
-| W3-511 | Devices | floppy | Ancient square save tablet | Emblem | P2 |  |  |
+| W3-507 | Devices | drive-removable-media-usb-pendrive | Small silver data talisman with USB prongs | Emblem | P1 |  |  |
+| W3-508 | Devices | media-flash-sd-mmc | Tiny memory rune card | Emblem | P1 |  |  |
+| W3-509 | Devices | drive-optical | Disc chamber with silver tray | Emblem | P1 |  |  |
+| W3-510 | Devices | media-optical | Shining alchemical data disc | Emblem | P1 |  |  |
+| W3-511 | Devices | media-floppy | Ancient square save tablet | Emblem | P2 |  |  |
 | W3-512 | Devices | network-card | Linked-node circuit plaque | Emblem | P2 |  |  |
 | W3-513 | Devices | router | Signal tower box with four antenna runes | Emblem | P2 |  |  |
 | W3-514 | Devices | modem | Compact communication box with wave glyph | Emblem | P2 |  |  |
@@ -554,21 +554,21 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-516 | Devices | wifi-adapter | Tiny radio ward dongle | Emblem | P2 |  |  |
 | W3-517 | Devices | gpu | Large graphic crystal board with fan rune | Emblem | P2 |  |  |
 | W3-518 | Devices | cpu | Square processor sigil with etched contacts | Emblem | P2 |  |  |
-| W3-519 | Devices | ram | Long memory talisman with chip runes | Emblem | P2 |  |  |
+| W3-519 | Devices | memory | Long memory talisman with chip runes | Emblem | P2 |  |  |
 | W3-520 | Devices | motherboard | Dwarven mainboard map of circuits | Emblem | P2 |  |  |
 | W3-521 | Devices | battery | Portable mutagen-cell battery | Emblem | P2 |  |  |
-| W3-522 | Devices | ups | Heavy backup power chest | Emblem | P2 |  |  |
+| W3-522 | Devices | battery-ups | Heavy backup power chest | Emblem | P2 |  |  |
 | W3-523 | Devices | vr-headset | Twin-lens spectral visor | Emblem | P2 |  |  |
 | W3-524 | Devices | smartwatch | Wrist-mounted clock rune crystal | Emblem | P2 |  |  |
 | W3-525 | Devices | controller-wheel | Racing wheel carved from black steel | Emblem | P2 |  |  |
 | W3-526 | MIME/Filetypes | text-plain | Simple parchment page with text lines | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-527 | MIME/Filetypes | text-markdown | Parchment page with engraved M↓ rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-528 | MIME/Filetypes | text-code | Parchment page with angle-bracket runes | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-529 | MIME/Filetypes | text-shell | Dark parchment terminal page with prompt rune | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-530 | MIME/Filetypes | text-python | Blue-yellow serpent pair on code parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-529 | MIME/Filetypes | text-x-shellscript | Dark parchment terminal page with prompt rune | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-530 | MIME/Filetypes | text-x-python | Blue-yellow serpent pair on code parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-531 | MIME/Filetypes | text-javascript | Golden JS rune on dark code parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-532 | MIME/Filetypes | text-typescript | Blue TS rune on code parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-533 | MIME/Filetypes | text-json | Curly-brace runes on parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-533 | MIME/Filetypes | application-json | Curly-brace runes on parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-534 | MIME/Filetypes | text-yaml | Red Y rune on configuration parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-535 | MIME/Filetypes | text-toml | Silver T rune on configuration parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-536 | MIME/Filetypes | text-xml | Red angle-tag rune on parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
@@ -579,73 +579,73 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-541 | MIME/Filetypes | text-diff | Red-green split parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-542 | MIME/Filetypes | text-license | Official wax seal on legal parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-543 | MIME/Filetypes | application-pdf | Red PDF contract seal | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-544 | MIME/Filetypes | application-epub | Green open e-book grimoire | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-544 | MIME/Filetypes | application-epub+zip | Green open e-book grimoire | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-545 | MIME/Filetypes | application-rtf | Blue rich-text parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-546 | MIME/Filetypes | application-msword | Blue W rune on office folio | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-547 | MIME/Filetypes | application-wordprocessing | Blue quill folio | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-548 | MIME/Filetypes | application-spreadsheet | Green grid ledger | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-549 | MIME/Filetypes | application-excel | Green X rune on grid ledger | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-550 | MIME/Filetypes | application-presentation | Orange presentation board | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-551 | MIME/Filetypes | application-powerpoint | Orange P rune on presentation board | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-552 | MIME/Filetypes | application-database | Stacked dark data cylinders | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-547 | MIME/Filetypes | application-vnd.oasis.opendocument.text | Blue quill folio | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-548 | MIME/Filetypes | application-vnd.oasis.opendocument.spreadsheet | Green grid ledger | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-549 | MIME/Filetypes | application-vnd.ms-excel | Green X rune on grid ledger | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-550 | MIME/Filetypes | application-vnd.oasis.opendocument.presentation | Orange presentation board | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-551 | MIME/Filetypes | application-vnd.ms-powerpoint | Orange P rune on presentation board | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-552 | MIME/Filetypes | application-vnd.oasis.opendocument.database | Stacked dark data cylinders | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-553 | MIME/Filetypes | application-sql | Database cylinders with SQL rune | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-554 | MIME/Filetypes | application-archive | Iron-bound archive chest | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-554 | MIME/Filetypes | application-x-archive | Iron-bound archive chest | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-555 | MIME/Filetypes | application-zip | Compressed chest with zipper-like clasp | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-556 | MIME/Filetypes | application-7zip | Seven-notch compression seal | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-557 | MIME/Filetypes | application-rar | Three bound archive tomes | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-558 | MIME/Filetypes | application-tar | Tar-black archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-556 | MIME/Filetypes | application-x-7z-compressed | Seven-notch compression seal | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-557 | MIME/Filetypes | application-vnd.rar | Three bound archive tomes | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-558 | MIME/Filetypes | application-x-tar | Tar-black archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-559 | MIME/Filetypes | application-gzip | Archive bundle under pressure gauge | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-560 | MIME/Filetypes | application-bzip2 | Blue compressed archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-560 | MIME/Filetypes | application-x-bzip | Blue compressed archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-561 | MIME/Filetypes | application-xz | Silver XZ seal on archive bundle | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-562 | MIME/Filetypes | application-zstd | Zstd rune on compact archive plate | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-563 | MIME/Filetypes | application-appimage | Portable app crystal with base pedestal | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-563 | MIME/Filetypes | application-vnd.appimage | Portable app crystal with base pedestal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-564 | MIME/Filetypes | application-flatpak | Stacked package cubes | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-565 | MIME/Filetypes | application-snap | Snapped rune loop package seal | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-566 | MIME/Filetypes | application-executable | Steel gear with green play rune | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-567 | MIME/Filetypes | application-sharedlib | Linked library chain glyph | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-568 | MIME/Filetypes | application-deb | Debian swirl stamped on package chest | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-569 | MIME/Filetypes | application-rpm | Red package gear seal | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-570 | MIME/Filetypes | application-pkg | Generic package crate | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-571 | MIME/Filetypes | application-iso | Optical disc over archive case | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-572 | MIME/Filetypes | application-torrent | Blue torrent spiral on parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-573 | MIME/Filetypes | application-font | Illuminated A type specimen | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-565 | MIME/Filetypes | application-vnd.snap | Snapped rune loop package seal | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-566 | MIME/Filetypes | application-x-executable | Steel gear with green play rune | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-567 | MIME/Filetypes | application-x-sharedlib | Linked library chain glyph | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-568 | MIME/Filetypes | application-x-deb | Debian swirl stamped on package chest | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-569 | MIME/Filetypes | application-x-rpm | Red package gear seal | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-570 | MIME/Filetypes | package-x-generic | Generic package crate | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-571 | MIME/Filetypes | application-x-cd-image | Optical disc over archive case | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-572 | MIME/Filetypes | application-x-bittorrent | Blue torrent spiral on parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-573 | MIME/Filetypes | font-x-generic | Illuminated A type specimen | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-574 | MIME/Filetypes | application-certificate | Signed certificate scroll with seal | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-575 | MIME/Filetypes | application-key | Silver cryptographic key on dark parchment | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-576 | MIME/Filetypes | application-encrypted | Locked parchment with Quen shield | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-577 | MIME/Filetypes | image-generic | Landscape painting in carved frame | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-576 | MIME/Filetypes | encrypted | Locked parchment with Quen shield | Emblem | P1 |  | Keep strong family resemblance by file class |
+| W3-577 | MIME/Filetypes | image-x-generic | Landscape painting in carved frame | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-578 | MIME/Filetypes | image-jpeg | Landscape frame with JPEG rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-579 | MIME/Filetypes | image-png | Crystal-clear landscape frame with PNG rune | Emblem | P1 |  | Keep strong family resemblance by file class |
 | W3-580 | MIME/Filetypes | image-webp | Web-shaped image frame | Emblem | P1 |  | Keep strong family resemblance by file class |
-| W3-581 | MIME/Filetypes | image-svg | Vector knot on transparent frame | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-581 | MIME/Filetypes | image-svg+xml | Vector knot on transparent frame | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-582 | MIME/Filetypes | image-gif | Animated double-frame image tile | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-583 | MIME/Filetypes | image-raw | Unpolished photo crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-583 | MIME/Filetypes | image-x-dcraw | Unpolished photo crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-584 | MIME/Filetypes | image-heif | High-efficiency image crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-585 | MIME/Filetypes | image-tiff | Layered archival image parchment | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-586 | MIME/Filetypes | image-psd | Stacked painted layers with PS rune | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-587 | MIME/Filetypes | image-kra | Krita feather over layered canvas | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-588 | MIME/Filetypes | image-xcf | GIMP brush over layered canvas | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-589 | MIME/Filetypes | audio-generic | Music note on sound crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-590 | MIME/Filetypes | audio-mp3 | Music note with MP3 rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-586 | MIME/Filetypes | image-vnd.adobe.photoshop | Stacked painted layers with PS rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-587 | MIME/Filetypes | application-x-krita | Krita feather over layered canvas | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-588 | MIME/Filetypes | image-x-xcf | GIMP brush over layered canvas | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-589 | MIME/Filetypes | audio-x-generic | Music note on sound crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-590 | MIME/Filetypes | audio-mpeg | Music note with MP3 rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-591 | MIME/Filetypes | audio-flac | Crystal waveform with FLAC rune | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-592 | MIME/Filetypes | audio-wav | Waveform parchment | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-592 | MIME/Filetypes | audio-vnd.wave | Waveform parchment | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-593 | MIME/Filetypes | audio-ogg | Round OGG sound stone | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-594 | MIME/Filetypes | audio-opus | Purple opus waveform gem | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-595 | MIME/Filetypes | audio-m4a | Silver M4A audio tablet | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-594 | MIME/Filetypes | audio-x-opus+ogg | Purple opus waveform gem | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-595 | MIME/Filetypes | audio-mp4 | Silver M4A audio tablet | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-596 | MIME/Filetypes | audio-playlist | List parchment with music runes | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-597 | MIME/Filetypes | video-generic | Film strip with play rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-597 | MIME/Filetypes | video-x-generic | Film strip with play rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-598 | MIME/Filetypes | video-mp4 | Film strip with MP4 plaque | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-599 | MIME/Filetypes | video-mkv | Dark film vault with MKV rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-599 | MIME/Filetypes | video-matroska | Dark film vault with MKV rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-600 | MIME/Filetypes | video-webm | Web-like film rune | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-601 | MIME/Filetypes | video-avi | Classic film reel with AVI plate | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-602 | MIME/Filetypes | video-mov | Polished film reel with MOV seal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-601 | MIME/Filetypes | video-vnd.avi | Classic film reel with AVI plate | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-602 | MIME/Filetypes | video-quicktime | Polished film reel with MOV seal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-603 | MIME/Filetypes | video-mpeg | Film strip with MPEG rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-604 | MIME/Filetypes | model-3d | Wireframe wyvern head | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-605 | MIME/Filetypes | model-blend | Orange forge-eye 3D file rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-605 | MIME/Filetypes | application-x-blender | Orange forge-eye 3D file rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-606 | MIME/Filetypes | model-stl | Triangulated steel sculpture | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-607 | MIME/Filetypes | model-obj | Stone bust with OBJ rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-608 | MIME/Filetypes | model-fbx | Rigged puppet rune | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-609 | MIME/Filetypes | model-glb | Faceted 3D crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-610 | MIME/Filetypes | model-gltf | Linked 3D node crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-609 | MIME/Filetypes | model-gltf-binary | Faceted 3D crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-610 | MIME/Filetypes | model-gltf+json | Linked 3D node crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-611 | Categories/Misc | applications-accessories | Utility pouch with assorted witcher tools | Emblem | P1 |  |  |
 | W3-612 | Categories/Misc | applications-development | Hammer and code-rune crossed | Emblem | P1 |  |  |
 | W3-613 | Categories/Misc | applications-education | Oxenfurt scholar cap over grimoire | Emblem | P1 |  |  |
@@ -661,21 +661,21 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-623 | Categories/Misc | preferences-desktop | Desktop crystal with gear seal | Emblem | P1 |  |  |
 | W3-624 | Categories/Misc | preferences-system | System gear over Quen shield | Emblem | P1 |  |  |
 | W3-625 | Categories/Misc | preferences-hardware | Gear and processor crystal | Emblem | P1 |  |  |
-| W3-626 | Categories/Misc | preferences-network | Linked network tower sigil | Emblem | P1 |  |  |
+| W3-626 | Categories/Misc | preferences-system-network | Linked network tower sigil | Emblem | P1 |  |  |
 | W3-627 | Categories/Misc | preferences-security | Quen shield with key | Emblem | P1 |  |  |
 | W3-628 | Categories/Misc | preferences-appearance | Mirror and paintbrush | Emblem | P1 |  |  |
-| W3-629 | Categories/Misc | preferences-keyboard | Rune keyboard plate | Emblem | P1 |  |  |
-| W3-630 | Categories/Misc | preferences-mouse | Mouse familiar over gear | Emblem | P1 |  |  |
-| W3-631 | Categories/Misc | preferences-display | Monitor crystal with sliders | Emblem | P2 |  |  |
-| W3-632 | Categories/Misc | preferences-audio | Sound horn with sliders | Emblem | P2 |  |  |
-| W3-633 | Categories/Misc | preferences-bluetooth | Blue tooth-rune with gear | Emblem | P2 |  |  |
-| W3-634 | Categories/Misc | preferences-power | Mutagen battery with gear | Emblem | P2 |  |  |
-| W3-635 | Categories/Misc | preferences-notifications | Bell talisman with gear | Emblem | P2 |  |  |
-| W3-636 | Categories/Misc | preferences-users | Twin portrait cameos | Emblem | P2 |  |  |
-| W3-637 | Categories/Misc | preferences-time | Clock rune with gear | Emblem | P2 |  |  |
-| W3-638 | Categories/Misc | preferences-locale | Globe and language scroll | Emblem | P2 |  |  |
-| W3-639 | Categories/Misc | preferences-storage | Disk vault with gear | Emblem | P2 |  |  |
-| W3-640 | Categories/Misc | preferences-printer | Printing press with gear | Emblem | P2 |  |  |
+| W3-629 | Categories/Misc | preferences-desktop-keyboard | Rune keyboard plate | Emblem | P1 |  |  |
+| W3-630 | Categories/Misc | preferences-desktop-mouse | Mouse familiar over gear | Emblem | P1 |  |  |
+| W3-631 | Categories/Misc | preferences-desktop-display | Monitor crystal with sliders | Emblem | P2 |  |  |
+| W3-632 | Categories/Misc | preferences-desktop-sound | Sound horn with sliders | Emblem | P2 |  |  |
+| W3-633 | Categories/Misc | preferences-system-bluetooth | Blue tooth-rune with gear | Emblem | P2 |  |  |
+| W3-634 | Categories/Misc | preferences-system-power-management | Mutagen battery with gear | Emblem | P2 |  |  |
+| W3-635 | Categories/Misc | preferences-desktop-notification | Bell talisman with gear | Emblem | P2 |  |  |
+| W3-636 | Categories/Misc | preferences-system-users | Twin portrait cameos | Emblem | P2 |  |  |
+| W3-637 | Categories/Misc | preferences-system-time | Clock rune with gear | Emblem | P2 |  |  |
+| W3-638 | Categories/Misc | preferences-desktop-locale | Globe and language scroll | Emblem | P2 |  |  |
+| W3-639 | Categories/Misc | preferences-system-disks | Disk vault with gear | Emblem | P2 |  |  |
+| W3-640 | Categories/Misc | preferences-devices-printer | Printing press with gear | Emblem | P2 |  |  |
 | W3-641 | Categories/Misc | system-help | Question rune over open grimoire | Emblem | P2 |  |  |
 | W3-642 | Categories/Misc | system-about | Information rune on wolf medallion | Emblem | P2 |  |  |
 | W3-643 | Categories/Misc | system-software-install | Package chest with downward arrow | Emblem | P2 |  |  |
