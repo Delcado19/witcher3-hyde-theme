@@ -632,12 +632,12 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-594 | MIME/Filetypes | audio-x-opus+ogg | Purple opus waveform gem | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-595 | MIME/Filetypes | audio-mp4 | Silver M4A audio tablet | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-596 | MIME/Filetypes | audio-playlist | List parchment with music runes | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-597 | MIME/Filetypes | video-generic | Film strip with play rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-597 | MIME/Filetypes | video-x-generic | Film strip with play rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-598 | MIME/Filetypes | video-mp4 | Film strip with MP4 plaque | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-599 | MIME/Filetypes | video-mkv | Dark film vault with MKV rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-599 | MIME/Filetypes | video-matroska | Dark film vault with MKV rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-600 | MIME/Filetypes | video-webm | Web-like film rune | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-601 | MIME/Filetypes | video-avi | Classic film reel with AVI plate | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-602 | MIME/Filetypes | video-mov | Polished film reel with MOV seal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-601 | MIME/Filetypes | video-vnd.avi | Classic film reel with AVI plate | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-602 | MIME/Filetypes | video-quicktime | Polished film reel with MOV seal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-603 | MIME/Filetypes | video-mpeg | Film strip with MPEG rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-604 | MIME/Filetypes | model-3d | Wireframe wyvern head | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-605 | MIME/Filetypes | model-blend | Orange forge-eye 3D file rune | Emblem | P2 |  | Keep strong family resemblance by file class |
