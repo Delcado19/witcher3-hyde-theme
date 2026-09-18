@@ -1,0 +1,83 @@
+# Hybrid Hero Crossover Pilot
+
+## Purpose
+
+Determine where detailed raster artwork becomes visibly superior to a deliberately simplified SVG treatment for Witcher3-HyDE Hero/Application icons.
+
+No crossover size is assumed in advance.
+
+## Initial candidates
+
+### W3-070 — dolphin
+
+`Blue sea-dolphin sigil on a steel file-cabinet shield`
+
+Useful because it has a broad object/silhouette, large steel surfaces that can carry raster material detail, and a strong cyan identity cue that remains suitable for simplified SVG.
+
+### W3-083 — kitty
+
+`Cat-school medallion with a terminal prompt etched below`
+
+Useful because its medallion/character construction differs materially from Dolphin, while face, metal wear, engraving, and inset details can benefit from a detailed raster master.
+
+W3-082 `konsole` remains a third control if Dolphin and Kitty disagree materially.
+
+## Comparison sizes
+
+- 32 px
+- 48 px
+- 64 px
+- 96 px
+- 128 px
+- 256 px
+- 512 px
+
+These are test points, **not a release PNG ladder**.
+
+## Review surfaces
+
+- `#0A151E`
+- `#171A1C`
+- `#1C1813`
+- `#262729`
+- `#F2F0EA`
+
+## Raster workflow
+
+For each candidate:
+
+1. keep the accepted SVG as the simplified/vector comparison;
+2. create one square detailed raster master at high resolution, initially 1024×1024 or larger if justified;
+3. generate initial downscaled comparisons;
+4. where raster appears promising, create size-specific optimized PNGs;
+5. rerun the review using those optimized PNGs;
+6. judge the crossover at normal viewing scale.
+
+A size-specific PNG may adjust local contrast, edge sharpness, silhouette separation, texture strength, highlight placement, and details that otherwise collapse. It is not required to be a blind mechanical resize.
+
+## Review tool
+
+```text
+python3 tools/build-hybrid-icon-review.py \
+  --svg design/icons/src/apps/dolphin.svg \
+  --raster-master <path-to-master.png> \
+  --optimized-dir <optional-size-specific-png-directory> \
+  --output build/icons/dolphin-hybrid-review.html \
+  --require-raster
+```
+
+An optimized directory uses exact target filenames such as `32.png`, `48.png`, `64.png`, `96.png`, `128.png`, `256.png`, and `512.png`. A present exact-size PNG overrides master downscaling only at that size.
+
+## Decision rule
+
+The crossover is the first size where the detailed raster treatment is **clearly and consistently better at normal viewing scale**, not merely more detailed under zoom.
+
+Review identity/silhouette, edge quality, material readability, useful texture survival, visual noise, dark-surface separation, and light-edge-case survival.
+
+Do not freeze a class-wide threshold from one ambiguous result. Compare both Dolphin and Kitty; use Konsole as a third control if needed.
+
+## Current status
+
+Candidate selection and review tooling are defined.
+
+No raster master has yet been accepted, and **no SVG↔PNG crossover size has been established**.

@@ -45,6 +45,7 @@ Project references:
 - [`design/icons/matrix/witcher-icon-matrix-v1.md`](design/icons/matrix/witcher-icon-matrix-v1.md) — 645-design icon specification
 - [`design/icons/ART_DIRECTION.md`](design/icons/ART_DIRECTION.md) — Hero/Glyph/Emblem visual system and acceptance rules
 - [`design/icons/PILOT_BATCH.md`](design/icons/PILOT_BATCH.md) — first 14-icon artwork validation batch
+- [`design/icons/HYBRID_CROSSOVER_PILOT.md`](design/icons/HYBRID_CROSSOVER_PILOT.md) — Hero SVG↔PNG visual crossover experiment
 
 Current integration is tested against pinned upstream states where practical instead of silently following moving targets.
 

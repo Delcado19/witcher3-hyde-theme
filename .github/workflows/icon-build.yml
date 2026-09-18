@@ -9,8 +9,11 @@ on:
       - 'tools/build-icons.py'
       - 'tools/validate-icon-sources.py'
       - 'tools/build-icon-review.py'
+      - 'tools/build-hybrid-icon-review.py'
+      - 'design/icons/HYBRID_CROSSOVER_PILOT.md'
       - 'tests/test_build_icons.py'
       - 'tests/test_icon_review.py'
+      - 'tests/test_hybrid_icon_review.py'
       - '.github/workflows/icon-build.yml'
   pull_request:
     paths:
@@ -20,8 +23,11 @@ on:
       - 'tools/build-icons.py'
       - 'tools/validate-icon-sources.py'
       - 'tools/build-icon-review.py'
+      - 'tools/build-hybrid-icon-review.py'
+      - 'design/icons/HYBRID_CROSSOVER_PILOT.md'
       - 'tests/test_build_icons.py'
       - 'tests/test_icon_review.py'
+      - 'tests/test_hybrid_icon_review.py'
       - '.github/workflows/icon-build.yml'
   workflow_dispatch:
 
@@ -47,8 +53,10 @@ jobs:
             tools/build-icons.py \
             tools/validate-icon-sources.py \
             tools/build-icon-review.py \
+            tools/build-hybrid-icon-review.py \
             tests/test_build_icons.py \
-            tests/test_icon_review.py
+            tests/test_icon_review.py \
+            tests/test_hybrid_icon_review.py
 
       - name: Validate repository artwork incrementally
         run: |
@@ -64,7 +72,7 @@ jobs:
       - name: Run icon tooling fixture suite
         run: |
           set -Eeuo pipefail
-          python3 -m unittest -v tests/test_build_icons.py tests/test_icon_review.py
+          python3 -m unittest -v tests/test_build_icons.py tests/test_icon_review.py tests/test_hybrid_icon_review.py
 
       - name: Verify tests left no release artifact
         run: |

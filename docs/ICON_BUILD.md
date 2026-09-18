@@ -386,3 +386,18 @@ Expected tendencies are hypotheses, not frozen rules:
 - Detailed Hero/application artwork is the primary candidate for simplified small-size SVG plus optimized larger PNGs.
 
 If the crossover proves consistent by class or family, encode the policy centrally. If individual canonicals require exceptions, add explicit delivery metadata rather than overloading `style_class` or free-form matrix notes.
+
+
+## 14. Hybrid crossover review helper
+
+The visual crossover pilot uses:
+
+```text
+python3 tools/build-hybrid-icon-review.py
+```
+
+The helper compares a simplified source SVG with a detailed raster master at the current test sizes 32, 48, 64, 96, 128, 256, and 512 px on the standard review surfaces.
+
+It is intentionally neutral about the final threshold. When `--optimized-dir` contains `<size>.png`, that exact-size derivative replaces the master downscale for the corresponding comparison. This supports size-specific optimization without assuming which sizes will ultimately ship.
+
+The helper writes only disposable HTML below `build/`; it does not generate artwork and does not define the release layout.
