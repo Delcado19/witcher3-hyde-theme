@@ -311,6 +311,8 @@ The final release format is **hybrid SVG/PNG**. Small functional artwork uses si
 
 The visual rules are defined in [`design/icons/ART_DIRECTION.md`](design/icons/ART_DIRECTION.md). The first cross-context review set is defined in [`design/icons/PILOT_BATCH.md`](design/icons/PILOT_BATCH.md). The 14-icon Hero/Glyph/Emblem pilot is complete, visually reviewed at its mandatory sizes and project surfaces, and protected by a fail-closed CI completeness gate.
 
+The Hero hybrid-crossover pilot has now reached its first production-quality raster milestone: corrected Dolphin and Kitty raster masters were generated from scratch and visually accepted as quality anchors. A same-identity simplified Dolphin medallion SVG is tracked under `design/icons/hybrid-pilot/dolphin-simplified.svg`, and the seven native-size test renders have been produced. No SVG→PNG crossover size is frozen yet; a materially different second Hero construction is still required before any class-wide default is considered.
+
 For the Hero hybrid pilot, the project-owner-approved quality anchors are now a corrected circular Dolphin medallion treatment and a Kitty medallion/terminal treatment at true high-detail raster quality. The earlier folder/file-cabinet Dolphin composition is retired as final Dolphin identity but may remain a labelled detail-stress-test reference. None of these reference binaries are committed automatically without provenance/redistribution clearance.
 
 ### Build contract

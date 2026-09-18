@@ -192,3 +192,31 @@ That use must be labelled explicitly:
 - **tooling fixture** — synthetic/procedural output used only to validate the review pipeline.
 
 Only a **production-quality final identity reference** may decide the actual crossover for that canonical. A stress-test image can reveal failure modes but cannot override the approved final art direction.
+
+
+## Production-quality master milestone — 2026-09-18
+
+Two generated-from-scratch Hero raster masters now pass the visual quality gate in the working session:
+
+- **Dolphin:** corrected circular forged-medallion identity with a large silver Dolphin, blackened/weathered steel, rune geometry, authored surface wear, and restrained red recess light;
+- **Kitty:** forged cat/terminal medallion at the same material-fidelity bar.
+
+The project owner visually accepted both as high-quality Hero references.
+
+The generated masters are 1254×1254 and exceed the initial 1024 px minimum. They are working-session pilot assets; promotion into the final release raster source layout remains pending until the crossover policy and storage layout are frozen.
+
+### Corrected Dolphin SVG control
+
+The repository now contains:
+
+`design/icons/hybrid-pilot/dolphin-simplified.svg`
+
+This is a deliberately simplified vector treatment of the **same corrected medallion identity** as the raster master.
+
+The previously accepted `design/icons/src/apps/dolphin.svg` still represents the older folder/file-cabinet composition and therefore must not be used as the SVG side of the real crossover experiment.
+
+Native-size SVG/PNG samples have now been rendered at all seven test sizes. This is the first technically valid Dolphin comparison. No crossover threshold is frozen yet.
+
+### Important limitation
+
+Dolphin and Kitty are both circular medallions. Kitty confirms the material/finish quality bar, but it does not satisfy the requirement for a materially different second Hero construction. A second non-medallion Hero is still required before a class-wide default can be considered.
