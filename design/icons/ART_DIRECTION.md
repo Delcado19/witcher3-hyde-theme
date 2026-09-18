@@ -166,6 +166,8 @@ A familiar symbol may be replaced only when the replacement is at least as immed
 
 For semantic families, first establish one approved base object or symbol and then derive family variants from it. Example: approve one strong Witcher folder master, then derive Home, Downloads, Documents, Music, Pictures and related folder variants through secondary emblems rather than reinventing the folder silhouette for every canonical.
 
+Secondary emblems must also follow established semantic conventions. They exist to clarify the variant, not merely to decorate it. Do not place a symbol on a familiar base object if users are likely to associate that symbol with a different function. A Home folder should use a home/house cue, Downloads should use a download/downward-transfer cue, Music should use an established music/audio cue, Pictures should use an image/photo cue, and so on. Witcher-themed ornaments may support these cues, but must not replace them with ambiguous swords, runes, monsters, alchemical marks, or other lore motifs that imply a different meaning.
+
 ## 7. Canvas, master size, and safe area
 
 Vector artwork should use a square coordinate system. The preferred authoring canvas is:
