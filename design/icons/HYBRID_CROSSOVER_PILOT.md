@@ -487,3 +487,19 @@ For these two candidates, the working delivery model is therefore:
 
 No claim is made yet about intermediate untested sizes.
 
+
+
+## Focused 256 px tie-break package prepared
+
+Because project-owner review found 256 px genuinely borderline for both Dolphin and Kitty, dedicated 256 px review sheets have now been generated.
+
+For each canonical, the focused package shows:
+
+- PNG vs SVG at true native 256 px;
+- all five required review surfaces;
+- a separate 2× nearest-neighbour diagnostic for material/edge inspection only.
+
+The 2× sheet must not replace the native-size verdict.
+
+Status: **awaiting project-owner 256 px decision**.
+
