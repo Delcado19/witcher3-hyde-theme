@@ -503,3 +503,26 @@ The 2× sheet must not replace the native-size verdict.
 
 Status: **awaiting project-owner 256 px decision**.
 
+
+
+## Critical correction — Kitty light-background alpha failure
+
+The project owner correctly identified that the Kitty review was visibly wrong on the required light background.
+
+Root-cause analysis found **two separate alpha defects**:
+
+1. the local working Kitty transparent master had been produced by corner-connected near-black flood removal; because very dark forged regions touched the exterior background, that flood operation removed **77,393 interior master pixels** that should have remained opaque;
+2. independently, the faceted SVG renderer leaves many anti-aliased internal polygon pixels partially transparent. Seam overlap reduces this but does not guarantee opaque interior coverage on a light desktop background.
+
+Therefore:
+
+- the previous Kitty crossover package is **invalid** and must not be used for a delivery verdict;
+- the previously recorded combined Dolphin+Kitty crossover conclusion is **superseded**;
+- the focused Kitty 256 px tie-break is also invalid;
+- the Kitty master must be rebuilt with a closed opaque medallion silhouette before reconstruction;
+- the reconstructor now adds a source-alpha-derived dark vector **underpainting silhouette** below all facets by default, so internal anti-aliasing reveals forged material rather than the external desktop background;
+- the underpainting is a real SVG path, not embedded raster data;
+- intentional alpha holes in a correctly prepared source are preserved through even-odd silhouette topology.
+
+Because the same facet anti-aliasing mechanism exists in Dolphin, Dolphin must also be re-rendered with the underpainting before its earlier size verdict is treated as final. The user's earlier Dolphin preference remains useful prior evidence, but the formal crossover is reopened until corrected light-background sheets are reviewed.
+

@@ -175,3 +175,19 @@ Adjacent facet polygons may use a small same-color stroke overlap to cover rende
 
 For the current 512-unit reconstruction analysis canvas, Dolphin testing selected **1.25 analysis pixels** as the default seam overlap. This replaces the earlier 0.55 value, which allowed light backgrounds to leak through internal facet boundaries and falsely reduced perceived brilliance.
 
+
+
+## Opaque vector underpainting requirement
+
+Faceted Hero SVGs must not rely on thousands of adjacent anti-aliased polygons to provide the icon's only interior opacity.
+
+The reconstructor must place a dark, source-alpha-derived **vector silhouette underpainting** beneath the facet layer by default. This underpainting:
+
+- is a real SVG path, never an embedded PNG;
+- follows source alpha topology and preserves intentional holes;
+- derives its dark material color from the source artwork;
+- prevents light or colored desktop backgrounds from leaking through internal facet boundaries;
+- does not replace seam overlap, which remains useful for color continuity between neighboring facets.
+
+A source master itself must also have correct alpha topology. Background removal that leaks into blackened-iron regions invalidates the reconstruction input and any crossover review derived from it.
+

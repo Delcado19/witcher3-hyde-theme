@@ -55,6 +55,26 @@ class HeroSvgReconstructionHelpersTest(unittest.TestCase):
             source,
         )
 
+    def test_underlay_is_real_vector_and_precedes_facets(self):
+        svg = MODULE._emit_svg(
+            analysis_size=512,
+            art_paths='<path d="M1 1h8v8z" fill="#aaa"/>',
+            seam_stroke=1.25,
+            smoothing=False,
+            edge_path="",
+            smooth_blur=1.1,
+            smooth_detail_opacity=0.04,
+            underlay_path="M0 0h10v10z",
+            underlay_color="#120807",
+        )
+        self.assertIn('fill="#120807"', svg)
+        self.assertIn('fill-rule="evenodd"', svg)
+        self.assertNotIn("<image", svg)
+        self.assertLess(
+            svg.index('fill="#120807"'),
+            svg.index('fill="#aaa"'),
+        )
+
     def test_surface_smoothing_keeps_real_vector_art_once(self):
         svg = MODULE._emit_svg(
             analysis_size=512,

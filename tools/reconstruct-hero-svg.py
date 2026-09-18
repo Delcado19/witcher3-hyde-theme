@@ -204,6 +204,58 @@ def _edge_mask_path(
     return "".join(paths), coverage, len(paths)
 
 
+def _alpha_underlay(
+    rgb,
+    alpha,
+    *,
+    alpha_threshold: int,
+    contour_epsilon: float = 1.0,
+):
+    """Build an opaque dark vector underpainting for the visible silhouette.
+
+    Facet paths are individually anti-aliased by SVG renderers. Thousands of
+    adjacent paths can therefore expose the desktop background through tiny
+    partially transparent seams. A silhouette underpainting keeps those seams
+    inside the artwork instead of letting the external background leak through.
+
+    The underlay follows the source alpha topology (including real holes) and
+    derives its dark forged-material color from the source image itself.
+    """
+    cv2, np, *_ = _runtime_modules()
+    visible = alpha > alpha_threshold
+    binary = visible.astype(np.uint8) * 255
+    contours, _ = cv2.findContours(
+        binary, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE
+    )
+    paths: list[str] = []
+    for contour in contours:
+        if cv2.contourArea(contour) < 1.0:
+            continue
+        approx = cv2.approxPolyDP(contour, contour_epsilon, True)
+        points = approx[:, 0, :]
+        if len(points) < 3:
+            continue
+        paths.append(relative_polygon_path(points))
+
+    pixels = rgb[visible].astype(np.float32)
+    if len(pixels) == 0:
+        color = "#000000"
+    else:
+        luma = (
+            0.2126 * pixels[:, 0]
+            + 0.7152 * pixels[:, 1]
+            + 0.0722 * pixels[:, 2]
+        )
+        threshold = float(np.percentile(luma, 25.0))
+        dark = pixels[luma <= threshold]
+        median = np.rint(np.median(dark, axis=0)).astype(np.uint8)
+        color = "#{:02x}{:02x}{:02x}".format(
+            int(median[0]), int(median[1]), int(median[2])
+        )
+
+    return "".join(paths), color, len(paths)
+
+
 def _emit_svg(
     *,
     analysis_size: int,
@@ -213,12 +265,21 @@ def _emit_svg(
     edge_path: str,
     smooth_blur: float,
     smooth_detail_opacity: float,
+    underlay_path: str = "",
+    underlay_color: str = "#000000",
 ) -> str:
-    group = (
+    underlay = (
+        f'<path fill="{underlay_color}" fill-rule="evenodd" '
+        f'd="{underlay_path}"/>'
+        if underlay_path
+        else ""
+    )
+    facets = (
         '<g shape-rendering="geometricPrecision" '
         'stroke-linejoin="round" '
         f'stroke-width="{seam_stroke:g}">{art_paths}</g>'
     )
+    group = underlay + facets
     if not smoothing:
         return (
             f'<svg xmlns="http://www.w3.org/2000/svg" '
@@ -268,6 +329,7 @@ def reconstruct(
     edge_epsilon: float,
     smooth_detail_opacity: float,
     brilliance: str,
+    opaque_underlay: bool,
 ) -> dict[str, int | float | str | bool | None]:
     cv2, np, Image, slic, KMeans = _runtime_modules()
 
@@ -369,6 +431,16 @@ def reconstruct(
         )
         emitted_colors += 1
 
+    underlay_path = ""
+    underlay_color = "#000000"
+    underlay_shapes = 0
+    if opaque_underlay:
+        underlay_path, underlay_color, underlay_shapes = _alpha_underlay(
+            rgb,
+            alpha,
+            alpha_threshold=alpha_threshold,
+        )
+
     edge_path = ""
     edge_coverage = 0.0
     edge_shapes = 0
@@ -389,6 +461,8 @@ def reconstruct(
         edge_path=edge_path,
         smooth_blur=smooth_blur,
         smooth_detail_opacity=smooth_detail_opacity,
+        underlay_path=underlay_path,
+        underlay_color=underlay_color,
     )
 
     output_svg.parent.mkdir(parents=True, exist_ok=True)
@@ -413,6 +487,9 @@ def reconstruct(
         "brilliance_highlight_threshold": brilliance_report[
             "highlight_threshold"
         ],
+        "opaque_underlay": opaque_underlay,
+        "underlay_color": underlay_color if opaque_underlay else None,
+        "underlay_shapes": underlay_shapes,
     }
 
 
@@ -562,6 +639,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--alpha-threshold", type=int, default=20)
     parser.add_argument("--min-area", type=float, default=1.0)
     parser.add_argument("--seam-stroke", type=float, default=1.25)
+    parser.add_argument(
+        "--no-underlay",
+        action="store_true",
+        help=(
+            "disable the source-alpha silhouette underpainting that prevents "
+            "desktop background leakage through anti-aliased facet seams"
+        ),
+    )
     parser.add_argument("--surface-smoothing", action="store_true")
     parser.add_argument("--smooth-blur", type=float, default=1.1)
     parser.add_argument("--edge-threshold", type=float, default=105.0)
@@ -617,6 +702,7 @@ def main() -> int:
         edge_epsilon=args.edge_epsilon,
         smooth_detail_opacity=args.smooth_detail_opacity,
         brilliance=args.brilliance,
+        opaque_underlay=not args.no_underlay,
     )
 
     optimized = (
