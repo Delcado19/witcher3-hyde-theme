@@ -266,3 +266,18 @@ Visual result so far:
 
 Next technical target: preserve the same reconstructed geometry while reducing the 512 px faceting, preferably with edge/material-aware refinement rather than merely multiplying polygons until file size becomes raster-like.
 
+
+
+## Project-owner visual verdict — first reconstruction
+
+The first serious Dolphin PNG→SVG reconstruction has now been visually reviewed by the project owner.
+
+Verdict:
+
+- the reconstruction approach is **accepted as the correct direction**;
+- the SVG is visually strong and preserves the intended Dolphin identity, Witcher material language, composition and palette;
+- the remaining visible defect is a slight **mosaic/faceted appearance**, especially at larger display size;
+- this artifact is understood as a segmentation/polygon-surface issue, not a failure of the underlying visual direction;
+- the next refinement must therefore improve surface continuity without changing silhouette, composition, dominant colors or the approved forged-metal style.
+
+The current SVG should still be treated as a working candidate rather than a frozen final Hero asset until the faceting is reduced and the large-size fidelity gate is revisited.
