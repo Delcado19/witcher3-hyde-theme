@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a self-contained SVG-vs-PNG crossover review sheet.
 
-The helper compares one simplified SVG treatment with a detailed raster master.
+The helper compares one SVG treatment with a detailed raster master.
 When <size>.png exists in an optimized directory, that exact-size PNG overrides
 master downscaling for the corresponding review size.
 
@@ -21,7 +21,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER_PATH = ROOT / "tools/build-icons.py"
 DEFAULT_OUTPUT = ROOT / "build/icons/hybrid-crossover-review.html"
-SIZES = (32, 48, 64, 96, 128, 256, 512)
+SIZES = (32, 48, 64, 96, 128, 256, 512, 1024)
 SURFACES = (
     ("w3-canvas", "#0A151E"),
     ("w3-surface", "#171A1C"),

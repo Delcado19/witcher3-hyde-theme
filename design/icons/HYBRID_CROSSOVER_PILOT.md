@@ -47,6 +47,7 @@ W3-082 `konsole` remains available as a third control if valid production-qualit
 - 128 px
 - 256 px
 - 512 px
+- 1024 px
 
 These are test points, **not a release PNG ladder**.
 
@@ -65,9 +66,9 @@ For each Hero candidate:
 1. establish and approve one square detailed raster master at 1024×1024 or larger;
 2. treat that master as the visual source of truth;
 3. attempt a **faithful PNG→SVG reconstruction**, not a stylistic simplification;
-4. test the SVG against the raster first at 256 and 512 px for subject, silhouette, composition, color hierarchy, depth, lighting and material fidelity;
+4. test the SVG against the raster first at 256, 512 and 1024 px for subject, silhouette, composition, color hierarchy, depth, lighting and material fidelity;
 5. if the SVG fails that fidelity gate, stop: the candidate remains PNG delivery and no SVG crossover is inferred;
-6. only if the SVG passes, generate the seven native-size SVG/PNG comparisons;
+6. only if the SVG passes, generate the eight native-size SVG/PNG comparisons;
 7. create size-specific optimized PNGs where needed;
 8. judge any actual delivery crossover at normal viewing scale.
 
@@ -86,13 +87,13 @@ python3 tools/build-hybrid-icon-review.py \
   --require-raster
 ```
 
-An optimized directory uses exact target filenames such as `32.png`, `48.png`, `64.png`, `96.png`, `128.png`, `256.png`, and `512.png`. A present exact-size PNG overrides master downscaling only at that size.
+An optimized directory uses exact target filenames such as `32.png`, `48.png`, `64.png`, `96.png`, `128.png`, `256.png`, `512.png`, and `1024.png`. A present exact-size PNG overrides master downscaling only at that size.
 
 ## Decision rule
 
 Hero review now has two gates.
 
-1. **Fidelity gate:** the SVG must first look like the same approved artwork at 256 and 512 px. Wrong subject/silhouette, flat/cartoon treatment, major color mismatch, lost material language or visibly different composition is an immediate reject.
+1. **Fidelity gate:** the SVG must first look like the same approved artwork at 256, 512 and 1024 px. Wrong subject/silhouette, flat/cartoon treatment, major color mismatch, lost material language or visibly different composition is an immediate reject.
 2. **Crossover gate:** only a fidelity-passing SVG is compared at 32, 48, 64, 96, 128, 256 and 512 px.
 
 If the fidelity gate fails, PNG-only is an approved result and no crossover size is invented.
@@ -186,7 +187,7 @@ Only after a raster master passes the quality gate:
 1. build a visually faithful vector reconstruction of the approved canonical;
 2. compare SVG and PNG at 256 and 512 px first;
 3. reject the SVG immediately if subject, silhouette, composition, color, depth, lighting or material character diverges materially from the PNG;
-4. if the SVG passes, export both forms at 32, 48, 64, 96, 128, 256 and 512 px;
+4. if the SVG passes, export both forms at 32, 48, 64, 96, 128, 256, 512 and 1024 px;
 5. optimize each candidate PNG size individually where necessary;
 6. compare **native-size output at 100% zoom** on all five standard review surfaces;
 7. measure/record SVG complexity and byte size alongside visual quality;
@@ -685,3 +686,29 @@ This decision is authoritative for the two reviewed production-quality Hero cand
 
 No claim is made for untested intermediate sizes between 512 and 1024.
 
+
+
+## Non-medallion control protocol — W3-082 Konsole
+
+Konsole is the next required control because Dolphin and terminal-forward Kitty are both medallion constructions.
+
+Canonical matrix identity:
+
+- **W3-082 — `konsole`**
+- concept: **black rune-terminal slab with a luminous command chevron**
+- desktop alias: `org.kde.konsole`
+- style class: **Hero / P0**
+
+The existing `design/icons/src/apps/konsole.svg` is an early lightweight pilot source (739 bytes). It is **not** a production-quality Hero master and must not be used to prove the SVG/PNG delivery boundary.
+
+Before Konsole can contribute valid crossover evidence:
+
+1. establish and project-owner-approve one production-quality, non-medallion Konsole raster master at **1024×1024 or larger**;
+2. preserve the terminal-slab identity rather than converting it into another circular medallion;
+3. require the normal Hero material bar: blackened/weathered metal, convincing depth, authored wear, controlled Witcher-red accent/recess light, and a strongly readable terminal command chevron;
+4. run the faithful PNG→SVG reconstruction from that approved raster master;
+5. perform the fidelity gate at **256 / 512 / 1024 px** on all standard surfaces;
+6. if fidelity passes, run the complete **32 / 48 / 64 / 96 / 128 / 256 / 512 / 1024 px** crossover review;
+7. begin from the current Dolphin/Kitty packaging baseline (SVG through 512, PNG at 1024), but record a Konsole-specific exception if native-size review demonstrates one.
+
+No generated chat image, procedural fixture, old lightweight pilot SVG, or unapproved raster may be substituted for step 1.

@@ -62,15 +62,16 @@ class HybridIconReviewTests(unittest.TestCase):
             master = base / "master.png"
             output = base / "review.html"
             svg.write_text(MINIMAL_SVG, encoding="utf-8")
-            write_png(master, 512)
+            write_png(master, 1024)
             available, missing = hybrid_review.generate_review(svg, master, None, output)
             self.assertEqual(available, len(hybrid_review.SIZES))
             self.assertEqual(missing, [])
             document = output.read_text(encoding="utf-8")
-            self.assertIn("master downscale (512px)", document)
+            self.assertIn("master downscale (1024px)", document)
             self.assertIn("32px", document)
             self.assertIn("96px", document)
             self.assertIn("512px", document)
+            self.assertIn("1024px", document)
             self.assertIn("#0A151E", document)
             self.assertIn("#F2F0EA", document)
 
@@ -82,7 +83,7 @@ class HybridIconReviewTests(unittest.TestCase):
             optimized = base / "optimized"
             output = base / "review.html"
             svg.write_text(MINIMAL_SVG, encoding="utf-8")
-            write_png(master, 512)
+            write_png(master, 1024)
             write_png(optimized / "64.png", 64)
             hybrid_review.generate_review(svg, master, optimized, output)
             self.assertIn("optimized 64.png", output.read_text(encoding="utf-8"))
@@ -95,7 +96,7 @@ class HybridIconReviewTests(unittest.TestCase):
             optimized = base / "optimized"
             output = base / "review.html"
             svg.write_text(MINIMAL_SVG, encoding="utf-8")
-            write_png(master, 512)
+            write_png(master, 1024)
             write_png(optimized / "64.png", 48)
             with self.assertRaises(ValueError):
                 hybrid_review.generate_review(svg, master, optimized, output)
