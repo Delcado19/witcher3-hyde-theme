@@ -165,3 +165,13 @@ This allowance is conditional:
 
 The Dolphin reference uses `punchy` brilliance compensation to restore highlight/chroma range lost during segmentation and palette clustering.
 
+
+
+## Internal vector seam opacity
+
+Faithful faceted reconstructions must remain visually stable on both dark and light backgrounds.
+
+Adjacent facet polygons may use a small same-color stroke overlap to cover renderer anti-aliasing seams. This is not an outline effect and must not visibly thicken semantic edges.
+
+For the current 512-unit reconstruction analysis canvas, Dolphin testing selected **1.25 analysis pixels** as the default seam overlap. This replaces the earlier 0.55 value, which allowed light backgrounds to leak through internal facet boundaries and falsely reduced perceived brilliance.
+

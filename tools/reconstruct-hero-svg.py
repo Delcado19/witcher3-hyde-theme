@@ -401,6 +401,7 @@ def reconstruct(
         "polygons": polygon_count,
         "input_bytes": input_png.stat().st_size,
         "svg_bytes_before_optimizer": output_svg.stat().st_size,
+        "seam_stroke": seam_stroke,
         "surface_smoothing": surface_smoothing,
         "edge_mask_coverage": edge_coverage,
         "edge_mask_shapes": edge_shapes,
@@ -560,7 +561,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--epsilon", type=float)
     parser.add_argument("--alpha-threshold", type=int, default=20)
     parser.add_argument("--min-area", type=float, default=1.0)
-    parser.add_argument("--seam-stroke", type=float, default=0.55)
+    parser.add_argument("--seam-stroke", type=float, default=1.25)
     parser.add_argument("--surface-smoothing", action="store_true")
     parser.add_argument("--smooth-blur", type=float, default=1.1)
     parser.add_argument("--edge-threshold", type=float, default=105.0)

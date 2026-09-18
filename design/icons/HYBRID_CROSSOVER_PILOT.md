@@ -398,3 +398,29 @@ These byte counts are engineering context only; visual quality decides delivery.
 
 **No crossover verdict is recorded yet.** The package is awaiting project-owner native-size review. Do not infer a threshold from file size or automated metrics.
 
+
+
+## Internal facet-seam alpha correction — 2026-09-18
+
+The seven-size review exposed a renderer-level issue that was independent of the accepted facet style: the original `0.55` analysis-pixel same-color stroke did not fully cover anti-aliased boundaries between thousands of adjacent polygons.
+
+Effect:
+
+- on dark surfaces the gaps were visually hidden by the background;
+- on the required light edge-case surface, partial alpha at internal facet boundaries allowed the light background to leak through and made the SVG look grey/washed out;
+- this was incorrectly easy to interpret as a color/brilliance problem even after the `punchy` palette correction.
+
+A controlled Dolphin sweep at 512 px tested seam coverage `0.55 / 0.75 / 1.0 / 1.25 / 1.5 / 1.75 / 2.0`.
+
+Selected engineering default: **`1.25` analysis pixels**.
+
+Reasons:
+
+- substantially closes internal alpha seams on the light surface;
+- preserves the project-owner-accepted facet geometry and mosaic character;
+- keeps dark-surface fidelity close to the best-tested value;
+- avoids the increasingly heavy polygon overlap seen at wider values.
+
+The reconstructed geometry and palette are unchanged; this is only same-color facet overlap to make the vector tiling opaque and renderer-robust.
+
+The old seven-size package rendered with `0.55` is superseded for final crossover judgment and must be regenerated with `1.25`.

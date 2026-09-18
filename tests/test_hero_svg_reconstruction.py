@@ -43,6 +43,18 @@ class HeroSvgReconstructionHelpersTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             MODULE.brilliance_config("nope")
 
+    def test_default_seam_stroke_is_light_surface_safe(self):
+        args = MODULE.parse_args
+        self.assertTrue(callable(args))
+        # The production default is intentionally wider than the original
+        # 0.55 analysis-pixel seam cover, which leaked light background
+        # through thousands of anti-aliased facet boundaries.
+        source = TOOL.read_text(encoding="utf-8")
+        self.assertIn(
+            'parser.add_argument("--seam-stroke", type=float, default=1.25)',
+            source,
+        )
+
     def test_surface_smoothing_keeps_real_vector_art_once(self):
         svg = MODULE._emit_svg(
             analysis_size=512,
