@@ -109,3 +109,21 @@ Observed result at normal viewing scale:
 This is a per-canonical pilot observation, **not a frozen Hero-wide threshold**. Kitty must be reviewed before deciding whether 96 px is a stable Hero-family rule.
 
 The generated master/review files remain disposable pilot outputs under `build/`; the deterministic generator source is committed so the result can be reproduced without yet freezing the final binary-source layout.
+
+
+## Kitty prototype — prepared for visual review
+
+A deterministic Kitty raster generator is now available:
+
+`tools/generate-hybrid-pilot-kitty.py`
+
+It produces the same seven comparison sizes used by Dolphin.
+
+The internal draft comparison suggests the same likely crossover region as Dolphin, but **no Hero-wide threshold is accepted until the rendered Dolphin and Kitty sheets have been inspected visually by the project owner**.
+
+Status:
+
+- Dolphin prototype: generated/reproducible
+- Kitty prototype: generated/reproducible
+- project-owner visual review: pending
+- Hero default crossover: **not yet frozen**
