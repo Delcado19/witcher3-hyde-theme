@@ -431,7 +431,7 @@ For the icon theme:
 4. Freeze the semantic build contract. **Done.** Hybrid SVG/PNG delivery is now the target; the exact crossover and final raster size ladder remain pending visual A/B review.
 5. Define Hero/Glyph/Emblem art direction and the first cross-context pilot. **Done.**
 6. Produce and review the 14-icon pilot artwork. **Done.**
-7. Expand accepted artwork family-by-family while incremental CI validates each batch. **In progress: `main` now has 310/645 canonical artwork sources. Actions/UI, Places/Folders, Status/Panel/Waybar, and Devices are complete; MIME/Filetypes is next at W3-526.**
+7. Expand accepted artwork family-by-family while incremental CI validates each batch. **In progress: `main` has 310/645 canonical artwork sources; this branch adds W3-526–W3-542, bringing branch coverage to 327/645. Actions/UI, Places/Folders, Status/Panel/Waybar, and Devices are complete; MIME/Filetypes is in progress.**
 8. Reach 645/645 canonical artwork identities, validate the hybrid delivery policy, and run the strict full staging path. **Pending remaining artwork and hybrid-builder upgrade.**
 9. Package `Source/arcs/Icon_Witcher3-HyDE.tar.xz`. **Pending complete artwork.**
 
@@ -451,7 +451,7 @@ Until the first stable release exists, this repository should be treated as a de
 
 ## Status
 
-**Current phase:** runtime styling and icon infrastructure are validated. Icon artwork expansion is well underway: Actions/UI is 100/100, Places/Folders is 65/65, Status/Panel/Waybar is 95/95, and Devices is 45/45, all merged to `main`. `main` currently contains 310/645 canonical artwork sources. MIME/Filetypes begins next at W3-526. The final icon delivery is hybrid SVG/PNG; the visual crossover size and final raster ladder remain intentionally pending visual A/B review.
+**Current phase:** runtime styling and icon infrastructure are validated. Icon artwork expansion is well underway: Actions/UI is 100/100, Places/Folders is 65/65, Status/Panel/Waybar is 95/95, and Devices is 45/45, all merged to `main`. `main` contains 310/645 canonical artwork sources. The active MIME branch adds W3-526–W3-542, bringing branch coverage to 327/645 and MIME/Filetypes to 18/85 including the accepted W3-543 PDF pilot. The final icon delivery is hybrid SVG/PNG; the visual crossover size and final raster ladder remain intentionally pending visual A/B review.
 
 - [x] Define the project as a full HyDE theme
 - [x] Establish a current-HyDE-compatible repository baseline
