@@ -10,6 +10,15 @@ The icon matrix remains the source of truth for design coverage and naming:
 
 The build system must consume this matrix; it must not maintain a second handwritten list of icon names.
 
+The final release is intentionally **hybrid**. Output format is chosen by visible rendering benefit, not by a blanket "small PNG / large SVG" or "small SVG / large PNG" rule:
+
+- small functional artwork that gains nothing from raster detail is delivered as SVG;
+- detailed artwork is delivered as size-specific PNG where the raster version visibly preserves more material, lighting, texture, or painted detail than a reduced SVG;
+- one canonical may therefore have a simplified SVG for small sizes and optimized PNG variants for larger sizes;
+- the SVG→PNG crossover is **not frozen yet**. It must be established by visual A/B review before the final raster size set is written into the package contract.
+
+The current SVG-only staging implementation is a development scaffold, not the final v1 delivery format.
+
 ## 1. Runtime identity
 
 The runtime icon theme name is:
@@ -65,7 +74,9 @@ design/icons/src/
   categories/
 ```
 
-Each canonical matrix row owns exactly one project source SVG:
+Each canonical matrix row owns exactly one **artwork identity**, but that identity is not required to ship in only one file format.
+
+During the current family-expansion phase, vector-delivered artwork continues to live at:
 
 ```text
 design/icons/src/<context>/<canonical_name>.svg
@@ -74,11 +85,13 @@ design/icons/src/<context>/<canonical_name>.svg
 Examples:
 
 ```text
-design/icons/src/apps/firefox.svg
 design/icons/src/actions/edit-copy.svg
 design/icons/src/status/audio-volume-high.svg
+design/icons/src/devices/gpu.svg
 design/icons/src/mimetypes/application-pdf.svg
 ```
+
+Detailed raster-capable artwork may later add a high-resolution master and reviewed, size-specific PNG derivatives. The raster-master directory layout is intentionally **not frozen before the crossover pilot**; freezing it now would encode an untested output policy. The matrix remains the semantic source of truth regardless of how many delivery files a canonical ultimately emits.
 
 The matrix group maps to the source/package context as follows:
 
@@ -98,17 +111,26 @@ These are project packaging buckets. A matrix row may intentionally differ from 
 
 The existing matrix style classes remain authoritative:
 
-- **Hero** — detailed application artwork. Design master canvas: 1024×1024.
+- **Hero** — detailed application artwork. Initial detailed-master target: 1024×1024 or larger.
 - **Glyph** — reduced high-contrast artwork for Actions, Status, Waybar, and small UI surfaces.
 - **Emblem** — medium-detail artwork for Places, Devices, MIME types, and Categories.
 
-All release artwork is true vector SVG. The build must not rasterize the canonical artwork into a large set of generated PNG sizes.
+Style class defines **visual language and review requirements**, not a mandatory delivery format.
+
+Hybrid delivery rules:
+
+1. **Use SVG where raster detail has no visible advantage.** This is expected to cover Waybar/status/action Glyphs and many compact Emblems.
+2. **Use PNG where detail is visibly better.** Detailed Hero artwork is expected to benefit most from raster masters and size-specific PNG exports.
+3. **Allow both for one canonical.** A simplified small-size SVG may coexist with detailed PNGs for larger icon sizes.
+4. **Optimize raster sizes individually.** PNG variants are not accepted as a blind resize ladder; each selected size must be reviewed and may need contrast, edge, silhouette, texture, or detail adjustments.
+5. **Do not freeze the crossover by assumption.** The first PNG size is determined by visual A/B testing of the simplified SVG against the detailed raster artwork at representative desktop sizes.
+6. **Do not use an SVG wrapper containing an embedded PNG as the default workaround.** That merely hides a raster image inside SVG and does not provide the size-specific art direction the hybrid system is intended to preserve.
 
 No placeholder artwork is allowed in a release package.
 
 ## 5. Package layout
 
-The first complete release uses one scalable directory per functional context:
+The **current validation scaffold** uses one scalable directory per functional context:
 
 ```text
 Witcher3-HyDE/
@@ -123,9 +145,11 @@ Witcher3-HyDE/
     categories/
 ```
 
-The build copies canonical SVGs into the corresponding `scalable/<context>/` directory.
+The current builder copies canonical SVGs into the corresponding `scalable/<context>/` directory.
 
-The initial `index.theme` contract is:
+This is **not the frozen final hybrid layout**. The final v1 package may additionally contain fixed-size raster directories such as `<size>x<size>/<context>/` for approved PNG sizes. The exact raster size set and the SVG/PNG crossover remain pending visual review.
+
+The current SVG-only validation `index.theme` scaffold is:
 
 ```ini
 [Icon Theme]
@@ -190,9 +214,9 @@ MaxSize=1024
 
 For every matrix row:
 
-1. `canonical_name` owns the SVG artwork.
-2. Every semicolon-separated entry in `aliases` becomes a relative symlink in the same package directory.
-3. Alias files never duplicate SVG data.
+1. `canonical_name` owns the artwork identity.
+2. Every semicolon-separated entry in `aliases` becomes a relative symlink to the canonical file in every emitted delivery directory where that canonical exists.
+3. Alias files never duplicate SVG or PNG data.
 4. The build fails if an alias collides with another canonical or alias.
 5. The build fails if an alias symlink would be dangling.
 6. A canonical name must never also be emitted as its own alias.
@@ -206,11 +230,11 @@ scalable/apps/com.github.taiko2k.tauonmb.svg -> tauonmb.svg
 
 The existing matrix validator remains responsible for global canonical/alias namespace integrity before packaging begins.
 
-## 7. SVG validation
+## 7. Artwork validation
 
-A release build must fail if any of the 645 canonical source SVGs is missing or invalid.
+The current incremental pipeline validates SVG artwork because the already-produced Glyph/Emblem families are vector sources. The final hybrid pipeline must validate both vector and raster delivery assets.
 
-At minimum, every canonical SVG must:
+At minimum, every emitted SVG must:
 
 - parse as XML;
 - have an `<svg>` root element;
@@ -221,15 +245,17 @@ At minimum, every canonical SVG must:
 
 The build may add stricter SVG checks later, but it must not silently rewrite artwork in ways that alter the visual design.
 
+For raster-delivered canonicals, the final pipeline must additionally validate the approved master/derivative relationship, exact target dimensions, alpha handling, absence of accidental upscaling, and the expected per-size file set. Those rules will be frozen after the visual crossover pilot.
+
 ## 8. Completeness policy
 
 The default release build is **fail-closed**:
 
 ```text
 645 matrix rows
-645 canonical source SVGs
-0 missing canonical SVGs
-0 unexpected canonical SVGs
+645 canonical artwork identities
+0 missing required delivery assets under the approved hybrid policy
+0 unexpected canonical delivery assets
 0 namespace collisions
 0 dangling aliases
 ```
@@ -278,21 +304,24 @@ The installed desktop must never depend on the repository checkout. HyDE install
 
 ## 11. Required builder behavior
 
-The implementation following this contract must perform the following sequence:
+The final implementation following this contract must perform the following sequence:
 
 1. read and validate the 645-row CSV matrix;
-2. resolve each matrix group to its package directory;
-3. validate all 645 canonical source SVGs;
-4. reject unexpected/colliding source names;
-5. generate `index.theme` from a fixed template owned by the project;
-6. copy canonical SVGs into staging;
-7. create matrix aliases as relative symlinks;
-8. validate the staged icon theme and symlink graph;
-9. optionally run an installed icon-cache validator without retaining its cache;
-10. when explicitly requested, create the reproducible `.tar.xz` release archive;
-11. verify that the archive contains only the `Witcher3-HyDE/` top-level directory.
+2. resolve each matrix group and approved delivery mode;
+3. validate each canonical artwork identity and all required SVG/PNG delivery assets;
+4. reject unexpected/colliding source or delivery names;
+5. generate `index.theme` from a fixed project-owned template that declares both scalable and approved fixed-size directories;
+6. stage simplified SVGs where vector delivery is selected;
+7. stage reviewed size-specific PNGs where raster delivery is selected;
+8. create matrix aliases as relative symlinks in every emitted delivery directory;
+9. validate the staged icon theme and complete symlink graph;
+10. optionally run an installed icon-cache validator without retaining its cache;
+11. when explicitly requested, create the reproducible `.tar.xz` release archive;
+12. verify that the archive contains only the `Witcher3-HyDE/` top-level directory.
 
-The builder must validate by default and package only through an explicit packaging option. This mirrors the project's GTK build policy and prevents accidental release artifacts during normal development checks.
+The builder must validate by default and package only through an explicit packaging option.
+
+**Implementation status:** `tools/build-icons.py` currently implements the older SVG-only staging scaffold. It remains useful for validating the existing vector artwork and aliases, but it must be revised to the approved hybrid layout before v1 release packaging. The repository must not treat the present scalable-only package graph as the final release contract.
 
 ## 12. Pilot visual review sheet
 
@@ -329,3 +358,31 @@ python3 tools/build-icon-review.py --require-all
 That command must fail until all 14 pilot SVGs exist and every present SVG passes the same source-level SVG validator used by the icon builder.
 
 The generated HTML belongs under `build/` and must not be committed as source or packaged into the icon theme.
+
+## 13. Hybrid crossover pilot — required before raster layout freeze
+
+Before the final PNG size ladder or per-class delivery defaults are committed, compare a genuinely detailed raster master against a deliberately simplified SVG version of the same canonical at representative display sizes.
+
+Initial comparison set:
+
+```text
+32 px
+48 px
+64 px
+96 px
+128 px
+256 px
+512 px
+```
+
+Additional sizes may be added when a desktop surface requires them.
+
+The crossover is the point at which the raster artwork provides a **clearly visible quality benefit at normal viewing scale**, not merely a theoretically higher information count under zoom. The review must judge silhouette, material/readability, edge quality, texture survival, and visual noise.
+
+Expected tendencies are hypotheses, not frozen rules:
+
+- Glyph / Waybar / status artwork may remain SVG at all practical sizes.
+- Many Emblems may remain SVG because their purpose is compact symbolic recognition.
+- Detailed Hero/application artwork is the primary candidate for simplified small-size SVG plus optimized larger PNGs.
+
+If the crossover proves consistent by class or family, encode the policy centrally. If individual canonicals require exceptions, add explicit delivery metadata rather than overloading `style_class` or free-form matrix notes.
