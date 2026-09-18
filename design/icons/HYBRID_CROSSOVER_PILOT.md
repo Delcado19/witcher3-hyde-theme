@@ -342,3 +342,20 @@ The average brightness is already almost identical. The loss is therefore primar
 The next fidelity experiment keeps the accepted V1 facet geometry untouched and applies optional Lab-space palette compensation only. Named review presets are now: `off`, `mild`, `balanced`, and `punchy`.
 
 No brilliance preset is frozen until visual review.
+
+## Dolphin brilliance/facet verdict — project-owner accepted
+
+The project owner selected the **`punchy` brilliance preset** for the current Dolphin vector reconstruction.
+
+The visual decision is now:
+
+- keep the original V1 reconstructed facet geometry;
+- use `punchy` Lab-space brilliance compensation for Dolphin;
+- do **not** use surface smoothing as the preferred Dolphin path;
+- retain the slight polygon/facet/mosaic character as an intentional vector-specific stylistic quality;
+- do not reinterpret this as permission to change the underlying subject, silhouette, composition, or Witcher material language.
+
+For Dolphin, the faceting is no longer considered a blocking fidelity defect. The remaining question is delivery behavior across the seven native icon sizes.
+
+This acceptance is **canonical-specific evidence**, not yet a class-wide rule for every Hero/Application icon. Other reconstructed Heroes may require different brilliance compensation or may not benefit from visible faceting.
+

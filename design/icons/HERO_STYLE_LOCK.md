@@ -149,3 +149,19 @@ Palette clustering may reduce local luminance contrast, bright metal highlights,
 - local material contrast.
 
 The reconstructor may apply a restrained Lab-space palette compensation after clustering, provided it does **not** alter geometry, introduce clipping, or turn Witcher red/steel into exaggerated neon/chrome. The visual master remains the PNG.
+
+## Faceting as a vector-specific Hero treatment
+
+A faithful Hero reconstruction is not required to imitate the raster master's microtexture literally when its vector construction develops a coherent visual character of its own.
+
+For the accepted Dolphin SVG, the project owner explicitly accepts the remaining polygon/facet/mosaic character as a **deliberate vector stylistic feature**, because it preserves more perceived material detail than the tested smoothing pass.
+
+This allowance is conditional:
+
+- the faceting must arise from faithful reconstruction of the PNG rather than a new flat/cartoon redraw;
+- application identity, silhouette, composition, major lighting and Witcher material hierarchy must remain faithful;
+- faceting must not reduce small-size readability;
+- acceptance is per canonical or visually coherent family, not automatic for all Hero artwork.
+
+The Dolphin reference uses `punchy` brilliance compensation to restore highlight/chroma range lost during segmentation and palette clustering.
+
