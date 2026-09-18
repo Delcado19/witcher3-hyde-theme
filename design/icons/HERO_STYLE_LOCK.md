@@ -135,3 +135,17 @@ This is not raster embedding and does not redraw the application identity. The r
 The intended effect is to reduce visible superpixel/mosaic faceting on broad forged-metal surfaces without softening identity-critical contours, runes, recesses, red accents, or structural metal edges.
 
 This mode must remain optional until visually accepted and renderer compatibility has been validated on the target desktop SVG stack.
+
+
+## Brilliance fidelity rule
+
+PNG→SVG reconstruction must preserve not only average palette identity but also the source artwork's perceived brilliance.
+
+Palette clustering may reduce local luminance contrast, bright metal highlights, and high-end chroma even when average RGB/L* remains close. A vector candidate should therefore be reviewed for:
+
+- highlight intensity on worn silver/steel;
+- black-to-silver dynamic range;
+- red recess/emissive impact;
+- local material contrast.
+
+The reconstructor may apply a restrained Lab-space palette compensation after clustering, provided it does **not** alter geometry, introduce clipping, or turn Witcher red/steel into exaggerated neon/chrome. The visual master remains the PNG.

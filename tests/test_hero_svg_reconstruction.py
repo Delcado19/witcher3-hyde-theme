@@ -30,6 +30,19 @@ class HeroSvgReconstructionHelpersTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             MODULE.preset_config("nope")
 
+    def test_brilliance_presets_are_ordered(self):
+        off = MODULE.brilliance_config("off")
+        balanced = MODULE.brilliance_config("balanced")
+        punchy = MODULE.brilliance_config("punchy")
+        self.assertEqual(off["contrast"], 1.0)
+        self.assertGreater(balanced["contrast"], off["contrast"])
+        self.assertGreater(punchy["chroma"], balanced["chroma"])
+        self.assertGreater(punchy["highlight"], balanced["highlight"])
+
+    def test_unknown_brilliance_preset_rejected(self):
+        with self.assertRaises(ValueError):
+            MODULE.brilliance_config("nope")
+
     def test_surface_smoothing_keeps_real_vector_art_once(self):
         svg = MODULE._emit_svg(
             analysis_size=512,

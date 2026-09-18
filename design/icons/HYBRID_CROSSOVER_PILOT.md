@@ -314,3 +314,31 @@ Current Dolphin v2 engineering result with the fidelity preset:
 The objective metrics are essentially neutral/slightly lower than the flat-facet candidate because smoothing deliberately trades pixel-local similarity for better perceived surface continuity. They are therefore not used as the visual verdict.
 
 The v2 candidate is **awaiting project-owner visual review**. It is not yet frozen as final artwork and does not establish a crossover.
+
+
+## Project-owner verdict on smoothing + brilliance observation — 2026-09-18
+
+The edge-aware smoothing v2 candidate was visually reviewed and **rejected as the preferred direction**.
+
+Reason:
+
+- the original faceted reconstruction is preferred;
+- smoothing removes useful authored-looking detail and makes the forged surfaces feel softer/muddier;
+- the slight faceting is therefore accepted as preferable to losing material detail.
+
+The project owner also identified a separate fidelity issue shared by both vector candidates: the PNG has visibly more **brilliance / color impact**.
+
+Measured 512 px Lab statistics support that observation:
+
+- PNG visible-pixel L* standard deviation: about **22.32**;
+- V1 SVG L* standard deviation: about **20.64**;
+- PNG 95th-percentile L*: about **72.29**;
+- V1 SVG 95th-percentile L*: about **68.07**;
+- PNG 95th-percentile chroma: about **22.07**;
+- V1 SVG 95th-percentile chroma: about **20.60**.
+
+The average brightness is already almost identical. The loss is therefore primarily **compressed local contrast/highlights and slightly compressed high-end chroma**, caused by superpixel averaging and palette clustering.
+
+The next fidelity experiment keeps the accepted V1 facet geometry untouched and applies optional Lab-space palette compensation only. Named review presets are now: `off`, `mild`, `balanced`, and `punchy`.
+
+No brilliance preset is frozen until visual review.

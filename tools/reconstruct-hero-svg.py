@@ -41,6 +41,13 @@ PRESETS = {
     },
 }
 
+BRILLIANCE_PRESETS = {
+    "off": {"contrast": 1.00, "chroma": 1.00, "highlight": 0.0},
+    "mild": {"contrast": 1.07, "chroma": 1.05, "highlight": 1.5},
+    "balanced": {"contrast": 1.10, "chroma": 1.07, "highlight": 2.5},
+    "punchy": {"contrast": 1.13, "chroma": 1.10, "highlight": 3.5},
+}
+
 
 def relative_polygon_path(points: Sequence[Sequence[int]]) -> str:
     """Serialize one closed polygon using compact relative line segments."""
@@ -65,6 +72,83 @@ def preset_config(name: str) -> dict[str, float | int]:
         return dict(PRESETS[name])
     except KeyError as exc:
         raise ValueError(f"unknown preset: {name}") from exc
+
+
+def brilliance_config(name: str) -> dict[str, float]:
+    try:
+        return dict(BRILLIANCE_PRESETS[name])
+    except KeyError as exc:
+        raise ValueError(f"unknown brilliance preset: {name}") from exc
+
+
+def _apply_palette_brilliance(
+    palette,
+    source_rgb,
+    source_mask,
+    *,
+    contrast: float,
+    chroma: float,
+    highlight: float,
+):
+    """Restore contrast/chroma compressed by region averaging and clustering.
+
+    The transform operates only on the vector palette. Geometry is unchanged.
+    L* contrast is expanded around the source image's visible-pixel mean,
+    chroma is scaled in Lab, and only the brightest palette colors receive
+    a small highlight lift.
+    """
+    if (
+        abs(contrast - 1.0) < 1e-9
+        and abs(chroma - 1.0) < 1e-9
+        and abs(highlight) < 1e-9
+    ):
+        return palette, {
+            "lstar_pivot": None,
+            "highlight_threshold": None,
+        }
+
+    try:
+        import numpy as np  # type: ignore
+        from skimage.color import lab2rgb, rgb2lab  # type: ignore
+    except ImportError as exc:
+        raise SystemExit(
+            "brilliance compensation requires numpy and scikit-image"
+        ) from exc
+
+    visible = source_rgb[source_mask].astype(np.float32) / 255.0
+    visible_lab = rgb2lab(visible.reshape(-1, 1, 3)).reshape(-1, 3)
+    pivot = float(visible_lab[:, 0].mean())
+
+    palette_rgb = palette.astype(np.float32) / 255.0
+    palette_lab = rgb2lab(
+        palette_rgb.reshape(-1, 1, 3)
+    ).reshape(-1, 3)
+
+    original_l = palette_lab[:, 0].copy()
+    palette_lab[:, 0] = pivot + contrast * (original_l - pivot)
+
+    highlight_threshold = pivot + 0.42 * (100.0 - pivot)
+    ramp = np.clip(
+        (original_l - highlight_threshold)
+        / max(1.0, 100.0 - highlight_threshold),
+        0.0,
+        1.0,
+    )
+    palette_lab[:, 0] += highlight * ramp
+    palette_lab[:, 0] = np.clip(palette_lab[:, 0], 0.0, 100.0)
+    palette_lab[:, 1] *= chroma
+    palette_lab[:, 2] *= chroma
+
+    corrected = lab2rgb(
+        palette_lab.reshape(-1, 1, 3)
+    ).reshape(-1, 3)
+    corrected = np.clip(
+        np.rint(corrected * 255.0), 0, 255
+    ).astype(np.uint8)
+    return corrected, {
+        "lstar_pivot": pivot,
+        "highlight_threshold": float(highlight_threshold),
+    }
 
 
 def _runtime_modules():
@@ -183,7 +267,8 @@ def reconstruct(
     edge_dilate: int,
     edge_epsilon: float,
     smooth_detail_opacity: float,
-) -> dict[str, int | float | str | bool]:
+    brilliance: str,
+) -> dict[str, int | float | str | bool | None]:
     cv2, np, Image, slic, KMeans = _runtime_modules()
 
     source = Image.open(input_png).convert("RGBA")
@@ -233,6 +318,16 @@ def reconstruct(
         np.rint(kmeans.cluster_centers_), 0, 255
     ).astype(np.uint8)
     assignments = kmeans.predict(means_array)
+
+    brilliance_values = brilliance_config(brilliance)
+    palette, brilliance_report = _apply_palette_brilliance(
+        palette,
+        rgb,
+        mask,
+        contrast=brilliance_values["contrast"],
+        chroma=brilliance_values["chroma"],
+        highlight=brilliance_values["highlight"],
+    )
 
     grouped: dict[int, list[str]] = {
         idx: [] for idx in range(color_count)
@@ -309,6 +404,14 @@ def reconstruct(
         "surface_smoothing": surface_smoothing,
         "edge_mask_coverage": edge_coverage,
         "edge_mask_shapes": edge_shapes,
+        "brilliance_preset": brilliance,
+        "brilliance_contrast": brilliance_values["contrast"],
+        "brilliance_chroma": brilliance_values["chroma"],
+        "brilliance_highlight": brilliance_values["highlight"],
+        "brilliance_lstar_pivot": brilliance_report["lstar_pivot"],
+        "brilliance_highlight_threshold": brilliance_report[
+            "highlight_threshold"
+        ],
     }
 
 
@@ -464,6 +567,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--edge-dilate", type=int, default=1)
     parser.add_argument("--edge-epsilon", type=float, default=0.5)
     parser.add_argument("--smooth-detail-opacity", type=float, default=0.04)
+    parser.add_argument(
+        "--brilliance",
+        choices=tuple(BRILLIANCE_PRESETS),
+        default="off",
+        help=(
+            "optional Lab palette compensation; preserves vector geometry "
+            "while restoring contrast, chroma, and bright highlights"
+        ),
+    )
     parser.add_argument("--no-scour", action="store_true")
     parser.add_argument("--compare-dir", type=Path)
     parser.add_argument(
@@ -503,6 +615,7 @@ def main() -> int:
         edge_dilate=args.edge_dilate,
         edge_epsilon=args.edge_epsilon,
         smooth_detail_opacity=args.smooth_detail_opacity,
+        brilliance=args.brilliance,
     )
 
     optimized = (
