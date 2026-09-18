@@ -293,3 +293,39 @@ The implementation following this contract must perform the following sequence:
 11. verify that the archive contains only the `Witcher3-HyDE/` top-level directory.
 
 The builder must validate by default and package only through an explicit packaging option. This mirrors the project's GTK build policy and prevents accidental release artifacts during normal development checks.
+
+## 12. Pilot visual review sheet
+
+The 14-icon pilot has a repository-owned visual review helper:
+
+```text
+python3 tools/build-icon-review.py
+```
+
+It writes a disposable, self-contained HTML review page to:
+
+```text
+build/icons/pilot-review.html
+```
+
+The page embeds the existing canonical SVG sources directly and renders every pilot icon at the mandatory sizes for its artwork class on:
+
+```text
+#0A151E  w3-canvas
+#171A1C  w3-surface
+#1C1813  w3-surface-warm
+#262729  w3-elevated
+#F2F0EA  generic light edge-case
+```
+
+The command is intentionally incremental: missing pilot icons are shown as missing cards so partial batches can still be reviewed.
+
+The final pilot gate is fail-closed:
+
+```text
+python3 tools/build-icon-review.py --require-all
+```
+
+That command must fail until all 14 pilot SVGs exist and every present SVG passes the same source-level SVG validator used by the icon builder.
+
+The generated HTML belongs under `build/` and must not be committed as source or packaged into the icon theme.

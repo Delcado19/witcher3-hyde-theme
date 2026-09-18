@@ -8,7 +8,9 @@ on:
       - 'docs/ICON_BUILD.md'
       - 'tools/build-icons.py'
       - 'tools/validate-icon-sources.py'
+      - 'tools/build-icon-review.py'
       - 'tests/test_build_icons.py'
+      - 'tests/test_icon_review.py'
       - '.github/workflows/icon-build.yml'
   pull_request:
     paths:
@@ -17,7 +19,9 @@ on:
       - 'docs/ICON_BUILD.md'
       - 'tools/build-icons.py'
       - 'tools/validate-icon-sources.py'
+      - 'tools/build-icon-review.py'
       - 'tests/test_build_icons.py'
+      - 'tests/test_icon_review.py'
       - '.github/workflows/icon-build.yml'
   workflow_dispatch:
 
@@ -42,17 +46,19 @@ jobs:
           python3 -m py_compile \
             tools/build-icons.py \
             tools/validate-icon-sources.py \
-            tests/test_build_icons.py
+            tools/build-icon-review.py \
+            tests/test_build_icons.py \
+            tests/test_icon_review.py
 
       - name: Validate repository artwork incrementally
         run: |
           set -Eeuo pipefail
           python3 tools/validate-icon-sources.py
 
-      - name: Run 645-icon fixture suite
+      - name: Run icon tooling fixture suite
         run: |
           set -Eeuo pipefail
-          python3 -m unittest -v tests/test_build_icons.py
+          python3 -m unittest -v tests/test_build_icons.py tests/test_icon_review.py
 
       - name: Verify tests left no release artifact
         run: |

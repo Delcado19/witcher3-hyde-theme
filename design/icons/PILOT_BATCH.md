@@ -187,6 +187,18 @@ All 14 should additionally be checked against these project surfaces:
 #262729
 ```
 
+The repository also provides a generated visual review sheet:
+
+```text
+python3 tools/build-icon-review.py
+```
+
+Open `build/icons/pilot-review.html` to inspect the current pilot sources at all mandatory class sizes on the four Witcher3 dark surfaces plus a generic light edge-case surface. For the final pilot gate, use:
+
+```text
+python3 tools/build-icon-review.py --require-all
+```
+
 ## 5. Acceptance gates
 
 The pilot is successful only if all of the following are true:
