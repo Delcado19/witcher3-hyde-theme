@@ -28,6 +28,18 @@
 | Categories/Misc | 35 |
 | **Total** | **645** |
 
+## Delivery-format policy
+
+`style_class` describes visual complexity and review behavior; it does **not** force SVG or PNG output.
+
+The v1 release is planned as a hybrid theme:
+
+- SVG for sizes/families where added raster detail has no visible benefit;
+- optimized PNG derivatives where detailed raster artwork is visibly superior;
+- a canonical may emit both a simplified SVG and larger PNG variants.
+
+The SVG→PNG crossover remains pending visual A/B review. Therefore the matrix intentionally has **no delivery-format or crossover-size column yet**. If the pilot shows one stable rule by class/family, the build contract will encode it centrally. If exceptions are required per canonical, explicit structured delivery metadata will be added rather than hiding the decision in free-form notes.
+
 ## Alias policy
 
 Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases` become symlinks or generated aliases during the build. Alias coverage in v1 is a seed and will be expanded in a separate validation pass.

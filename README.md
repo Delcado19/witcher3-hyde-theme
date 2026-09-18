@@ -306,7 +306,7 @@ The icon system is divided into three visual families:
 - **Glyph** — reduced UI, status, action, and Waybar icons
 - **Emblem** — folders, devices, MIME types, and category icons
 
-The release format uses project-owned scalable SVGs. Glyph artwork is specifically designed to remain legible at small UI sizes instead of relying on mechanical downscaling of highly detailed Hero artwork.
+The final release format is **hybrid SVG/PNG**. Small functional artwork uses simplified vector delivery where raster detail would only turn into pixel noise; detailed artwork may use reviewed size-specific PNG variants where material, lighting, texture, and painted detail remain visibly superior. One canonical may therefore use SVG at small sizes and PNG at larger sizes. The crossover size is intentionally not frozen until a visual A/B pilot establishes where the raster version actually wins.
 
 The visual rules are defined in [`design/icons/ART_DIRECTION.md`](design/icons/ART_DIRECTION.md). The first cross-context review set is defined in [`design/icons/PILOT_BATCH.md`](design/icons/PILOT_BATCH.md). The 14-icon Hero/Glyph/Emblem pilot is complete, visually reviewed at its mandatory sizes and project surfaces, and protected by a fail-closed CI completeness gate.
 
@@ -324,7 +324,7 @@ Normal invocation validates and stages only. Release packaging is explicit:
 python3 tools/build-icons.py --package
 ```
 
-The default release path is fail-closed: all 645 canonical source SVGs must exist and pass validation before the real archive can be produced.
+The current builder remains fail-closed for the existing SVG source tree, but its scalable-only package graph is a development scaffold. Before the real v1 archive is produced, the builder must be upgraded to the approved hybrid layout and validate all required SVG/PNG delivery assets for 645 canonical artwork identities.
 
 Artwork may still be added incrementally. Existing source SVGs are checked with:
 
@@ -361,7 +361,7 @@ The icon archive is a core project deliverable even though HyDE itself can opera
 $ICON_THEME = Witcher3-HyDE
 ```
 
-The icon archive contract is:
+The current SVG validation scaffold stages:
 
 ```text
 Witcher3-HyDE/
@@ -376,7 +376,7 @@ Witcher3-HyDE/
     └── categories/
 ```
 
-`index.theme` inherits only `hicolor`; the package does not silently require Tela, Breeze, Papirus, or another optional third-party theme. Aliases are generated as relative SVG symlinks and are not duplicate artwork.
+The final v1 archive will retain scalable directories where SVG is the approved delivery mode and add fixed-size raster directories for PNG sizes that pass the crossover review. The exact raster ladder is intentionally not frozen yet. `index.theme` inherits only `hicolor`; aliases remain relative symlinks to the canonical asset in each emitted directory rather than duplicate artwork.
 
 See [`docs/ICON_BUILD.md`](docs/ICON_BUILD.md) for the complete archive and validation contract.
 
@@ -428,11 +428,11 @@ For the icon theme:
 1. Define and structurally validate the complete 645-design matrix. **Done.**
 2. Validate canonical Linux / Freedesktop / KDE names and application identities. **Done.**
 3. Validate aliases separately from unique artwork. **Done for the current matrix baseline.**
-4. Freeze the build contract and scalable package layout. **Done.**
+4. Freeze the semantic build contract. **Done.** Hybrid SVG/PNG delivery is now the target; the exact crossover and final raster size ladder remain pending visual A/B review.
 5. Define Hero/Glyph/Emblem art direction and the first cross-context pilot. **Done.**
 6. Produce and review the 14-icon pilot artwork. **Done.**
-7. Expand accepted artwork family-by-family while incremental CI validates each batch. **In progress: `main` has 287/645 canonical SVGs; the active `icon-devices-storage-1` branch has 301/645. Actions/UI, Places/Folders, and Status/Panel/Waybar are complete; Devices is complete through W3-516 on the active branch.**
-8. Reach 645/645 canonical SVGs and run the strict full staging path. **Pending artwork; builder already validated.**
+7. Expand accepted artwork family-by-family while incremental CI validates each batch. **In progress: `main` has 287/645 canonical SVG sources; the active `icon-devices-storage-1` branch has 310/645 and Devices is complete at 45/45.**
+8. Reach 645/645 canonical artwork identities, validate the hybrid delivery policy, and run the strict full staging path. **Pending artwork and hybrid-builder upgrade.**
 9. Package `Source/arcs/Icon_Witcher3-HyDE.tar.xz`. **Pending complete artwork.**
 
 Release archives should only be created after the corresponding validation steps pass.
@@ -451,7 +451,7 @@ Until the first stable release exists, this repository should be treated as a de
 
 ## Status
 
-**Current phase:** runtime styling and icon infrastructure are validated. Icon artwork expansion is well underway: Actions/UI is 100/100, Places/Folders is 65/65, Status/Panel/Waybar is 95/95, and Devices is complete through W3-502 on `main` and through W3-516 on the active `icon-devices-storage-1` branch. `main` currently contains 287/645 canonical SVGs; the active branch contains 301/645.
+**Current phase:** runtime styling and icon infrastructure are validated. Icon artwork expansion is well underway: Actions/UI is 100/100, Places/Folders is 65/65, Status/Panel/Waybar is 95/95, and Devices is 45/45 on the active `icon-devices-storage-1` branch. `main` currently contains 287/645 canonical SVG sources; the active branch contains 310/645. The final icon delivery is hybrid SVG/PNG; the visual crossover size and final raster ladder are intentionally still pending.
 
 - [x] Define the project as a full HyDE theme
 - [x] Establish a current-HyDE-compatible repository baseline

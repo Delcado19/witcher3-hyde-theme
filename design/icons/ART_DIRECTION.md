@@ -6,7 +6,7 @@
 
 This document defines the visual language for the original project artwork used by the `Witcher3-HyDE` icon theme.
 
-The matrix defines **what** each icon represents. This document defines **how** that icon should look. The build contract in `docs/ICON_BUILD.md` defines how accepted SVG artwork is validated and packaged.
+The matrix defines **what** each icon represents. This document defines **how** that icon should look. The build contract in `docs/ICON_BUILD.md` defines how accepted artwork is validated and packaged through the hybrid SVG/PNG delivery system.
 
 ## 1. Core objective
 
@@ -136,15 +136,17 @@ These are a vocabulary, **not mandatory containers**.
 
 Do not place every application inside the same circular medallion, rounded-square tile, or shield. Hero icons must retain varied silhouettes so the launcher remains scannable.
 
-## 6. Canvas and safe area
+## 6. Canvas, master size, and safe area
 
-All project source SVGs should use a square coordinate system. The preferred authoring canvas is:
+Vector artwork should use a square coordinate system. The preferred authoring canvas is:
 
 ```text
 viewBox="0 0 1024 1024"
 ```
 
-A different square viewBox is acceptable when imported from a project-owned vector workflow, but exported artwork must remain scalable and centered predictably.
+A different square viewBox is acceptable when imported from a project-owned vector workflow, but exported vector artwork must remain scalable and centered predictably.
+
+Detailed raster artwork should start from a high-resolution square master. **1024×1024 is the initial target, not yet an immutable minimum**; the crossover pilot may justify a larger master if that produces measurably better reviewed derivatives. Raster delivery sizes must be derived from the high-resolution master and then reviewed/optimized individually rather than accepted as blind automatic downsizes.
 
 General safe-area guidance:
 
@@ -154,7 +156,21 @@ General safe-area guidance:
 - do not force all silhouettes to fill exactly the same bounding box;
 - optical centering takes precedence over mathematical centering.
 
-## 7. Hero icons — Applications
+## 7. Hybrid delivery principle
+
+The artwork class does not automatically determine the file format.
+
+The project uses **SVG when simplification is an advantage** and **PNG when retained detail is an advantage**:
+
+- tiny UI/status/action artwork should stay geometric and clean; vector delivery is expected to be strongest here;
+- detailed application artwork may use painted/material-rich raster masters and optimized PNG derivatives where those details survive at the target size;
+- one canonical may use a simplified SVG at small sizes and PNG variants at larger sizes;
+- the SVG→PNG transition is a visual decision, not a fixed number inherited from the source canvas;
+- an embedded PNG inside an SVG wrapper is not the default delivery strategy because it does not by itself provide per-size optimization.
+
+The crossover must be established by side-by-side review before the final release size ladder is frozen.
+
+## 8. Hero icons — Applications
 
 **Matrix class:** `Hero`  
 **Count:** 220
@@ -177,7 +193,8 @@ At 128 px and larger:
 
 - material texture may be visible;
 - secondary engravings may appear;
-- controlled scratches, bevel cues, seams, or rivets are allowed.
+- controlled scratches, bevel cues, seams, or rivets are allowed;
+- detailed Heroes may use raster artwork when it is visibly superior to the simplified vector treatment.
 
 At 48–64 px:
 
@@ -191,7 +208,7 @@ At 16–32 px:
 - micro-texture is irrelevant;
 - internal negative spaces must not collapse.
 
-## 8. Glyph icons — Actions, Status, Panel, Waybar
+## 9. Glyph icons — Actions, Status, Panel, Waybar
 
 **Matrix class:** `Glyph`  
 **Count:** 195
@@ -226,7 +243,7 @@ State families should keep the same outer silhouette and change only the minimum
 
 At typical Waybar sizes, one-glance recognition is mandatory. Decorative material effects should never make a status icon weaker than the equivalent plain symbolic icon.
 
-## 9. Emblem icons — Places, Devices, MIME, Categories
+## 10. Emblem icons — Places, Devices, MIME, Categories
 
 **Matrix class:** `Emblem`  
 **Count:** 230
@@ -249,7 +266,7 @@ Examples:
 - MIME types use consistent document/container geometry and a strong type-specific emblem;
 - preference categories use coherent control/tool metaphors rather than unrelated mini-scenes.
 
-## 10. Family consistency rules
+## 11. Family consistency rules
 
 Icons in a semantic family must share:
 
@@ -264,7 +281,7 @@ They must **not** be simple recolors when the matrix requires genuinely distinct
 
 Aliases reuse one canonical design by symlink and are the only intended cases of identical artwork under multiple names.
 
-## 11. Lighting
+## 12. Lighting
 
 Use one restrained desktop-icon lighting model:
 
@@ -276,7 +293,7 @@ Use one restrained desktop-icon lighting model:
 
 No global lens flare, bloom haze, depth-of-field, or environmental background scene.
 
-## 12. Depth and perspective
+## 13. Depth and perspective
 
 Hero and Emblem icons may use shallow pseudo-3D depth, bevels, overlapping plates, straps, and object thickness.
 
@@ -284,7 +301,7 @@ Avoid extreme perspective. Icons should feel like crafted objects presented for 
 
 Glyphs should remain substantially flatter.
 
-## 13. Edge treatment
+## 14. Edge treatment
 
 The icon theme must remain readable on the project's dark surfaces.
 
@@ -297,7 +314,7 @@ Use one or more of:
 
 Do not solve separation with a universal bright sticker outline.
 
-## 14. Text and letters
+## 15. Text and letters
 
 Text is discouraged inside icons.
 
@@ -307,7 +324,7 @@ Release SVGs should not require an installed font to render correctly.
 
 Long words, UI labels, version numbers, and tiny decorative inscriptions are not allowed as identity-critical elements.
 
-## 15. Gradients and effects
+## 16. Gradients and effects
 
 Allowed:
 
@@ -327,7 +344,7 @@ Avoid:
 
 Any SVG effect must remain self-contained. External image or network references are rejected by the build pipeline.
 
-## 16. Background test surfaces
+## 17. Background test surfaces
 
 Every canonical icon should be visually reviewed on at least these project surfaces:
 
@@ -340,7 +357,7 @@ Every canonical icon should be visually reviewed on at least these project surfa
 
 The icon should also remain legible on a generic light surface during file-manager or application edge cases. This does not require optimizing the entire design for a light theme; it requires avoiding silhouettes that disappear completely outside the intended dark desktop.
 
-## 17. Required review sizes
+## 18. Required review sizes
 
 Every accepted canonical should be inspected at:
 
@@ -355,11 +372,13 @@ Every accepted canonical should be inspected at:
 256 px
 ```
 
-Hero artwork should additionally be inspected at 512 px or above for obvious vector defects.
+Hero artwork should additionally be inspected at 512 px or above.
 
-The SVG itself remains the release source; these review sizes do not imply committed raster variants.
+For hybrid candidates, the review sizes are also used to compare the simplified SVG against the detailed raster master/derivative. Candidate crossover sizes currently include 32, 48, 64, 96, 128, 256, and 512 px; this is a test set, **not a frozen delivery ladder**.
 
-## 18. Acceptance criteria
+Review sizes do not automatically imply committed raster variants. A PNG size enters the release only after it demonstrates a visible advantage and passes size-specific optimization review.
+
+## 19. Acceptance criteria
 
 A canonical design is ready to enter `design/icons/src/` only when all of the following are true:
 
@@ -370,13 +389,14 @@ A canonical design is ready to enter `design/icons/src/` only when all of the fo
 - it does not rely on copied Witcher game UI artwork;
 - it does not embed unlicensed third-party raster art;
 - it uses no external network resource;
-- it has a valid SVG `viewBox`;
+- vector-delivered artwork has a valid SVG `viewBox`;
+- raster-delivered artwork comes from an approved high-resolution master and is not accidentally upscaled;
 - its identity does not depend on a locally installed font;
 - it is visually distinct from other canonical designs;
 - related state/family icons remain coherent;
 - the incremental source validator accepts it.
 
-## 19. Artwork workflow
+## 20. Artwork workflow
 
 The intended workflow for each reviewed batch is:
 
@@ -384,8 +404,8 @@ The intended workflow for each reviewed batch is:
 2. create original vector artwork outside the release staging directory;
 3. compare the result against this art-direction document and the matrix concept;
 4. inspect the required small sizes;
-5. place accepted canonical SVGs in `design/icons/src/<context>/`;
-6. run `python3 tools/validate-icon-sources.py`;
+5. place accepted vector canonical sources in `design/icons/src/<context>/`; raster-master storage will be frozen only after the crossover pilot;
+6. run the applicable source validation; during the current vector-family expansion this remains `python3 tools/validate-icon-sources.py`;
 7. commit only the reviewed batch;
 8. let CI repeat the validation;
 9. continue with the next batch only after the current batch is green.
