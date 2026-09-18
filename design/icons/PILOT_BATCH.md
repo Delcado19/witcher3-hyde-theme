@@ -6,6 +6,25 @@
 
 This batch is intentionally small. It should expose problems in silhouette, material treatment, small-size readability, family consistency, and package validation before the project commits to hundreds of finished SVGs.
 
+## Pilot result — PASS — 2026-09-18
+
+The 14-icon pilot is accepted as the visual baseline for family expansion.
+
+Review result:
+
+- **14 / 14** canonical pilot SVGs are present and pass `python3 tools/validate-icon-sources.py`;
+- Glyphs were reviewed at 16, 22, 24, 32, and 48 px;
+- Emblems were reviewed at 22, 32, 48, 64, and 128 px;
+- Heroes were reviewed at 32, 48, 64, 128, 256, and 512 px;
+- all three artwork classes were checked on `#0A151E`, `#171A1C`, `#1C1813`, `#262729`, and a generic light edge-case surface;
+- the only systemic review issue found was weak light-surface contrast on `audio-volume-high` and `network-wireless-100`; both were corrected with restrained weathered-steel under-strokes;
+- `folder` / `folder-home` share one base construction while remaining distinct;
+- Dolphin, Konsole, and Kitty remain distinct by silhouette and do not establish a repeated Hero container rule;
+- Witcher red remains a controlled accent rather than a default large-area fill;
+- the permanent CI gate `python3 tools/build-icon-review.py --require-all` passes.
+
+**Expansion is authorized.** Continue by coherent families, beginning with core Actions/UI around the existing pilot anchors.
+
 ## 1. Pilot set
 
 | Order | Matrix ID | Canonical | Context | Class | Priority | Pilot purpose |
