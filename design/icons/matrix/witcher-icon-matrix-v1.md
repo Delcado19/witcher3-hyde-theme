@@ -640,12 +640,12 @@ Aliases do **not** count as designs. `canonical_name` owns the artwork; `aliases
 | W3-602 | MIME/Filetypes | video-quicktime | Polished film reel with MOV seal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-603 | MIME/Filetypes | video-mpeg | Film strip with MPEG rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-604 | MIME/Filetypes | model-3d | Wireframe wyvern head | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-605 | MIME/Filetypes | model-blend | Orange forge-eye 3D file rune | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-605 | MIME/Filetypes | application-x-blender | Orange forge-eye 3D file rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-606 | MIME/Filetypes | model-stl | Triangulated steel sculpture | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-607 | MIME/Filetypes | model-obj | Stone bust with OBJ rune | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-608 | MIME/Filetypes | model-fbx | Rigged puppet rune | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-609 | MIME/Filetypes | model-glb | Faceted 3D crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
-| W3-610 | MIME/Filetypes | model-gltf | Linked 3D node crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-609 | MIME/Filetypes | model-gltf-binary | Faceted 3D crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
+| W3-610 | MIME/Filetypes | model-gltf+json | Linked 3D node crystal | Emblem | P2 |  | Keep strong family resemblance by file class |
 | W3-611 | Categories/Misc | applications-accessories | Utility pouch with assorted witcher tools | Emblem | P1 |  |  |
 | W3-612 | Categories/Misc | applications-development | Hammer and code-rune crossed | Emblem | P1 |  |  |
 | W3-613 | Categories/Misc | applications-education | Oxenfurt scholar cap over grimoire | Emblem | P1 |  |  |
