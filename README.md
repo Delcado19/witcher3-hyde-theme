@@ -313,6 +313,8 @@ The visual rules are defined in [`design/icons/ART_DIRECTION.md`](design/icons/A
 
 The Hero pilot has reached its first production-quality raster milestone: corrected Dolphin and Kitty high-detail forged-metal treatments were visually accepted as quality anchors. The subsequent flat/simplified Dolphin SVG comparison was rejected because it did not resemble the accepted PNG closely enough in subject/silhouette, color hierarchy or material finish; that experimental SVG is no longer a valid delivery candidate.
 
+A first PNG→SVG fidelity reconstruction tool is now tracked as `tools/reconstruct-hero-svg.py`. It uses perceptual image segmentation and true vector path reconstruction rather than a stylistic redraw. The current Dolphin fidelity prototype is compact relative to its raster master and already close at 256 px, but remains visibly faceted at 512 px; it is therefore still an experiment, not accepted Hero artwork.
+
 Hero development is now PNG-fidelity-first. The next experiment is a visually guided PNG→SVG reconstruction/optimization pipeline. Only a vector result that still looks like the same Hero artwork may proceed to crossover testing; otherwise PNG-only is the correct result. The earlier folder/file-cabinet Dolphin composition remains retired as final identity. Reference binaries are not committed automatically without provenance/redistribution clearance.
 
 ### Build contract

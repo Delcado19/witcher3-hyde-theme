@@ -230,3 +230,39 @@ The next Dolphin vector attempt must reconstruct the accepted forged-medallion P
 ### Important limitation
 
 Dolphin and Kitty are both circular medallions. Kitty confirms the material/finish quality bar, but it does not establish a universal medallion container. Applications still require varied silhouettes/constructions.
+
+
+## PNG→SVG reconstruction prototype — 2026-09-18
+
+A first serious reconstruction tool now exists at:
+
+\`tools/reconstruct-hero-svg.py\`
+
+Unlike the rejected flat SVG, this tool reconstructs the accepted raster artwork itself. It does not redraw the subject or substitute a new style.
+
+First local Dolphin fidelity run against the accepted 1254×1254 master:
+
+- analysis canvas: **512×512**;
+- requested perceptual segments: **8000**;
+- actual visible segments: **7308**;
+- palette classes: **192**;
+- reconstructed polygons: **7295**;
+- source PNG size: **2,969,196 bytes**;
+- SVG before Scour: **360,994 bytes**;
+- SVG after Scour: **263,486 bytes**;
+- optimized SVG / PNG byte ratio: **8.87%**;
+- 256 px diagnostic: SSIM **0.8616**, MAE **8.25**;
+- 512 px diagnostic: SSIM **0.7100**, MAE **10.60**.
+
+Metrics are **diagnostics, not visual acceptance criteria**.
+
+Visual result so far:
+
+- subject, silhouette, composition and dominant Witcher palette are now genuinely the same artwork;
+- at 256 px the reconstruction is already close to the PNG;
+- at 512 px the current polygon segmentation is still visibly faceted/mosaic-like in the metal surfaces;
+- therefore the SVG has **not yet passed the Hero fidelity gate**;
+- no crossover decision follows from this prototype.
+
+Next technical target: preserve the same reconstructed geometry while reducing the 512 px faceting, preferably with edge/material-aware refinement rather than merely multiplying polygons until file size becomes raster-like.
+

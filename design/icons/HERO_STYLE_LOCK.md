@@ -105,3 +105,22 @@ Do not recreate the rejected flat/vector Dolphin. Reconstruct the accepted forge
 - native-size quality.
 
 If that experiment cannot reach the locked visual target efficiently, record the result and treat Dolphin/Hero delivery as PNG-first or PNG-only rather than lowering the style bar.
+
+
+## Reconstruction tool prototype — 2026-09-18
+
+The active pilot branch now contains \`tools/reconstruct-hero-svg.py\`.
+
+It is a **fidelity reconstruction tool**, not an art-style generator. It does not invent a replacement Dolphin. The current implementation:
+
+1. preserves the source alpha silhouette;
+2. uses perceptual superpixel segmentation to find contiguous visual/material regions;
+3. clusters region colors from the source PNG itself;
+4. traces the regions as real SVG polygons;
+5. groups/reuses palette colors instead of embedding raster data;
+6. uses compact relative path serialization;
+7. optionally runs Scour for structural SVG optimization;
+8. can render 256/512 diagnostics and report SSIM/MAE as engineering diagnostics only.
+
+The current \`fidelity\` preset deliberately prioritizes visual similarity over minimum path count. The next optimization target is reducing the visible faceted/superpixel texture at 512 px without exploding SVG size.
+

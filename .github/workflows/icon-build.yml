@@ -12,6 +12,8 @@ on:
       - 'tools/build-hybrid-icon-review.py'
       - 'tools/generate-hybrid-pilot-dolphin.py'
       - 'tools/generate-hybrid-pilot-kitty.py'
+      - 'tools/reconstruct-hero-svg.py'
+      - 'tests/test_hero_svg_reconstruction.py'
       - 'design/icons/HYBRID_CROSSOVER_PILOT.md'
       - 'tests/test_build_icons.py'
       - 'tests/test_icon_review.py'
@@ -60,9 +62,11 @@ jobs:
             tools/build-hybrid-icon-review.py \
             tools/generate-hybrid-pilot-dolphin.py \
             tools/generate-hybrid-pilot-kitty.py \
+            tools/reconstruct-hero-svg.py \
             tests/test_build_icons.py \
             tests/test_icon_review.py \
-            tests/test_hybrid_icon_review.py
+            tests/test_hybrid_icon_review.py \
+            tests/test_hero_svg_reconstruction.py
 
       - name: Validate repository artwork incrementally
         run: |
@@ -78,7 +82,7 @@ jobs:
       - name: Run icon tooling fixture suite
         run: |
           set -Eeuo pipefail
-          python3 -m unittest -v tests/test_build_icons.py tests/test_icon_review.py tests/test_hybrid_icon_review.py
+          python3 -m unittest -v tests/test_build_icons.py tests/test_icon_review.py tests/test_hybrid_icon_review.py tests/test_hero_svg_reconstruction.py
 
       - name: Verify tests left no release artifact
         run: |
