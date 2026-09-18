@@ -323,6 +323,21 @@ For the current Office/Documents MIME direction, the detailed design itself rema
 
 At very small sizes, a separately authored micro-variant is allowed when the full identity no longer reads clearly. A micro-variant may simplify texture, wax seals, scratches, decorative engraving and nonessential text/code lines, while preserving the same semantic silhouette, family construction and dominant type marker. Whether that micro-variant ships as SVG or PNG is again decided by native-size visual quality.
 
+### Family-master production workflow
+
+For semantically related icon groups, the default production method is **family-first, not canonical-first**.
+
+1. establish one visually approved family master that preserves the conventional semantic base;
+2. define the fixed family geometry/material system and the allowed type-marker zone;
+3. define how individual members differ without breaking the common silhouette;
+4. review the master and a representative set at native sizes;
+5. once the family system is accepted, derive the remaining family members as one coherent batch;
+6. only outliers or ambiguous members require individual visual review.
+
+A source file being present in the repository does **not** mean the artwork is visually approved. Existing legacy Glyph/Emblem coverage may be replaced when it fails the current quality bar.
+
+This workflow is especially important for MIME/filetype families, folder/place families, device families, and repeated status-state families.
+
 ## 12. Family consistency rules
 
 Icons in a semantic family must share:
