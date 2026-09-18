@@ -55,6 +55,12 @@ jobs:
           set -Eeuo pipefail
           python3 tools/validate-icon-sources.py
 
+      - name: Validate complete 14-icon pilot
+        run: |
+          set -Eeuo pipefail
+          python3 tools/build-icon-review.py --require-all \
+            --output "$RUNNER_TEMP/pilot-review.html"
+
       - name: Run icon tooling fixture suite
         run: |
           set -Eeuo pipefail
