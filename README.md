@@ -431,7 +431,7 @@ For the icon theme:
 4. Freeze the build contract and scalable package layout. **Done.**
 5. Define Hero/Glyph/Emblem art direction and the first cross-context pilot. **Done.**
 6. Produce and review the 14-icon pilot artwork. **Done.**
-7. Expand accepted artwork family-by-family while incremental CI validates each batch. **In progress; next block is core Actions/UI.**
+7. Expand accepted artwork family-by-family while incremental CI validates each batch. **In progress: `main` has 287/645 canonical SVGs; the active `icon-devices-storage-1` branch has 301/645. Actions/UI, Places/Folders, and Status/Panel/Waybar are complete; Devices is complete through W3-516 on the active branch.**
 8. Reach 645/645 canonical SVGs and run the strict full staging path. **Pending artwork; builder already validated.**
 9. Package `Source/arcs/Icon_Witcher3-HyDE.tar.xz`. **Pending complete artwork.**
 
@@ -451,7 +451,7 @@ Until the first stable release exists, this repository should be treated as a de
 
 ## Status
 
-**Current phase:** core runtime styling and icon infrastructure are validated; the reviewed 14-icon Witcher artwork pilot is accepted, and family-by-family icon expansion plus live HyDE integration are next.
+**Current phase:** runtime styling and icon infrastructure are validated. Icon artwork expansion is well underway: Actions/UI is 100/100, Places/Folders is 65/65, Status/Panel/Waybar is 95/95, and Devices is complete through W3-502 on `main` and through W3-516 on the active `icon-devices-storage-1` branch. `main` currently contains 287/645 canonical SVGs; the active branch contains 301/645.
 
 - [x] Define the project as a full HyDE theme
 - [x] Establish a current-HyDE-compatible repository baseline
