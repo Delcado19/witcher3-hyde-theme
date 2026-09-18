@@ -1,0 +1,107 @@
+# Hero Application Style Lock — 2026-09-18
+
+## Status
+
+This document is **authoritative for Applications/Hero artwork**.
+
+If another icon document conflicts with this file, this Hero style lock wins until it is explicitly revised.
+
+## Locked visual target
+
+The accepted high-detail Dolphin medallion from the 2026-09-18 working session defines the required Hero finish level.
+
+The repository does not store that chat reference binary automatically, but its visual characteristics are frozen here:
+
+- forged circular construction where the concept calls for a medallion;
+- blackened and weathered iron/steel;
+- bright but worn silver identity motif;
+- authored scratches, abrasion, edge wear, cracks and patina;
+- convincing depth, beveling, local shadow and directional lighting;
+- controlled Witcher-red recess, rune and emissive accents;
+- strong application identity before decorative detail;
+- dark, mature Witcher material language rather than flat desktop-cartoon styling.
+
+This locks the **finish and material language**, not one universal silhouette. Applications must still use varied constructions where their identity calls for them.
+
+## Explicitly rejected Hero treatment
+
+Flat or cartoon-like vector reinterpretations are **not acceptable Hero substitutes** when they materially diverge from the approved raster identity.
+
+The rejected 2026-09-18 Dolphin vector comparison had the wrong silhouette, read as a different animal/object, lost the forged-metal material language, and did not preserve the raster master's color/value structure. Artwork of that kind must not be offered again as a Hero delivery candidate.
+
+For Hero artwork, "simplified SVG" does **not** mean permission to redraw the icon into a different style.
+
+## Hero fidelity rule
+
+For each Hero canonical, the approved high-detail master is the visual source of truth.
+
+An SVG candidate is acceptable only when it preserves, as closely as practical:
+
+- the same recognizable subject and silhouette;
+- the same composition and major proportions;
+- the same dominant dark-steel / weathered-silver / Witcher-red color hierarchy;
+- the same perceived depth and lighting direction;
+- the same major bevels, recesses, rune structures and material boundaries;
+- enough authored wear/material character that it still belongs to the same Hero artwork.
+
+Minor micro-texture may be reduced where vector economics require it. Major style, shape or color changes are not allowed merely to make vectorization easier.
+
+## PNG-only is an approved outcome
+
+SVG is **optional for Hero icons**.
+
+If a visually faithful SVG cannot be produced at reasonable vector complexity and file size, the canonical must ship as reviewed PNG delivery rather than accepting an inferior vector approximation.
+
+There is no requirement to force SVG at small Hero sizes. A Hero canonical may be PNG-only across all approved fixed sizes.
+
+The wider icon theme can still be hybrid: Glyph and many Emblem families may remain SVG while Hero applications use PNG wherever that produces the correct artwork.
+
+## PNG → SVG reconstruction experiment
+
+A serious PNG-to-SVG workflow is allowed and encouraged as an experiment.
+
+The goal is **not** one-click tracing. The target is a visually guided reconstruction and optimization pipeline that can include:
+
+1. visual/semantic segmentation of the master into major objects and material layers;
+2. contour extraction and curve fitting for clean silhouettes;
+3. layered vector reconstruction of rings, motifs, runes, bevels and recesses;
+4. gradients, masks, clipped highlights and restrained filter effects for depth/lighting;
+5. controlled vectorized wear/detail only where it materially contributes at display size;
+6. path simplification and duplicate-point removal;
+7. gradient/filter reuse and SVG structural cleanup;
+8. final SVG optimization followed by raster A/B comparison against the master.
+
+The vector result must remain a **real vector asset**. Embedding the original PNG inside an SVG wrapper does not satisfy this experiment.
+
+A useful vector result should also have a practical SVG-like storage footprint relative to the high-resolution raster source. No hard byte threshold is frozen yet; visual fidelity comes first, then complexity/size is optimized and measured before acceptance.
+
+## Fidelity gate before crossover testing
+
+Hero SVG/PNG crossover testing is now a two-stage process.
+
+**Stage 1 — fidelity gate**
+
+Compare the candidate SVG with the approved PNG master first at large sizes, especially 256 and 512 px. If the vector does not clearly represent the same artwork, reject it immediately.
+
+**Stage 2 — delivery crossover**
+
+Only after an SVG passes the fidelity gate may both forms be compared at 32, 48, 64, 96, 128, 256 and 512 px to determine whether SVG is preferable at any smaller sizes.
+
+If Stage 1 fails, there is no SVG crossover to discover for that candidate: use PNG delivery.
+
+## Reference handling
+
+Chat-supplied or generated working references establish visual direction, but binary files are not automatically committed as redistributable release assets. Promotion of a raster master into repository/release sources still requires clear project ownership or redistribution permission.
+
+## Immediate next experiment
+
+Use the accepted Dolphin raster identity as the first PNG→SVG reconstruction test.
+
+Do not recreate the rejected flat/vector Dolphin. Reconstruct the accepted forged medallion artwork itself, then evaluate:
+
+- visual fidelity;
+- SVG complexity and byte size;
+- render stability;
+- native-size quality.
+
+If that experiment cannot reach the locked visual target efficiently, record the result and treat Dolphin/Hero delivery as PNG-first or PNG-only rather than lowering the style bar.

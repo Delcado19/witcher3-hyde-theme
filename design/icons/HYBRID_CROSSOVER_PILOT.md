@@ -2,9 +2,11 @@
 
 ## Purpose
 
-Determine where detailed raster artwork becomes visibly superior to a deliberately simplified SVG treatment for Witcher3-HyDE Hero/Application icons.
+Determine whether a Hero/Application icon can first be reconstructed as a **visually faithful SVG** from the approved production-quality artwork, and only then determine whether SVG has any useful delivery range versus PNG.
 
-No crossover size is assumed in advance.
+No crossover size is assumed in advance. SVG is not mandatory for Hero icons.
+
+The authoritative visual policy is [`HERO_STYLE_LOCK.md`](HERO_STYLE_LOCK.md).
 
 ## Initial candidates and approved visual anchors
 
@@ -52,18 +54,22 @@ These are test points, **not a release PNG ladder**.
 - `#262729`
 - `#F2F0EA`
 
-## Raster workflow
+## Raster / vector workflow
 
-For each candidate:
+For each Hero candidate:
 
-1. keep the accepted SVG as the simplified/vector comparison;
-2. create one square detailed raster master at high resolution, initially 1024×1024 or larger if justified;
-3. generate initial downscaled comparisons;
-4. where raster appears promising, create size-specific optimized PNGs;
-5. rerun the review using those optimized PNGs;
-6. judge the crossover at normal viewing scale.
+1. establish and approve one square detailed raster master at 1024×1024 or larger;
+2. treat that master as the visual source of truth;
+3. attempt a **faithful PNG→SVG reconstruction**, not a stylistic simplification;
+4. test the SVG against the raster first at 256 and 512 px for subject, silhouette, composition, color hierarchy, depth, lighting and material fidelity;
+5. if the SVG fails that fidelity gate, stop: the candidate remains PNG delivery and no SVG crossover is inferred;
+6. only if the SVG passes, generate the seven native-size SVG/PNG comparisons;
+7. create size-specific optimized PNGs where needed;
+8. judge any actual delivery crossover at normal viewing scale.
 
 A size-specific PNG may adjust local contrast, edge sharpness, silhouette separation, texture strength, highlight placement, and details that otherwise collapse. It is not required to be a blind mechanical resize.
+
+The PNG→SVG experiment may use visual segmentation, layered path reconstruction, gradients, masks, restrained filters and subsequent path/structure optimization. One-click tracing and embedded-raster SVG wrappers do not satisfy the Hero vector experiment.
 
 ## Review tool
 
@@ -80,20 +86,26 @@ An optimized directory uses exact target filenames such as `32.png`, `48.png`, `
 
 ## Decision rule
 
-The crossover is the first size where the detailed raster treatment is **clearly and consistently better at normal viewing scale**, not merely more detailed under zoom.
+Hero review now has two gates.
 
-Review identity/silhouette, edge quality, material readability, useful texture survival, visual noise, dark-surface separation, and light-edge-case survival.
+1. **Fidelity gate:** the SVG must first look like the same approved artwork at 256 and 512 px. Wrong subject/silhouette, flat/cartoon treatment, major color mismatch, lost material language or visibly different composition is an immediate reject.
+2. **Crossover gate:** only a fidelity-passing SVG is compared at 32, 48, 64, 96, 128, 256 and 512 px.
 
-Do not freeze a class-wide threshold from one ambiguous result. Compare both Dolphin and Kitty; use Konsole as a third control if needed.
+If the fidelity gate fails, PNG-only is an approved result and no crossover size is invented.
+
+If it passes, the crossover is the first size where one delivery form has a clear normal-viewing advantage while both still represent the same artwork.
+
+Review identity/silhouette, edge quality, material readability, useful texture survival, visual noise, dark-surface separation, light-edge-case survival, and SVG complexity/file size.
 
 ## Current status
 
-Candidate selection and review tooling are defined.
+Production-quality Dolphin and Kitty raster references have now been visually accepted as Hero quality anchors.
 
-The earlier procedural Dolphin/Kitty raster generators are retained only as **workflow fixtures**. They are useful for testing review-sheet generation, exact-size overrides, and CI wiring, but they do **not** meet the visual quality bar for Hero artwork and therefore provide **zero evidence** for the SVG↔PNG crossover.
+The earlier procedural Dolphin/Kitty raster generators remain **workflow fixtures only** and provide zero crossover evidence.
 
-No production-quality raster Hero master has yet been accepted, and **no SVG↔PNG crossover size has been established**.
+The later flat/simplified Dolphin SVG comparison is also **rejected**. It did not preserve the approved Dolphin silhouette, material language, color hierarchy or overall Witcher finish closely enough to count as the same artwork. It must not be used for crossover evidence or offered as a Hero style direction.
 
+No Hero SVG has yet passed the new fidelity gate, and **no SVG↔PNG crossover size has been established**.
 
 ## Retired procedural Dolphin review
 
@@ -167,18 +179,18 @@ The exact user-supplied reference images are art-direction references, not redis
 
 Only after a raster master passes the quality gate:
 
-1. create or retain a deliberately simplified SVG treatment of the same canonical;
-2. export the raster master at 32, 48, 64, 96, 128, 256, and 512 px;
-3. optimize each candidate PNG size individually where necessary;
-4. compare **native-size output at 100% zoom** on all five standard review surfaces;
-5. use enlarged nearest-neighbour sheets only as a diagnostic supplement, never as the primary verdict;
-6. record where texture/material/detail first survives without harming identity or edge clarity;
-7. repeat with at least one materially different production-quality Hero construction;
-8. freeze a default Hero crossover only if the valid prototypes converge;
-9. otherwise encode a family/per-canonical exception model.
+1. build a visually faithful vector reconstruction of the approved canonical;
+2. compare SVG and PNG at 256 and 512 px first;
+3. reject the SVG immediately if subject, silhouette, composition, color, depth, lighting or material character diverges materially from the PNG;
+4. if the SVG passes, export both forms at 32, 48, 64, 96, 128, 256 and 512 px;
+5. optimize each candidate PNG size individually where necessary;
+6. compare **native-size output at 100% zoom** on all five standard review surfaces;
+7. measure/record SVG complexity and byte size alongside visual quality;
+8. repeat with at least one materially different production-quality Hero construction if a class-wide rule is still desired;
+9. freeze a default Hero crossover only if valid prototypes converge;
+10. otherwise encode family/per-canonical delivery rules, including PNG-only where appropriate.
 
-A visually weak raster candidate invalidates the experiment because it tests artwork quality rather than delivery-format quality.
-
+A visually weak raster candidate invalidates the experiment, and a visually unfaithful SVG invalidates the vector side of the experiment.
 
 ## Final-vs-stress-test distinction
 
@@ -203,20 +215,18 @@ Two generated-from-scratch Hero raster masters now pass the visual quality gate 
 
 The project owner visually accepted both as high-quality Hero references.
 
-The generated masters are 1254×1254 and exceed the initial 1024 px minimum. They are working-session pilot assets; promotion into the final release raster source layout remains pending until the crossover policy and storage layout are frozen.
+The generated masters exceed the initial 1024 px minimum. They remain working-session pilot assets; promotion into the final release raster source layout still requires the repository asset/provenance decision.
 
-### Corrected Dolphin SVG control
+### Rejected Dolphin SVG control
 
-The repository now contains:
+The attempted `design/icons/hybrid-pilot/dolphin-simplified.svg` comparison was visually rejected by the project owner and is removed from the active branch.
 
-`design/icons/hybrid-pilot/dolphin-simplified.svg`
+The reason is fundamental, not a small polish issue: the vector did not resemble the approved high-detail Dolphin closely enough, its subject/silhouette read incorrectly, and its colors/material treatment diverged from the raster source.
 
-This is a deliberately simplified vector treatment of the **same corrected medallion identity** as the raster master.
+Therefore the generated comparison is **not valid crossover evidence**.
 
-The previously accepted `design/icons/src/apps/dolphin.svg` still represents the older folder/file-cabinet composition and therefore must not be used as the SVG side of the real crossover experiment.
-
-Native-size SVG/PNG samples have now been rendered at all seven test sizes. This is the first technically valid Dolphin comparison. No crossover threshold is frozen yet.
+The next Dolphin vector attempt must reconstruct the accepted forged-medallion PNG identity itself using the PNG→SVG fidelity workflow in `HERO_STYLE_LOCK.md`. If that cannot be done at practical SVG complexity/size, Dolphin will use PNG delivery rather than an inferior vector substitute.
 
 ### Important limitation
 
-Dolphin and Kitty are both circular medallions. Kitty confirms the material/finish quality bar, but it does not satisfy the requirement for a materially different second Hero construction. A second non-medallion Hero is still required before a class-wide default can be considered.
+Dolphin and Kitty are both circular medallions. Kitty confirms the material/finish quality bar, but it does not establish a universal medallion container. Applications still require varied silhouettes/constructions.

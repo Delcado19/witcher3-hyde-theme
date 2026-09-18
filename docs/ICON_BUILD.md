@@ -311,8 +311,8 @@ The final implementation following this contract must perform the following sequ
 3. validate each canonical artwork identity and all required SVG/PNG delivery assets;
 4. reject unexpected/colliding source or delivery names;
 5. generate `index.theme` from a fixed project-owned template that declares both scalable and approved fixed-size directories;
-6. stage simplified SVGs where vector delivery is selected;
-7. stage reviewed size-specific PNGs where raster delivery is selected;
+6. stage SVGs only where vector delivery has passed the applicable visual/fidelity policy (Hero SVGs must satisfy `design/icons/HERO_STYLE_LOCK.md`);
+7. stage reviewed size-specific PNGs where raster delivery is selected, including PNG-only Hero canonicals;
 8. create matrix aliases as relative symlinks in every emitted delivery directory;
 9. validate the staged icon theme and complete symlink graph;
 10. optionally run an installed icon-cache validator without retaining its cache;
@@ -359,36 +359,28 @@ That command must fail until all 14 pilot SVGs exist and every present SVG passe
 
 The generated HTML belongs under `build/` and must not be committed as source or packaged into the icon theme.
 
-## 13. Hybrid crossover pilot — required before raster layout freeze
+## 13. Hero fidelity and hybrid crossover pilot — required before raster layout freeze
 
-Before the final PNG size ladder or per-class delivery defaults are committed, compare a genuinely detailed raster master against a deliberately simplified SVG version of the same canonical at representative display sizes.
+Before the final PNG size ladder or per-class delivery defaults are committed, Hero artwork must follow the authoritative policy in `design/icons/HERO_STYLE_LOCK.md`.
 
-Initial comparison set:
+For Hero/Application canonicals, **SVG is optional**. Do not compare an intentionally different flat/cartoon vector against a detailed PNG and call the result a format crossover.
 
-```text
-32 px
-48 px
-64 px
-96 px
-128 px
-256 px
-512 px
-```
+The required order is:
 
-Additional sizes may be added when a desktop surface requires them.
+1. approve a production-quality high-resolution raster master;
+2. attempt a visually faithful vector reconstruction only when worthwhile;
+3. compare SVG vs PNG first at 256 and 512 px for subject, silhouette, composition, color hierarchy, depth, lighting and material language;
+4. reject the SVG if it is visibly a different artwork or requires unacceptable style compromise;
+5. allow PNG-only delivery when the fidelity gate fails;
+6. only after the SVG passes fidelity, compare the approved forms at 32, 48, 64, 96, 128, 256 and 512 px;
+7. judge native-size display quality and record SVG byte size/complexity;
+8. encode central family rules only when repeated valid prototypes support them; otherwise use explicit per-canonical delivery metadata.
 
-The crossover is the point at which the raster artwork provides a **clearly visible quality benefit at normal viewing scale**, not merely a theoretically higher information count under zoom. The review must judge silhouette, material/readability, edge quality, texture survival, and visual noise.
+The PNG→SVG experiment may use visual segmentation, curve fitting, layered gradients/masks, restrained filters and path/structure optimization. One-click tracing and SVG files that merely embed the raster master do not count as successful Hero vector delivery.
 
-The raster artwork used for this decision must first pass the production-quality Hero raster gate in `design/icons/HYBRID_CROSSOVER_PILOT.md`. Procedural fixtures, placeholder renderers, and synthetic detail demos may validate tooling but **must never be treated as crossover evidence**. Native-size 100% renders are the primary review artifact; enlarged diagnostic sheets are secondary.
+Procedural fixtures, placeholder renderers, synthetic detail demos and visually unfaithful simplified vectors may validate tooling but **must never be treated as crossover evidence**.
 
-Expected tendencies are hypotheses, not frozen rules:
-
-- Glyph / Waybar / status artwork may remain SVG at all practical sizes.
-- Many Emblems may remain SVG because their purpose is compact symbolic recognition.
-- Detailed Hero/application artwork is the primary candidate for simplified small-size SVG plus optimized larger PNGs.
-
-If the crossover proves consistent by class or family, encode the policy centrally. If individual canonicals require exceptions, add explicit delivery metadata rather than overloading `style_class` or free-form matrix notes.
-
+Glyph / Waybar / status artwork may remain SVG at all practical sizes, and many Emblems may also remain SVG. Hero artwork must not be forced into SVG merely for consistency with those classes.
 
 ## 14. Hybrid crossover review helper
 
@@ -398,7 +390,7 @@ The visual crossover pilot uses:
 python3 tools/build-hybrid-icon-review.py
 ```
 
-The helper compares a simplified source SVG with a detailed raster master at the current test sizes 32, 48, 64, 96, 128, 256, and 512 px on the standard review surfaces.
+The helper compares an **approved, fidelity-passing SVG candidate** with a detailed raster master at the current test sizes 32, 48, 64, 96, 128, 256, and 512 px on the standard review surfaces. It must not be used to legitimize a Hero SVG that already fails the large-size fidelity gate.
 
 It is intentionally neutral about the final threshold. When `--optimized-dir` contains `<size>.png`, that exact-size derivative replaces the master downscale for the corresponding comparison. This supports size-specific optimization without assuming which sizes will ultimately ship.
 

@@ -160,15 +160,22 @@ General safe-area guidance:
 
 The artwork class does not automatically determine the file format.
 
-The project uses **SVG when simplification is an advantage** and **PNG when retained detail is an advantage**:
-
 - tiny UI/status/action artwork should stay geometric and clean; vector delivery is expected to be strongest here;
-- detailed application artwork may use painted/material-rich raster masters and optimized PNG derivatives where those details survive at the target size;
-- one canonical may use a simplified SVG at small sizes and PNG variants at larger sizes;
-- the SVG→PNG transition is a visual decision, not a fixed number inherited from the source canvas;
-- an embedded PNG inside an SVG wrapper is not the default delivery strategy because it does not by itself provide per-size optimization.
+- many Emblems may remain SVG when their symbolic construction benefits from vector delivery;
+- Hero/Application artwork is **fidelity-first**: SVG is optional and is accepted only when it remains visually faithful to the approved high-detail artwork;
+- a Hero canonical may ship as PNG-only when a practical vector reconstruction would require unacceptable style, shape, color, material or lighting compromises;
+- there is no rule that small Hero sizes must use SVG;
+- an embedded PNG inside an SVG wrapper is not considered a successful vector reconstruction.
 
-The crossover must be established by side-by-side review before the final release size ladder is frozen.
+The authoritative Hero-specific policy is [`HERO_STYLE_LOCK.md`](HERO_STYLE_LOCK.md).
+
+A Hero crossover is tested only **after** a candidate SVG passes the visual-fidelity gate against its production-quality PNG master. If it fails that gate, the delivery decision is PNG rather than a lower-quality simplified vector.
+
+### Hero visual-style lock
+
+For Hero artwork, the approved high-detail Witcher treatment is the source of truth. Flat/cartoon redraws, semantically approximate substitute animals/objects, and recolored simplified variants are not acceptable merely because they are easy to express in SVG.
+
+A valid Hero SVG must preserve the raster identity, major composition, color/value hierarchy, depth, lighting and material language closely enough to read as the same artwork.
 
 ### Hero raster quality gate
 
@@ -177,12 +184,6 @@ The raster side of a Hero crossover test must itself be **release-quality Hero a
 Before any raster candidate is allowed to influence crossover policy, review its high-resolution master on its own. It must show authored material depth and finish that justify raster delivery: layered construction, coherent lighting, weathered surfaces, material-specific highlights, controlled edge wear, and application identity strong enough to survive simplification.
 
 The approved target quality is comparable to a forged Witcher-style desktop object: blackened/weathered steel, leather or other secondary material where appropriate, engraved accents, controlled red recess/rim light, and a strong central application motif.
-
-If the raster master would not be acceptable as a large Hero icon by itself, **do not use it in the crossover experiment**.
-
-A deprecated concept may be retained as a **detail stress test** if it is useful for exposing downscale failure, but it must remain clearly separated from the accepted final identity. Stress-test artwork can inform simplification strategy; it cannot define the final canonical composition or the canonical's crossover by itself.
-
-Dolphin and Kitty currently provide the production-quality visual bar. Their present approved references both use circular forged medallions, but this does **not** make circular medallions the default Hero container. Application silhouettes must remain varied across the 220-icon family.
 
 ## 8. Hero icons — Applications
 
