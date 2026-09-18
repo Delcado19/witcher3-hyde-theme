@@ -180,6 +180,10 @@ The approved target quality is comparable to a forged Witcher-style desktop obje
 
 If the raster master would not be acceptable as a large Hero icon by itself, **do not use it in the crossover experiment**.
 
+A deprecated concept may be retained as a **detail stress test** if it is useful for exposing downscale failure, but it must remain clearly separated from the accepted final identity. Stress-test artwork can inform simplification strategy; it cannot define the final canonical composition or the canonical's crossover by itself.
+
+Dolphin and Kitty currently provide the production-quality visual bar. Their present approved references both use circular forged medallions, but this does **not** make circular medallions the default Hero container. Application silhouettes must remain varied across the 220-icon family.
+
 ## 8. Hero icons — Applications
 
 **Matrix class:** `Hero`  

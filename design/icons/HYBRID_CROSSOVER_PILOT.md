@@ -6,21 +6,31 @@ Determine where detailed raster artwork becomes visibly superior to a deliberate
 
 No crossover size is assumed in advance.
 
-## Initial candidates
+## Initial candidates and approved visual anchors
 
 ### W3-070 — dolphin
 
-`Blue sea-dolphin sigil on a steel file-cabinet shield`
+**Current approved Dolphin direction:** a circular forged medallion/seal with a strongly recognizable silver Dolphin emblem, blackened/weathered steel, engraved rune ring, controlled red recess/rim light, and optional secondary scene/detail that does not weaken the Dolphin silhouette.
 
-Useful because it has a broad object/silhouette, large steel surfaces that can carry raster material detail, and a strong cyan identity cue that remains suitable for simplified SVG.
+This corrected medallion treatment supersedes the earlier folder/file-cabinet Dolphin as the intended final Dolphin identity.
+
+**Earlier Dolphin concept:** a layered folder/file-cabinet object with leather bindings, steel plates, rivets, runes, and a large silver Dolphin emblem.
+
+That earlier concept is **retired as final Dolphin artwork**. It may still be used as a **detail-stress-test reference** because its layered materials and depth make it useful for observing how complex raster detail collapses at smaller sizes. It must never be mistaken for the accepted final Dolphin direction.
 
 ### W3-083 — kitty
 
-`Cat-school medallion with a terminal prompt etched below`
+**Current approved Kitty direction:** a circular forged medallion with a distinct cat/wolf-like school head, terminal prompt element, weathered steel, engraved rune ring, and controlled red emissive accents.
 
-Useful because its medallion/character construction differs materially from Dolphin, while face, metal wear, engraving, and inset details can benefit from a detailed raster master.
+Kitty is a valid quality anchor for the Hero raster bar, but it does not establish circular medallions as the default container for Applications.
 
-W3-082 `konsole` remains a third control if Dolphin and Kitty disagree materially.
+### Reference handling
+
+The project owner has supplied high-quality Dolphin and Kitty raster references in chat. They establish the **visual quality bar and current art direction**, but the binary images are not committed automatically.
+
+Before any supplied reference image becomes a redistributable repository asset, its provenance and redistribution rights must be clear. Until then, the repository stores the art-direction decision in text and any production master must be project-owned/cleared.
+
+W3-082 `konsole` remains available as a third control if valid production-quality Dolphin and Kitty comparisons do not establish a stable crossover.
 
 ## Comparison sizes
 
@@ -143,11 +153,15 @@ Minimum expectations:
 - no procedural noise used as a substitute for authored surface treatment;
 - no placeholder geometry whose only purpose is to make the PNG look "more detailed" than the SVG.
 
-The approved Dolphin quality bar is conceptually:
+The approved **current Dolphin quality bar** is conceptually:
 
-> a layered file/folder or cabinet object built from blackened/weathered steel, leather bindings, engraved/rune accents, controlled red recess/rim light, and a strongly recognizable silver Dolphin emblem.
+> a forged circular medallion/seal built from blackened and weathered steel, a large strongly recognizable silver Dolphin emblem, engraved rune geometry, authored scratches and edge wear, controlled red recess/rim light, and enough layered depth/material variation to reward raster delivery at large sizes.
 
-The exact reference image is an art-direction reference, not a redistributable repository asset unless its provenance/license is explicitly cleared.
+The earlier layered folder/file-cabinet Dolphin remains useful only as a **complex-detail stress-test reference**. It is not the accepted final Dolphin identity.
+
+The approved **Kitty quality bar** uses the same material/finish standard while preserving its own distinct cat/terminal identity.
+
+The exact user-supplied reference images are art-direction references, not redistributable repository assets unless provenance/redistribution is explicitly cleared.
 
 ## Valid crossover experiment
 
@@ -164,3 +178,17 @@ Only after a raster master passes the quality gate:
 9. otherwise encode a family/per-canonical exception model.
 
 A visually weak raster candidate invalidates the experiment because it tests artwork quality rather than delivery-format quality.
+
+
+## Final-vs-stress-test distinction
+
+A rejected Hero concept may still be useful for technical downscale testing when it contains materially richer depth, layered construction, or texture than the accepted final composition.
+
+That use must be labelled explicitly:
+
+- **final identity reference** — defines what the canonical should ultimately look like;
+- **quality reference** — defines required finish/material fidelity;
+- **detail stress test** — intentionally complex artwork used to expose downscale failure;
+- **tooling fixture** — synthetic/procedural output used only to validate the review pipeline.
+
+Only a **production-quality final identity reference** may decide the actual crossover for that canonical. A stress-test image can reveal failure modes but cannot override the approved final art direction.
