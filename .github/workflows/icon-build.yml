@@ -10,6 +10,7 @@ on:
       - 'tools/validate-icon-sources.py'
       - 'tools/build-icon-review.py'
       - 'tools/build-hybrid-icon-review.py'
+      - 'tools/generate-hybrid-pilot-dolphin.py'
       - 'design/icons/HYBRID_CROSSOVER_PILOT.md'
       - 'tests/test_build_icons.py'
       - 'tests/test_icon_review.py'
@@ -24,6 +25,7 @@ on:
       - 'tools/validate-icon-sources.py'
       - 'tools/build-icon-review.py'
       - 'tools/build-hybrid-icon-review.py'
+      - 'tools/generate-hybrid-pilot-dolphin.py'
       - 'design/icons/HYBRID_CROSSOVER_PILOT.md'
       - 'tests/test_build_icons.py'
       - 'tests/test_icon_review.py'
@@ -54,6 +56,7 @@ jobs:
             tools/validate-icon-sources.py \
             tools/build-icon-review.py \
             tools/build-hybrid-icon-review.py \
+            tools/generate-hybrid-pilot-dolphin.py \
             tests/test_build_icons.py \
             tests/test_icon_review.py \
             tests/test_hybrid_icon_review.py
