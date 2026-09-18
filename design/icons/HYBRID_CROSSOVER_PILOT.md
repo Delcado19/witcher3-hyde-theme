@@ -22,9 +22,13 @@ That earlier concept is **retired as final Dolphin artwork**. It may still be us
 
 ### W3-083 — kitty
 
-**Current approved Kitty direction:** a circular forged medallion with a distinct cat/wolf-like school head, terminal prompt element, weathered steel, engraved rune ring, and controlled red emissive accents.
+**Current approved Kitty direction — superseded 2026-09-18:** the earlier cat/wolf-head medallion candidate is retired.
 
-Kitty is a valid quality anchor for the Hero raster bar, but it does not establish circular medallions as the default container for Applications.
+**New approved Kitty direction:** a forged circular rune medallion with a large angular silver wolf/lynx-like head integrated with an unmistakable terminal window (`>_`) in the lower foreground, blackened/weathered iron, high-contrast worn silver, engraved runes, controlled red recess/emissive light, and restrained outer ember/smoke atmosphere.
+
+The terminal window is now a required identity element rather than a small secondary prompt. This makes the canonical read as Kitty/terminal first while preserving the Witcher forged-medallion language.
+
+Kitty remains a quality anchor for the Hero raster bar, but it does not establish circular medallions as the default container for Applications.
 
 ### Reference handling
 
@@ -550,4 +554,31 @@ Measured SVG interior alpha after underpainting:
 The previous facet-only renders had roughly half or more of their visible SVG pixels partially transparent at these sizes. The corrected values confirm that internal desktop-background leakage is now effectively removed while normal anti-aliasing remains at the exterior silhouette.
 
 Fresh seven-size/five-surface packages exist for both icons. **All prior crossover verdicts remain superseded until the project owner reviews these corrected sheets.**
+
+
+
+## Kitty master replacement — 2026-09-18
+
+The project owner supplied and approved a **new Kitty master motif** after the alpha repair.
+
+New canonical visual identity:
+
+- large angular silver wolf/lynx-like head;
+- explicit foreground terminal window with glowing `>_` prompt;
+- forged circular rune ring;
+- blackened/weathered metal with bright worn silver;
+- strong Witcher-red recess/emissive highlights;
+- optional restrained smoke/ember atmosphere outside the medallion.
+
+This **supersedes the earlier Kitty cat-head master and every vector/review package derived from it**.
+
+Consequences:
+
+- old Kitty PNG/SVG crossover sheets are historical only;
+- old Kitty 256 px tie-break is void;
+- old Kitty brilliance observations do not transfer automatically;
+- the new master must receive fresh alpha preparation, reconstruction, brilliance review, 256/512 fidelity gate, and seven-size crossover review;
+- the earlier alpha bug remains relevant as a tooling lesson, but no old Kitty visual verdict survives the master replacement.
+
+The chat-supplied binary remains a working-session reference/master until provenance/redistribution status is explicitly cleared for repository release use.
 

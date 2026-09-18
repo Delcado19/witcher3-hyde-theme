@@ -191,3 +191,13 @@ The reconstructor must place a dark, source-alpha-derived **vector silhouette un
 
 A source master itself must also have correct alpha topology. Background removal that leaks into blackened-iron regions invalidates the reconstruction input and any crossover review derived from it.
 
+
+
+## Kitty terminal-forward identity lock
+
+The current Kitty canonical is no longer the earlier generic cat-head medallion.
+
+Kitty must preserve a **prominent terminal identity**: the approved reference combines an angular silver wolf/lynx-like forged head with a foreground terminal window containing a luminous `>_` prompt. The terminal window must remain recognizable at the intended application-icon sizes.
+
+The older cat-head Kitty treatment is superseded and must not be resurrected as the final canonical.
+
