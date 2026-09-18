@@ -582,3 +582,38 @@ Consequences:
 
 The chat-supplied binary remains a working-session reference/master until provenance/redistribution status is explicitly cleared for repository release use.
 
+
+
+## New Kitty terminal-master reconstruction — fidelity candidate
+
+The replacement Kitty master has completed its first reconstruction pass.
+
+Working alpha preparation deliberately avoids the failed near-black flood-fill method:
+
+- the main medallion is treated as a closed opaque structure;
+- the three outer cardinal spikes visible beyond the circle are preserved;
+- external smoke/ember atmosphere is omitted from the vector-fidelity input so it cannot create ambiguous semi-transparent background material;
+- internal blackened steel remains fully opaque;
+- the SVG uses the standard dark vector underpainting beneath all facets.
+
+Reconstruction metrics:
+
+- source working master: **1254×1254**;
+- analysis canvas: **512×512**;
+- requested SLIC segments: **8000**;
+- actual visible segments: **7186**;
+- reconstructed polygons: **7163**;
+- palette classes: **192**;
+- underlay topology: **1 closed vector silhouette**;
+- derived underlay color: **#060100**;
+- optimized SVG size: about **263 KB** for each brilliance variant.
+
+Fresh brilliance candidates have been generated with identical geometry:
+
+- `off`: 263,049 bytes;
+- `mild`: 263,043 bytes;
+- `balanced`: 263,043 bytes;
+- `punchy`: 263,037 bytes.
+
+A 256/512 dark+light review sheet is ready. **No Kitty brilliance setting is accepted yet.** Project-owner visual review is required before the seven-size crossover package is generated.
+
