@@ -170,6 +170,16 @@ The project uses **SVG when simplification is an advantage** and **PNG when reta
 
 The crossover must be established by side-by-side review before the final release size ladder is frozen.
 
+### Hero raster quality gate
+
+The raster side of a Hero crossover test must itself be **release-quality Hero artwork**. A procedural schematic, flat placeholder, synthetic texture demo, or mechanically decorated SVG-equivalent is not valid evidence.
+
+Before any raster candidate is allowed to influence crossover policy, review its high-resolution master on its own. It must show authored material depth and finish that justify raster delivery: layered construction, coherent lighting, weathered surfaces, material-specific highlights, controlled edge wear, and application identity strong enough to survive simplification.
+
+The approved target quality is comparable to a forged Witcher-style desktop object: blackened/weathered steel, leather or other secondary material where appropriate, engraved accents, controlled red recess/rim light, and a strong central application motif.
+
+If the raster master would not be acceptable as a large Hero icon by itself, **do not use it in the crossover experiment**.
+
 ## 8. Hero icons — Applications
 
 **Matrix class:** `Hero`  
@@ -375,6 +385,8 @@ Every accepted canonical should be inspected at:
 Hero artwork should additionally be inspected at 512 px or above.
 
 For hybrid candidates, the review sizes are also used to compare the simplified SVG against the detailed raster master/derivative. Candidate crossover sizes currently include 32, 48, 64, 96, 128, 256, and 512 px; this is a test set, **not a frozen delivery ladder**.
+
+The primary verdict must be made from **native-size 100% renders** on the target review surfaces. Enlarged nearest-neighbour or zoomed sheets are diagnostic only.
 
 Review sizes do not automatically imply committed raster variants. A PNG size enters the release only after it demonstrates a visible advantage and passes size-specific optimization review.
 

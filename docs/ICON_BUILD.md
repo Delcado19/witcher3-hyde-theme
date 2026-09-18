@@ -379,6 +379,8 @@ Additional sizes may be added when a desktop surface requires them.
 
 The crossover is the point at which the raster artwork provides a **clearly visible quality benefit at normal viewing scale**, not merely a theoretically higher information count under zoom. The review must judge silhouette, material/readability, edge quality, texture survival, and visual noise.
 
+The raster artwork used for this decision must first pass the production-quality Hero raster gate in `design/icons/HYBRID_CROSSOVER_PILOT.md`. Procedural fixtures, placeholder renderers, and synthetic detail demos may validate tooling but **must never be treated as crossover evidence**. Native-size 100% renders are the primary review artifact; enlarged diagnostic sheets are secondary.
+
 Expected tendencies are hypotheses, not frozen rules:
 
 - Glyph / Waybar / status artwork may remain SVG at all practical sizes.
