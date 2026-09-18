@@ -529,8 +529,7 @@ def main() -> int:
     print(encoded)
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
-        args.report.write_text(encoded + "
-", encoding="utf-8")
+        args.report.write_text(encoded + "\n", encoding="utf-8")
     return 0
 
 
