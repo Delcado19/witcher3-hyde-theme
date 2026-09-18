@@ -313,26 +313,15 @@ Examples:
 - MIME types use consistent document/container geometry and a strong type-specific emblem;
 - preference categories use coherent control/tool metaphors rather than unrelated mini-scenes.
 
-### MIME family micro-scale delivery rule
+### Native-size format and micro-scale rule
 
-For visually rich MIME families, one large master must **not** be blindly scaled through all desktop sizes.
+File format is chosen by **native-size visual quality**, not by artwork class. Hero, Emblem, MIME, Places, Devices and other families all follow the same principle: if a faithful SVG is visually indistinguishable or preferable at the target size, use SVG; use PNG only where the approved raster master shows a visible quality advantage.
 
-The current Office/Documents family establishes the working crossover strategy:
+The current tested Hero reference boundary (Dolphin and Kitty) is **SVG through 512 px and PNG at 1024 px** because native 100% review showed the vector treatment remained visually sound through 512 px. That is a tested baseline, not a class privilege and not an automatic rule for every future icon.
 
-- **64 px and larger:** use the detailed family artwork when it remains clearly superior, including material, parchment, frame and controlled type-specific detail;
-- **48 px:** treat as an explicit crossover review size. Compare the detailed raster derivative against the simplified SVG micro-variant and choose by native-size readability;
-- **32 px and smaller:** use a separately authored **SVG micro-variant of the same identity** rather than a reduced detailed master.
+For the current Office/Documents MIME direction, the detailed design itself remains recognizable at 128 px and 64 px, while 48 px is near the semantic/detail readability boundary. This observation **does not by itself choose PNG over SVG**. The same artwork must first undergo a faithful SVG reconstruction and native-size A/B review before any MIME crossover is frozen.
 
-The micro-variant must preserve the same semantic family and type identity while removing detail that cannot survive at native size:
-
-- keep the document silhouette;
-- keep parchment/light body versus dark forged edge separation;
-- reduce or remove wax seals, texture, scratches and decorative engraving;
-- remove nonessential text/code lines;
-- enlarge the type marker until it becomes the dominant differentiator;
-- preserve only a restrained Witcher-red accent where useful.
-
-The goal is not to make the small icon a miniature copy of the large artwork. The goal is to make it unmistakably the **same file type and family** at the size where it is actually viewed.
+At very small sizes, a separately authored micro-variant is allowed when the full identity no longer reads clearly. A micro-variant may simplify texture, wax seals, scratches, decorative engraving and nonessential text/code lines, while preserving the same semantic silhouette, family construction and dominant type marker. Whether that micro-variant ships as SVG or PNG is again decided by native-size visual quality.
 
 ## 12. Family consistency rules
 
