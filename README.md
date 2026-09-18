@@ -317,6 +317,8 @@ A first PNG→SVG fidelity reconstruction tool is now tracked as `tools/reconstr
 
 The reconstruction tool also includes an experimental edge-aware smoothing pass, but Dolphin review preferred the sharper original facet geometry: smoothing lost too much material detail. For the current Dolphin candidate, the project owner selected the `punchy` Lab-space brilliance preset and accepted the residual faceted/mosaic character as an intentional vector-specific style. That decision is Dolphin-specific until other Hero reconstructions are reviewed.
 
+Kitty has now also been reconstructed as a real vector candidate with the corrected facet-seam overlap. Its seven-size/five-surface review package shows a faithful faceted Witcher treatment, but no Kitty format crossover has been accepted yet; its `punchy` setting remains provisional. Dolphin and Kitty together validate the reconstruction method for medallion-style Heroes but are not enough to establish a class-wide rule.
+
 Hero development is now PNG-fidelity-first. The next experiment is a visually guided PNG→SVG reconstruction/optimization pipeline. Only a vector result that still looks like the same Hero artwork may proceed to crossover testing; otherwise PNG-only is the correct result. The earlier folder/file-cabinet Dolphin composition remains retired as final identity. Reference binaries are not committed automatically without provenance/redistribution clearance.
 
 ### Build contract

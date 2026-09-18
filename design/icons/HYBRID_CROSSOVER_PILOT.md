@@ -424,3 +424,36 @@ Reasons:
 The reconstructed geometry and palette are unchanged; this is only same-color facet overlap to make the vector tiling opaque and renderer-robust.
 
 The old seven-size package rendered with `0.55` is superseded for final crossover judgment and must be regenerated with `1.25`.
+
+
+## Kitty reconstruction candidate — 2026-09-18
+
+The accepted high-detail Kitty medallion has now been run through the same real-vector reconstruction method as Dolphin.
+
+Working-session preparation:
+
+- the generated Kitty reference had an opaque near-black outer background;
+- only the corner-connected near-black background was removed; internal black/forged recesses were preserved;
+- no binary reference/master is promoted into repository release sources by this documentation step.
+
+Reconstruction result:
+
+- analysis canvas: **512×512**;
+- requested segments: **8000**;
+- actual visible segments: **6998**;
+- reconstructed polygons: **7016**;
+- palette classes: **192**;
+- seam overlap: **1.25** analysis pixels;
+- SVG after Scour: **258,938 bytes**;
+- `punchy` was used only as a **provisional review candidate**; it is not yet a Kitty-specific accepted brilliance setting.
+
+A full 32/48/64/96/128/256/512 render set was produced on all five standard surfaces plus the small-size diagnostic.
+
+Initial engineering/visual observation (not project-owner verdict):
+
+- the SVG clearly preserves Kitty identity, composition and forged-Witcher character;
+- the faceted vector treatment again reads coherently rather than as a flat/cartoon redraw;
+- optimized PNG remains visibly sharper at small sizes and retains more high-frequency material detail at large sizes;
+- no Kitty crossover or PNG-only decision is frozen yet.
+
+Kitty is useful as a second conversion-method check, but because Dolphin and Kitty are both medallion constructions it still does **not** satisfy the requirement for a materially different Hero construction before any class-wide rule is frozen.
