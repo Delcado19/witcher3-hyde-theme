@@ -532,5 +532,7 @@ See [LICENSE](LICENSE) for repository licensing details.
 
 The earlier Kitty cat-head medallion candidate has been superseded by a new terminal-forward Kitty master: an angular silver wolf/lynx-like head integrated with a prominent glowing `>_` terminal window inside the forged rune medallion. All crossover results from the old Kitty master are retired; the replacement must pass the reconstruction and size-review pipeline from scratch. Dolphin remains the current separate accepted reconstruction reference.
 
+The replacement Kitty reconstruction now has a project-owner-selected `punchy` brilliance baseline, opaque vector underpainting, and a complete corrected 32–512 px five-surface review package. No replacement-Kitty crossover has been frozen yet; the package still requires native-size visual review.
+
 
 The replacement Kitty terminal-forward master has now completed its first clean PNG→SVG reconstruction pass: roughly 7.2k PNG-derived vector facets, opaque underpainting, and four brilliance variants at about 263 KB each. Its 256/512 dark/light fidelity sheet is awaiting project-owner brilliance selection before any new Kitty crossover test is valid.

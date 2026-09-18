@@ -617,3 +617,41 @@ Fresh brilliance candidates have been generated with identical geometry:
 
 A 256/512 dark+light review sheet is ready. **No Kitty brilliance setting is accepted yet.** Project-owner visual review is required before the seven-size crossover package is generated.
 
+
+
+## New Kitty brilliance verdict + seven-size package
+
+The project owner selected **`punchy`** for the replacement terminal-forward Kitty master.
+
+Kitty-specific accepted vector baseline:
+
+- replacement wolf/lynx + terminal `>_` identity;
+- faceted reconstruction retained;
+- `punchy` Lab-space brilliance compensation;
+- no surface smoothing;
+- source-alpha-derived opaque vector underpainting enabled;
+- 1.25 analysis-pixel same-color seam overlap.
+
+The full corrected seven-size package has now been generated at:
+
+- 32 px
+- 48 px
+- 64 px
+- 96 px
+- 128 px
+- 256 px
+- 512 px
+
+and on all five required review surfaces.
+
+Engineering measurements:
+
+- SVG: **263,037 bytes**;
+- complete optimized seven-size PNG ladder: **664,607 bytes**;
+- 256 px fully opaque visible SVG pixels: **97.69%**;
+- 512 px fully opaque visible SVG pixels: **98.87%**.
+
+The remaining partial alpha is normal exterior-edge anti-aliasing; the previous internal light-background leakage is no longer present.
+
+**No new Kitty crossover verdict is recorded yet.** The new terminal-forward package is awaiting project-owner native-size review.
+

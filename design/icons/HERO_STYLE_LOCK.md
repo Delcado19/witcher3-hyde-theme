@@ -201,3 +201,16 @@ Kitty must preserve a **prominent terminal identity**: the approved reference co
 
 The older cat-head Kitty treatment is superseded and must not be resurrected as the final canonical.
 
+
+
+## Kitty brilliance baseline
+
+For the replacement terminal-forward Kitty master, the project owner selected **`punchy`** brilliance compensation.
+
+This is a Kitty-specific acceptance, not an automatic global default. The accepted Kitty vector baseline combines:
+
+- faithful faceted reconstruction;
+- `punchy` contrast/chroma/highlight compensation;
+- opaque vector underpainting;
+- no smoothing.
+
