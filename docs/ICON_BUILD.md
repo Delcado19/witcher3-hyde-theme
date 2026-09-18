@@ -15,7 +15,7 @@ The final release is intentionally **hybrid**. Output format is chosen by visibl
 - small functional artwork that gains nothing from raster detail is delivered as SVG;
 - detailed artwork is delivered as size-specific PNG where the raster version visibly preserves more material, lighting, texture, or painted detail than a reduced SVG;
 - one canonical may therefore have a simplified SVG for small sizes and optimized PNG variants for larger sizes;
-- the SVG→PNG crossover is **not frozen yet**. It must be established by visual A/B review before the final raster size set is written into the package contract.
+- for the reviewed production-quality Hero candidates Dolphin and terminal-forward Kitty, the current visual A/B baseline is now **SVG through 512 px and PNG at 1024 px**; a materially different Hero may override this only through explicit review.
 
 The current SVG-only staging implementation is a development scaffold, not the final v1 delivery format.
 
@@ -123,7 +123,7 @@ Hybrid delivery rules:
 2. **Use PNG where detail is visibly better.** Detailed Hero artwork is expected to benefit most from raster masters and size-specific PNG exports.
 3. **Allow both for one canonical.** A simplified small-size SVG may coexist with detailed PNGs for larger icon sizes.
 4. **Optimize raster sizes individually.** PNG variants are not accepted as a blind resize ladder; each selected size must be reviewed and may need contrast, edge, silhouette, texture, or detail adjustments.
-5. **Do not freeze the crossover by assumption.** The first PNG size is determined by visual A/B testing of the simplified SVG against the detailed raster artwork at representative desktop sizes.
+5. **Use the reviewed Hero baseline, then verify exceptions.** Dolphin and terminal-forward Kitty establish SVG delivery through 512 px and PNG at 1024 px. A materially different Hero may use another boundary only after explicit visual A/B review.
 6. **Do not use an SVG wrapper containing an embedded PNG as the default workaround.** That merely hides a raster image inside SVG and does not provide the size-specific art direction the hybrid system is intended to preserve.
 
 No placeholder artwork is allowed in a release package.
@@ -147,7 +147,7 @@ Witcher3-HyDE/
 
 The current builder copies canonical SVGs into the corresponding `scalable/<context>/` directory.
 
-This is **not the frozen final hybrid layout**. The final v1 package may additionally contain fixed-size raster directories such as `<size>x<size>/<context>/` for approved PNG sizes. The exact raster size set and the SVG/PNG crossover remain pending visual review.
+This is **not the final hybrid layout**. The current reviewed Hero baseline requires scalable SVG delivery through 512 px plus a fixed `1024x1024/apps/` PNG delivery for reviewed Hero canonicals. Additional fixed-size PNG directories are added only when later visual review establishes a need.
 
 The current SVG-only validation `index.theme` scaffold is:
 

@@ -655,3 +655,33 @@ The remaining partial alpha is normal exterior-edge anti-aliasing; the previous 
 
 **No new Kitty crossover verdict is recorded yet.** The new terminal-forward package is awaiting project-owner native-size review.
 
+
+
+## Reviewed Hero delivery boundary — 512 SVG / 1024 PNG
+
+The project owner completed native-size review of the current corrected **Dolphin** and replacement terminal-forward **Kitty** candidates, including additional 1024 px renders.
+
+For both reviewed candidates the accepted delivery choice is now:
+
+```text
+32 / 48 / 64 / 96 / 128 / 256 / 512 px : SVG
+1024 px                                  : PNG
+```
+
+At native 512 px the SVG and PNG are visually close enough that the SVG is preferred for delivery. At native 1024 px the raster master's additional authored material detail is clearly visible and PNG is preferred.
+
+Engineering diagnostics on the standard dark surface (`#171A1C`) support the visual breakpoint but do **not** replace visual review:
+
+| Candidate | Size | SSIM PNG↔SVG | RGB MAE |
+| --- | ---: | ---: | ---: |
+| Dolphin | 512 | 0.644 | 14.36 |
+| Kitty terminal | 512 | 0.616 | 14.95 |
+| Dolphin | 1024 | 0.531 | 16.40 |
+| Kitty terminal | 1024 | 0.533 | 16.66 |
+
+Higher SSIM means greater structural similarity. The decline at 1024 agrees with the project-owner review: the vector facet representation diverges more clearly from raster microtexture when twice as many pixels are available.
+
+This decision is authoritative for the two reviewed production-quality Hero candidates. It is also the current Hero packaging baseline while additional non-medallion controls are tested. A materially different future Hero may override the baseline only by explicit visual review.
+
+No claim is made for untested intermediate sizes between 512 and 1024.
+
