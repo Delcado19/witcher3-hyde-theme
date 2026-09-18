@@ -359,3 +359,42 @@ For Dolphin, the faceting is no longer considered a blocking fidelity defect. Th
 
 This acceptance is **canonical-specific evidence**, not yet a class-wide rule for every Hero/Application icon. Other reconstructed Heroes may require different brilliance compensation or may not benefit from visible faceting.
 
+
+## Dolphin seven-size punchy crossover package — generated
+
+The accepted Dolphin SVG baseline (V1 facet geometry + `punchy` brilliance) has now been rendered against size-specific optimized PNG derivatives at all required test sizes:
+
+- 32 px
+- 48 px
+- 64 px
+- 96 px
+- 128 px
+- 256 px
+- 512 px
+
+Native-size comparison sheets were produced for all five required surfaces:
+
+- `#0A151E`
+- `#171A1C`
+- `#1C1813`
+- `#262729`
+- `#F2F0EA`
+
+A nearest-neighbour enlargement sheet for 32–128 px was also produced strictly as a diagnostic aid.
+
+Storage measurements from this review run:
+
+- scalable SVG candidate: **263,486 bytes**;
+- optimized PNG 32: **3,013 bytes**;
+- optimized PNG 48: **6,250 bytes**;
+- optimized PNG 64: **10,454 bytes**;
+- optimized PNG 96: **21,637 bytes**;
+- optimized PNG 128: **36,644 bytes**;
+- optimized PNG 256: **132,688 bytes**;
+- optimized PNG 512: **509,134 bytes**;
+- complete seven-size PNG ladder: **719,820 bytes**.
+
+These byte counts are engineering context only; visual quality decides delivery.
+
+**No crossover verdict is recorded yet.** The package is awaiting project-owner native-size review. Do not infer a threshold from file size or automated metrics.
+
