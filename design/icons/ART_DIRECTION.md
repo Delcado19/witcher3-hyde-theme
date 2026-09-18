@@ -136,7 +136,7 @@ These are a vocabulary, **not mandatory containers**.
 
 Do not place every application inside the same circular medallion, rounded-square tile, or shield. Hero icons must retain varied silhouettes so the launcher remains scannable.
 
-## 7. Platform convention and semantic recognition
+## 6. Platform convention and semantic recognition
 
 The theme must preserve established desktop icon conventions wherever a strong cross-platform convention already exists.
 
@@ -166,7 +166,7 @@ A familiar symbol may be replaced only when the replacement is at least as immed
 
 For semantic families, first establish one approved base object or symbol and then derive family variants from it. Example: approve one strong Witcher folder master, then derive Home, Downloads, Documents, Music, Pictures and related folder variants through secondary emblems rather than reinventing the folder silhouette for every canonical.
 
-## 6. Canvas, master size, and safe area
+## 7. Canvas, master size, and safe area
 
 Vector artwork should use a square coordinate system. The preferred authoring canvas is:
 
@@ -359,7 +359,7 @@ Use one or more of:
 
 Do not solve separation with a universal bright sticker outline.
 
-## 15. Text and letters
+## 16. Text and letters
 
 Text is discouraged inside icons.
 
@@ -369,7 +369,7 @@ Release SVGs should not require an installed font to render correctly.
 
 Long words, UI labels, version numbers, and tiny decorative inscriptions are not allowed as identity-critical elements.
 
-## 16. Gradients and effects
+## 17. Gradients and effects
 
 Allowed:
 
@@ -389,7 +389,7 @@ Avoid:
 
 Any SVG effect must remain self-contained. External image or network references are rejected by the build pipeline.
 
-## 17. Background test surfaces
+## 18. Background test surfaces
 
 Every canonical icon should be visually reviewed on at least these project surfaces:
 
@@ -402,7 +402,7 @@ Every canonical icon should be visually reviewed on at least these project surfa
 
 The icon should also remain legible on a generic light surface during file-manager or application edge cases. This does not require optimizing the entire design for a light theme; it requires avoiding silhouettes that disappear completely outside the intended dark desktop.
 
-## 18. Required review sizes
+## 19. Required review sizes
 
 Every accepted canonical should be inspected at:
 
@@ -425,7 +425,7 @@ The primary verdict must be made from **native-size 100% renders** on the target
 
 Review sizes do not automatically imply committed raster variants. A PNG size enters the release only after it demonstrates a visible advantage and passes size-specific optimization review.
 
-## 19. Acceptance criteria
+## 20. Acceptance criteria
 
 A canonical design is ready to enter `design/icons/src/` only when all of the following are true:
 
@@ -443,7 +443,7 @@ A canonical design is ready to enter `design/icons/src/` only when all of the fo
 - related state/family icons remain coherent;
 - the incremental source validator accepts it.
 
-## 20. Artwork workflow
+## 21. Artwork workflow
 
 The intended workflow for each reviewed batch is:
 
