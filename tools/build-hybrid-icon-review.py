@@ -113,7 +113,7 @@ def review_html(
             )
             surfaces.append(
                 f"""
-<div class="surface" style="--surface:{surface_color}">
+<div class="surface" style="--surface:{surface_color};--review-size:{size}px">
   <div class="surface-name">{html.escape(surface_name)} <code>{surface_color}</code></div>
   <div class="pair">
     <div class="variant">
@@ -151,10 +151,10 @@ body {{ margin: 0; padding: 28px; background: #0A151E; color: #DEE6F0; }}
 main {{ max-width: 1600px; margin: 0 auto; }}
 .summary {{ color: #B0B6C2; margin-bottom: 28px; }}
 .size-row {{ border: 1px solid #3D3A39; background: #171A1C; padding: 16px; margin: 18px 0; }}
-.surfaces {{ display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }}
-.surface {{ background: var(--surface); min-height: 150px; border: 1px solid #3D3A39; padding: 10px; }}
+.surfaces {{ display: flex; gap: 12px; overflow-x: auto; align-items: flex-start; padding-bottom: 8px; }}
+.surface {{ background: var(--surface); min-height: 150px; border: 1px solid #3D3A39; padding: 10px; flex: 0 0 auto; min-width: max(240px, calc(var(--review-size) * 2 + 56px)); }}
 .surface-name {{ font-size: 12px; margin-bottom: 10px; }}
-.pair {{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: end; }}
+.pair {{ display: grid; grid-template-columns: repeat(2, var(--review-size)); gap: 12px; align-items: end; justify-content: center; }}
 .variant {{ min-height: 100px; display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: flex-end; }}
 .variant-label {{ font-size: 11px; color: #B0B6C2; text-align: center; }}
 .variant img {{ display: block; object-fit: contain; }}

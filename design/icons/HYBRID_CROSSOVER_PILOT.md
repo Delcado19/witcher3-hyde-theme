@@ -94,7 +94,7 @@ An optimized directory uses exact target filenames such as `32.png`, `48.png`, `
 Hero review now has two gates.
 
 1. **Fidelity gate:** the SVG must first look like the same approved artwork at 256, 512 and 1024 px. Wrong subject/silhouette, flat/cartoon treatment, major color mismatch, lost material language or visibly different composition is an immediate reject.
-2. **Crossover gate:** only a fidelity-passing SVG is compared at 32, 48, 64, 96, 128, 256 and 512 px.
+2. **Crossover gate:** only a fidelity-passing SVG is compared at 32, 48, 64, 96, 128, 256, 512 and 1024 px.
 
 If the fidelity gate fails, PNG-only is an approved result and no crossover size is invented.
 
@@ -185,7 +185,7 @@ The exact user-supplied reference images are art-direction references, not redis
 Only after a raster master passes the quality gate:
 
 1. build a visually faithful vector reconstruction of the approved canonical;
-2. compare SVG and PNG at 256 and 512 px first;
+2. compare SVG and PNG at 256, 512 and 1024 px first;
 3. reject the SVG immediately if subject, silhouette, composition, color, depth, lighting or material character diverges materially from the PNG;
 4. if the SVG passes, export both forms at 32, 48, 64, 96, 128, 256, 512 and 1024 px;
 5. optimize each candidate PNG size individually where necessary;

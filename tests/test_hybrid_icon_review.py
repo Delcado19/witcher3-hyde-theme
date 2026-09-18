@@ -72,6 +72,7 @@ class HybridIconReviewTests(unittest.TestCase):
             self.assertIn("96px", document)
             self.assertIn("512px", document)
             self.assertIn("1024px", document)
+            self.assertIn("--review-size:1024px", document)
             self.assertIn("#0A151E", document)
             self.assertIn("#F2F0EA", document)
 
