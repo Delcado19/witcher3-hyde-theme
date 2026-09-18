@@ -132,13 +132,14 @@ witcher3-hyde-theme/
 └── tools/
     ├── build-gtk.sh
     ├── build-icons.py
+    ├── build-icon-review.py
     ├── import-witcher-wallpaper.py
     ├── validate-icon-matrix.py
     ├── validate-icon-sources.py
     └── validate-wallpaper-theme.py
 ```
 
-The Kaer Morhen default wallpaper is bundled as a validated 2560×1440 16-bit RGB PNG. With exactly one bundled wallpaper, current HyDE's fallback selection is deterministic and creates `wall.set` as runtime state when the theme is first applied; `wall.set` is intentionally not stored in the repository. Actual icon artwork and screenshots remain development targets. Witcher3 v1 intentionally does not ship or force a cursor package and inherits the normal HyDE/user cursor configuration instead. Icon and wallpaper build/validation tooling is CI-tested independently of unfinished visual assets.
+The Kaer Morhen default wallpaper is bundled as a validated 2560×1440 16-bit RGB PNG. With exactly one bundled wallpaper, current HyDE's fallback selection is deterministic and creates `wall.set` as runtime state when the theme is first applied; `wall.set` is intentionally not stored in the repository. The reviewed 14-icon artwork pilot is now present; broad icon coverage and screenshots remain development targets. Witcher3 v1 intentionally does not ship or force a cursor package and inherits the normal HyDE/user cursor configuration instead. Icon and wallpaper build/validation tooling is CI-tested independently of unfinished visual assets.
 
 ### Kvantum integration
 
@@ -307,7 +308,7 @@ The icon system is divided into three visual families:
 
 The release format uses project-owned scalable SVGs. Glyph artwork is specifically designed to remain legible at small UI sizes instead of relying on mechanical downscaling of highly detailed Hero artwork.
 
-The visual rules are defined in [`design/icons/ART_DIRECTION.md`](design/icons/ART_DIRECTION.md). The first cross-context review set is defined in [`design/icons/PILOT_BATCH.md`](design/icons/PILOT_BATCH.md).
+The visual rules are defined in [`design/icons/ART_DIRECTION.md`](design/icons/ART_DIRECTION.md). The first cross-context review set is defined in [`design/icons/PILOT_BATCH.md`](design/icons/PILOT_BATCH.md). The 14-icon Hero/Glyph/Emblem pilot is complete, visually reviewed at its mandatory sizes and project surfaces, and protected by a fail-closed CI completeness gate.
 
 ### Build contract
 
@@ -400,7 +401,7 @@ Current CI coverage includes:
 | Kvantum | Rendered Kvconfig, pinned HyDE SVG, XML validity, color roles, selection contrast |
 | Wallpaper | Strict 2560×1440 16-bit RGB PNG structure/data validation, exact approved filename, single-wallpaper baseline, and repository-level `wall.set` rejection |
 | Icon matrix | 645-design structure, canonical/alias namespace, Freedesktop/Breeze naming and application identity provenance |
-| Icon builder | Incremental source validation plus synthetic 645-SVG staging, symlink, archive, and reproducibility tests |
+| Icon builder | Incremental source validation, permanent 14-icon pilot completeness review gate, plus synthetic 645-SVG staging, symlink, archive, and reproducibility tests |
 
 Static CI validation does **not** replace final visual testing on a real HyDE installation.
 
@@ -429,8 +430,8 @@ For the icon theme:
 3. Validate aliases separately from unique artwork. **Done for the current matrix baseline.**
 4. Freeze the build contract and scalable package layout. **Done.**
 5. Define Hero/Glyph/Emblem art direction and the first cross-context pilot. **Done.**
-6. Produce and review the 14-icon pilot artwork. **Pending.**
-7. Expand accepted artwork family-by-family while incremental CI validates each batch. **Pending.**
+6. Produce and review the 14-icon pilot artwork. **Done.**
+7. Expand accepted artwork family-by-family while incremental CI validates each batch. **In progress; next block is core Actions/UI.**
 8. Reach 645/645 canonical SVGs and run the strict full staging path. **Pending artwork; builder already validated.**
 9. Package `Source/arcs/Icon_Witcher3-HyDE.tar.xz`. **Pending complete artwork.**
 
@@ -450,7 +451,7 @@ Until the first stable release exists, this repository should be treated as a de
 
 ## Status
 
-**Current phase:** core runtime styling, the Kaer Morhen wallpaper baseline, the v1 cursor policy, and icon infrastructure are statically validated; original icon artwork and live integration are next.
+**Current phase:** core runtime styling and icon infrastructure are validated; the reviewed 14-icon Witcher artwork pilot is accepted, and family-by-family icon expansion plus live HyDE integration are next.
 
 - [x] Define the project as a full HyDE theme
 - [x] Establish a current-HyDE-compatible repository baseline
@@ -475,7 +476,7 @@ Until the first stable release exists, this repository should be treated as a de
 - [x] Add and CI-validate the Kaer Morhen default wallpaper
 - [x] Document `wall.set` as HyDE-managed runtime state rather than a repository asset
 - [x] Decide v1 cursor policy: inherit HyDE/user cursor; no cursor package
-- [ ] Produce and review the 14-icon Witcher artwork pilot
+- [x] Produce and review the 14-icon Witcher artwork pilot
 - [ ] Expand original icon artwork to 645/645 canonicals
 - [ ] Build the real `Icon_Witcher3-HyDE.tar.xz` from accepted artwork
 - [ ] Add screenshots
