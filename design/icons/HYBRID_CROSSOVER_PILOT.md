@@ -281,3 +281,36 @@ Verdict:
 - the next refinement must therefore improve surface continuity without changing silhouette, composition, dominant colors or the approved forged-metal style.
 
 The current SVG should still be treated as a working candidate rather than a frozen final Hero asset until the faceting is reduced and the large-size fidelity gate is revisited.
+
+
+## Edge-aware smoothing prototype v2 — 2026-09-18
+
+The first refinement specifically targeting the project-owner-reported mosaic/faceted appearance is implemented in `tools/reconstruct-hero-svg.py` behind `--surface-smoothing`.
+
+Method:
+
+- retain the full PNG-derived reconstructed vector geometry;
+- render a mildly smoothed low-frequency copy;
+- detect strong edges from the source PNG with a Sobel magnitude threshold;
+- vectorize those strong-edge areas into an SVG mask;
+- restore the original vector reconstruction sharply only through that mask;
+- retain a very low-opacity global sharp pass;
+- store the actual artwork paths only once and reuse them through SVG references.
+
+The internal references use `xlink:href` because this survives the current Scour optimization pass correctly. A first SVG2 `href` attempt was found to be over-optimized by Scour and was rejected.
+
+Current Dolphin v2 engineering result with the fidelity preset:
+
+- strong-edge mask coverage: **16.42%** of visible source pixels;
+- edge-mask vector shapes: **203**;
+- smoothing blur: **1.1** analysis pixels;
+- global sharp-detail opacity: **0.04**;
+- SVG before Scour: **381,241 bytes**;
+- SVG after Scour: **278,426 bytes**;
+- optimized SVG / source PNG: **9.38%**;
+- 256 px diagnostic via Inkscape: SSIM **0.8544**, MAE **8.38**;
+- 512 px diagnostic via Inkscape: SSIM **0.7092**, MAE **10.27**.
+
+The objective metrics are essentially neutral/slightly lower than the flat-facet candidate because smoothing deliberately trades pixel-local similarity for better perceived surface continuity. They are therefore not used as the visual verdict.
+
+The v2 candidate is **awaiting project-owner visual review**. It is not yet frozen as final artwork and does not establish a crossover.

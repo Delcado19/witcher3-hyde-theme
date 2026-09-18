@@ -5,15 +5,16 @@ The source composition is not redrawn. The tool uses perceptual superpixel
 segmentation, palette clustering and contour tracing, then optionally Scour.
 No raster image is embedded in the SVG.
 
+An optional edge-aware surface-smoothing mode keeps the reconstructed vector
+geometry but softens low-frequency faceting while restoring strong source
+edges through a separately vectorized detail mask.
+
 Runtime reconstruction dependencies:
   Pillow numpy opencv-python scikit-image scikit-learn
-Optional comparison dependency:
-  cairosvg
+Optional comparison dependencies:
+  cairosvg or Inkscape
 Optional final optimizer:
   scour (python-scour)
-
-Imports are lazy so repository CI can compile/import dependency-free helpers
-without installing the optional reconstruction stack.
 """
 from __future__ import annotations
 
@@ -81,6 +82,88 @@ def _runtime_modules():
     return cv2, np, Image, slic, KMeans
 
 
+def _edge_mask_path(
+    rgb,
+    alpha,
+    *,
+    threshold: float,
+    dilate_iterations: int,
+    contour_epsilon: float,
+):
+    """Return a vectorized mask for strong source-image edges."""
+    cv2, np, *_ = _runtime_modules()
+    gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY).astype(np.float32)
+    grad_x = cv2.Sobel(gray, cv2.CV_32F, 1, 0, ksize=3)
+    grad_y = cv2.Sobel(gray, cv2.CV_32F, 0, 1, ksize=3)
+    magnitude = np.sqrt(grad_x * grad_x + grad_y * grad_y) / 4.0
+    visible = alpha > 20
+    edge_mask = ((magnitude > threshold) & visible).astype(np.uint8) * 255
+    if dilate_iterations > 0:
+        edge_mask = cv2.dilate(
+            edge_mask,
+            np.ones((3, 3), dtype=np.uint8),
+            iterations=dilate_iterations,
+        )
+    coverage = float((edge_mask > 0).sum() / max(1, int(visible.sum())))
+    contours, _ = cv2.findContours(
+        edge_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
+    paths: list[str] = []
+    for contour in contours:
+        if cv2.contourArea(contour) < 1.0:
+            continue
+        approx = cv2.approxPolyDP(contour, contour_epsilon, True)
+        points = approx[:, 0, :]
+        if len(points) < 3:
+            continue
+        paths.append(relative_polygon_path(points))
+    return "".join(paths), coverage, len(paths)
+
+
+def _emit_svg(
+    *,
+    analysis_size: int,
+    art_paths: str,
+    seam_stroke: float,
+    smoothing: bool,
+    edge_path: str,
+    smooth_blur: float,
+    smooth_detail_opacity: float,
+) -> str:
+    group = (
+        '<g shape-rendering="geometricPrecision" '
+        'stroke-linejoin="round" '
+        f'stroke-width="{seam_stroke:g}">{art_paths}</g>'
+    )
+    if not smoothing:
+        return (
+            f'<svg xmlns="http://www.w3.org/2000/svg" '
+            f'viewBox="0 0 {analysis_size} {analysis_size}">'
+            f'{group}</svg>\n'
+        )
+
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" '
+        'xmlns:xlink="http://www.w3.org/1999/xlink" '
+        f'viewBox="0 0 {analysis_size} {analysis_size}">'
+        '<defs>'
+        '<filter id="surfaceSoft" x="-5%" y="-5%" width="110%" height="110%">'
+        f'<feGaussianBlur stdDeviation="{smooth_blur:g}"/>'
+        '</filter>'
+        f'<g id="heroArt">{group}</g>'
+        f'<mask id="strongEdges" maskUnits="userSpaceOnUse" x="0" y="0" '
+        f'width="{analysis_size}" height="{analysis_size}">'
+        f'<rect width="{analysis_size}" height="{analysis_size}" fill="#000"/>'
+        f'<path d="{edge_path}" fill="#fff"/>'
+        '</mask>'
+        '</defs>'
+        '<use xlink:href="#heroArt" filter="url(#surfaceSoft)"/>'
+        '<use xlink:href="#heroArt" mask="url(#strongEdges)"/>'
+        f'<use xlink:href="#heroArt" opacity="{smooth_detail_opacity:g}"/>'
+        '</svg>\n'
+    )
+
+
 def reconstruct(
     input_png: Path,
     output_svg: Path,
@@ -94,7 +177,13 @@ def reconstruct(
     alpha_threshold: int,
     min_area: float,
     seam_stroke: float,
-) -> dict[str, int | float | str]:
+    surface_smoothing: bool,
+    smooth_blur: float,
+    edge_threshold: float,
+    edge_dilate: int,
+    edge_epsilon: float,
+    smooth_detail_opacity: float,
+) -> dict[str, int | float | str | bool]:
     cv2, np, Image, slic, KMeans = _runtime_modules()
 
     source = Image.open(input_png).convert("RGBA")
@@ -166,20 +255,10 @@ def reconstruct(
             )
             polygon_count += 1
 
-    parts = [
-        (
-            f'<svg xmlns="http://www.w3.org/2000/svg" '
-            f'viewBox="0 0 {analysis_size} {analysis_size}">'
-        ),
-        (
-            '<g shape-rendering="geometricPrecision" '
-            'stroke-linejoin="round" '
-            f'stroke-width="{seam_stroke:g}">'
-        ),
-    ]
     order = sorted(
         range(color_count), key=lambda idx: float(palette[idx].mean())
     )
+    art_parts: list[str] = []
     emitted_colors = 0
     for palette_index in order:
         paths = grouped[palette_index]
@@ -189,15 +268,36 @@ def reconstruct(
             int(value) for value in palette[palette_index]
         )
         color = f"#{red:02x}{green:02x}{blue:02x}"
-        parts.append(
+        art_parts.append(
             f'<path fill="{color}" stroke="{color}" '
             f'd="{"".join(paths)}"/>'
         )
         emitted_colors += 1
-    parts.append("</g></svg>\n")
+
+    edge_path = ""
+    edge_coverage = 0.0
+    edge_shapes = 0
+    if surface_smoothing:
+        edge_path, edge_coverage, edge_shapes = _edge_mask_path(
+            rgb,
+            alpha,
+            threshold=edge_threshold,
+            dilate_iterations=edge_dilate,
+            contour_epsilon=edge_epsilon,
+        )
+
+    svg = _emit_svg(
+        analysis_size=analysis_size,
+        art_paths="".join(art_parts),
+        seam_stroke=seam_stroke,
+        smoothing=surface_smoothing,
+        edge_path=edge_path,
+        smooth_blur=smooth_blur,
+        smooth_detail_opacity=smooth_detail_opacity,
+    )
 
     output_svg.parent.mkdir(parents=True, exist_ok=True)
-    output_svg.write_text("".join(parts), encoding="utf-8")
+    output_svg.write_text(svg, encoding="utf-8")
     return {
         "analysis_size": analysis_size,
         "requested_segments": segments,
@@ -206,6 +306,9 @@ def reconstruct(
         "polygons": polygon_count,
         "input_bytes": input_png.stat().st_size,
         "svg_bytes_before_optimizer": output_svg.stat().st_size,
+        "surface_smoothing": surface_smoothing,
+        "edge_mask_coverage": edge_coverage,
+        "edge_mask_shapes": edge_shapes,
     }
 
 
@@ -241,52 +344,85 @@ def optimize_with_scour(svg_path: Path) -> bool:
         temp_path.unlink(missing_ok=True)
 
 
+def _render_with_inkscape(svg_path: Path, output_png: Path, size: int) -> None:
+    executable = shutil.which("inkscape")
+    if not executable:
+        raise SystemExit("Inkscape renderer requested but inkscape is unavailable")
+    subprocess.run(
+        [
+            executable,
+            str(svg_path),
+            f"--export-filename={output_png}",
+            f"--export-width={size}",
+            f"--export-height={size}",
+        ],
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+
+def _render_with_cairosvg(svg_path: Path, output_png: Path, size: int) -> None:
+    try:
+        import cairosvg  # type: ignore
+    except ImportError as exc:
+        raise SystemExit("CairoSVG renderer requested but cairosvg is unavailable") from exc
+    output_png.write_bytes(
+        cairosvg.svg2png(
+            bytestring=svg_path.read_bytes(),
+            output_width=size,
+            output_height=size,
+        )
+    )
+
+
 def render_comparison(
-    input_png: Path, svg_path: Path, output_dir: Path
+    input_png: Path,
+    svg_path: Path,
+    output_dir: Path,
+    *,
+    renderer: str,
 ) -> dict[str, object]:
     """Render 256/512 diagnostics; metrics are not acceptance gates."""
     try:
-        import io
-        import cairosvg  # type: ignore
         import numpy as np  # type: ignore
         from PIL import Image  # type: ignore
         from skimage.metrics import structural_similarity as ssim  # type: ignore
     except ImportError as exc:
         raise SystemExit(
-            "comparison rendering additionally requires cairosvg, "
-            "Pillow, numpy, and scikit-image"
+            "comparison rendering requires Pillow, numpy, and scikit-image"
         ) from exc
+
+    if renderer == "auto":
+        renderer = "inkscape" if shutil.which("inkscape") else "cairosvg"
 
     output_dir.mkdir(parents=True, exist_ok=True)
     source = Image.open(input_png).convert("RGBA")
-    svg_bytes = svg_path.read_bytes()
     background = np.asarray([23, 26, 28], dtype=np.float32)
-    results: dict[str, object] = {}
+    results: dict[str, object] = {"renderer": renderer}
 
     def composite(array):
-        alpha = array[:, :, 3:4].astype(np.float32) / 255.0
+        a = array[:, :, 3:4].astype(np.float32) / 255.0
         return (
-            array[:, :, :3].astype(np.float32) * alpha
-            + background * (1.0 - alpha)
+            array[:, :, :3].astype(np.float32) * a
+            + background * (1.0 - a)
         ).astype(np.uint8)
 
     for size in (256, 512):
-        rendered_png = cairosvg.svg2png(
-            bytestring=svg_bytes,
-            output_width=size,
-            output_height=size,
-        )
-        vector_render = Image.open(
-            io.BytesIO(rendered_png)
-        ).convert("RGBA")
-        target = source.resize(
-            (size, size), Image.Resampling.LANCZOS
-        )
+        rendered_path = output_dir / f"svg-{size}.png"
+        if renderer == "inkscape":
+            _render_with_inkscape(svg_path, rendered_path, size)
+        elif renderer == "cairosvg":
+            _render_with_cairosvg(svg_path, rendered_path, size)
+        else:
+            raise ValueError(f"unknown comparison renderer: {renderer}")
+
+        vector_render = Image.open(rendered_path).convert("RGBA")
+        target = source.resize((size, size), Image.Resampling.LANCZOS)
         a = composite(np.asarray(vector_render))
         b = composite(np.asarray(target))
-        score = float(
-            ssim(a, b, channel_axis=2, data_range=255)
-        )
+        score = float(ssim(a, b, channel_axis=2, data_range=255))
         mae = float(
             np.abs(
                 a.astype(np.float32) - b.astype(np.float32)
@@ -294,14 +430,10 @@ def render_comparison(
         )
         results[str(size)] = {"ssim": score, "mae": mae}
 
-        board = Image.new(
-            "RGB", (size * 2, size), (23, 26, 28)
-        )
+        board = Image.new("RGB", (size * 2, size), (23, 26, 28))
         board.paste(target, (0, 0), target)
         board.paste(vector_render, (size, 0), vector_render)
-        board.save(
-            output_dir / f"compare-{size}.png", optimize=True
-        )
+        board.save(output_dir / f"compare-{size}.png", optimize=True)
     return results
 
 
@@ -326,8 +458,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--alpha-threshold", type=int, default=20)
     parser.add_argument("--min-area", type=float, default=1.0)
     parser.add_argument("--seam-stroke", type=float, default=0.55)
+    parser.add_argument("--surface-smoothing", action="store_true")
+    parser.add_argument("--smooth-blur", type=float, default=1.1)
+    parser.add_argument("--edge-threshold", type=float, default=105.0)
+    parser.add_argument("--edge-dilate", type=int, default=1)
+    parser.add_argument("--edge-epsilon", type=float, default=0.5)
+    parser.add_argument("--smooth-detail-opacity", type=float, default=0.04)
     parser.add_argument("--no-scour", action="store_true")
     parser.add_argument("--compare-dir", type=Path)
+    parser.add_argument(
+        "--comparison-renderer",
+        choices=("auto", "inkscape", "cairosvg"),
+        default="auto",
+    )
     parser.add_argument("--report", type=Path)
     return parser.parse_args()
 
@@ -354,6 +497,12 @@ def main() -> int:
         alpha_threshold=args.alpha_threshold,
         min_area=args.min_area,
         seam_stroke=args.seam_stroke,
+        surface_smoothing=args.surface_smoothing,
+        smooth_blur=args.smooth_blur,
+        edge_threshold=args.edge_threshold,
+        edge_dilate=args.edge_dilate,
+        edge_epsilon=args.edge_epsilon,
+        smooth_detail_opacity=args.smooth_detail_opacity,
     )
 
     optimized = (
@@ -370,14 +519,18 @@ def main() -> int:
 
     if args.compare_dir:
         report["comparison"] = render_comparison(
-            args.input_png, args.output_svg, args.compare_dir
+            args.input_png,
+            args.output_svg,
+            args.compare_dir,
+            renderer=args.comparison_renderer,
         )
 
     encoded = json.dumps(report, indent=2, sort_keys=True)
     print(encoded)
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
-        args.report.write_text(encoded + "\n", encoding="utf-8")
+        args.report.write_text(encoded + "
+", encoding="utf-8")
     return 0
 
 

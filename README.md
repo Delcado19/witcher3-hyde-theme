@@ -315,6 +315,8 @@ The Hero pilot has reached its first production-quality raster milestone: correc
 
 A first PNG→SVG fidelity reconstruction tool is now tracked as `tools/reconstruct-hero-svg.py`. It uses perceptual image segmentation and true vector path reconstruction rather than a stylistic redraw. The current Dolphin fidelity prototype is compact relative to its raster master and already close at 256 px, but remains visibly faceted at 512 px; it is therefore still an experiment, not accepted Hero artwork.
 
+The tool now also has an optional edge-aware surface-smoothing pass: it softens low-frequency faceting while restoring strong source-image edges through a separately vectorized mask. The first Dolphin v2 remains a review candidate; filtered-SVG compatibility still has to be verified on the target HyDE/librsvg path before this mode becomes production policy.
+
 Hero development is now PNG-fidelity-first. The next experiment is a visually guided PNG→SVG reconstruction/optimization pipeline. Only a vector result that still looks like the same Hero artwork may proceed to crossover testing; otherwise PNG-only is the correct result. The earlier folder/file-cabinet Dolphin composition remains retired as final identity. Reference binaries are not committed automatically without provenance/redistribution clearance.
 
 ### Build contract

@@ -30,6 +30,22 @@ class HeroSvgReconstructionHelpersTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             MODULE.preset_config("nope")
 
+    def test_surface_smoothing_keeps_real_vector_art_once(self):
+        svg = MODULE._emit_svg(
+            analysis_size=512,
+            art_paths='<path d="M0 0h10v10z" fill="#fff"/>',
+            seam_stroke=0.55,
+            smoothing=True,
+            edge_path="M0 0h4v4z",
+            smooth_blur=1.1,
+            smooth_detail_opacity=0.04,
+        )
+        self.assertIn("feGaussianBlur", svg)
+        self.assertIn('mask id="strongEdges"', svg)
+        self.assertIn('xlink:href="#heroArt"', svg)
+        self.assertNotIn("<image", svg)
+        self.assertEqual(svg.count('<path d="M0 0h10v10z"'), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

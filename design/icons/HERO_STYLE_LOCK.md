@@ -124,3 +124,14 @@ It is a **fidelity reconstruction tool**, not an art-style generator. It does no
 
 The current \`fidelity\` preset deliberately prioritizes visual similarity over minimum path count. The next optimization target is reducing the visible faceted/superpixel texture at 512 px without exploding SVG size.
 
+
+
+## Edge-aware surface smoothing — prototype v2
+
+The reconstruction tool may optionally apply **edge-aware vector surface smoothing** after the real-vector reconstruction.
+
+This is not raster embedding and does not redraw the application identity. The reconstructed path set is stored once inside the SVG. A mild SVG Gaussian blur is used for the low-frequency surface layer, while a second PNG-derived vector mask restores only strong source-image edges sharply. A very low-opacity global detail pass prevents the smoothed layer from becoming sterile.
+
+The intended effect is to reduce visible superpixel/mosaic faceting on broad forged-metal surfaces without softening identity-critical contours, runes, recesses, red accents, or structural metal edges.
+
+This mode must remain optional until visually accepted and renderer compatibility has been validated on the target desktop SVG stack.
