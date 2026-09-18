@@ -313,6 +313,27 @@ Examples:
 - MIME types use consistent document/container geometry and a strong type-specific emblem;
 - preference categories use coherent control/tool metaphors rather than unrelated mini-scenes.
 
+### MIME family micro-scale delivery rule
+
+For visually rich MIME families, one large master must **not** be blindly scaled through all desktop sizes.
+
+The current Office/Documents family establishes the working crossover strategy:
+
+- **64 px and larger:** use the detailed family artwork when it remains clearly superior, including material, parchment, frame and controlled type-specific detail;
+- **48 px:** treat as an explicit crossover review size. Compare the detailed raster derivative against the simplified SVG micro-variant and choose by native-size readability;
+- **32 px and smaller:** use a separately authored **SVG micro-variant of the same identity** rather than a reduced detailed master.
+
+The micro-variant must preserve the same semantic family and type identity while removing detail that cannot survive at native size:
+
+- keep the document silhouette;
+- keep parchment/light body versus dark forged edge separation;
+- reduce or remove wax seals, texture, scratches and decorative engraving;
+- remove nonessential text/code lines;
+- enlarge the type marker until it becomes the dominant differentiator;
+- preserve only a restrained Witcher-red accent where useful.
+
+The goal is not to make the small icon a miniature copy of the large artwork. The goal is to make it unmistakably the **same file type and family** at the size where it is actually viewed.
+
 ## 12. Family consistency rules
 
 Icons in a semantic family must share:
