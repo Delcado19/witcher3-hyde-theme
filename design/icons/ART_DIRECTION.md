@@ -338,6 +338,29 @@ A source file being present in the repository does **not** mean the artwork is v
 
 This workflow is especially important for MIME/filetype families, folder/place families, device families, and repeated status-state families.
 
+### Emblem/MIME Witcher identity lock
+
+Recent MIME-family exploration showed a drift toward brighter generic fantasy / steampunk styling. That direction is rejected as a release target.
+
+A Witcher3-HyDE Emblem or MIME icon must read as part of the theme **even if its wolf seal or explicit Witcher emblem is removed**. A pasted seal is not sufficient identity.
+
+Required visual bias:
+
+- darker overall value structure, closer to Dolphin / Kitty / Konsole than to bright parchment fantasy UI;
+- blackened/weathered iron and cold steel should carry more of the construction;
+- parchment, leather, brass and gold are secondary materials, not the dominant brightness source;
+- parchment should be aged, muted and locally lit rather than broad bright beige;
+- Witcher red stays controlled in recesses, wax, stitching or small accents;
+- avoid warm golden global lighting, polished fantasy ornament overload and bright decorative filigree;
+- prefer restrained, functional forged construction, authored wear, soot, scratches, cold edge highlights and deeper cavities;
+- family members may use different physical metaphors, but all must share the same dark Witcher material and lighting language.
+
+Quality check:
+
+> If the seal/emblem is hidden, the icon should still plausibly belong next to Dolphin, Kitty and Konsole.
+
+This rule applies to MIME, Places, Devices, Categories and other Emblem-class redesigns.
+
 ## 12. Family consistency rules
 
 Icons in a semantic family must share:
