@@ -1,0 +1,48 @@
+name: Recover icon PNGs
+
+on:
+  push:
+    branches:
+      - icon-hero-hybrid-pilot-1
+    paths:
+      - 'design/icons/recovery/chunks/**'
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: icon-hero-hybrid-pilot-1
+          fetch-depth: 0
+      - name: Reassemble recovery PNGs
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          changed=0
+          for d in design/icons/recovery/chunks/*; do
+            [ -d "$d" ] || continue
+            meta="$d/meta.env"
+            [ -f "$meta" ] || continue
+            source "$meta"
+            parts=("$d"/part-*.b64)
+            [ "${#parts[@]}" -gt 0 ] || continue
+            mkdir -p "$(dirname "$TARGET")"
+            cat "${parts[@]}" | base64 -d > "$TARGET"
+            actual="$(sha256sum "$TARGET" | awk '{print $1}')"
+            test "$actual" = "$SHA256"
+            git add "$TARGET"
+            git rm -r "$d"
+            changed=1
+          done
+          if [ "$changed" -eq 0 ]; then
+            exit 0
+          fi
+          git config user.name "witcher3-hyde-recovery"
+          git config user.email "actions@users.noreply.github.com"
+          git commit -m "Recover exact icon PNG assets [skip ci]"
+          git push origin HEAD:icon-hero-hybrid-pilot-1
