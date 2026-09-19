@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<defs>
+  <linearGradient id="steelA" x1=".05" y1=".05" x2=".95" y2=".95">
+    <stop offset="0" stop-color="#8f9087"/><stop offset=".11" stop-color="#3b3d3b"/>
+    <stop offset=".43" stop-color="#111313"/><stop offset=".72" stop-color="#303230"/>
+    <stop offset="1" stop-color="#080909"/>
+  </linearGradient>
+  <linearGradient id="steelB" x1=".9" y1=".1" x2=".1" y2=".9">
+    <stop offset="0" stop-color="#5f615d"/><stop offset=".17" stop-color="#171918"/>
+    <stop offset=".57" stop-color="#2b2d2c"/><stop offset="1" stop-color="#090a0a"/>
+  </linearGradient>
+  <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#c8c7bc"/><stop offset=".16" stop-color="#777871"/>
+    <stop offset=".52" stop-color="#202221"/><stop offset="1" stop-color="#070808"/>
+  </linearGradient>
+  <radialGradient id="red" cx=".5" cy=".5" r=".7">
+    <stop offset="0" stop-color="#cf281a"/><stop offset=".25" stop-color="#74110c"/>
+    <stop offset=".62" stop-color="#1b0202"/><stop offset="1" stop-color="#000"/>
+  </radialGradient>
+  <filter id="forge" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency=".016 .08" numOctaves="4" seed="57" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="5.8" result="d"/>
+    <feSpecularLighting in="n" surfaceScale="4.5" specularConstant=".52" specularExponent="22" lighting-color="#deddd3" result="s">
+      <feDistantLight azimuth="226" elevation="47"/>
+    </feSpecularLighting>
+    <feComposite in="s" in2="d" operator="in" result="si"/>
+    <feBlend in="d" in2="si" mode="screen"/>
+  </filter>
+  <filter id="glow" x="-90%" y="-90%" width="280%" height="280%">
+    <feGaussianBlur stdDeviation="12" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="shadow" x="-35%" y="-35%" width="170%" height="180%">
+    <feDropShadow dx="0" dy="28" stdDeviation="28" flood-color="#000" flood-opacity=".9"/>
+  </filter>
+  <pattern id="scar" width="68" height="68" patternUnits="userSpaceOnUse" patternTransform="rotate(-19)">
+    <path d="M7 0V68M31 0V68M59 0V68" stroke="#dedbd0" stroke-opacity=".05"/>
+    <path d="M18 0V68M47 0V68" stroke="#000" stroke-opacity=".33" stroke-width="2"/>
+  </pattern>
+</defs>
+<g filter="url(#shadow)">
+  <g opacity=".9">
+    <path d="M174 728L414 488" stroke="#070808" stroke-width="42" stroke-linecap="round"/>
+    <path d="M174 728L414 488" stroke="url(#edge)" stroke-width="24" stroke-linecap="round" filter="url(#forge)"/>
+    <path d="M167 736l-54 14 14-54z" fill="url(#steelA)" stroke="#676861" stroke-width="8" filter="url(#forge)"/>
+    <path d="M850 728L610 488" stroke="#070808" stroke-width="42" stroke-linecap="round"/>
+    <path d="M850 728L610 488" stroke="url(#edge)" stroke-width="24" stroke-linecap="round" filter="url(#forge)"/>
+    <path d="M857 736l54 14-14-54z" fill="url(#steelA)" stroke="#676861" stroke-width="8" filter="url(#forge)"/>
+    <path d="M512 214V443" stroke="#070808" stroke-width="42" stroke-linecap="round"/>
+    <path d="M512 214V443" stroke="url(#edge)" stroke-width="24" stroke-linecap="round" filter="url(#forge)"/>
+    <path d="M512 139l-35 59h70z" fill="url(#steelA)" stroke="#74756e" stroke-width="8" filter="url(#forge)"/>
+  </g>
+  <g opacity=".62" filter="url(#glow)">
+    <path d="M184 716L415 485" stroke="#7d130e" stroke-width="10"/>
+    <path d="M840 716L609 485" stroke="#7d130e" stroke-width="10"/>
+    <path d="M512 224V442" stroke="#7d130e" stroke-width="10"/>
+  </g>
+  <path d="M512 286L705 396L705 620L512 733L319 620L319 396Z" fill="#070808" stroke="#020303" stroke-width="30" stroke-linejoin="round"/>
+  <path d="M512 309L682 406L682 607L512 706L342 607L342 406Z" fill="url(#red)" opacity=".5" filter="url(#glow)"/>
+  <path d="M512 317L667 406L667 596L512 686L357 596L357 406Z" fill="none" stroke="url(#edge)" stroke-width="15" stroke-linejoin="round"/>
+  <path d="M512 326L653 407L512 488L371 407Z" fill="url(#steelA)" stroke="#52544f" stroke-width="8" filter="url(#forge)"/>
+  <path d="M371 407L512 488V664L371 583Z" fill="url(#steelB)" stroke="#3f413e" stroke-width="8" filter="url(#forge)"/>
+  <path d="M653 407L512 488V664L653 583Z" fill="url(#steelA)" stroke="#4d4f4a" stroke-width="8" filter="url(#forge)"/>
+  <path d="M512 326L653 407L512 488L371 407Z" fill="url(#scar)" opacity=".8"/>
+  <path d="M371 407L512 488V664L371 583Z" fill="url(#scar)" opacity=".55"/>
+  <path d="M653 407L512 488V664L653 583Z" fill="url(#scar)" opacity=".55"/>
+  <g stroke="#090a0a" stroke-width="5" opacity=".9">
+    <path d="M432 371l63 22m65-34l-61 37m-89 78l65 34m-64 45l73 40m126-110l-64 35m67 54l-80 42m-11-190l-7 50m10 18l-8 71"/>
+  </g>
+  <g fill="#83857e" stroke="#111" stroke-width="4">
+    <path d="M512 301l10 10-10 10-10-10z"/>
+    <path d="M360 401l10 10-10 10-10-10z"/>
+    <path d="M664 401l10 10-10 10-10-10z"/>
+    <path d="M512 676l10 10-10 10-10-10z"/>
+  </g>
+  <g opacity=".76">
+    <circle cx="319" cy="396" r="15" fill="#6e110c" filter="url(#glow)"/>
+    <circle cx="705" cy="396" r="15" fill="#6e110c" filter="url(#glow)"/>
+    <circle cx="512" cy="733" r="15" fill="#6e110c" filter="url(#glow)"/>
+  </g>
+</g>
+</svg>
