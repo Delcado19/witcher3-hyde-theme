@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<defs>
+  <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#575a59"/><stop offset=".18" stop-color="#1b1d1d"/>
+    <stop offset=".52" stop-color="#343636"/><stop offset=".78" stop-color="#0c0e0e"/><stop offset="1" stop-color="#4a4c4b"/>
+  </linearGradient>
+  <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#b8b8ae"/><stop offset=".13" stop-color="#5b5d59"/><stop offset=".55" stop-color="#181a1a"/><stop offset="1" stop-color="#050606"/>
+  </linearGradient>
+  <radialGradient id="red" cx=".52" cy=".5" r=".58">
+    <stop offset="0" stop-color="#d42517"/><stop offset=".28" stop-color="#7b100a"/><stop offset=".65" stop-color="#210302"/><stop offset="1" stop-color="#000"/>
+  </radialGradient>
+  <filter id="rough" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency=".018 .11" numOctaves="3" seed="31" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feSpecularLighting in="n" surfaceScale="3" specularConstant=".45" specularExponent="18" lighting-color="#cfd0c9" result="s">
+      <feDistantLight azimuth="225" elevation="42"/>
+    </feSpecularLighting>
+    <feComposite in="s" in2="d" operator="in" result="si"/>
+    <feBlend in="d" in2="si" mode="screen"/>
+  </filter>
+  <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="11" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#000" flood-opacity=".85"/>
+  </filter>
+  <pattern id="scratches" width="72" height="72" patternUnits="userSpaceOnUse" patternTransform="rotate(-17)">
+    <path d="M4 0V72M29 0V72M63 0V72" stroke="#d6d3ca" stroke-opacity=".07" stroke-width="1"/>
+    <path d="M15 0V72M49 0V72" stroke="#000" stroke-opacity=".28" stroke-width="2"/>
+  </pattern>
+</defs>
+<g filter="url(#shadow)">
+  <path d="M170 398Q170 360 208 350L320 322L500 198Q532 176 559 192L612 224Q636 239 636 270V754Q636 786 609 801L556 832Q530 847 501 826L320 701L208 674Q170 664 170 624Z" fill="url(#iron)" stroke="#090a0a" stroke-width="24" stroke-linejoin="round"/>
+  <path d="M194 405Q194 382 218 375L326 349L494 232Q520 214 542 228L575 248Q592 258 592 282V742Q592 765 572 776L539 795Q519 806 496 790L326 672L218 647Q194 640 194 617Z" fill="none" stroke="url(#edge)" stroke-width="18" stroke-linejoin="round" opacity=".95"/>
+  <path d="M332 352L502 232Q527 214 550 232L579 253Q592 262 592 283V741Q592 763 575 773L546 791Q526 803 502 786L332 668Z" fill="url(#red)" opacity=".45" filter="url(#glow)"/>
+  <path d="M344 365L500 257Q518 245 533 255L552 267Q562 274 562 289V735Q562 750 549 757L531 768Q517 776 500 764L344 655Z" fill="#171919" stroke="#4e504d" stroke-width="10" filter="url(#rough)"/>
+  <path d="M354 375L493 278Q515 263 537 278L542 282V742L535 746Q515 759 495 745L354 647Z" fill="url(#scratches)" opacity=".8"/>
+  <g>
+    <rect x="160" y="388" width="184" height="248" rx="58" fill="#0c0e0e" stroke="#090a0a" stroke-width="18"/>
+    <rect x="181" y="409" width="142" height="206" rx="45" fill="url(#iron)" stroke="url(#edge)" stroke-width="13" filter="url(#rough)"/>
+    <path d="M205 430V593M232 420V604M286 424V599" stroke="#050606" stroke-width="11" opacity=".85"/>
+    <path d="M214 430V594M263 423V601M301 438V587" stroke="#a7a89f" stroke-width="2" opacity=".18"/>
+  </g>
+  <path d="M228 371L323 347M228 650L323 672" stroke="#72140f" stroke-width="10" opacity=".8"/>
+  <g fill="#0b0c0c" stroke="#858781" stroke-width="5">
+    <path d="M278 349l14 14-14 14-14-14z"/><path d="M278 647l14 14-14 14-14-14z"/>
+  </g>
+  <g fill="none" stroke-linecap="round">
+    <path d="M690 370Q784 454 690 654" stroke="#131515" stroke-width="72"/>
+    <path d="M690 370Q784 454 690 654" stroke="url(#edge)" stroke-width="48" filter="url(#rough)"/>
+    <path d="M690 370Q784 454 690 654" stroke="#85150f" stroke-width="12" opacity=".75" filter="url(#glow)"/>
+    <path d="M794 280Q948 445 794 744" stroke="#111313" stroke-width="82"/>
+    <path d="M794 280Q948 445 794 744" stroke="url(#edge)" stroke-width="54" filter="url(#rough)"/>
+    <path d="M794 280Q948 445 794 744" stroke="#7d130d" stroke-width="12" opacity=".65" filter="url(#glow)"/>
+  </g>
+  <g stroke="#050606" stroke-width="4" opacity=".85">
+    <path d="M406 328l-30 82m86-120l-54 154m103-180l-38 123m53 20l-43 142m55-93l-30 116m-85 42l-26 72m90-51l-31 83"/>
+  </g>
+</g>
+</svg>
