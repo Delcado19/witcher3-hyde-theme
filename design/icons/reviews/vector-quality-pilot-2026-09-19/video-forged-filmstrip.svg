@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<defs>
+  <linearGradient id="steel" x1=".08" y1=".05" x2=".92" y2=".95">
+    <stop offset="0" stop-color="#85877f"/><stop offset=".08" stop-color="#303232"/><stop offset=".42" stop-color="#101212"/><stop offset=".73" stop-color="#343636"/><stop offset="1" stop-color="#070808"/>
+  </linearGradient>
+  <linearGradient id="bevel" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#c5c4b8"/><stop offset=".12" stop-color="#676862"/><stop offset=".38" stop-color="#1a1c1b"/><stop offset=".78" stop-color="#080909"/><stop offset="1" stop-color="#575954"/>
+  </linearGradient>
+  <radialGradient id="ember" cx=".5" cy=".48" r=".65">
+    <stop offset="0" stop-color="#b92317"/><stop offset=".35" stop-color="#5e0d08"/><stop offset=".7" stop-color="#170202"/><stop offset="1" stop-color="#000"/>
+  </radialGradient>
+  <filter id="forge" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency=".012 .075" numOctaves="4" seed="19" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="5.5" result="d"/>
+    <feSpecularLighting in="n" surfaceScale="4" specularConstant=".55" specularExponent="24" lighting-color="#dddcd3" result="s">
+      <feDistantLight azimuth="230" elevation="48"/>
+    </feSpecularLighting>
+    <feComposite in="s" in2="d" operator="in" result="si"/>
+    <feBlend in="d" in2="si" mode="screen"/>
+  </filter>
+  <filter id="redglow" x="-80%" y="-80%" width="260%" height="260%">
+    <feGaussianBlur stdDeviation="13" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+    <feDropShadow dx="0" dy="25" stdDeviation="25" flood-color="#000" flood-opacity=".88"/>
+  </filter>
+  <pattern id="score" width="54" height="54" patternUnits="userSpaceOnUse" patternTransform="rotate(21)">
+    <path d="M5 0V54M23 0V54M47 0V54" stroke="#d0cec5" stroke-opacity=".06"/>
+    <path d="M13 0V54M39 0V54" stroke="#000" stroke-opacity=".28" stroke-width="2"/>
+  </pattern>
+</defs>
+<g filter="url(#shadow)">
+  <path d="M174 216Q174 176 214 176H810Q850 176 850 216V808Q850 848 810 848H214Q174 848 174 808Z" fill="#080909" stroke="#020303" stroke-width="22"/>
+  <path d="M198 218Q198 198 218 198H806Q826 198 826 218V806Q826 826 806 826H218Q198 826 198 806Z" fill="url(#steel)" stroke="url(#bevel)" stroke-width="16" filter="url(#forge)"/>
+  <path d="M238 252H786V772H238Z" fill="#0a0b0b" stroke="#3f413e" stroke-width="12"/>
+  <path d="M264 278H760V746H264Z" fill="url(#ember)" opacity=".66"/>
+  <path d="M282 296H742V728H282Z" fill="#111313" stroke="#77786f" stroke-opacity=".28" stroke-width="7"/>
+  <path d="M282 296H742V728H282Z" fill="url(#score)"/>
+  <g fill="#090a0a" stroke="url(#bevel)" stroke-width="8" filter="url(#forge)">
+    <path d="M206 238H264V306H206Z"/><path d="M206 350H264V418H206Z"/><path d="M206 462H264V530H206Z"/><path d="M206 574H264V642H206Z"/><path d="M206 686H264V754H206Z"/>
+    <path d="M760 238H818V306H760Z"/><path d="M760 350H818V418H760Z"/><path d="M760 462H818V530H760Z"/><path d="M760 574H818V642H760Z"/><path d="M760 686H818V754H760Z"/>
+  </g>
+  <g fill="#69110c" opacity=".82" filter="url(#redglow)">
+    <rect x="218" y="250" width="34" height="42" rx="8"/><rect x="218" y="362" width="34" height="42" rx="8"/><rect x="218" y="474" width="34" height="42" rx="8"/><rect x="218" y="586" width="34" height="42" rx="8"/><rect x="218" y="698" width="34" height="42" rx="8"/>
+    <rect x="772" y="250" width="34" height="42" rx="8"/><rect x="772" y="362" width="34" height="42" rx="8"/><rect x="772" y="474" width="34" height="42" rx="8"/><rect x="772" y="586" width="34" height="42" rx="8"/><rect x="772" y="698" width="34" height="42" rx="8"/>
+  </g>
+  <path d="M438 385Q438 359 460 373L650 491Q674 507 650 523L460 641Q438 655 438 629Z" fill="#090a0a" stroke="#030404" stroke-width="30" stroke-linejoin="round"/>
+  <path d="M447 392Q447 373 464 384L636 493Q653 504 636 515L464 624Q447 635 447 616Z" fill="url(#bevel)" stroke="#72736d" stroke-width="9" stroke-linejoin="round" filter="url(#forge)"/>
+  <path d="M477 421L606 503L477 585Z" fill="#171919"/>
+  <path d="M480 427L600 503L480 579Z" fill="#6e120d" opacity=".5" filter="url(#redglow)"/>
+  <g stroke="#050606" stroke-width="5" opacity=".9">
+    <path d="M328 323l56 13m-37 35l94 19m-112 77l66 12m256-142l-80 23m89 49l-117 30m-198 239l80-29m159 52l68-20m-327-42l61-18"/>
+  </g>
+  <g fill="#85867e" opacity=".55">
+    <path d="M241 213l11 11-11 11-11-11z"/><path d="M783 213l11 11-11 11-11-11z"/>
+    <path d="M241 789l11 11-11 11-11-11z"/><path d="M783 789l11 11-11 11-11-11z"/>
+  </g>
+</g>
+</svg>
