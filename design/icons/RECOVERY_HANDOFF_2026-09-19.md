@@ -31,6 +31,23 @@ For every completed work unit:
 
 For binary artwork, verification must include the actual remote file identity (Git blob SHA and/or cryptographic checksum when available), not merely the presence of a filename.
 
+## SVG / rendered-artifact verification rule
+
+Remote presence and a valid Git blob are **not sufficient** for SVG artwork.
+
+For every SVG that matters to the project:
+
+1. re-read the exact remote SVG bytes after push;
+2. render those remote bytes with at least one SVG renderer and preferably a second independent renderer/browser engine;
+3. verify that the render is non-empty and contains meaningful opaque/non-background pixels;
+4. inspect the rendered result at intended native icon sizes;
+5. treat renderer disagreements as a compatibility defect to resolve, not as proof that the SVG itself is universally broken;
+6. only then mark the SVG technically valid.
+
+The 2026-09-19 vector quality pilot exposed this requirement: one renderer produced an empty result while another visible client rendered the artwork. Therefore future SVG verification must test actual rendered output, not just file syntax, filename, size or blob identity.
+
+For PNG/raster assets, verification must likewise open/decode the actual remote bytes and verify dimensions plus non-empty pixel/alpha content.
+
 ## No chat-only artwork
 
 Any generated or reconstructed artwork that matters to the project must be persisted before moving on.
