@@ -361,6 +361,23 @@ Quality check:
 
 This rule applies to MIME, Places, Devices, Categories and other Emblem-class redesigns.
 
+### Container restraint / silhouette variety
+
+Do not overuse box, tile, plaque or framed-card containers merely to force family cohesion.
+
+Use a box-like body only when it is semantically or physically appropriate to the object: package, crate, drive enclosure, terminal slab, framed device, document folio, archive chest, etc.
+
+Otherwise prefer the natural silhouette of the object:
+
+- keys should read as keys;
+- scrolls/certificates as scrolls or folios;
+- type specimens/quills/letterpress forms should remain typographic objects;
+- locks/shields may stay open silhouettes;
+- lenses, instruments, tools, seals and medallions should not be forced into rectangular tiles;
+- family cohesion should come from material, lighting, edge treatment, accent logic and perspective before a repeated container is introduced.
+
+A repeated rectangular frame is acceptable for category/system groups when it materially improves scanability, but it must not become the universal default for identity-rich MIME, device or application artwork.
+
 ## 12. Family consistency rules
 
 Icons in a semantic family must share:
