@@ -323,6 +323,20 @@ For the current Office/Documents MIME direction, the detailed design itself rema
 
 At very small sizes, a separately authored micro-variant is allowed when the full identity no longer reads clearly. A micro-variant may simplify texture, wax seals, scratches, decorative engraving and nonessential text/code lines, while preserving the same semantic silhouette, family construction and dominant type marker. Whether that micro-variant ships as SVG or PNG is again decided by native-size visual quality.
 
+### Mandatory family preflight
+
+Before any new icon family is drawn or generated, its membership must be established first.
+
+Required sequence:
+
+1. query the canonical matrix and list every type currently assigned to the intended family;
+2. identify aliases, fallbacks, special cases and obvious mis-groupings;
+3. explicitly freeze the review set for that family;
+4. only then begin visual generation;
+5. do not add attractive but unrelated formats to a review sheet merely because they fit visually.
+
+A generated sheet that mixes unrelated families is reference material only and cannot be treated as a valid family approval.
+
 ### Family-master production workflow
 
 For semantically related icon groups, the default production method is **family-first, not canonical-first**.
