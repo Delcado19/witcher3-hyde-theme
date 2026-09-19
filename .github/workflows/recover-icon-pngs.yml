@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: recover-icon-pngs-icon-hero-hybrid-pilot-1
+  cancel-in-progress: false
+
 jobs:
   recover:
     runs-on: ubuntu-latest
@@ -45,4 +49,15 @@ jobs:
           git config user.name "witcher3-hyde-recovery"
           git config user.email "actions@users.noreply.github.com"
           git commit -m "Recover exact icon PNG assets [skip ci]"
-          git push origin HEAD:icon-hero-hybrid-pilot-1
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:icon-hero-hybrid-pilot-1; then
+              exit 0
+            fi
+            echo "Push raced with another branch update; rebasing before retry $attempt/3"
+            git fetch origin icon-hero-hybrid-pilot-1
+            git rebase origin/icon-hero-hybrid-pilot-1
+          done
+
+          echo "Failed to push recovery commit after retries" >&2
+          exit 1
